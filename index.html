@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The DTV Visa Guide — Stay in Thailand Legally for Up to 5 Years</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-deep: #B8860B;
+            --gold-light: #D4AF37;
+            --cream: #FDF8F3;
+            --cream-dark: #F5EDE4;
+            --green-soft: #6B8E6B;
+            --green-dark: #4A6B4A;
+            --charcoal: #2C2C2C;
+            --charcoal-light: #3D3D3D;
+            --white: #FFFFFF;
+            --shadow: rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--cream-dark);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold-deep);
+        }
+
+        .nav-cta {
+            background: var(--gold-deep);
+            color: var(--white);
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--charcoal);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 1.5rem 4rem;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(184,134,11,0.03) 100%);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--gold-deep);
+            color: var(--white);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        .hero h1 span {
+            color: var(--gold-deep);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            color: var(--charcoal-light);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gold-deep);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--charcoal);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--charcoal);
+            border: 2px solid var(--charcoal);
+        }
+
+        .btn-secondary:hover {
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        .hero-trust {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: var(--charcoal-light);
+        }
+
+        .hero-trust strong {
+            color: var(--gold-deep);
+        }
+
+        /* Story Section */
+        .story {
+            padding: 5rem 1.5rem;
+            background: var(--white);
+        }
+
+        .story-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            color: var(--gold-deep);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .story h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
+            color: var(--charcoal);
+        }
+
+        .story-content {
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        .story-photo {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            background: var(--cream-dark);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--charcoal-light);
+            font-size: 0.9rem;
+            margin: 0 auto;
+        }
+
+        .story-text p {
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+            color: var(--charcoal-light);
+        }
+
+        .story-text strong {
+            color: var(--charcoal);
+        }
+
+        .story-highlights {
+            background: var(--cream);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            border-left: 4px solid var(--gold-deep);
+        }
+
+        .story-highlights ul {
+            list-style: none;
+        }
+
+        .story-highlights li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--charcoal-light);
+        }
+
+        .story-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green-soft);
+            font-weight: bold;
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 4rem 1.5rem;
+            background: var(--cream-dark);
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--charcoal);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 5rem 1.5rem;
+            background: var(--white);
+        }
+
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quiz-section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-section > .quiz-container > p {
+            color: var(--charcoal-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .quiz-box {
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: left;
+            box-shadow: 0 4px 24px var(--shadow);
+        }
+
+        .quiz-progress {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: var(--cream-dark);
+            border-radius: 2px;
+        }
+
+        .quiz-progress-bar.active {
+            background: var(--gold-deep);
+        }
+
+        .quiz-question {
+            display: none;
+        }
+
+        .quiz-question.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .quiz-question h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .quiz-option {
+            background: var(--white);
+            border: 2px solid var(--cream-dark);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--gold-deep);
+            background: var(--cream);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--gold-deep);
+            background: rgba(184,134,11,0.05);
+        }
+
+        .quiz-result {
+            display: none;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .quiz-result.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quiz-result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-result h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-result p {
+            color: var(--charcoal-light);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .quiz-result .btn {
+            margin-top: 1rem;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 5rem 1.5rem;
+            background: var(--cream-dark);
+        }
+
+        .products-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .products h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .products > .products-container > p {
+            color: var(--charcoal-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: left;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px var(--shadow);
+        }
+
+        .product-card.featured {
+            border-color: var(--gold-deep);
+            position: relative;
+        }
+
+        .product-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-deep);
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-number {
+            width: 48px;
+            height: 48px;
+            background: var(--cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold-deep);
+            margin-bottom: 1rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card p {
+            color: var(--charcoal-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+        }
+
+        .product-price span {
+            font-size: 0.9rem;
+            color: var(--charcoal-light);
+            font-weight: 400;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--charcoal-light);
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green-soft);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 1.5rem;
+            background: var(--white);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--cream-dark);
+            padding: 1.5rem 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--charcoal);
+            font-size: 1.1rem;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--gold-deep);
+            transition: transform 0.2s;
+        }
+
+        .faq-item.open .faq-question::after {
+            content: '−';
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--charcoal-light);
+            line-height: 1.7;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 1.5rem;
+            background: var(--charcoal);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-section .btn-primary {
+            background: var(--gold-deep);
+            font-size: 1.1rem;
+            padding: 1.25rem 2.5rem;
+        }
+
+        .cta-section .btn-primary:hover {
+            background: var(--gold-light);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 1.5rem;
+            background: var(--charcoal-light);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .hero {
+                padding: 5rem 1rem 3rem;
+            }
+
+            .quiz-box {
+                padding: 1.5rem;
+            }
+
+            .product-card {
+                padding: 1.5rem;
+            }
+
+            .story-highlights {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">The DTV Guide</div>
+            <a href="#quiz" class="nav-cta">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">Thailand just ended the 60-day rule</div>
+            <h1>Here's how to stay legally — <span>for up to 5 years</span></h1>
+            <p class="hero-subtitle">The exact system I used to get my DTV as a UK entrepreneur — formatted, structured, and ready for your application.</p>
+            <div class="hero-buttons">
+                <a href="#quiz" class="btn btn-primary">Take the Free Quiz</a>
+                <a href="#products" class="btn btn-secondary">See the Guide</a>
+            </div>
+            <div class="hero-trust">
+                <strong>5-year multiple entry visa</strong> · 180 days per stay · No more visa runs
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story">
+        <div class="story-container">
+            <div class="section-label">My Story</div>
+            <h2>I sold my house, left the UK, and made Thailand my base</h2>
+            
+            <div class="story-content">
+                <div class="story-photo">
+                    [Your Photo Here]
+                </div>
+                
+                <div class="story-text">
+                    <p>I'm a UK entrepreneur who <strong>sold up, put my house on the market, and relocated to Thailand.</strong> I still run my UK company remotely — and I'm now expanding into the Philippines.</p>
+                    
+                    <p>Thailand is my hub for Southeast Asia. And I hold a <strong>DTV visa</strong> — that's 5 years, multiple entry, 180 days per stay.</p>
+                    
+                    <p>With the 60-day rule now ending, the DTV is the best long-term option for most people. But embassy applications are strict — the £300 government fee is non-refundable — so getting it right matters.</p>
+                    
+                    <p>I spent <strong>10–15 hours</strong> preparing my application. Then I built an <strong>AI-assisted document formatting system</strong> that gets it done in a fraction of the time.</p>
+                    
+                    <p>This is NOT AI generating fake info. It formats <strong>YOUR</strong> real information correctly so embassies accept it.</p>
+                </div>
+            </div>
+
+            <div class="story-highlights">
+                <ul>
+                    <li>5-year DTV visa holder & UK entrepreneur</li>
+                    <li>Remote company still running from Thailand</li>
+                    <li>Built the exact system that got me approved</li>
+                    <li>Helped others navigate the strict embassy requirements</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="video-container">
+            <div class="section-label">Watch</div>
+            <h2>See how the DTV works in practice</h2>
+            <div class="video-placeholder">
+                [Video Embed Placeholder]
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz-section" id="quiz">
+        <div class="quiz-container">
+            <div class="section-label">Free Eligibility Check</div>
+            <h2>Find out in 2 minutes if you qualify</h2>
+            <p>Answer 7 quick questions. Get a personalised result.</p>
+            
+            <div class="quiz-box">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar active"></div>
+                    <div class="quiz-progress-bar"></div>
+                    <div class="quiz-progress-bar"></div>
+                    <div class="quiz-progress-bar"></div>
+                    <div class="quiz-progress-bar"></div>
+                    <div class="quiz-progress-bar"></div>
+                    <div class="quiz-progress-bar"></div>
+                </div>
+
+                <!-- Question 1: Nationality -->
+                <div class="quiz-question active" data-question="1">
+                    <h3>What's your nationality / passport country?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-value="uk-ireland">UK or Ireland</div>
+                        <div class="quiz-option" data-value="us-canada-aus-nz">USA, Canada, Australia, or New Zealand</div>
+                        <div class="quiz-option" data-value="europe">Europe (EU/EEA)</div>
+                        <div class="quiz-option" data-value="other">Other</div>
+                    </div>
+                </div>
+
+                <!-- Question 2: Employment -->
+                <div class="quiz-question" data-question="2">
+                    <h3>What's your current employment status?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-value="remote-employee">Remote employee for a foreign company</div>
+                        <div class="quiz-option" data-value="freelancer">Freelancer with foreign clients</div>
+                        <div class="quiz-option" data-value="business-owner">Business owner (foreign company)</div>
+                        <div class="quiz-option" data-value="other">Other / Not sure yet</div>
+                    </div>
+                </div>
+
+                <!-- Question 3: Income Source -->
+                <div class="quiz-question" data-question="3">
+                    <h3>Do you have a foreign employer or foreign clients?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-value="yes">Yes, I work with clients/employer outside Thailand</div>
+                        <div class="quiz-option" data-value="no-thai">No, I currently work for a Thai company</div>
+                        <div class="quiz-option" data-value="no-local">No, I only have local clients</div>
+                        <div class="quiz-option" data-value="planning">I'm planning to get them / just starting out</div>
+                    </div>
+                </div>
+
+                <!-- Question 4: Bank Balance -->
+                <div class="quiz-question" data-question="4">
+                    <h3>Can you show 500,000 THB (~£11,500) in a bank account?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-value="yes">Yes, I have this already</div>
+                        <div class="quiz-option" data-value="soon">I'll have this in the next 3 months</div>
+                        <div class="quiz-option" data-value="no-but">Not yet, but I'm working on it</div>
+                        <div class="quiz-option" data-value="no">No, this won't be possible</div>
+                    </div>
+                </div>
+
+                <!-- Question 5: Health Insurance -->
+                <div class="quiz-question" data-question="5">
+                    <h3>Do you have health insurance, or are you willing to get it?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-value="yes-have">Yes, I already have it</div>
+                        <div class="quiz-option" data-value="yes-will">No, but I'll get it</div>
+                        <div class="quiz-option" data-value="maybe">Not sure / need more info</div>
+                        <div class="quiz-option" data-value="no">No, I don't want health insurance</div>
+                    </div>
+                </div>
+
+                <!-- Question 6: Location -->
+                <div class="quiz-question" data-question="6">
+                    <h3>Are you currently inside or outside Thailand?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-value="outside">Outside Thailand (applying from home country)</div>
+                        <div class="quiz-option" data-value="inside-tourist">Inside Thailand on a tourist visa</div>
+                        <div class="quiz-option" data-value="inside-other">Inside Thailand on another visa type</div>
+                        <div class="quiz-option" data-value="planning">Not in Thailand yet, but planning to visit</div>
+                    </div>
+                </div>
+
+                <!-- Question 7: Stay Duration -->
+                <div class="quiz-question" data-question="7">
+                    <h3>How long do you want to stay in Thailand?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-value="long-term">Long-term (1+ years, possibly permanently)</div>
+                        <div class="quiz-option" data-value="medium">Medium-term (6–12 months)</div>
+                        <div class="quiz-option" data-value="flexible">Flexible — I want the option to stay longer</div>
+                        <div class="quiz-option" data-value="short">Short-term only (under 6 months)</div>
+                    </div>
+                </div>
+
+                <!-- Result: Likely Qualify -->
+                <div class="quiz-result" id="result-likely">
+                    <div class="quiz-result-icon">✅</div>
+                    <h3>You likely qualify for the DTV</h3>
+                    <p>Based on your answers, you're in a strong position to apply for the Destination Thailand Visa. The next step is making sure your documents are formatted correctly — embassies are strict, and the £300 fee is non-refundable.</p>
+                    <p>I've built the exact system that got me (and others) approved. Ready to skip the 15-hour learning curve?</p>
+                    <a href="#products" class="btn btn-primary">See the Guide Options</a>
+                </div>
+
+                <!-- Result: Challenges -->
+                <div class="quiz-result" id="result-challenges">
+                    <div class="quiz-result-icon">⚠️</div>
+                    <h3>You may face some challenges</h3>
+                    <p>Don't worry — this doesn't mean you can't get the DTV. It just means there are specific hurdles to address. The most common issues are: proving foreign income, meeting the bank balance requirement, or timing your application.</p>
+                    <p>Book a free consultation call and I'll help you figure out your best path forward.</p>
+                    <a href="#consultation" class="btn btn-primary">Book Free Call</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="products-container">
+            <div class="section-label">Services</div>
+            <h2>Choose your level of support</h2>
+            <p>From a quick check to full hand-holding — whatever you need.</p>
+            
+            <div class="products-grid">
+                <!-- Product 1: Free Quiz -->
+                <div class="product-card">
+                    <div class="product-number">1</div>
+                    <h3>Free Eligibility Quiz</h3>
+                    <p>Find out in 2 minutes if you qualify</p>
+                    <div class="product-price">Free</div>
+                    <ul class="product-features">
+                        <li>7-question assessment</li>
+                        <li>Personalised result</li>
+                        <li>Instant feedback</li>
+                    </ul>
+                    <a href="#quiz" class="btn btn-secondary" style="width: 100%; text-align: center;">Take the Quiz</a>
+                </div>
+
+                <!-- Product 2: Consultation -->
+                <div class="product-card">
+                    <div class="product-number">2</div>
+                    <h3>Consultation Call</h3>
+                    <p>Not sure if DTV is right for you?</p>
+                    <div class="product-price">£<span>99</span></div>
+                    <ul class="product-features">
+                        <li>30-minute 1-to-1 call</li>
+                        <li>Personalised assessment</li>
+                        <li>Q&A on your situation</li>
+                        <li>Action plan emailed after</li>
+                    </ul>
+                    <a href="#consultation" class="btn btn-secondary" style="width: 100%; text-align: center;">Book a Call</a>
+                </div>
+
+                <!-- Product 3: The Guide -->
+                <div class="product-card featured">
+                    <div class="product-number">3</div>
+                    <h3>The DTV Guide</h3>
+                    <p>Full step-by-step PDF/digital guide</p>
+                    <div class="product-price">£<span>147</span></div>
+                    <ul class="product-features">
+                        <li>Complete application walkthrough</li>
+                        <li>Document templates & checklists</li>
+                        <li>AI formatting system access</li>
+                        <li>Embassy-specific requirements</li>
+                        <li>Updates for 12 months</li>
+                    </ul>
+                    <a href="#buy-guide" class="btn btn-primary" style="width: 100%; text-align: center;">Get the Guide</a>
+                </div>
+
+                <!-- Product 4: Guide + Support -->
+                <div class="product-card">
+                    <div class="product-number">4</div>
+                    <h3>Guide + Email Support</h3>
+                    <p>Guide plus 30 days of direct Q&A</p>
+                    <div class="product-price">£<span>297</span></div>
+                    <ul class="product-features">
+                        <li>Everything in The Guide</li>
+                        <li>30 days email support</li>
+                        <li>Document review (1 round)</li>
+                        <li>Priority responses</li>
+                        <li>Updates for 12 months</li>
+                    </ul>
+                    <a href="#buy-support" class="btn btn-secondary" style="width: 100%; text-align: center;">Get Guide + Support</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="faq-container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">What's included in The DTV Guide?</div>
+                <div class="faq-answer">The guide is a comprehensive PDF covering every step of the DTV application: eligibility requirements, document preparation, embassy-specific nuances, common rejection reasons, and my AI-assisted formatting system. You also get templates, checklists, and 12 months of updates.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How is this different from free info online?</div>
+                <div class="faq-answer">Free info is often outdated, generic, or wrong. Embassy requirements change. The DTV Guide is kept current, includes embassy-specific details, and gives you the exact document formatting system I built — which isn't documented anywhere else. Plus, the £300 government fee is non-refundable. Getting it wrong is expensive.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I apply from inside Thailand?</div>
+                <div class="faq-answer">In most cases, no. The DTV is designed to be applied for from your home country or a country where you have residency. If you're already in Thailand on a tourist visa, you'll typically need to leave to apply. The guide covers the best strategies for your situation.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What if I don't have £11,500 saved yet?</div>
+                <div class="faq-answer">The 500,000 THB requirement is strict — you need to show it in your account. If you don't have it yet, the consultation call can help you plan your timeline. I won't sell you the guide if you're not ready.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is this guaranteed to get me approved?</div>
+                <div class="faq-answer">No — embassies make the final decision. What I guarantee is that you'll submit the strongest possible application with correctly formatted documents. I've used this exact system myself and helped others get approved. I also guarantee you'll save 10+ hours of research.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How long does the DTV last?</div>
+                <div class="faq-answer">The DTV is a 5-year multiple entry visa. Each stay can be up to 180 days. You can extend once per entry for another 180 days (for a fee), meaning you could potentially stay continuously for up to 1 year before needing a border run.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to make Thailand your base?</h2>
+        <p>The 60-day rule is ending. The DTV is your path to long-term, legal stays. Start with the free quiz — it takes 2 minutes.</p>
+        <a href="#quiz" class="btn btn-primary">Check My Eligibility</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 The DTV Guide. Built by a UK entrepreneur who actually did this.</p>
+        <p style="margin-top: 0.5rem;">Not legal advice. Always verify current requirements with the Thai embassy.</p>
+    </footer>
+
+    <script>
+        // Quiz Logic
+        const questions = document.querySelectorAll('.quiz-question');
+        const progressBars = document.querySelectorAll('.quiz-progress-bar');
+        const resultLikely = document.getElementById('result-likely');
+        const resultChallenges = document.getElementById('result-challenges');
+        
+        let currentQuestion = 0;
+        const answers = {};
+
+        // Handle option clicks
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const questionEl = this.closest('.quiz-question');
+                const questionNum = parseInt(questionEl.dataset.question);
+                
+                // Store answer
+                answers[questionNum] = this.dataset.value;
+                
+                // Visual selection
+                questionEl.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                // Delay then move to next
+                setTimeout(() => {
+                    if (questionNum < 7) {
+                        showQuestion(questionNum);
+                    } else {
+                        showResult();
+                    }
+                }, 300);
+            });
+        });
+
+        function showQuestion(completedQuestion) {
+            // Hide current
+            questions.forEach(q => q.classList.remove('active'));
+            
+            // Show next
+            const nextQuestion = document.querySelector(`.quiz-question[data-question="${completedQuestion + 1}"]`);
+            if (nextQuestion) {
+                nextQuestion.classList.add('active');
+                currentQuestion = completedQuestion;
+                
+                // Update progress
+                progressBars.forEach((bar, index) => {
+                    bar.classList.toggle('active', index <= completedQuestion);
+                });
+            }
+        }
+
+        function showResult() {
+            // Hide all questions
+            questions.forEach(q => q.classList.remove('active'));
+            document.querySelector('.quiz-progress').style.display = 'none';
+            
+            // Calculate score
+            let score = 0;
+            let challenges = [];
+            
+            // Q1: Nationality
+            if (['uk-ireland', 'us-canada-aus-nz', 'europe'].includes(answers[1])) score += 1;
+            
+            // Q2: Employment
+            if (['remote-employee', 'freelancer', 'business-owner'].includes(answers[2])) score += 1;
+            else challenges.push('employment');
+            
+            // Q3: Income source
+            if (answers[3] === 'yes') score += 1;
+            else if (['no-thai', 'no-local'].includes(answers[3])) challenges.push('income');
+            
+            // Q4: Bank balance
+            if (answers[4] === 'yes') score += 1;
+            else if (answers[4] === 'no') challenges.push('funds');
+            
+            // Q5: Insurance
+            if (['yes-have', 'yes-will'].includes(answers[5])) score += 1;
+            else if (answers[5] === 'no') challenges.push('insurance');
+            
+            // Q6: Location
+            if (answers[6] === 'outside') score += 1;
+            else if (['inside-tourist', 'inside-other'].includes(answers[6])) challenges.push('location');
+            
+            // Q7: Stay duration
+            if (['long-term', 'flexible', 'medium'].includes(answers[7])) score += 1;
+            
+            // Show appropriate result
+            if (score >= 5 && challenges.length <= 1) {
+                resultLikely.classList.add('show');
+            } else {
+                resultChallenges.classList.add('show');
+            }
+        }
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isOpen = item.classList.contains('open');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                
+                // Open clicked if it was closed
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
