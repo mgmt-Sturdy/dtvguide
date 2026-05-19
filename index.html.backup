@@ -755,21 +755,9 @@
             <h2>Find out in 2 minutes if you qualify</h2>
             <p>Answer 7 quick questions. Get a personalised result.</p>
             
-                        <div class="quiz-box">
-                <!-- Email Capture (Question 0) -->
-                <div class="quiz-question active" data-question="0">
-                    <h3>Let's check your DTV eligibility</h3>
-                    <p style="color: var(--charcoal-light); margin-bottom: 1.5rem;">Enter your email and we'll send you your results so you can come back to them.</p>
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <input type="email" id="quiz-email" placeholder="your@email.com" style="padding: 1rem; border: 2px solid var(--cream-dark); border-radius: 8px; font-size: 1rem;">
-                        <button class="btn btn-primary" onclick="saveEmailAndContinue()" style="width: 100%;">Start the Quiz</button>
-                    </div>
-                    <p style="font-size: 0.85rem; color: var(--charcoal-light); margin-top: 1rem;">Takes 2 minutes. No spam, unsubscribe anytime.</p>
-                </div>
-
-                <div class="quiz-progress" style="display: none;">
-                    <div class="quiz-progress-bar"></div>
-                    <div class="quiz-progress-bar"></div>
+            <div class="quiz-box">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar active"></div>
                     <div class="quiz-progress-bar"></div>
                     <div class="quiz-progress-bar"></div>
                     <div class="quiz-progress-bar"></div>
@@ -778,52 +766,49 @@
                     <div class="quiz-progress-bar"></div>
                 </div>
 
-                <!-- Question 1: Residence -->
-                <div class="quiz-question" data-question="1">
-                    <h3>Where are you currently resident?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="uk-citizen">UK — I'm a British citizen</div>
-                        <div class="quiz-option" data-value="uk-visa">UK — I'm here on a visa</div>
-                        <div class="quiz-option" data-value="ireland">Ireland</div>
-                        <div class="quiz-option" data-value="other">Other country</div>
-                    </div>
-                </div>
-
-                <!-- Question 2: Passport Validity -->
-                <div class="quiz-question" data-question="2">
-                    <h3>Does your passport have at least 6 months validity?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="yes">Yes, 6+ months remaining</div>
-                        <div class="quiz-option" data-value="under-6">Less than 6 months</div>
-                        <div class="quiz-option" data-value="expired">Expired / don't have one</div>
-                    </div>
-                </div>
-
-                <!-- Question 3: Remote Income -->
-                <div class="quiz-question" data-question="3">
+                <!-- Question 1: Remote Income -->
+                <div class="quiz-question active" data-question="1">
                     <h3>Do you currently have remote income?</h3>
                     <div class="quiz-options">
-                        <div class="quiz-option" data-value="yes-employed">Yes — employed and work remotely</div>
-                        <div class="quiz-option" data-value="yes-self">Yes — self-employed / run my own business</div>
-                        <div class="quiz-option" data-value="yes-freelance">Yes — freelancer with clients</div>
+                        <div class="quiz-option" data-value="yes-employed">Yes — I'm employed and work remotely</div>
+                        <div class="quiz-option" data-value="yes-self">Yes — I'm self-employed / run my own business</div>
+                        <div class="quiz-option" data-value="yes-freelance">Yes — I'm a freelancer with clients</div>
                         <div class="quiz-option" data-value="no">No, I don't have remote income</div>
                     </div>
                 </div>
 
-                <!-- Question 4a: Workplace Permission (for employed) -->
-                <div class="quiz-question" data-question="4a">
-                    <h3>Can you get written permission from your employer to work from Thailand?</h3>
+                <!-- Question 2a: PAYE or Self-Employed -->
+                <div class="quiz-question" data-question="2a">
+                    <h3>Are you PAYE (employed by a company) or self-employed?</h3>
                     <div class="quiz-options">
-                        <div class="quiz-option" data-value="yes-have">Yes, I already have it in writing</div>
-                        <div class="quiz-option" data-value="yes-can-get">Yes, I can get it — they're flexible</div>
-                        <div class="quiz-option" data-value="need-to-ask">I need to ask / not sure</div>
-                        <div class="quiz-option" data-value="no">No, definitely not allowed</div>
+                        <div class="quiz-option" data-value="paye">PAYE — I'm employed by a company</div>
+                        <div class="quiz-option" data-value="self-employed">Self-employed / I run my own business</div>
                     </div>
                 </div>
 
-                <!-- Question 4b: Self-Employed Duration -->
-                <div class="quiz-question" data-question="4b">
-                    <h3>How long have you been self-employed or running your business?</h3>
+                <!-- Question 2b: Workplace Policy -->
+                <div class="quiz-question" data-question="2b">
+                    <h3>Does your workplace have a policy that allows you to work abroad?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-value="yes">Yes, they allow remote work from abroad</div>
+                        <div class="quiz-option" data-value="no">No, they don't have a policy for this</div>
+                        <div class="quiz-option" data-value="unsure">I'm not sure / haven't checked</div>
+                    </div>
+                </div>
+
+                <!-- Question 2c: Asked Permission -->
+                <div class="quiz-question" data-question="2c">
+                    <h3>Have you asked your workplace for permission to work from Thailand?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-value="yes">Yes, and they're okay with it</div>
+                        <div class="quiz-option" data-value="asked-waiting">I've asked, waiting for response</div>
+                        <div class="quiz-option" data-value="no">No, I haven't asked yet</div>
+                    </div>
+                </div>
+
+                <!-- Question 2d: Self-Employed Duration -->
+                <div class="quiz-question" data-question="2d">
+                    <h3>How long have you been working for yourself?</h3>
                     <div class="quiz-options">
                         <div class="quiz-option" data-value="over-2-years">Over 2 years</div>
                         <div class="quiz-option" data-value="1-2-years">1–2 years</div>
@@ -832,20 +817,20 @@
                     </div>
                 </div>
 
-                <!-- Question 4c: Tax Documentation -->
-                <div class="quiz-question" data-question="4c">
-                    <h3>What tax documentation do you have?</h3>
+                <!-- Question 2e: Tax Return -->
+                <div class="quiz-question" data-question="2e">
+                    <h3>Have you submitted a tax return for your self-employed income or business?</h3>
                     <div class="quiz-options">
-                        <div class="quiz-option" data-value="paye-payslips">PAYE — 12 months of payslips</div>
-                        <div class="quiz-option" data-value="self-filed">Self-employed — tax return filed</div>
-                        <div class="quiz-option" data-value="self-not-yet">Self-employed — not filed yet (business new)</div>
-                        <div class="quiz-option" data-value="mix">Mix of salary and dividends</div>
+                        <div class="quiz-option" data-value="yes-filed">Yes, I've filed at least one</div>
+                        <div class="quiz-option" data-value="not-yet-due">Not yet — business is new, not due yet</div>
+                        <div class="quiz-option" data-value="overdue">I should have but haven't</div>
+                        <div class="quiz-option" data-value="not-uk">Not UK-based / different tax system</div>
                     </div>
                 </div>
 
-                <!-- Question 5: Monthly Income (with dividends) -->
-                <div class="quiz-question" data-question="5">
-                    <h3>What's your average monthly income? (Include salary, dividends, all sources)</h3>
+                <!-- Question 3: Monthly Income -->
+                <div class="quiz-question" data-question="3">
+                    <h3>How much do you typically pay yourself per month from your self-employed work or business?</h3>
                     <div class="quiz-options">
                         <div class="quiz-option" data-value="over-3k">£3,000+ / month</div>
                         <div class="quiz-option" data-value="2-3k">£2,000–£3,000 / month</div>
@@ -854,25 +839,25 @@
                     </div>
                 </div>
 
-                <!-- Question 6: Bank Balance -->
-                <div class="quiz-question" data-question="6">
-                    <h3>Can you show 500,000 THB (approx. £11,000–£12,000) in a bank account?</h3>
+                <!-- Question 4: Bank Balance -->
+                <div class="quiz-question" data-question="4">
+                    <h3>Can you show 500,000 THB (approx. £11,000–£12,000 depending on exchange rate) in a bank account?</h3>
                     <div class="quiz-options">
-                        <div class="quiz-option" data-value="yes-have">Yes, already have it</div>
-                        <div class="quiz-option" data-value="yes-spread">Yes, spread across accounts</div>
-                        <div class="quiz-option" data-value="soon">Will have it in 2-3 months</div>
-                        <div class="quiz-option" data-value="no">No, won't be possible</div>
+                        <div class="quiz-option" data-value="yes-have">Yes, I have this already</div>
+                        <div class="quiz-option" data-value="yes-savings">Yes, but it's spread across accounts</div>
+                        <div class="quiz-option" data-value="soon">I'll have this in the next 3 months</div>
+                        <div class="quiz-option" data-value="no">No, this won't be possible</div>
                     </div>
                 </div>
 
-                <!-- Question 7: Timeline -->
-                <div class="quiz-question" data-question="7">
-                    <h3>When do you want to apply for the DTV?</h3>
+                <!-- Question 5: Employment Proof -->
+                <div class="quiz-question" data-question="5">
+                    <h3>Do you have documentation to prove your remote work status?</h3>
                     <div class="quiz-options">
-                        <div class="quiz-option" data-value="asap">ASAP — I have documents ready</div>
-                        <div class="quiz-option" data-value="1-2-months">In 1–2 months</div>
-                        <div class="quiz-option" data-value="3-6-months">In 3–6 months</div>
-                        <div class="quiz-option" data-value="researching">Just researching for now</div>
+                        <div class="quiz-option" data-value="contract">Employment contract stating remote work</div>
+                        <div class="quiz-option" data-value="letter">Employer letter confirming remote work</div>
+                        <div class="quiz-option" data-value="portfolio">Freelance portfolio + client contracts</div>
+                        <div class="quiz-option" data-value="business-docs">Business registration / tax documents</div>
                     </div>
                 </div>
 
@@ -880,36 +865,24 @@
                 <div class="quiz-result" id="result-no-remote">
                     <div class="quiz-result-icon">🎯</div>
                     <h3>The DTV Remote Work visa isn't right for you</h3>
-                    <p>But don't worry — there are other options. The DTV has a different category called <strong>DTV2 — Thai Soft Power</strong> that covers:</p>
+                    <p>The DTV has a different category called <strong>DTV2 — Thai Soft Power</strong> that might work for you instead. This covers activities like:</p>
                     <ul style="text-align: left; margin: 1.5rem 0; color: var(--charcoal-light);">
                         <li>Muay Thai training</li>
                         <li>Thai cooking classes</li>
                         <li>Thai language courses</li>
                         <li>Medical treatment</li>
                     </ul>
-                    <p>Same 5-year visa, same £300 fee — just a different purpose.</p>
-                    <p style="margin-top: 1.5rem;"><strong>Want help figuring out your best option?</strong></p>
-                    <a href="#consultation" class="btn btn-primary">Book a Consultation</a>
-                </div>
-
-                <!-- Result: Need Passport Renewal -->
-                <div class="quiz-result" id="result-passport">
-                    <div class="quiz-result-icon">🛂</div>
-                    <h3>Renew your passport first</h3>
-                    <p>The Thai Embassy requires at least 6 months validity on your passport. You'll need to renew before applying for the DTV.</p>
-                    <p><strong>Estimated timeline:</strong> 3–6 weeks for passport renewal, then 2–4 weeks for DTV application.</p>
-                    <p style="margin-top: 1.5rem;"><strong>Want the guide ready for when your passport arrives?</strong></p>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
+                    <p>Same 5-year visa, same £300 fee — just a different purpose of visit.</p>
+                    <a href="https://london.thaiembassy.org/en/page/destination-thailand-visa" target="_blank" class="btn btn-primary">See DTV2 Requirements</a>
                 </div>
 
                 <!-- Result: Need Workplace Permission -->
                 <div class="quiz-result" id="result-need-permission">
                     <div class="quiz-result-icon">⏸️</div>
-                    <h3>Get workplace permission first</h3>
-                    <p>The Thai Embassy requires written proof that your employer allows remote work from Thailand. Without this, you can't get the DTV.</p>
-                    <p><strong>Your next step:</strong> Ask your employer for a letter confirming you're authorized to work remotely from Thailand.</p>
-                    <p style="margin-top: 1rem;">If they won't allow it, the DTV2 (Soft Power) route might work — cooking, Muay Thai, language courses, etc.</p>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
+                    <h3>Stop here — you need workplace permission first</h3>
+                    <p>The Thai Embassy requires an <strong>employment contract or certificate</strong> showing you're authorised to work remotely. If your workplace doesn't allow it, you can't get the DTV.</p>
+                    <p><strong>Your next step:</strong> Ask your employer about their remote work policy. If they say yes, come back and continue this quiz.</p>
+                    <p>If they say no, you might want to consider the <strong>DTV2 (Soft Power)</strong> route instead — cooking, Muay Thai, language courses, etc.</p>
                 </div>
 
                 <!-- Result: Low Income Warning -->
@@ -923,7 +896,8 @@
                         <li>Waiting until your business earns more</li>
                         <li>Looking at DTV2 Soft Power options instead</li>
                     </ul>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
+                    <p>Want to discuss your specific situation?</p>
+                    <a href="#consultation" class="btn btn-primary">Book a Consultation</a>
                 </div>
 
                 <!-- Result: Likely Qualify -->
@@ -931,12 +905,8 @@
                     <div class="quiz-result-icon">✅</div>
                     <h3>You likely qualify for the DTV Remote Work visa</h3>
                     <p>Based on your answers, you're in a strong position to apply. You have remote income, the right documentation, and can meet the financial requirements.</p>
-                    <div id="timeline-display" style="background: var(--cream); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; text-align: left;">
-                        <strong>Your estimated timeline:</strong>
-                        <p id="timeline-text" style="margin-top: 0.5rem; margin-bottom: 0;">Calculating...</p>
-                    </div>
                     <p>Next step: Get your documents formatted correctly. The Thai Embassy is strict — the £300 fee is non-refundable, and missing or poorly formatted documents = delays or rejection.</p>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
+                    <a href="#products" class="btn btn-primary">See the Guide Options</a>
                 </div>
 
                 <!-- Result: Challenges -->
@@ -944,11 +914,8 @@
                     <div class="quiz-result-icon">⚠️</div>
                     <h3>You may face some challenges</h3>
                     <p>Not disqualifying, but worth addressing before applying. Common issues: bank balance timing, documentation format, or employment proof.</p>
-                    <div id="timeline-display-challenges" style="background: var(--cream); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; text-align: left;">
-                        <strong>Your estimated timeline:</strong>
-                        <p id="timeline-text-challenges" style="margin-top: 0.5rem; margin-bottom: 0;">Calculating...</p>
-                    </div>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
+                    <p>Book a consultation — I'll help you figure out the best path forward.</p>
+                    <a href="#consultation" class="btn btn-primary">Book Free Call</a>
                 </div>
             </div>
         </div>
@@ -1076,7 +1043,7 @@
         <p style="margin-top: 0.5rem;">Not legal advice. Always verify current requirements with the Thai embassy.</p>
     </footer>
 
-        <script>
+    <script>
         // Quiz Logic
         const questions = document.querySelectorAll('.quiz-question');
         const progressBars = document.querySelectorAll('.quiz-progress-bar');
@@ -1085,28 +1052,10 @@
         const resultNoRemote = document.getElementById('result-no-remote');
         const resultNeedPermission = document.getElementById('result-need-permission');
         const resultLowIncome = document.getElementById('result-low-income');
-        const resultPassport = document.getElementById('result-passport');
         
-        let userEmail = '';
-        let questionPath = [];
+        let currentQuestion = 0;
         const answers = {};
-
-        // Save email and start quiz
-        function saveEmailAndContinue() {
-            const emailInput = document.getElementById('quiz-email');
-            userEmail = emailInput.value;
-            
-            if (!userEmail || !userEmail.includes('@')) {
-                alert('Please enter a valid email address');
-                return;
-            }
-            
-            // Hide email question, show progress and first question
-            document.querySelector('[data-question="0"]').classList.remove('active');
-            document.querySelector('.quiz-progress').style.display = 'flex';
-            showQuestion('1');
-            questionPath.push('0');
-        }
+        let questionPath = []; // Track which questions were shown
 
         // Handle option clicks
         document.querySelectorAll('.quiz-option').forEach(option => {
@@ -1133,95 +1082,85 @@
             // Hide current
             questions.forEach(q => q.classList.remove('active'));
             
-            // Update progress bar
+            // Update progress bar based on how far we've gone
             const progressIndex = questionPath.length;
             progressBars.forEach((bar, index) => {
                 bar.classList.toggle('active', index < progressIndex);
             });
             
             switch(currentQId) {
-                case '1': // Residence
-                    showQuestion('2');
-                    break;
-                    
-                case '2': // Passport
-                    if (answer === 'under-6' || answer === 'expired') {
-                        calculateTimelineAndShowResult('passport');
-                    } else {
-                        showQuestion('3');
-                    }
-                    break;
-                    
-                case '3': // Remote income
+                case '1': // Remote income?
                     if (answer === 'no') {
-                        calculateTimelineAndShowResult('no-remote');
-                    } else if (answer === 'yes-employed') {
-                        showQuestion('4a');
+                        showResult('no-remote');
                     } else {
-                        showQuestion('4b');
+                        showQuestion('2a');
                     }
                     break;
                     
-                case '4a': // Workplace permission
-                    if (answer === 'no') {
-                        calculateTimelineAndShowResult('need-permission');
-                    } else if (answer === 'need-to-ask') {
-                        // Still let them continue but note they need to ask
-                        showQuestion('4c');
+                case '2a': // PAYE or self-employed?
+                    if (answer === 'paye') {
+                        showQuestion('2b');
                     } else {
-                        showQuestion('4c');
+                        showQuestion('2d'); // Self-employed path
                     }
                     break;
                     
-                case '4b': // Self-employed duration
-                    showQuestion('4c');
+                case '2b': // Workplace policy?
+                    if (answer === 'yes') {
+                        showQuestion('4'); // Skip to bank balance
+                    } else {
+                        showQuestion('2c'); // Ask if they've asked permission
+                    }
                     break;
                     
-                case '4c': // Tax documentation
+                case '2c': // Asked permission?
+                    if (answer === 'yes' || answer === 'asked-waiting') {
+                        showQuestion('4'); // Continue
+                    } else {
+                        showResult('need-permission');
+                    }
+                    break;
+                    
+                case '2d': // Self-employed duration
+                    showQuestion('2e');
+                    break;
+                    
+                case '2e': // Tax return filed?
+                    showQuestion('3');
+                    break;
+                    
+                case '3': // Monthly income
+                    if (answer === 'under-1k') {
+                        showResult('low-income');
+                    } else {
+                        showQuestion('4');
+                    }
+                    break;
+                    
+                case '4': // Bank balance
                     showQuestion('5');
                     break;
                     
-                case '5': // Monthly income
-                    if (answer === 'under-1k') {
-                        calculateTimelineAndShowResult('low-income');
-                    } else {
-                        showQuestion('6');
-                    }
-                    break;
-                    
-                case '6': // Bank balance
-                    showQuestion('7');
-                    break;
-                    
-                case '7': // Timeline preference
+                case '5': // Employment proof
                     calculateFinalResult();
                     break;
             }
         }
 
         function showQuestion(questionId) {
-            const nextQuestion = document.querySelector('.quiz-question[data-question="' + questionId + '"');
+            const nextQuestion = document.querySelector(`.quiz-question[data-question="${questionId}"]`);
             if (nextQuestion) {
                 nextQuestion.classList.add('active');
             }
         }
 
-        function calculateTimelineAndShowResult(resultId) {
+        function showResult(resultId) {
             // Hide all questions
             questions.forEach(q => q.classList.remove('active'));
             document.querySelector('.quiz-progress').style.display = 'none';
             
-            // Calculate timeline
-            const timeline = calculateTimeline();
-            
-            // Show result with timeline
-            const resultEl = document.getElementById('result-' + resultId);
-            resultEl.classList.add('show');
-            
-            // Send email if we have one
-            if (userEmail) {
-                sendResultsEmail(userEmail, resultId, timeline);
-            }
+            // Show appropriate result
+            document.getElementById(`result-${resultId}`).classList.add('show');
         }
 
         function calculateFinalResult() {
@@ -1233,121 +1172,36 @@
             let score = 0;
             let issues = [];
             
-            // Must have remote income
-            if (answers['3'] && answers['3'] !== 'no') score += 1;
+            // Q1: Must have remote income (already filtered)
+            if (answers['1'] && answers['1'] !== 'no') score += 1;
             
-            // Bank balance
-            if (['yes-have', 'yes-spread'].includes(answers['6'])) {
+            // Q4: Bank balance
+            if (['yes-have', 'yes-savings'].includes(answers['4'])) {
                 score += 2;
-            } else if (answers['6'] === 'soon') {
+            } else if (answers['4'] === 'soon') {
                 score += 1;
                 issues.push('funds-soon');
             } else {
                 issues.push('funds-no');
             }
             
-            // Workplace permission (for employed)
-            if (answers['3'] === 'yes-employed') {
-                if (['yes-have', 'yes-can-get'].includes(answers['4a'])) {
-                    score += 2;
-                } else {
-                    issues.push('permission-unclear');
-                }
+            // Q5: Employment proof
+            if (answers['5']) {
+                score += 2;
             }
             
-            // Self-employed tax status
-            if (answers['3'] === 'yes-self' || answers['3'] === 'yes-freelance') {
-                if (answers['4c'] === 'self-filed' || answers['4c'] === 'mix') {
-                    score += 2;
-                } else if (answers['4c'] === 'self-not-yet') {
-                    score += 1;
-                    issues.push('tax-pending');
-                } else {
-                    issues.push('tax-issue');
-                }
+            // Self-employed specific checks
+            if (answers['2a'] === 'self-employed') {
+                if (answers['2e'] === 'yes-filed') score += 1;
+                else if (answers['2e'] === 'overdue') issues.push('tax-overdue');
             }
             
-            // Income level
-            if (['over-3k', '2-3k', '1-2k'].includes(answers['5'])) {
-                score += 1;
-            }
-            
-            // Calculate timeline
-            const timeline = calculateTimeline();
-            
-            // Show appropriate result
-            if (score >= 5 && issues.length === 0) {
+            // Show result
+            if (score >= 4 && issues.length === 0) {
                 resultLikely.classList.add('show');
-                document.getElementById('timeline-text').textContent = timeline;
             } else {
                 resultChallenges.classList.add('show');
-                document.getElementById('timeline-text-challenges').textContent = timeline;
             }
-            
-            // Send email
-            if (userEmail) {
-                const resultType = score >= 5 && issues.length === 0 ? 'likely' : 'challenges';
-                sendResultsEmail(userEmail, resultType, timeline);
-            }
-        }
-
-        function calculateTimeline() {
-            const applicationTiming = answers['7'];
-            const hasFunds = ['yes-have', 'yes-spread'].includes(answers['6']);
-            const hasPermission = answers['4a'] === 'yes-have' || answers['4a'] === 'yes-can-get';
-            const hasTaxDocs = answers['4c'] === 'paye-payslips' || answers['4c'] === 'self-filed' || answers['4c'] === 'mix';
-            
-            let weeks = 0;
-            let stages = [];
-            
-            // Document gathering time
-            if (!hasFunds) {
-                stages.push('Save £11,000 (2-3 months)');
-                weeks += 12;
-            }
-            
-            if (!hasPermission && answers['3'] === 'yes-employed') {
-                stages.push('Get workplace permission (1-2 weeks)');
-                weeks += 2;
-            }
-            
-            if (!hasTaxDocs) {
-                stages.push('Gather tax documents (1-2 weeks)');
-                weeks += 2;
-            }
-            
-            // Application prep
-            stages.push('Prepare DTV application (1-2 weeks)');
-            weeks += 2;
-            
-            // Embassy processing
-            stages.push('Embassy processing (15+ working days)');
-            weeks += 3;
-            
-            // Total
-            const totalMonths = Math.ceil(weeks / 4);
-            
-            if (applicationTiming === 'asap') {
-                if (weeks <= 4) {
-                    return 'You could be ready to apply in ' + weeks + ' weeks. Start now!';
-                } else {
-                    return 'You could be ready to apply in about ' + totalMonths + ' months.';
-                }
-            } else if (applicationTiming === '1-2-months') {
-                return 'Target: Apply in 1-2 months. You should start preparing documents now.';
-            } else if (applicationTiming === '3-6-months') {
-                return 'Good planning window. Start gathering documents in ' + (totalMonths - 2) + ' months.';
-            } else {
-                return 'Estimated time to ready: ' + totalMonths + ' months when you decide to apply.';
-            }
-        }
-
-        function sendResultsEmail(email, resultType, timeline) {
-            // This would connect to your email service
-            console.log('Sending results to:', email);
-            console.log('Result:', resultType);
-            console.log('Timeline:', timeline);
-            // Implementation depends on your backend
         }
 
         // FAQ Accordion

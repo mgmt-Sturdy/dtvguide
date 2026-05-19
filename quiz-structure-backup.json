@@ -1,0 +1,67 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-05-19T17:06:31.754Z",
+  "questions": [
+    {
+      "id": "0",
+      "type": "email",
+      "text": "Enter your email"
+    },
+    {
+      "id": "1",
+      "type": "residence",
+      "text": "Where are you resident?"
+    },
+    {
+      "id": "2",
+      "type": "passport",
+      "text": "Passport validity?"
+    },
+    {
+      "id": "3",
+      "type": "income_type",
+      "text": "Remote income?"
+    },
+    {
+      "id": "4a",
+      "type": "workplace_permission",
+      "text": "Can you get workplace permission?",
+      "condition": "employed"
+    },
+    {
+      "id": "4b",
+      "type": "self_employed_duration",
+      "text": "How long self-employed?",
+      "condition": "self_employed"
+    },
+    {
+      "id": "4c",
+      "type": "tax_docs",
+      "text": "What tax documentation?"
+    },
+    {
+      "id": "5",
+      "type": "monthly_income",
+      "text": "Monthly income (incl dividends)?"
+    },
+    {
+      "id": "6",
+      "type": "bank_balance",
+      "text": "Can you show £11k?"
+    },
+    {
+      "id": "7",
+      "type": "timeline",
+      "text": "When do you want to apply?"
+    }
+  ],
+  "results": [
+    "likely",
+    "challenges",
+    "no-remote",
+    "need-permission",
+    "low-income",
+    "passport"
+  ],
+  "logic": "see JavaScript for routing rules"
+}
