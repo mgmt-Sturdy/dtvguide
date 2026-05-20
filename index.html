@@ -1571,12 +1571,15 @@ function routeQuiz(currentQId, answer) {
             showQuestion('2');
             break;
         case '2': // Passport
-            if (answer === 'under-6' || answer === 'expired') {
-                calculateTimelineAndShowResult('passport');
-            } else {
+            // All passport answers continue - no hard stop
+            if (answer === '6plus') {
                 updateProgress(calculatePoints('passport', '6plus'));
-                showQuestion('3');
+            } else {
+                // Under 6 months or expired gets 0 points but continues
+                // Suggestion will show at the end if needed
+                updateProgress(0);
             }
+            showQuestion('3');
             break;
         case '3': // Remote income
             if (answer === 'no') {
@@ -1658,6 +1661,10 @@ function calculateFinalResult() {
     
     const percentage = Math.round((currentScore / MAX_SCORE) * 100);
     
+    // Check passport status for suggestion
+    const passportAnswer = answers['2'];
+    const needsPassportRenewal = (passportAnswer === 'under-6' || passportAnswer === 'expired');
+    
     let resultId;
     if (percentage >= 70) {
         resultId = 'likely';
@@ -1673,6 +1680,19 @@ function calculateFinalResult() {
         const timelineText = resultEl.querySelector('[id^="timeline-text"]');
         if (timelineText) {
             timelineText.textContent = 'Your DTV Readiness: ' + percentage + '%';
+        }
+        
+        // Add passport suggestion if needed
+        if (needsPassportRenewal) {
+            const suggestionDiv = document.createElement('div');
+            suggestionDiv.className = 'suggestion-box';
+            suggestionDiv.innerHTML = `
+                <h4>🛂 Passport Renewal Needed</h4>
+                <p>Your passport has less than 6 months validity or is expired. 
+                You'll need to renew it before applying for the DTV. 
+                Add 3-6 weeks for passport renewal to your timeline.</p>
+            `;
+            resultEl.insertBefore(suggestionDiv, resultEl.firstChild);
         }
     }
 }
