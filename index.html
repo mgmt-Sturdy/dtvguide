@@ -1048,6 +1048,8 @@
             const isEligible = DTV_ELIGIBLE_COUNTRIES.includes(country);
             
             if (!isEligible) {
+                // Save hard stop data
+                saveToGoogleSheet('Ineligible Country: ' + country);
                 document.getElementById('hard-stop-country').classList.add('show');
                 return;
             }
@@ -1091,6 +1093,8 @@
                     }
                 } else if (questionId === '4a') {
                     if (value === 'no') {
+                        // Save hard stop data
+                        saveToGoogleSheet('No workplace permission');
                         document.getElementById('hard-stop-permission').classList.add('show');
                     } else {
                         showQuestion(5);
@@ -1350,18 +1354,18 @@
             document.getElementById('result-container').classList.add('show');
             
             // Save to Google Sheet
-            saveToGoogleSheet();
+            saveToGoogleSheet('');
         }
         
         // Save quiz data to Google Sheet
-        function saveToGoogleSheet() {
+        function saveToGoogleSheet(status) {
             const percentage = Math.round((currentScore / MAX_SCORE) * 100);
             const country = answers['1'] || '';
             
             const data = {
                 email: userEmail,
                 country: country,
-                score: percentage + '%'
+                score: status || percentage + '%'
             };
             
             fetch('https://script.google.com/macros/s/AKfycbwJoiYKO48-MTYseNns5iMbG2TCxuwRtMbtXrgb1qORZhOLPqEEz8MrBYvv73qzrCgX/exec', {
