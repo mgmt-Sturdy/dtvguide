@@ -1896,16 +1896,20 @@ function calculateFinalResult() {
     // Check funds
     const fundsAnswer = answers['6'];
     if (fundsAnswer && !fundsAnswer.sufficient) {
-        const neededAmount = fundsAnswer.currency === 'GBP' ? '£11,000' : '$14,000';
-        const shortfall = Math.round((11000 - fundsAnswer.amount) / 1000) * 1000;
+        const neededAmount = fundsAnswer.currency === 'GBP' ? 11000 : 14000;
+        const shortfall = neededAmount - fundsAnswer.amount;
+        const monthsNeeded = Math.ceil(shortfall / 1000);
+        const weeksNeeded = monthsNeeded * 4;
+        const displayAmount = fundsAnswer.currency === 'GBP' ? '£11,000' : '$14,000';
+        
         issues.push({
             icon: '🏦',
             title: 'Build Up Savings',
-            description: `You need ${neededAmount} in your account.`,
-            time: '4 weeks',
-            weeks: 4
+            description: `You need ${displayAmount} in your account.`,
+            time: monthsNeeded + ' month' + (monthsNeeded > 1 ? 's' : ''),
+            weeks: weeksNeeded
         });
-        totalWeeks += 4;
+        totalWeeks += weeksNeeded;
     }
     
     // Determine result type based on number of issues
