@@ -1074,7 +1074,7 @@
     <section class="quiz-section" id="quiz">
         <div class="quiz-container">
             <div class="section-label">Free Eligibility Check</div>
-            <h2>Find out in 30 seconds if you qualify</h2>
+            <h2>Find out in 2 minutes if you qualify</h2>
             <p>Answer 7 quick questions. Get a personalised result.</p>
             
                         <div class="quiz-box">
@@ -1106,7 +1106,7 @@
                         <input type="email" id="quiz-email" placeholder="your@email.com" style="padding: 1rem; border: 2px solid var(--cream-dark); border-radius: 8px; font-size: 1rem;">
                         <button class="btn btn-primary" onclick="saveEmailAndContinue()" style="width: 100%;">Start the Quiz</button>
                     </div>
-                    <p style="font-size: 0.85rem; color: var(--charcoal-light); margin-top: 1rem;">Takes 30 seconds. No spam, unsubscribe anytime.</p>
+                    <p style="font-size: 0.85rem; color: var(--charcoal-light); margin-top: 1rem;">Takes 2 minutes. No spam, unsubscribe anytime.</p>
                 </div>
 
                 <div class="quiz-progress" style="display: none;">
@@ -1327,7 +1327,7 @@
                 <div class="product-card">
                     <div class="product-number">1</div>
                     <h3>Free Eligibility Quiz</h3>
-                    <p>Find out in 30 seconds if you qualify</p>
+                    <p>Find out in 2 minutes if you qualify</p>
                     <div class="product-price">Free</div>
                     <ul class="product-features">
                         <li>7-question assessment</li>
@@ -1427,7 +1427,7 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <h2>Ready to make Thailand your base?</h2>
-        <p>The 60-day rule is ending. The DTV is your path to long-term, legal stays. Start with the free quiz — it takes 30 seconds.</p>
+        <p>The 60-day rule is ending. The DTV is your path to long-term, legal stays. Start with the free quiz — it takes 2 minutes.</p>
         <a href="#quiz" class="btn btn-primary">Check My Eligibility</a>
     </section>
 

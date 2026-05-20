@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+    <h1>Testing DTV Guide Quiz</h1>
+    
+    <div id="test-results"></div>
+    
+    <script>
+        // Check if the main functions exist
+        const results = [];
+        
+        // Check for required elements
+        const requiredElements = [
+            'quiz-email',
+            'progress-container',
+            'country-search',
+            'country-dropdown',
+            'selected-country',
+            'selected-country-display',
+            'country-continue',
+            'currency-select',
+            'funds-amount',
+            'funds-continue'
+        ];
+        
+        results.push('DOM not loaded yet - run this after page load');
+        
+        // Output
+        document.getElementById('test-results').innerHTML = results.join('<br>');
+    </script>
+</body>
+</html>
