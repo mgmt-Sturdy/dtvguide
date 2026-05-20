@@ -675,7 +675,123 @@
                 padding: 1.5rem;
             }
         }
-    </style>
+    
+/* Progress Bar with Percentage */
+.quiz-progress-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--cream-dark);
+    z-index: 100;
+    display: none;
+}
+
+.quiz-progress-container.active {
+    display: block;
+}
+
+.progress-bar-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.progress-bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--cream-dark);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.progress-percentage {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gold-deep);
+    min-width: 100px;
+    text-align: right;
+}
+
+/* Hard Stop Screen */
+.hard-stop-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--cream);
+    z-index: 1000;
+    padding: 6rem 1.5rem 2rem;
+}
+
+.hard-stop-screen.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hard-stop-content {
+    max-width: 600px;
+    text-align: center;
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px var(--shadow);
+}
+
+.hard-stop-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.hard-stop-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+}
+
+.hard-stop-message {
+    font-size: 1.1rem;
+    color: var(--charcoal-light);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.hard-stop-btn {
+    display: inline-block;
+    background: var(--gold-deep);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.hard-stop-btn:hover {
+    background: var(--charcoal);
+}
+
+</style>
 </head>
 <body>
     <!-- Navigation -->
@@ -757,7 +873,27 @@
             
                         <div class="quiz-box">
                 <!-- Email Capture (Question 0) -->
-                <div class="quiz-question active" data-question="0">
+                <!-- Progress Bar -->
+<div class="quiz-progress-container" id="progress-container">
+    <div class="progress-bar-wrapper">
+        <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+        <div class="progress-percentage" id="progress-percentage">0% Ready</div>
+    </div>
+</div>
+
+<!-- Hard Stop Screen -->
+<div class="hard-stop-screen" id="hard-stop-screen">
+    <div class="hard-stop-content">
+        <div class="hard-stop-icon">🚫</div>
+        <h2 class="hard-stop-title">Not Eligible</h2>
+        <div class="hard-stop-message" id="hard-stop-message"></div>
+        <button class="hard-stop-btn" onclick="location.reload()">Start Over</button>
+    </div>
+</div>
+
+<div class="quiz-question active" data-question="0">
                     <h3>Let's check your DTV eligibility</h3>
                     <p style="color: var(--charcoal-light); margin-bottom: 1.5rem;">Enter your email and we'll send you your results so you can come back to them.</p>
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
@@ -1077,305 +1213,275 @@
     </footer>
 
         <script>
-        // Quiz Logic
-        const questions = document.querySelectorAll('.quiz-question');
-        const progressBars = document.querySelectorAll('.quiz-progress-bar');
-        const resultLikely = document.getElementById('result-likely');
-        const resultChallenges = document.getElementById('result-challenges');
-        const resultNoRemote = document.getElementById('result-no-remote');
-        const resultNeedPermission = document.getElementById('result-need-permission');
-        const resultLowIncome = document.getElementById('result-low-income');
-        const resultPassport = document.getElementById('result-passport');
-        
-        let userEmail = '';
-        let questionPath = [];
-        const answers = {};
+// Quiz Logic with Hard Stops and Progress Percentage
+const questions = document.querySelectorAll('.quiz-question');
+const progressContainer = document.getElementById('progress-container');
+const progressBarFill = document.getElementById('progress-bar-fill');
+const progressText = document.getElementById('progress-percentage');
+const hardStopScreen = document.getElementById('hard-stop-screen');
+const hardStopMessage = document.getElementById('hard-stop-message');
 
-        // Save email and start quiz
-        function saveEmailAndContinue() {
-            const emailInput = document.getElementById('quiz-email');
-            userEmail = emailInput.value;
-            
-            if (!userEmail || !userEmail.includes('@')) {
-                alert('Please enter a valid email address');
-                return;
-            }
-            
-            // Hide email question, show progress and first question
-            document.querySelector('[data-question="0"]').classList.remove('active');
-            document.querySelector('.quiz-progress').style.display = 'flex';
+let currentScore = 0;
+const MAX_SCORE = 80; // Total of all scoring questions
+let userEmail = '';
+let questionPath = [];
+const answers = {};
+
+// Hard Stop Configurations
+const HARD_STOPS = {
+    'ineligible-country': {
+        title: 'DTV Not Available',
+        message: 'Sorry, the Thailand DTV is currently only available for UK, Ireland, US, Canada, Australia, EU countries, and select others. Please check with the Thai embassy for alternative visa options that may suit your situation.'
+    },
+    'employer-denies-remote': {
+        title: 'Remote Work Required',
+        message: 'Your employer doesn\'t allow remote work from abroad. You\'ll need to either:<br><br>1. Request permission from your employer<br>2. Find a new job that allows remote work<br>3. Switch to self-employed/freelance work<br><br>Come back once you have remote work permission.'
+    }
+};
+
+// Scoring configuration
+const SCORING = {
+    'passport': { max: 15 },
+    'remote-income': { max: 30 },
+    'work-permission': { max: 20 },
+    'monthly-income': { max: 15 },
+    'bank-balance': { max: 20 }
+};
+
+function calculatePoints(questionType, answer) {
+    let points = 0;
+    
+    switch(questionType) {
+        case 'passport':
+            if (answer === '6plus') points = 15;
+            break;
+        case 'remote-income':
+            if (['employed', 'self-employed', 'freelance'].includes(answer)) points = 30;
+            break;
+        case 'work-permission':
+            if (answer === 'yes-have') points = 20;
+            else if (answer === 'yes-can-get') points = 15;
+            else if (answer === 'need-to-ask') points = 10;
+            break;
+        case 'tax-docs':
+            if (['paye-payslips', 'self-filed', 'mix'].includes(answer)) points = 20;
+            else if (answer === 'self-not-yet') points = 10;
+            break;
+        case 'monthly-income':
+            if (['1-2k', '2-3k', 'over-3k'].includes(answer)) points = 15;
+            break;
+        case 'bank-balance':
+            if (answer === 'yes-have') points = 20;
+            else if (answer === 'yes-spread') points = 15;
+            else if (answer === 'soon') points = 10;
+            break;
+    }
+    
+    return points;
+}
+
+function updateProgress(points) {
+    currentScore += points;
+    const percentage = Math.round((currentScore / MAX_SCORE) * 100);
+    
+    if (progressBarFill) {
+        progressBarFill.style.width = percentage + '%';
+    }
+    if (progressText) {
+        progressText.textContent = percentage + '% Ready';
+    }
+}
+
+function showHardStop(stopKey) {
+    const config = HARD_STOPS[stopKey];
+    if (hardStopMessage && hardStopScreen) {
+        hardStopMessage.innerHTML = config.message;
+        hardStopScreen.querySelector('.hard-stop-title').textContent = config.title;
+        hardStopScreen.classList.add('show');
+    }
+}
+
+function saveEmailAndContinue() {
+    const emailInput = document.getElementById('quiz-email');
+    userEmail = emailInput.value;
+    
+    if (!userEmail || !userEmail.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+    }
+    
+    document.querySelector('[data-question="0"]').classList.remove('active');
+    progressContainer.classList.add('active');
+    showQuestion('1');
+    questionPath.push('0');
+}
+
+function showQuestion(questionId) {
+    questions.forEach(q => q.classList.remove('active'));
+    const nextQuestion = document.querySelector('.quiz-question[data-question="' + questionId + '"]');
+    if (nextQuestion) {
+        nextQuestion.classList.add('active');
+    }
+}
+
+function routeQuiz(currentQId, answer) {
+    // Check hard stops
+    if (currentQId === '1') {
+        if (answer === 'other') {
+            showHardStop('ineligible-country');
+            return;
+        }
+    }
+    
+    // Calculate points for scoring questions
+    const points = calculatePoints(currentQId, answer);
+    if (points > 0) {
+        updateProgress(points);
+    }
+    
+    // Store answer
+    answers[currentQId] = answer;
+    questionPath.push(currentQId);
+    
+    // Routing logic
+    questions.forEach(q => q.classList.remove('active'));
+    
+    switch(currentQId) {
+        case '0': // Email
             showQuestion('1');
-            questionPath.push('0');
-        }
-
-        // Handle option clicks
-        document.querySelectorAll('.quiz-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const questionEl = this.closest('.quiz-question');
-                const questionId = questionEl.dataset.question;
-                
-                // Store answer
-                answers[questionId] = this.dataset.value;
-                questionPath.push(questionId);
-                
-                // Visual selection
-                questionEl.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-                
-                // Handle routing based on answers
-                setTimeout(() => {
-                    routeQuiz(questionId, this.dataset.value);
-                }, 300);
-            });
-        });
-
-        function routeQuiz(currentQId, answer) {
-            // Hide current
-            questions.forEach(q => q.classList.remove('active'));
-            
-            // Update progress bar
-            const progressIndex = questionPath.length;
-            progressBars.forEach((bar, index) => {
-                bar.classList.toggle('active', index < progressIndex);
-            });
-            
-            switch(currentQId) {
-                case '1': // Residence
-                    showQuestion('2');
-                    break;
-                    
-                case '2': // Passport
-                    if (answer === 'under-6' || answer === 'expired') {
-                        calculateTimelineAndShowResult('passport');
-                    } else {
-                        showQuestion('3');
-                    }
-                    break;
-                    
-                case '3': // Remote income
-                    if (answer === 'no') {
-                        calculateTimelineAndShowResult('no-remote');
-                    } else if (answer === 'yes-employed') {
-                        showQuestion('4a');
-                    } else {
-                        showQuestion('4b');
-                    }
-                    break;
-                    
-                case '4a': // Workplace permission
-                    if (answer === 'no') {
-                        calculateTimelineAndShowResult('need-permission');
-                    } else if (answer === 'need-to-ask') {
-                        // Still let them continue but note they need to ask
-                        showQuestion('4c');
-                    } else {
-                        showQuestion('4c');
-                    }
-                    break;
-                    
-                case '4b': // Self-employed duration
+            break;
+        case '1': // Residence - passed hard stop
+            showQuestion('2');
+            break;
+        case '2': // Passport
+            if (answer === 'under-6' || answer === 'expired') {
+                calculateTimelineAndShowResult('passport');
+            } else {
+                updateProgress(calculatePoints('passport', '6plus'));
+                showQuestion('3');
+            }
+            break;
+        case '3': // Remote income
+            if (answer === 'no') {
+                calculateTimelineAndShowResult('no-remote');
+            } else {
+                updateProgress(calculatePoints('remote-income', answer));
+                if (answer === 'employed') {
+                    showQuestion('employer-remote-check');
+                } else {
                     showQuestion('4c');
-                    break;
-                    
-                case '4c': // Tax documentation
-                    showQuestion('5');
-                    break;
-                    
-                case '5': // Monthly income
-                    if (answer === 'under-1k') {
-                        calculateTimelineAndShowResult('low-income');
-                    } else {
-                        showQuestion('6');
-                    }
-                    break;
-                    
-                case '6': // Bank balance
-                    showQuestion('7');
-                    break;
-                    
-                case '7': // Timeline preference
-                    calculateFinalResult();
-                    break;
+                }
             }
-        }
-
-        function showQuestion(questionId) {
-            const nextQuestion = document.querySelector('.quiz-question[data-question="' + questionId + '"');
-            if (nextQuestion) {
-                nextQuestion.classList.add('active');
-            }
-        }
-
-        function calculateTimelineAndShowResult(resultId) {
-            // Hide all questions
-            questions.forEach(q => q.classList.remove('active'));
-            document.querySelector('.quiz-progress').style.display = 'none';
-            
-            // Calculate timeline
-            const timeline = calculateTimeline();
-            
-            // Show result with timeline
-            const resultEl = document.getElementById('result-' + resultId);
-            resultEl.classList.add('show');
-            
-            // Send email if we have one
-            if (userEmail) {
-                sendResultsEmail(userEmail, resultId, timeline);
-            }
-        }
-
-        function calculateFinalResult() {
-            // Hide all questions
-            questions.forEach(q => q.classList.remove('active'));
-            document.querySelector('.quiz-progress').style.display = 'none';
-            
-            // Calculate qualification score
-            let score = 0;
-            let issues = [];
-            
-            // Must have remote income
-            if (answers['3'] && answers['3'] !== 'no') score += 1;
-            
-            // Bank balance
-            if (['yes-have', 'yes-spread'].includes(answers['6'])) {
-                score += 2;
-            } else if (answers['6'] === 'soon') {
-                score += 1;
-                issues.push('funds-soon');
+            break;
+        case 'employer-remote-check':
+            if (answer === 'no') {
+                showHardStop('employer-denies-remote');
             } else {
-                issues.push('funds-no');
+                showQuestion('4a');
             }
-            
-            // Workplace permission (for employed)
-            if (answers['3'] === 'yes-employed') {
-                if (['yes-have', 'yes-can-get'].includes(answers['4a'])) {
-                    score += 2;
-                } else {
-                    issues.push('permission-unclear');
-                }
-            }
-            
-            // Self-employed tax status
-            if (answers['3'] === 'yes-self' || answers['3'] === 'yes-freelance') {
-                if (answers['4c'] === 'self-filed' || answers['4c'] === 'mix') {
-                    score += 2;
-                } else if (answers['4c'] === 'self-not-yet') {
-                    score += 1;
-                    issues.push('tax-pending');
-                } else {
-                    issues.push('tax-issue');
-                }
-            }
-            
-            // Income level
-            if (['over-3k', '2-3k', '1-2k'].includes(answers['5'])) {
-                score += 1;
-            }
-            
-            // Calculate timeline
-            const timeline = calculateTimeline();
-            
-            // Show appropriate result
-            if (score >= 5 && issues.length === 0) {
-                resultLikely.classList.add('show');
-                document.getElementById('timeline-text').textContent = timeline;
+            break;
+        case '4a': // Workplace permission
+            updateProgress(calculatePoints('work-permission', answer));
+            if (answer === 'no') {
+                calculateTimelineAndShowResult('need-permission');
             } else {
-                resultChallenges.classList.add('show');
-                document.getElementById('timeline-text-challenges').textContent = timeline;
+                showQuestion('5');
             }
-            
-            // Send email
-            if (userEmail) {
-                const resultType = score >= 5 && issues.length === 0 ? 'likely' : 'challenges';
-                sendResultsEmail(userEmail, resultType, timeline);
-            }
-        }
-
-        function calculateTimeline() {
-            const applicationTiming = answers['7'];
-            const hasFunds = ['yes-have', 'yes-spread'].includes(answers['6']);
-            const hasPermission = answers['4a'] === 'yes-have' || answers['4a'] === 'yes-can-get';
-            const hasTaxDocs = answers['4c'] === 'paye-payslips' || answers['4c'] === 'self-filed' || answers['4c'] === 'mix';
-            
-            let weeks = 0;
-            let stages = [];
-            
-            // Document gathering time
-            if (!hasFunds) {
-                stages.push('Save £11,000 (2-3 months)');
-                weeks += 12;
-            }
-            
-            if (!hasPermission && answers['3'] === 'yes-employed') {
-                stages.push('Get workplace permission (1-2 weeks)');
-                weeks += 2;
-            }
-            
-            if (!hasTaxDocs) {
-                stages.push('Gather tax documents (1-2 weeks)');
-                weeks += 2;
-            }
-            
-            // Application prep
-            stages.push('Prepare DTV application (1-2 weeks)');
-            weeks += 2;
-            
-            // Embassy processing
-            stages.push('Embassy processing (15+ working days)');
-            weeks += 3;
-            
-            // Total
-            const totalMonths = Math.ceil(weeks / 4);
-            
-            if (applicationTiming === 'asap') {
-                if (weeks <= 4) {
-                    return 'You could be ready to apply in ' + weeks + ' weeks. Start now!';
-                } else {
-                    return 'You could be ready to apply in about ' + totalMonths + ' months.';
-                }
-            } else if (applicationTiming === '1-2-months') {
-                return 'Target: Apply in 1-2 months. You should start preparing documents now.';
-            } else if (applicationTiming === '3-6-months') {
-                return 'Good planning window. Start gathering documents in ' + (totalMonths - 2) + ' months.';
+            break;
+        case '4c': // Tax docs
+            updateProgress(calculatePoints('tax-docs', answer));
+            showQuestion('5');
+            break;
+        case '5': // Monthly income
+            updateProgress(calculatePoints('monthly-income', answer));
+            if (answer === 'under-1k') {
+                calculateTimelineAndShowResult('low-income');
             } else {
-                return 'Estimated time to ready: ' + totalMonths + ' months when you decide to apply.';
+                showQuestion('6');
             }
+            break;
+        case '6': // Bank balance
+            updateProgress(calculatePoints('bank-balance', answer));
+            showQuestion('7');
+            break;
+        case '7': // Timeline
+            calculateFinalResult();
+            break;
+    }
+}
+
+// Initialize click handlers
+document.querySelectorAll('.quiz-option').forEach(option => {
+    option.addEventListener('click', function() {
+        const questionEl = this.closest('.quiz-question');
+        const questionId = questionEl.dataset.question;
+        
+        questionEl.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+        this.classList.add('selected');
+        
+        setTimeout(() => {
+            routeQuiz(questionId, this.dataset.value);
+        }, 300);
+    });
+});
+
+function calculateTimelineAndShowResult(resultId) {
+    questions.forEach(q => q.classList.remove('active'));
+    progressContainer.style.display = 'none';
+    
+    const resultEl = document.getElementById('result-' + resultId);
+    if (resultEl) {
+        resultEl.classList.add('show');
+    }
+}
+
+function calculateFinalResult() {
+    questions.forEach(q => q.classList.remove('active'));
+    progressContainer.style.display = 'none';
+    
+    const percentage = Math.round((currentScore / MAX_SCORE) * 100);
+    
+    let resultId;
+    if (percentage >= 70) {
+        resultId = 'likely';
+    } else if (percentage >= 50) {
+        resultId = 'challenges';
+    } else {
+        resultId = 'challenges';
+    }
+    
+    const resultEl = document.getElementById('result-' + resultId);
+    if (resultEl) {
+        resultEl.classList.add('show');
+        const timelineText = resultEl.querySelector('[id^="timeline-text"]');
+        if (timelineText) {
+            timelineText.textContent = 'Your DTV Readiness: ' + percentage + '%';
         }
+    }
+}
 
-        function sendResultsEmail(email, resultType, timeline) {
-            // This would connect to your email service
-            console.log('Sending results to:', email);
-            console.log('Result:', resultType);
-            console.log('Timeline:', timeline);
-            // Implementation depends on your backend
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) {
+            item.classList.add('open');
         }
+    });
+});
 
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                const isOpen = item.classList.contains('open');
-                
-                // Close all
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-                
-                // Open clicked if it was closed
-                if (!isOpen) {
-                    item.classList.add('open');
-                }
-            });
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+</script>
 </body>
 </html>
