@@ -1171,17 +1171,6 @@
                     </div>
                 </div>
 
-                <!-- Question 7: Timeline -->
-                <div class="quiz-question" data-question="7">
-                    <h3>When do you want to apply for the DTV?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="asap">ASAP — I have documents ready</div>
-                        <div class="quiz-option" data-value="1-2-months">In 1–2 months</div>
-                        <div class="quiz-option" data-value="3-6-months">In 3–6 months</div>
-                        <div class="quiz-option" data-value="researching">Just researching for now</div>
-                    </div>
-                </div>
-
                 <!-- Result: No Remote Income -->
                 <div class="quiz-result" id="result-no-remote">
                     <div class="quiz-result-icon">🎯</div>
@@ -1733,10 +1722,11 @@ function routeQuiz(currentQId, answer) {
             }
             break;
         case '4a': // Workplace permission
-            updateProgress(calculatePoints('work-permission', answer));
             if (answer === 'no') {
-                calculateTimelineAndShowResult('need-permission');
+                // Hard stop - can't get permission
+                showHardStop('employer-denies-remote');
             } else {
+                updateProgress(calculatePoints('work-permission', answer));
                 showQuestion('5');
             }
             break;
@@ -1752,10 +1742,8 @@ function routeQuiz(currentQId, answer) {
                 showQuestion('6');
             }
             break;
-        case '6': // Bank balance - handled by submitFunds() function
-            // This is handled by the submitFunds() function above
-            break;
-        case '7': // Timeline
+        case '6': // Bank balance - after submitFunds, calculate final result
+            // submitFunds() already called, now calculate final result
             calculateFinalResult();
             break;
     }
