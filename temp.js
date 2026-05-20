@@ -27,7 +27,7 @@ function submitFunds() {
     const currency = document.getElementById('currency-select').value;
     const amount = parseFloat(document.getElementById('funds-amount').value);
     
-    if (isNaN(amount) || amount <= 0) {
+    if (isNaN(amount) || amount < 0) {
         alert('Please enter a valid amount');
         return;
     }
@@ -55,8 +55,9 @@ function submitFunds() {
     
     updateProgress(points);
     
-    // Show next question
-    showQuestion('7');
+    // Hide current question and show final result
+    document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+    calculateFinalResult();
 }
 
 

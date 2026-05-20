@@ -1495,8 +1495,9 @@ function submitFunds() {
     
     updateProgress(points);
     
-    // Show next question
-    showQuestion('7');
+    // Hide current question and show final result
+    document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+    calculateFinalResult();
 }
 
 
