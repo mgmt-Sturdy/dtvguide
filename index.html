@@ -48,18 +48,17 @@
         /* Navigation */
         .nav-floating {
             position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 1rem;
+            right: 1rem;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             border-radius: 100px;
-            padding: 0.75rem 1.5rem;
+            padding: 0.6rem 1rem;
             z-index: 1000;
             box-shadow: var(--shadow-medium);
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             align-items: center;
         }
 
@@ -674,9 +673,10 @@
             }
 
             .nav-floating {
-                bottom: 1rem;
-                padding: 0.6rem 1rem;
-                gap: 1rem;
+                top: 0.75rem;
+                right: 0.75rem;
+                padding: 0.5rem 0.75rem;
+                gap: 0.75rem;
             }
 
             .nav-link {
@@ -698,6 +698,10 @@
 
             .bottom-progress-bar {
                 padding: 1rem;
+            }
+
+            .top-progress-bar {
+                padding: 0.75rem 1rem;
             }
 
             .result-card {
