@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The DTV Visa Guide — Stay in Thailand Legally for Up to 5 Years</title>
+    <title>DTV Visa Guide — Stay in Thailand Legally</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold-deep: #B8860B;
-            --gold-light: #D4AF37;
-            --cream: #FDF8F3;
-            --cream-dark: #F5EDE4;
-            --green-soft: #6B8E6B;
-            --green-dark: #4A6B4A;
-            --charcoal: #2C2C2C;
-            --charcoal-light: #3D3D3D;
-            --white: #FFFFFF;
-            --shadow: rgba(0,0,0,0.08);
+            --violet-deep: #5B21B6;
+            --violet-main: #7C3AED;
+            --violet-light: #A78BFA;
+            --accent-pink: #EC4899;
+            --accent-cyan: #06B6D4;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F7FF;
+            --bg-tertiary: #F3F0FF;
+            --text-primary: #0F0F0F;
+            --text-secondary: #4B5563;
+            --text-muted: #9CA3AF;
+            --border: #E5E7EB;
+            --shadow-soft: 0 4px 20px rgba(124, 58, 237, 0.08);
+            --shadow-medium: 0 8px 40px rgba(124, 58, 237, 0.12);
         }
 
         * {
@@ -29,343 +33,233 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--cream);
-            color: var(--charcoal);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3, .brand-font {
-            font-family: 'Cormorant Garamond', serif;
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.1;
         }
 
         /* Navigation */
-        nav {
+        .nav-floating {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--white);
-            border-bottom: 1px solid var(--cream-dark);
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 0.75rem 1.5rem;
             z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+            box-shadow: var(--shadow-medium);
             display: flex;
-            justify-content: space-between;
+            gap: 2rem;
             align-items: center;
         }
 
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--gold-deep);
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--violet-main);
         }
 
         .nav-cta {
-            background: var(--gold-deep);
-            color: var(--white);
-            padding: 0.6rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: background 0.2s;
+            background: linear-gradient(135deg, var(--violet-main), var(--accent-pink));
+            color: white;
+            padding: 0.6rem 1.25rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .nav-cta:hover {
-            background: var(--charcoal);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
         }
 
-        /* Hero */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 6rem 1.5rem 4rem;
-            background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 0%, rgba(184,134,11,0.03) 100%);
-            pointer-events: none;
-        }
-
-        .hero-container {
-            max-width: 900px;
-            margin: 0 auto;
             text-align: center;
+            padding: 8rem 2rem 6rem;
+            position: relative;
+            background: var(--bg-secondary);
         }
 
         .hero-badge {
-            display: inline-block;
-            background: var(--gold-deep);
-            color: var(--white);
-            padding: 0.5rem 1.25rem;
-            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--violet-light);
+            color: var(--violet-main);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
             font-size: 0.85rem;
             font-weight: 500;
             margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 700;
-            line-height: 1.15;
             margin-bottom: 1.5rem;
-            color: var(--charcoal);
-        }
-
-        .hero h1 span {
-            color: var(--gold-deep);
+            background: linear-gradient(135deg, var(--text-primary), var(--violet-main));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-            color: var(--charcoal-light);
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-            font-weight: 300;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
         }
 
-        .hero-buttons {
+        .hero-cta {
             display: flex;
             gap: 1rem;
-            justify-content: center;
             flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
+            justify-content: center;
         }
 
         .btn-primary {
-            background: var(--gold-deep);
-            color: var(--white);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--violet-main), var(--accent-pink));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
         }
 
         .btn-primary:hover {
-            background: var(--charcoal);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
         }
 
         .btn-secondary {
-            background: var(--white);
-            color: var(--charcoal);
-            border: 2px solid var(--charcoal);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
         .btn-secondary:hover {
-            background: var(--charcoal);
-            color: var(--white);
-        }
-
-        .hero-trust {
-            margin-top: 3rem;
-            font-size: 0.9rem;
-            color: var(--charcoal-light);
-        }
-
-        .hero-trust strong {
-            color: var(--gold-deep);
-        }
-
-        /* Story Section */
-        .story {
-            padding: 5rem 1.5rem;
-            background: var(--white);
-        }
-
-        .story-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            color: var(--gold-deep);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-        }
-
-        .story h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 2rem;
-            color: var(--charcoal);
-        }
-
-        .story-content {
-            display: grid;
-            gap: 2.5rem;
-        }
-
-        .story-photo {
-            width: 100%;
-            max-width: 400px;
-            aspect-ratio: 1;
-            background: var(--cream-dark);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--charcoal-light);
-            font-size: 0.9rem;
-            margin: 0 auto;
-        }
-
-        .story-text p {
-            margin-bottom: 1.25rem;
-            font-size: 1.1rem;
-            color: var(--charcoal-light);
-        }
-
-        .story-text strong {
-            color: var(--charcoal);
-        }
-
-        .story-highlights {
-            background: var(--cream);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-top: 2rem;
-            border-left: 4px solid var(--gold-deep);
-        }
-
-        .story-highlights ul {
-            list-style: none;
-        }
-
-        .story-highlights li {
-            padding: 0.75rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: var(--charcoal-light);
-        }
-
-        .story-highlights li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--green-soft);
-            font-weight: bold;
-        }
-
-        /* Video Section */
-        .video-section {
-            padding: 4rem 1.5rem;
-            background: var(--cream-dark);
-            text-align: center;
-        }
-
-        .video-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: var(--charcoal);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.1rem;
-            margin-top: 1.5rem;
+            border-color: var(--violet-main);
+            color: var(--violet-main);
         }
 
         /* Quiz Section */
         .quiz-section {
-            padding: 5rem 1.5rem;
-            background: var(--white);
+            padding: 6rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 10rem;
         }
 
         .quiz-container {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
+            background: var(--bg-primary);
+            border-radius: 32px;
+            border: 1px solid var(--border);
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
         }
 
-        .quiz-section h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 1rem;
-        }
-
-        .quiz-section > .quiz-container > p {
-            color: var(--charcoal-light);
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-        }
-
-        .quiz-box {
-            background: var(--cream);
-            border-radius: 16px;
-            padding: 2.5rem;
-            text-align: left;
-            box-shadow: 0 4px 24px var(--shadow);
-        }
-
-        .quiz-progress {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .quiz-progress-bar {
-            flex: 1;
-            height: 4px;
-            background: var(--cream-dark);
-            border-radius: 2px;
-        }
-
-        .quiz-progress-bar.active {
-            background: var(--gold-deep);
+        .quiz-container::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--violet-main), transparent);
+            border-radius: 3px;
         }
 
         .quiz-question {
             display: none;
+            animation: fadeIn 0.4s ease;
         }
 
         .quiz-question.active {
             display: block;
-            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(10px); }
-            to { opacity: 1; transform: translateX(0); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .quiz-question h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            color: var(--charcoal);
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .quiz-question > p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            color: var(--violet-main);
+            border-radius: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
         .quiz-options {
@@ -375,627 +269,70 @@
         }
 
         .quiz-option {
-            background: var(--white);
-            border: 2px solid var(--cream-dark);
-            border-radius: 10px;
-            padding: 1rem 1.25rem;
+            padding: 1.25rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 1rem;
-            text-align: left;
-        }
-
-        .quiz-option:hover {
-            border-color: var(--gold-deep);
-            background: var(--cream);
-        }
-
-        .quiz-option.selected {
-            border-color: var(--gold-deep);
-            background: rgba(184,134,11,0.05);
-        }
-
-        .quiz-result {
-            display: none;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        .quiz-result.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .quiz-result-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .quiz-result h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .quiz-result p {
-            color: var(--charcoal-light);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-
-        .quiz-result .btn {
-            margin-top: 1rem;
-        }
-
-        /* Products Section */
-        .products {
-            padding: 5rem 1.5rem;
-            background: var(--cream-dark);
-        }
-
-        .products-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .products h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 1rem;
-        }
-
-        .products > .products-container > p {
-            color: var(--charcoal-light);
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .product-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: left;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 2px solid transparent;
-        }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 32px var(--shadow);
-        }
-
-        .product-card.featured {
-            border-color: var(--gold-deep);
+            background: var(--bg-primary);
             position: relative;
+            overflow: hidden;
         }
 
-        .product-card.featured::before {
-            content: 'Most Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gold-deep);
-            color: var(--white);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .product-number {
-            width: 48px;
-            height: 48px;
-            background: var(--cream);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--gold-deep);
-            margin-bottom: 1rem;
-        }
-
-        .product-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-card p {
-            color: var(--charcoal-light);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .product-price {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--charcoal);
-            margin-bottom: 1.5rem;
-        }
-
-        .product-price span {
-            font-size: 0.9rem;
-            color: var(--charcoal-light);
-            font-weight: 400;
-        }
-
-        .product-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .product-features li {
-            padding: 0.5rem 0;
-            padding-left: 1.25rem;
-            position: relative;
-            font-size: 0.9rem;
-            color: var(--charcoal-light);
-        }
-
-        .product-features li::before {
-            content: '✓';
+        .quiz-option::before {
+            content: '';
             position: absolute;
             left: 0;
-            color: var(--green-soft);
-        }
-
-        /* FAQ Section */
-        .faq {
-            padding: 5rem 1.5rem;
-            background: var(--white);
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 2.5rem;
-            text-align: center;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid var(--cream-dark);
-            padding: 1.5rem 0;
-        }
-
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--charcoal);
-            font-size: 1.1rem;
-        }
-
-        .faq-question::after {
-            content: '+';
-            font-size: 1.5rem;
-            color: var(--gold-deep);
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--violet-main), var(--accent-pink));
+            transform: scaleY(0);
             transition: transform 0.2s;
         }
 
-        .faq-item.open .faq-question::after {
-            content: '−';
+        .quiz-option:hover {
+            border-color: var(--violet-light);
+            transform: translateX(5px);
+            box-shadow: var(--shadow-soft);
         }
 
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            color: var(--charcoal-light);
-            line-height: 1.7;
+        .quiz-option:hover::before {
+            transform: scaleY(1);
         }
 
-        .faq-item.open .faq-answer {
-            max-height: 500px;
-            padding-top: 1rem;
+        .quiz-option.selected {
+            border-color: var(--violet-main);
+            background: var(--bg-tertiary);
         }
 
-        /* CTA Section */
-        .cta-section {
-            padding: 5rem 1.5rem;
-            background: var(--charcoal);
-            color: var(--white);
-            text-align: center;
+        .quiz-option.selected::before {
+            transform: scaleY(1);
         }
 
-        .cta-section h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 1rem;
-        }
-
-        .cta-section p {
-            color: rgba(255,255,255,0.7);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            font-size: 1.1rem;
-        }
-
-        .cta-section .btn-primary {
-            background: var(--gold-deep);
-            font-size: 1.1rem;
-            padding: 1.25rem 2.5rem;
-        }
-
-        .cta-section .btn-primary:hover {
-            background: var(--gold-light);
-        }
-
-        /* Footer */
-        footer {
-            padding: 3rem 1.5rem;
-            background: var(--charcoal-light);
-            color: rgba(255,255,255,0.6);
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: var(--gold-light);
-            text-decoration: none;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .logo {
-                font-size: 1.25rem;
-            }
-
-            .hero {
-                padding: 5rem 1rem 3rem;
-            }
-
-            .quiz-box {
-                padding: 1.5rem;
-            }
-
-            .product-card {
-                padding: 1.5rem;
-            }
-
-            .story-highlights {
-                padding: 1.5rem;
-            }
-        }
-    
-/* Progress Bar with Percentage */
-.quiz-progress-container {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    right: 0;
-    background: var(--white);
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--cream-dark);
-    z-index: 100;
-    display: none;
-}
-
-.quiz-progress-container.active {
-    display: block;
-}
-
-.progress-bar-wrapper {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.progress-bar-track {
-    flex: 1;
-    height: 8px;
-    background: var(--cream-dark);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
-    border-radius: 4px;
-    transition: width 0.5s ease;
-    width: 0%;
-}
-
-.progress-percentage {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--gold-deep);
-    min-width: 100px;
-    text-align: right;
-}
-
-/* Hard Stop Screen */
-.hard-stop-screen {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--cream);
-    z-index: 1000;
-    padding: 6rem 1.5rem 2rem;
-}
-
-.hard-stop-screen.show {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.hard-stop-content {
-    max-width: 600px;
-    text-align: center;
-    background: var(--white);
-    padding: 3rem;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px var(--shadow);
-}
-
-.hard-stop-icon {
-    font-size: 4rem;
-    margin-bottom: 1.5rem;
-}
-
-.hard-stop-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--charcoal);
-    margin-bottom: 1rem;
-}
-
-.hard-stop-message {
-    font-size: 1.1rem;
-    color: var(--charcoal-light);
-    line-height: 1.7;
-    margin-bottom: 2rem;
-}
-
-.hard-stop-btn {
-    display: inline-block;
-    background: var(--gold-deep);
-    color: var(--white);
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.2s;
-    cursor: pointer;
-    border: none;
-}
-
-.hard-stop-btn:hover {
-    background: var(--charcoal);
-}
-
-
-        /* Country Dropdown Styles */
-        .country-search-container {
-            position: relative;
-            max-width: 400px;
-            margin: 1.5rem auto;
-        }
-        
-        .country-search-input {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1rem;
-            border: 2px solid var(--cream-dark);
-            border-radius: 8px;
-            background: var(--white);
-            color: var(--charcoal);
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .country-search-input:focus {
-            outline: none;
-            border-color: var(--gold-deep);
-        }
-        
-        .country-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            max-height: 300px;
-            overflow-y: auto;
-            background: var(--white);
-            border: 2px solid var(--cream-dark);
-            border-top: none;
-            border-radius: 0 0 8px 8px;
-            z-index: 1000;
-            box-shadow: 0 10px 30px var(--shadow);
-        }
-        
-        .country-dropdown.active {
-            display: block;
-        }
-        
-        .country-option {
-            padding: 0.75rem 1rem;
-            cursor: pointer;
-            border-bottom: 1px solid var(--cream-dark);
-            transition: background 0.2s;
-            text-align: left;
-        }
-        
-        .country-option:hover {
-            background: var(--cream);
-        }
-        
-        .country-option.dtv-eligible {
-            border-left: 3px solid var(--green-soft);
-        }
-        
-        .country-option.not-eligible {
-            color: var(--charcoal-light);
-        }
-        
-        .selected-country-display {
-            margin: 1rem auto;
-            padding: 1rem;
-            background: var(--cream);
-            border-radius: 8px;
-            display: none;
-            max-width: 400px;
-        }
-        
-        .selected-country-display.active {
-            display: block;
-        }
-        
-        .selected-country-display.eligible {
-            border-left: 4px solid var(--green-soft);
-        }
-        
-        .selected-country-display.not-eligible {
-            border-left: 4px solid #cc0000;
-        }
-
-        /* Funds Question Styles */
-        .funds-input-container {
-            max-width: 400px;
-            margin: 2rem auto;
-            text-align: center;
-        }
-        
-        .currency-selector {
-            margin-bottom: 1rem;
-        }
-        
-        .currency-selector select {
-            padding: 0.75rem 1rem;
-            font-size: 1rem;
-            border: 2px solid var(--cream-dark);
-            border-radius: 8px;
-            background: var(--white);
-            color: var(--charcoal);
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        .amount-input-wrapper {
-            margin-bottom: 1rem;
-        }
-        
-        .funds-amount-input {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.5rem;
-            text-align: center;
-            border: 2px solid var(--cream-dark);
-            border-radius: 8px;
-            background: var(--white);
-            color: var(--charcoal);
-        }
-        
-        .funds-amount-input:focus {
-            outline: none;
-            border-color: var(--gold-deep);
-        }
-        
-        .required-amount-display {
-            background: var(--cream);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            border-left: 4px solid var(--gold-deep);
-        }
-        
-        .currency-note {
-            font-size: 0.85rem;
-            color: var(--charcoal-light);
-        }
-
-
-        /* Issues Section Styles */
-        .issues-section {
-            background: var(--cream);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid var(--cream-dark);
-        }
-        
-        .issues-section h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            color: var(--charcoal);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .issues-list {
+        /* Email Input */
+        .email-input-wrapper {
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
         }
-        
-        .issue-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            background: var(--white);
-            padding: 1.25rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--gold-deep);
+
+        .email-input {
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s;
+            background: var(--bg-primary);
         }
-        
-        .issue-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-        
-        .issue-content h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            color: var(--charcoal);
-            margin-bottom: 0.25rem;
-        }
-        
-        .issue-content p {
-            color: var(--charcoal-light);
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .issue-time {
-            color: var(--gold-deep);
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        
-        .total-timeline {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid var(--cream-dark);
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--charcoal);
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--violet-main);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
         }
 
         /* Bottom Progress Bar */
@@ -1004,1135 +341,1007 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--white);
-            border-top: 1px solid var(--cream-dark);
-            padding: 1rem 1.5rem;
-            z-index: 1000;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            padding: 1.25rem 2rem;
+            z-index: 999;
             display: none;
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .bottom-progress-bar.active {
             display: block;
         }
-        
-        .progress-info {
+
+        .bottom-progress-content {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .progress-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.75rem;
         }
-        
-        .question-number-display {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+
+        .progress-question {
+            font-family: 'Space Grotesk', sans-serif;
             font-weight: 600;
-            color: var(--charcoal);
+            font-size: 1rem;
+            color: var(--text-primary);
         }
-        
-        .progress-percent-display {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--gold-deep);
+
+        .progress-percent {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--violet-main);
         }
-        
+
         .progress-track {
             height: 6px;
-            background: var(--cream-dark);
-            border-radius: 3px;
+            background: var(--bg-tertiary);
+            border-radius: 100px;
             overflow: hidden;
-            margin-bottom: 0.75rem;
         }
-        
+
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
-            border-radius: 3px;
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--violet-main), var(--accent-pink));
+            border-radius: 100px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             width: 0%;
         }
-        
-        .question-dots {
+
+        .progress-dots {
             display: flex;
             justify-content: center;
             gap: 0.5rem;
         }
-        
-        .question-dots .dot {
+
+        .progress-dots .dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--cream-dark);
+            background: var(--border);
             transition: all 0.3s ease;
         }
-        
-        .question-dots .dot.active {
-            background: var(--gold-deep);
-            transform: scale(1.2);
+
+        .progress-dots .dot.active {
+            background: var(--violet-main);
+            transform: scale(1.3);
         }
-        
-        .question-dots .dot.completed {
-            background: var(--green-soft);
+
+        .progress-dots .dot.completed {
+            background: var(--accent-cyan);
         }
-        
-        .quiz-section {
-            padding-bottom: 120px;
+
+        /* Country Search */
+        .country-search-container {
+            position: relative;
         }
-        
-        @media (min-width: 768px) {
+
+        .country-search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s;
+            background: var(--bg-primary);
+        }
+
+        .country-search-input:focus {
+            outline: none;
+            border-color: var(--violet-main);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+
+        .country-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            max-height: 280px;
+            overflow-y: auto;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .country-dropdown.active {
+            display: block;
+        }
+
+        .country-option {
+            padding: 0.875rem 1.25rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .country-option:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .country-option.dtv-eligible {
+            border-left: 3px solid var(--violet-main);
+        }
+
+        /* Currency Selector */
+        .currency-selector select {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234B5563' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 20px;
+            padding-right: 3rem;
+        }
+
+        .currency-selector select:focus {
+            outline: none;
+            border-color: var(--violet-main);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+
+        .amount-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            font-size: 1.25rem;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-weight: 600;
+            background: var(--bg-primary);
+            transition: border-color 0.2s;
+        }
+
+        .amount-input:focus {
+            outline: none;
+            border-color: var(--violet-main);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+
+        /* Results Section */
+        .result-container {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-container.show {
+            display: block;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+            border-radius: 32px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .result-percentage {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 8px solid var(--violet-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            background: var(--bg-primary);
+        }
+
+        .result-percentage span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .result-percentage small {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .issues-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .issue-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            text-align: left;
+            transition: transform 0.2s;
+        }
+
+        .issue-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .issue-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .issue-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .issue-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .issue-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--violet-main);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .guide-help {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--violet-main);
+            padding: 1rem 1.25rem;
+            border-radius: 0 12px 12px 0;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .guide-help strong {
+            color: var(--violet-main);
+        }
+
+        /* Hard Stop Screen */
+        .hard-stop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .hard-stop.show {
+            display: flex;
+        }
+
+        .hard-stop-content {
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .hard-stop-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 6rem 1.5rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-floating {
+                bottom: 1rem;
+                padding: 0.6rem 1rem;
+                gap: 1rem;
+            }
+
+            .nav-link {
+                display: none;
+            }
+
+            .nav-link:first-child {
+                display: block;
+            }
+
+            .quiz-section {
+                padding: 4rem 1rem;
+            }
+
+            .quiz-container {
+                padding: 2rem;
+                border-radius: 24px;
+            }
+
             .bottom-progress-bar {
-                padding: 1.25rem 2rem;
+                padding: 1rem;
             }
-            
-            .progress-track {
-                height: 8px;
+
+            .result-card {
+                padding: 2rem;
             }
-            
-            .question-dots .dot {
-                width: 10px;
-                height: 10px;
+
+            .result-percentage {
+                width: 120px;
+                height: 120px;
+            }
+
+            .result-percentage span {
+                font-size: 2.5rem;
             }
         }
-</style>
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">The DTV Guide</div>
-            <a href="#quiz" class="nav-cta">Check Eligibility</a>
-        </div>
+    <nav class="nav-floating">
+        <a href="#quiz" class="nav-link">Quiz</a>
+        <a href="#guide" class="nav-link">Guide</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#quiz" class="nav-cta">Start Quiz</a>
     </nav>
+
+    <!-- Hard Stop Screens -->
+    <div class="hard-stop" id="hard-stop-country">
+        <div class="hard-stop-content">
+            <div class="hard-stop-icon">🌍</div>
+            <h2>DTV Not Available</h2>
+            <p>Sorry, the Thailand DTV is currently only available for UK, Ireland, US, Canada, Australia, EU countries, and select others.</p>
+            <a href="#" class="btn-secondary" onclick="location.reload()">Start Over</a>
+        </div>
+    </div>
+
+    <div class="hard-stop" id="hard-stop-permission">
+        <div class="hard-stop-content">
+            <div class="hard-stop-icon">💼</div>
+            <h2>Remote Work Required</h2>
+            <p>You'll need to get permission from your employer to work remotely from Thailand. Come back once you have written approval.</p>
+            <a href="#" class="btn-secondary" onclick="location.reload()">Start Over</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-container">
-            <div class="hero-badge">Thailand just ended the 60-day rule</div>
-            <h1>Here's how to stay legally — <span>for up to 5 years</span></h1>
-            <p class="hero-subtitle">The exact system I used to get my DTV as a UK entrepreneur — formatted, structured, and ready for your application.</p>
-            <div class="hero-buttons">
-                <a href="#quiz" class="btn btn-primary">Take the Free Quiz</a>
-                <a href="#products" class="btn btn-secondary">See the Guide</a>
-            </div>
-            <div class="hero-trust">
-                <strong>5-year multiple entry visa</strong> · 180 days per stay · No more visa runs
-            </div>
+        <div class="hero-badge">
+            <span>✨</span>
+            New: Thailand DTV Guide 2025
         </div>
-    </section>
 
-    <!-- Story Section -->
-    <section class="story">
-        <div class="story-container">
-            <div class="section-label">My Story</div>
-            <h2>I sold my house, left the UK, and made Thailand my base</h2>
-            
-            <div class="story-content">
-                <div class="story-photo">
-                    [Your Photo Here]
-                </div>
-                
-                <div class="story-text">
-                    <p>I'm a UK entrepreneur who <strong>sold up, put my house on the market, and relocated to Thailand.</strong> I still run my UK company remotely — and I'm now expanding into the Philippines.</p>
-                    
-                    <p>Thailand is my hub for Southeast Asia. And I hold a <strong>DTV visa</strong> — that's 5 years, multiple entry, 180 days per stay.</p>
-                    
-                    <p>With the 60-day rule now ending, the DTV is the best long-term option for most people. But embassy applications are strict — the £300 government fee is non-refundable — so getting it right matters.</p>
-                    
-                    <p>I spent <strong>10–15 hours</strong> preparing my application. Then I built an <strong>AI-assisted document formatting system</strong> that gets it done in a fraction of the time.</p>
-                    
-                    <p>This is NOT AI generating fake info. It formats <strong>YOUR</strong> real information correctly so embassies accept it.</p>
-                </div>
-            </div>
+        <h1>Stay in Thailand Legally</h1>
 
-            <div class="story-highlights">
-                <ul>
-                    <li>5-year DTV visa holder & UK entrepreneur</li>
-                    <li>Remote company still running from Thailand</li>
-                    <li>Built the exact system that got me approved</li>
-                    <li>Helped others navigate the strict embassy requirements</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        <p class="hero-subtitle">
+            The exact system I used to get my 5-year DTV visa as a UK entrepreneur. 
+            No more visa runs. No more uncertainty. Just a clear path to living in Thailand.
+        </p>
 
-    <!-- Video Section -->
-    <section class="video-section">
-        <div class="video-container">
-            <div class="section-label">Watch</div>
-            <h2>See how the DTV works in practice</h2>
-            <div class="video-placeholder">
-                [Video Embed Placeholder]
-            </div>
+        <div class="hero-cta">
+            <a href="#quiz" class="btn-primary">
+                Check Your Eligibility
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            <a href="#guide" class="btn-secondary">See the Guide</a>
         </div>
     </section>
 
     <!-- Quiz Section -->
     <section class="quiz-section" id="quiz">
         <div class="quiz-container">
-            <div class="section-label">Free Eligibility Check</div>
-            <h2>Find out in 30 seconds if you qualify</h2>
-            <p>Answer 7 quick questions. Get a personalised result.</p>
-            
-                        <div class="quiz-box">
-                <!-- Email Capture (Question 0) -->
-                <!-- Progress Bar -->
-<div class="quiz-progress-container" id="progress-container">
-    <div class="progress-bar-wrapper">
-        <div class="progress-bar-track">
-            <div class="progress-bar-fill" id="progress-bar-fill"></div>
-        </div>
-        <div class="progress-percentage" id="progress-percentage">0% Ready</div>
-    </div>
-</div>
+            <!-- Question 0: Email -->
+            <div class="quiz-question active" data-question="0">
+                <div class="question-number">Q0</div>
+                <h3>Let's check your DTV eligibility</h3>
+                <p>Enter your email and we'll send you your results so you can come back to them.</p>
 
-<!-- Hard Stop Screen -->
-<div class="hard-stop-screen" id="hard-stop-screen">
-    <div class="hard-stop-content">
-        <div class="hard-stop-icon">🚫</div>
-        <h2 class="hard-stop-title">Not Eligible</h2>
-        <div class="hard-stop-message" id="hard-stop-message"></div>
-        <button class="hard-stop-btn" onclick="location.reload()">Start Over</button>
-    </div>
-</div>
+                <div class="email-input-wrapper">
+                    <input type="email" id="quiz-email" class="email-input" placeholder="your@email.com">
+                    <button class="btn-primary" onclick="saveEmailAndContinue()" style="width: 100%;">Start the Quiz</button>
+                </div>
 
-<div class="quiz-question active" data-question="0">
-                    <h3>Let's check your DTV eligibility</h3>
-                    <p style="color: var(--charcoal-light); margin-bottom: 1.5rem;">Enter your email and we'll send you your results so you can come back to them.</p>
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <input type="email" id="quiz-email" placeholder="your@email.com" style="padding: 1rem; border: 2px solid var(--cream-dark); border-radius: 8px; font-size: 1rem;">
-                        <button class="btn btn-primary" onclick="saveEmailAndContinue()" style="width: 100%;">Start the Quiz</button>
+                <p style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                    Takes 30 seconds. No spam.
+                </p>
+            </div>
+
+            <!-- Question 1: Country -->
+            <div class="quiz-question" data-question="1">
+                <div class="question-number">Q1</div>
+                <h3>What country do you hold citizenship in?</h3>
+                <p>Select your country from the dropdown.</p>
+
+                <div class="country-search-container">
+                    <input type="text" id="country-search" class="country-search-input" placeholder="Search for your country..." autocomplete="off">
+                    <div class="country-dropdown" id="country-dropdown"></div>
+                </div>
+
+                <input type="hidden" id="selected-country" value="">
+                <button class="btn-primary" id="country-continue" onclick="submitCountry()" disabled style="width: 100%; margin-top: 1rem;">Continue</button>
+            </div>
+
+            <!-- Question 2: Passport -->
+            <div class="quiz-question" data-question="2">
+                <div class="question-number">Q2</div>
+                <h3>Does your passport have at least 6 months validity?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-value="6plus" onclick="selectOption(2, '6plus')">Yes, 6+ months remaining</div>
+                    <div class="quiz-option" data-value="under-6" onclick="selectOption(2, 'under-6')">Less than 6 months</div>
+                    <div class="quiz-option" data-value="expired" onclick="selectOption(2, 'expired')">Expired / don't have one</div>
+                </div>
+            </div>
+
+            <!-- Question 3: Remote Income -->
+            <div class="quiz-question" data-question="3">
+                <div class="question-number">Q3</div>
+                <h3>Do you currently have remote income?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-value="yes-employed" onclick="selectOption(3, 'yes-employed')">Yes — employed and work remotely</div>
+                    <div class="quiz-option" data-value="yes-self" onclick="selectOption(3, 'yes-self')">Yes — self-employed / run my own business</div>
+                    <div class="quiz-option" data-value="yes-freelance" onclick="selectOption(3, 'yes-freelance')">Yes — freelancer with clients</div>
+                    <div class="quiz-option" data-value="no" onclick="selectOption(3, 'no')">No, I don't have remote income</div>
+                </div>
+            </div>
+
+            <!-- Question 4a: Workplace Permission -->
+            <div class="quiz-question" data-question="4a">
+                <div class="question-number">Q4a</div>
+                <h3>Do you have permission from your workplace to work abroad?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-value="yes-have" onclick="selectOption('4a', 'yes-have')">Yes, I already have it in writing</div>
+                    <div class="quiz-option" data-value="yes-can-get" onclick="selectOption('4a', 'yes-can-get')">Yes, I can get it — they're flexible</div>
+                    <div class="quiz-option" data-value="need-to-ask" onclick="selectOption('4a', 'need-to-ask')">I need to ask / not sure</div>
+                    <div class="quiz-option" data-value="no" onclick="selectOption('4a', 'no')">No, definitely not allowed</div>
+                </div>
+            </div>
+
+            <!-- Question 4c: Tax Docs -->
+            <div class="quiz-question" data-question="4c">
+                <div class="question-number">Q4c</div>
+                <h3>What tax documentation do you have?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-value="paye-payslips" onclick="selectOption('4c', 'paye-payslips')">PAYE — 12 months of payslips</div>
+                    <div class="quiz-option" data-value="self-filed" onclick="selectOption('4c', 'self-filed')">Self-employed — tax return filed</div>
+                    <div class="quiz-option" data-value="self-not-yet" onclick="selectOption('4c', 'self-not-yet')">Self-employed — not filed yet</div>
+                    <div class="quiz-option" data-value="mix" onclick="selectOption('4c', 'mix')">Mix of PAYE payslips and self-employed tax returns</div>
+                </div>
+            </div>
+
+            <!-- Question 5: Monthly Income -->
+            <div class="quiz-question" data-question="5">
+                <div class="question-number">Q5</div>
+                <h3>What's your average monthly income?</h3>
+                <p>Include salary, dividends, all sources.</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-value="over-3k" onclick="selectOption(5, 'over-3k')">£3,000+ / month</div>
+                    <div class="quiz-option" data-value="2-3k" onclick="selectOption(5, '2-3k')">£2,000–£3,000 / month</div>
+                    <div class="quiz-option" data-value="1-2k" onclick="selectOption(5, '1-2k')">£1,000–£2,000 / month</div>
+                    <div class="quiz-option" data-value="under-1k" onclick="selectOption(5, 'under-1k')">Under £1,000 / month</div>
+                </div>
+            </div>
+
+            <!-- Question 6: Bank Balance -->
+            <div class="quiz-question" data-question="6">
+                <div class="question-number">Q6</div>
+                <h3>This visa requires proof of funds</h3>
+                <p>Select your currency and enter how much you can show.</p>
+
+                <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="currency-selector">
+                        <select id="currency-select" onchange="updateRequiredAmount()">
+                            <option value="GBP">🇬🇧 GBP (British Pounds)</option>
+                            <option value="USD">🇺🇸 USD (US Dollars)</option>
+                        </select>
                     </div>
-                    <p style="font-size: 0.85rem; color: var(--charcoal-light); margin-top: 1rem;">Takes 30 seconds. No spam, unsubscribe anytime.</p>
-                </div>
 
-                <div class="quiz-progress" style="display: none;">
-                    <div class="quiz-progress-bar"></div>
-                    <div class="quiz-progress-bar"></div>
-                    <div class="quiz-progress-bar"></div>
-                    <div class="quiz-progress-bar"></div>
-                    <div class="quiz-progress-bar"></div>
-                    <div class="quiz-progress-bar"></div>
-                    <div class="quiz-progress-bar"></div>
-                    <div class="quiz-progress-bar"></div>
-                </div>
+                    <input type="number" id="funds-amount" class="amount-input" placeholder="Enter amount" min="0" step="100">
 
-                <!-- Question 1: Country Citizenship -->
-                <div class="quiz-question" data-question="1">
-                    <h3>What country do you hold citizenship in?</h3>
-                    <p>Select your country of citizenship from the dropdown below.</p>
-                    
-                    <div class="country-search-container">
-                        <input type="text" 
-                               id="country-search" 
-                               class="country-search-input" 
-                               placeholder="Search for your country..." 
-                               autocomplete="off">
-                        <div class="country-dropdown" id="country-dropdown"></div>
-                    </div>
-                    
-                    <input type="hidden" id="selected-country" value="">
-                    <div class="selected-country-display" id="selected-country-display"></div>
-                    
-                    <button class="btn btn-primary" id="country-continue" disabled onclick="submitCountry()">Continue</button>
-                </div>
-
-                <!-- Question 2: Passport Validity -->
-                <div class="quiz-question" data-question="2">
-                    <h3>Does your passport have at least 6 months validity?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="yes">Yes, 6+ months remaining</div>
-                        <div class="quiz-option" data-value="under-6">Less than 6 months</div>
-                        <div class="quiz-option" data-value="expired">Expired / don't have one</div>
-                    </div>
-                </div>
-
-                <!-- Question 3: Remote Income -->
-                <div class="quiz-question" data-question="3">
-                    <h3>Do you currently have remote income?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="yes-employed">Yes — employed and work remotely</div>
-                        <div class="quiz-option" data-value="yes-self">Yes — self-employed / run my own business</div>
-                        <div class="quiz-option" data-value="yes-freelance">Yes — freelancer with clients</div>
-                        <div class="quiz-option" data-value="no">No, I don't have remote income</div>
-                    </div>
-                </div>
-
-                <!-- Question 4a: Workplace Permission (for employed) -->
-                <div class="quiz-question" data-question="4a">
-                    <h3>Do you have permission from your workplace to work abroad?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="yes-have">Yes, I already have it in writing</div>
-                        <div class="quiz-option" data-value="yes-can-get">Yes, I can get it — they're flexible</div>
-                        <div class="quiz-option" data-value="need-to-ask">I need to ask / not sure</div>
-                        <div class="quiz-option" data-value="no">No, definitely not allowed</div>
-                    </div>
-                </div>
-
-                <!-- Question 4b: Self-Employed Duration -->
-                <div class="quiz-question" data-question="4b">
-                    <h3>How long have you been self-employed or running your business?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="over-2-years">Over 2 years</div>
-                        <div class="quiz-option" data-value="1-2-years">1–2 years</div>
-                        <div class="quiz-option" data-value="6-12-months">6–12 months</div>
-                        <div class="quiz-option" data-value="under-6-months">Under 6 months</div>
-                    </div>
-                </div>
-
-                <!-- Question 4c: Tax Documentation -->
-                <div class="quiz-question" data-question="4c">
-                    <h3>What tax documentation do you have?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="paye-payslips">PAYE — 12 months of payslips</div>
-                        <div class="quiz-option" data-value="self-filed">Self-employed — tax return filed</div>
-                        <div class="quiz-option" data-value="self-not-yet">Self-employed — not filed yet (business new)</div>
-                        <div class="quiz-option" data-value="mix">Mix of PAYE payslips and self-employed tax returns</div>
+                    <div id="required-amount-display" style="background: var(--bg-tertiary); padding: 1rem; border-radius: 12px; border-left: 3px solid var(--violet-main);">
+                        <strong>Required: £11,000 GBP</strong> (or 500,000 THB)
+                        <br>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>
                     </div>
                 </div>
 
-                <!-- Question 5: Monthly Income (with dividends) -->
-                <div class="quiz-question" data-question="5">
-                    <h3>What's your average monthly income? (Include salary, dividends, all sources)</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="over-3k">£3,000+ / month</div>
-                        <div class="quiz-option" data-value="2-3k">£2,000–£3,000 / month</div>
-                        <div class="quiz-option" data-value="1-2k">£1,000–£2,000 / month</div>
-                        <div class="quiz-option" data-value="under-1k">Under £1,000 / month</div>
-                    </div>
-                </div>
+                <button class="btn-primary" onclick="submitFunds()" style="width: 100%;">Continue</button>
+            </div>
 
-                <!-- Question 6: Bank Balance with Currency Selector -->
-                <div class="quiz-question" data-question="6">
-                    <h3>This visa requires proof of funds. Can you show in your application the required amount?</h3>
-                    <p>Select your currency and enter how much you can show.</p>
-                    
-                    <div class="funds-input-container">
-                        <div class="currency-selector">
-                            <select id="currency-select" onchange="updateRequiredAmount()">
-                                <option value="GBP">🇬🇧 GBP (British Pounds)</option>
-                                <option value="USD">🇺🇸 USD (US Dollars)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="amount-input-wrapper">
-                            <input type="number" 
-                                   id="funds-amount" 
-                                   class="funds-amount-input" 
-                                   placeholder="Enter amount"
-                                   min="0"
-                                   step="100">
-                        </div>
-                        
-                        <div class="required-amount-display" id="required-amount-display">
-                            <strong>Required: £11,000 GBP</strong> (or 500,000 THB)
-                            <br>
-                            <span class="currency-note">Amount can vary due to currency fluctuations. Proof of funds will be required.</span>
-                        </div>
-                        
-                        <button class="btn btn-primary" id="funds-continue" onclick="submitFunds()">Continue</button>
-                    </div>
-                </div>
-
-                <!-- Bottom Progress Bar -->
-<div class="bottom-progress-bar" id="bottom-progress">
-    <div class="progress-info">
-        <span class="question-number-display">Q1 of 6</span>
-        <span class="progress-percent-display">0%</span>
-    </div>
-    <div class="progress-track">
-        <div class="progress-fill" id="bottom-progress-fill"></div>
-    </div>
-    <div class="question-dots" id="question-dots">
-        <span class="dot active" data-q="1"></span>
-        <span class="dot" data-q="2"></span>
-        <span class="dot" data-q="3"></span>
-        <span class="dot" data-q="4"></span>
-        <span class="dot" data-q="5"></span>
-        <span class="dot" data-q="6"></span>
-    </div>
-</div>
-
-<!-- Result: No Remote Income -->
-                <div class="quiz-result" id="result-no-remote">
-                    <div class="quiz-result-icon">🎯</div>
-                    <h3>The DTV Remote Work visa isn't right for you</h3>
-                    <p>But don't worry — there are other options. The DTV has a different category called <strong>DTV2 — Thai Soft Power</strong> that covers:</p>
-                    <ul style="text-align: left; margin: 1.5rem 0; color: var(--charcoal-light);">
-                        <li>Muay Thai training</li>
-                        <li>Thai cooking classes</li>
-                        <li>Thai language courses</li>
-                        <li>Medical treatment</li>
-                    </ul>
-                    <p>Same 5-year visa, same £300 fee — just a different purpose.</p>
-                    <p style="margin-top: 1.5rem;"><strong>Want help figuring out your best option?</strong></p>
-                    <a href="#consultation" class="btn btn-primary">Book a Consultation</a>
-                </div>
-
-                <!-- Result: Need Passport Renewal -->
-                <div class="quiz-result" id="result-passport">
-                    <div class="quiz-result-icon">🛂</div>
-                    <h3>Renew your passport first</h3>
-                    <p>The Thai Embassy requires at least 6 months validity on your passport. You'll need to renew before applying for the DTV.</p>
-                    <p><strong>Estimated timeline:</strong> 3–6 weeks for passport renewal, then 2–4 weeks for DTV application.</p>
-                    <p style="margin-top: 1.5rem;"><strong>Want the guide ready for when your passport arrives?</strong></p>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
-                </div>
-
-                <!-- Result: Need Workplace Permission -->
-                <div class="quiz-result" id="result-need-permission">
-                    <div class="quiz-result-icon">⏸️</div>
-                    <h3>Get workplace permission first</h3>
-                    <p>The Thai Embassy requires written proof that your employer allows remote work from Thailand. Without this, you can't get the DTV.</p>
-                    <p><strong>Your next step:</strong> Ask your employer for a letter confirming you're authorized to work remotely from Thailand.</p>
-                    <p style="margin-top: 1rem;">If they won't allow it, the DTV2 (Soft Power) route might work — cooking, Muay Thai, language courses, etc.</p>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
-                </div>
-
-                <!-- Result: Low Income Warning -->
-                <div class="quiz-result" id="result-low-income">
-                    <div class="quiz-result-icon">💡</div>
-                    <h3>You may need additional income sources</h3>
-                    <p>Under £1,000/month might be tight for Thailand living + the £11,000 bank requirement. The Embassy wants to see you can support yourself.</p>
-                    <p>You're not disqualified — but consider:</p>
-                    <ul style="text-align: left; margin: 1.5rem 0; color: var(--charcoal-light);">
-                        <li>Building up additional income streams</li>
-                        <li>Waiting until your business earns more</li>
-                        <li>Looking at DTV2 Soft Power options instead</li>
-                    </ul>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
-                </div>
-
-                <!-- Result: Likely Qualify -->
-                <div class="quiz-result" id="result-likely">
-                    <div class="quiz-result-icon">✅</div>
-                    <h3>You likely qualify for the DTV Remote Work visa</h3>
-                    <p>Based on your answers, you're in a strong position to apply. You have remote income, the right documentation, and can meet the financial requirements.</p>
-                    <div id="timeline-display" style="background: var(--cream); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; text-align: left;">
-                        <strong>Your estimated timeline:</strong>
-                        <p id="timeline-text" style="margin-top: 0.5rem; margin-bottom: 0;">Calculating...</p>
-                    </div>
-                    <p>Next step: Get your documents formatted correctly. The Thai Embassy is strict — the £300 fee is non-refundable, and missing or poorly formatted documents = delays or rejection.</p>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
-                </div>
-
-                <!-- Result: Challenges -->
-                <div class="quiz-result" id="result-challenges">
-                    <div class="quiz-result-icon">⚠️</div>
-                    <h3>You may face some challenges</h3>
-                    <p>Not disqualifying, but worth addressing before applying. Common issues: bank balance timing, documentation format, or employment proof.</p>
-                    <div id="timeline-display-challenges" style="background: var(--cream); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; text-align: left;">
-                        <strong>Your estimated timeline:</strong>
-                        <p id="timeline-text-challenges" style="margin-top: 0.5rem; margin-bottom: 0;">Calculating...</p>
-                    </div>
-                    <a href="#products" class="btn btn-primary">Get the Guide</a>
-                </div>
+            <!-- Results -->
+            <div class="result-container" id="result-container">
+                <div id="result-content"></div>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="products" id="products">
-        <div class="products-container">
-            <div class="section-label">Services</div>
-            <h2>Choose your level of support</h2>
-            <p>From a quick check to full hand-holding — whatever you need.</p>
-            
-            <div class="products-grid">
-                <!-- Product 1: Free Quiz -->
-                <div class="product-card">
-                    <div class="product-number">1</div>
-                    <h3>Free Eligibility Quiz</h3>
-                    <p>Find out in 30 seconds if you qualify</p>
-                    <div class="product-price">Free</div>
-                    <ul class="product-features">
-                        <li>7-question assessment</li>
-                        <li>Personalised result</li>
-                        <li>Instant feedback</li>
-                    </ul>
-                    <a href="#quiz" class="btn btn-secondary" style="width: 100%; text-align: center;">Take the Quiz</a>
-                </div>
-
-                <!-- Product 2: Consultation -->
-                <div class="product-card">
-                    <div class="product-number">2</div>
-                    <h3>Consultation Call</h3>
-                    <p>Not sure if DTV is right for you?</p>
-                    <div class="product-price">£<span>99</span></div>
-                    <ul class="product-features">
-                        <li>30-minute 1-to-1 call</li>
-                        <li>Personalised assessment</li>
-                        <li>Q&A on your situation</li>
-                        <li>Action plan emailed after</li>
-                    </ul>
-                    <a href="#consultation" class="btn btn-secondary" style="width: 100%; text-align: center;">Book a Call</a>
-                </div>
-
-                <!-- Product 3: The Guide -->
-                <div class="product-card featured">
-                    <div class="product-number">3</div>
-                    <h3>The DTV Guide</h3>
-                    <p>Full step-by-step PDF/digital guide</p>
-                    <div class="product-price">£<span>147</span></div>
-                    <ul class="product-features">
-                        <li>Complete application walkthrough</li>
-                        <li>Document templates & checklists</li>
-                        <li>AI formatting system access</li>
-                        <li>Embassy-specific requirements</li>
-                        <li>Updates for 12 months</li>
-                    </ul>
-                    <a href="#buy-guide" class="btn btn-primary" style="width: 100%; text-align: center;">Get the Guide</a>
-                </div>
-
-                <!-- Product 4: Guide + Support -->
-                <div class="product-card">
-                    <div class="product-number">4</div>
-                    <h3>Guide + Email Support</h3>
-                    <p>Guide plus 30 days of direct Q&A</p>
-                    <div class="product-price">£<span>297</span></div>
-                    <ul class="product-features">
-                        <li>Everything in The Guide</li>
-                        <li>30 days email support</li>
-                        <li>Document review (1 round)</li>
-                        <li>Priority responses</li>
-                        <li>Updates for 12 months</li>
-                    </ul>
-                    <a href="#buy-support" class="btn btn-secondary" style="width: 100%; text-align: center;">Get Guide + Support</a>
-                </div>
+    <!-- Bottom Progress Bar -->
+    <div class="bottom-progress-bar" id="bottom-progress">
+        <div class="bottom-progress-content">
+            <div class="progress-header">
+                <span class="progress-question" id="progress-question">Q1 of 6</span>
+                <span class="progress-percent" id="progress-percent">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-dots" id="progress-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- FAQ Section -->
-    <section class="faq">
-        <div class="faq-container">
-            <h2>Frequently Asked Questions</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question">What's included in The DTV Guide?</div>
-                <div class="faq-answer">The guide is a comprehensive PDF covering every step of the DTV application: eligibility requirements, document preparation, embassy-specific nuances, common rejection reasons, and my AI-assisted formatting system. You also get templates, checklists, and 12 months of updates.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">How is this different from free info online?</div>
-                <div class="faq-answer">Free info is often outdated, generic, or wrong. Embassy requirements change. The DTV Guide is kept current, includes embassy-specific details, and gives you the exact document formatting system I built — which isn't documented anywhere else. Plus, the £300 government fee is non-refundable. Getting it wrong is expensive.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Can I apply from inside Thailand?</div>
-                <div class="faq-answer">In most cases, no. The DTV is designed to be applied for from your home country or a country where you have residency. If you're already in Thailand on a tourist visa, you'll typically need to leave to apply. The guide covers the best strategies for your situation.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">What if I don't have £11,500 saved yet?</div>
-                <div class="faq-answer">The 500,000 THB requirement is strict — you need to show it in your account. If you don't have it yet, the consultation call can help you plan your timeline. I won't sell you the guide if you're not ready.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Is this guaranteed to get me approved?</div>
-                <div class="faq-answer">No — embassies make the final decision. What I guarantee is that you'll submit the strongest possible application with correctly formatted documents. I've used this exact system myself and helped others get approved. I also guarantee you'll save 10+ hours of research.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">How long does the DTV last?</div>
-                <div class="faq-answer">The DTV is a 5-year multiple entry visa. Each stay can be up to 180 days. You can extend once per entry for another 180 days (for a fee), meaning you could potentially stay continuously for up to 1 year before needing a border run.</div>
-            </div>
-        </div>
-    </section>
+    <script>
+        // DTV Eligible Countries
+        const DTV_ELIGIBLE_COUNTRIES = [
+            'Andorra', 'Argentina', 'Australia', 'Austria', 'Bahrain', 'Belgium', 
+            'Brazil', 'Canada', 'Chile', 'China', 'Colombia', 'Croatia', 'Cuba', 
+            'Czech Republic', 'Denmark', 'Dominican Republic', 'Ecuador', 'Estonia', 
+            'Finland', 'France', 'Germany', 'Greece', 'Guatemala', 'Hong Kong', 
+            'Hungary', 'Iceland', 'India', 'Indonesia', 'Ireland', 'Israel', 'Italy', 
+            'Jamaica', 'Japan', 'Latvia', 'Lithuania', 'Luxembourg', 'Macau', 
+            'Malaysia', 'Mauritius', 'Mexico', 'Morocco', 'Netherlands', 'New Zealand', 
+            'Norway', 'Oman', 'Panama', 'Peru', 'Philippines', 'Poland', 'Portugal', 
+            'Romania', 'San Marino', 'Saudi Arabia', 'Singapore', 'Slovakia', 
+            'Slovenia', 'South Africa', 'South Korea', 'Spain', 'Sweden', 'Switzerland', 
+            'Turkey', 'United Arab Emirates', 'United Kingdom', 'United States', 
+            'Uruguay', 'Vietnam'
+        ];
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <h2>Ready to make Thailand your base?</h2>
-        <p>The 60-day rule is ending. The DTV is your path to long-term, legal stays. Start with the free quiz — it takes 30 seconds.</p>
-        <a href="#quiz" class="btn btn-primary">Check My Eligibility</a>
-    </section>
+        // All countries
+        const ALL_COUNTRIES = [
+            'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 
+            'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 
+            'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 
+            'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 
+            'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 
+            'Cape Verde', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 
+            'Comoros', 'Congo', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 
+            'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 
+            'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 
+            'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 
+            'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 
+            'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 
+            'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 
+            'Kenya', 'Kiribati', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 
+            'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 
+            'Macau', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 
+            'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 
+            'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 
+            'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 
+            'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'North Macedonia', 'Norway', 
+            'Oman', 'Pakistan', 'Palau', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 
+            'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 
+            'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 
+            'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 
+            'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 
+            'Solomon Islands', 'Somalia', 'South Africa', 'South Korea', 'South Sudan', 
+            'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 
+            'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 
+            'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 
+            'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 
+            'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 
+            'Yemen', 'Zambia', 'Zimbabwe'
+        ].sort();
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 The DTV Guide. Built by a UK entrepreneur who actually did this.</p>
-        <p style="margin-top: 0.5rem;">Not legal advice. Always verify current requirements with the Thai embassy.</p>
-    </footer>
+        const REQUIRED_GBP = 11000;
+        const REQUIRED_USD = 14000;
+        const MAX_SCORE = 80;
 
-        <script>
+        let currentScore = 0;
+        let userEmail = '';
+        let questionPath = [];
+        const answers = {};
 
-// Bank Balance Question Functions
-const REQUIRED_GBP = 11000;
-const REQUIRED_USD = 14000;
-const REQUIRED_THB = 500000;
+        // Initialize country dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('country-search');
+            const dropdown = document.getElementById('country-dropdown');
+            const selectedDisplay = document.getElementById('selected-country-display');
+            const continueBtn = document.getElementById('country-continue');
 
-function updateRequiredAmount() {
-    const currency = document.getElementById('currency-select').value;
-    const display = document.getElementById('required-amount-display');
-    
-    if (currency === 'GBP') {
-        display.innerHTML = `
-            <strong>Required: £${REQUIRED_GBP.toLocaleString()} GBP</strong> (or ${REQUIRED_THB.toLocaleString()} THB)
-            <br>
-            <span class="currency-note">Amount can vary due to currency fluctuations. Proof of funds will be required.</span>
-        `;
-    } else if (currency === 'USD') {
-        display.innerHTML = `
-            <strong>Required: $${REQUIRED_USD.toLocaleString()} USD</strong> (or ${REQUIRED_THB.toLocaleString()} THB)
-            <br>
-            <span class="currency-note">Amount can vary due to currency fluctuations. Proof of funds will be required.</span>
-        `;
-    }
-}
+            if (searchInput) {
+                searchInput.addEventListener('focus', () => populateDropdown(''));
+                searchInput.addEventListener('input', (e) => populateDropdown(e.target.value));
+                
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.country-search-container')) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
 
-function submitFunds() {
-    const currency = document.getElementById('currency-select').value;
-    const amount = parseFloat(document.getElementById('funds-amount').value);
-    
-    if (isNaN(amount) || amount < 0) {
-        alert('Please enter a valid amount');
-        return;
-    }
-    
-    const requiredAmount = currency === 'GBP' ? REQUIRED_GBP : REQUIRED_USD;
-    const isSufficient = amount >= requiredAmount;
-    
-    // Store answer
-    answers['6'] = {
-        currency: currency,
-        amount: amount,
-        sufficient: isSufficient
-    };
-    questionPath.push('6');
-    
-    // Calculate points based on amount
-    let points = 0;
-    if (amount >= requiredAmount) {
-        points = 20;
-    } else if (amount >= requiredAmount * 0.7) {
-        points = 10;
-    } else if (amount >= requiredAmount * 0.5) {
-        points = 5;
-    }
-    
-    updateProgress(points);
-    
-    // Hide current question and show final result
-    document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
-    calculateFinalResult();
-}
+            function populateDropdown(filter) {
+                dropdown.innerHTML = '';
+                const filtered = ALL_COUNTRIES.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
+                
+                filtered.forEach(country => {
+                    const isEligible = DTV_ELIGIBLE_COUNTRIES.includes(country);
+                    const option = document.createElement('div');
+                    option.className = 'country-option' + (isEligible ? ' dtv-eligible' : '');
+                    option.textContent = country + (isEligible ? '' : ' (not eligible)');
+                    option.onclick = () => selectCountry(country, isEligible);
+                    dropdown.appendChild(option);
+                });
+                
+                dropdown.classList.toggle('active', filtered.length > 0);
+            }
 
-
-// DTV Eligible Countries List
-const DTV_ELIGIBLE_COUNTRIES = [
-    'Andorra', 'Argentina', 'Australia', 'Austria', 'Bahrain', 'Belgium', 
-    'Brazil', 'Canada', 'Chile', 'China', 'Colombia', 'Croatia', 'Cuba', 
-    'Czech Republic', 'Denmark', 'Dominican Republic', 'Ecuador', 'Estonia', 
-    'Finland', 'France', 'Germany', 'Greece', 'Guatemala', 'Hong Kong', 
-    'Hungary', 'Iceland', 'India', 'Indonesia', 'Ireland', 'Israel', 'Italy', 
-    'Jamaica', 'Japan', 'Latvia', 'Lithuania', 'Luxembourg', 'Macau', 
-    'Malaysia', 'Mauritius', 'Mexico', 'Morocco', 'Netherlands', 'New Zealand', 
-    'Norway', 'Oman', 'Panama', 'Peru', 'Philippines', 'Poland', 'Portugal', 
-    'Romania', 'San Marino', 'Saudi Arabia', 'Singapore', 'Slovakia', 
-    'Slovenia', 'South Africa', 'South Korea', 'Spain', 'Sweden', 'Switzerland', 
-    'Turkey', 'United Arab Emirates', 'United Kingdom', 'United States', 
-    'Uruguay', 'Vietnam'
-];
-
-// All countries (DTV eligible + others for the dropdown)
-const ALL_COUNTRIES = [
-    'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 
-    'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 
-    'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 
-    'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 
-    'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 
-    'Cape Verde', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 
-    'Comoros', 'Congo', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 
-    'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 
-    'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 
-    'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 
-    'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 
-    'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 
-    'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 
-    'Kenya', 'Kiribati', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 
-    'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 
-    'Macau', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 
-    'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 
-    'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 
-    'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 
-    'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'North Macedonia', 'Norway', 
-    'Oman', 'Pakistan', 'Palau', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 
-    'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 
-    'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 
-    'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 
-    'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 
-    'Solomon Islands', 'Somalia', 'South Africa', 'South Korea', 'South Sudan', 
-    'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 
-    'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 
-    'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 
-    'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 
-    'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 
-    'Yemen', 'Zambia', 'Zimbabwe'
-].sort();
-
-// Country dropdown functions
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('country-search');
-    const dropdown = document.getElementById('country-dropdown');
-    const selectedInput = document.getElementById('selected-country');
-    const selectedDisplay = document.getElementById('selected-country-display');
-    const continueBtn = document.getElementById('country-continue');
-    
-    if (!searchInput) return;
-    
-    function populateDropdown(filter = '') {
-        dropdown.innerHTML = '';
-        
-        const filtered = ALL_COUNTRIES.filter(country => 
-            country.toLowerCase().includes(filter.toLowerCase())
-        );
-        
-        filtered.forEach(country => {
-            const isEligible = DTV_ELIGIBLE_COUNTRIES.includes(country);
-            const option = document.createElement('div');
-            option.className = `country-option ${isEligible ? 'dtv-eligible' : 'not-eligible'}`;
-            option.textContent = country + (isEligible ? '' : ' (Not eligible)');
-            option.dataset.value = country;
-            option.dataset.eligible = isEligible;
-            
-            option.addEventListener('click', function() {
-                selectedInput.value = country;
-                selectedDisplay.innerHTML = `<strong>${country}</strong><br><span style="color: ${isEligible ? 'var(--green-dark)' : '#cc0000'}">${isEligible ? '✓ DTV Eligible' : '✗ Not eligible for DTV'}</span>`;
-                selectedDisplay.className = `selected-country-display active ${isEligible ? 'eligible' : 'not-eligible'}`;
+            window.selectCountry = function(country, isEligible) {
+                document.getElementById('selected-country').value = country;
                 searchInput.value = country;
                 dropdown.classList.remove('active');
                 continueBtn.disabled = false;
-            });
+            };
+        });
+
+        function saveEmailAndContinue() {
+            const emailInput = document.getElementById('quiz-email');
+            userEmail = emailInput.value.trim();
             
-            dropdown.appendChild(option);
-        });
-        
-        if (filtered.length > 0) {
-            dropdown.classList.add('active');
-        } else {
-            dropdown.classList.remove('active');
-        }
-    }
-    
-    searchInput.addEventListener('focus', () => populateDropdown());
-    searchInput.addEventListener('input', (e) => populateDropdown(e.target.value));
-    
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.country-search-container')) {
-            dropdown.classList.remove('active');
-        }
-    });
-});
-
-function submitCountry() {
-    const selectedCountry = document.getElementById('selected-country').value;
-    const isEligible = DTV_ELIGIBLE_COUNTRIES.includes(selectedCountry);
-    
-    if (isEligible) {
-        answers['1'] = selectedCountry;
-        questionPath.push('1');
-        document.querySelector('[data-question="1"]').classList.remove('active');
-        showQuestion('2');
-    } else {
-        // Hard stop
-        document.querySelector('.quiz-progress').style.display = 'none';
-        document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
-        const hardStop = document.getElementById('hard-stop-country');
-        if (hardStop) hardStop.classList.add('show');
-    }
-}
-
-// Quiz Logic with Hard Stops and Progress Percentage
-const questions = document.querySelectorAll('.quiz-question');
-const progressContainer = document.getElementById('progress-container');
-const progressBarFill = document.getElementById('progress-bar-fill');
-const progressText = document.getElementById('progress-percentage');
-const hardStopScreen = document.getElementById('hard-stop-screen');
-const hardStopMessage = document.getElementById('hard-stop-message');
-
-let currentScore = 0;
-const MAX_SCORE = 80; // Total of all scoring questions
-let userEmail = '';
-let questionPath = [];
-const answers = {};
-
-// Hard Stop Configurations
-const HARD_STOPS = {
-    'ineligible-country': {
-        title: 'DTV Not Available',
-        message: 'Sorry, the Thailand DTV is currently only available for UK, Ireland, US, Canada, Australia, EU countries, and select others. Please check with the Thai embassy for alternative visa options that may suit your situation.'
-    },
-    'employer-denies-remote': {
-        title: 'Remote Work Required',
-        message: 'Your employer doesn\'t allow remote work from abroad. You\'ll need to either:<br><br>1. Request permission from your employer<br>2. Find a new job that allows remote work<br>3. Switch to self-employed/freelance work<br><br>Come back once you have remote work permission.'
-    }
-};
-
-// Scoring configuration
-const SCORING = {
-    'passport': { max: 15 },
-    'remote-income': { max: 30 },
-    'work-permission': { max: 20 },
-    'monthly-income': { max: 15 },
-    'bank-balance': { max: 20 }
-};
-
-function calculatePoints(questionType, answer) {
-    let points = 0;
-    
-    switch(questionType) {
-        case 'passport':
-            if (answer === '6plus') points = 15;
-            break;
-        case 'remote-income':
-            if (['employed', 'self-employed', 'freelance'].includes(answer)) points = 30;
-            break;
-        case 'work-permission':
-            if (answer === 'yes-have') points = 20;
-            else if (answer === 'yes-can-get') points = 15;
-            else if (answer === 'need-to-ask') points = 10;
-            break;
-        case 'tax-docs':
-            if (['paye-payslips', 'self-filed', 'mix'].includes(answer)) points = 20;
-            else if (answer === 'self-not-yet') points = 10;
-            break;
-        case 'monthly-income':
-            if (['1-2k', '2-3k', 'over-3k'].includes(answer)) points = 15;
-            break;
-        case 'bank-balance':
-            if (answer === 'yes-have') points = 20;
-            else if (answer === 'yes-spread') points = 15;
-            else if (answer === 'soon') points = 10;
-            break;
-    }
-    
-    return points;
-}
-
-function updateProgress(points) {
-    currentScore += points;
-    const percentage = Math.round((currentScore / MAX_SCORE) * 100);
-    
-    if (progressBarFill) {
-        progressBarFill.style.width = percentage + '%';
-    }
-    if (progressText) {
-        progressText.textContent = percentage + '% Ready';
-    }
-}
-
-function showHardStop(stopKey) {
-    const config = HARD_STOPS[stopKey];
-    if (hardStopMessage && hardStopScreen) {
-        hardStopMessage.innerHTML = config.message;
-        hardStopScreen.querySelector('.hard-stop-title').textContent = config.title;
-        hardStopScreen.classList.add('show');
-    }
-}
-
-function saveEmailAndContinue() {
-    const emailInput = document.getElementById('quiz-email');
-    userEmail = emailInput.value.trim();
-    
-    if (!userEmail || !userEmail.includes('@')) {
-        alert('Please enter a valid email address');
-        emailInput.focus();
-        return;
-    }
-    
-    const q0 = document.querySelector('[data-question="0"]');
-    if (q0) q0.classList.remove('active');
-    
-    const progressEl = document.getElementById('progress-container');
-    if (progressEl) progressEl.style.display = 'block';
-    
-    showQuestion('1');
-    questionPath.push('0');
-}
-
-function showQuestion(questionId) {
-    questions.forEach(q => q.classList.remove('active'));
-    const nextQuestion = document.querySelector('.quiz-question[data-question="' + questionId + '"]');
-    if (nextQuestion) {
-        nextQuestion.classList.add('active');
-    }
-}
-
-function routeQuiz(currentQId, answer) {
-    // Check hard stops
-    if (currentQId === '1') {
-        if (answer === 'other') {
-            showHardStop('ineligible-country');
-            return;
-        }
-    }
-    
-    // Calculate points for scoring questions
-    const points = calculatePoints(currentQId, answer);
-    if (points > 0) {
-        updateProgress(points);
-    }
-    
-    // Store answer
-    answers[currentQId] = answer;
-    questionPath.push(currentQId);
-    
-    // Routing logic
-    questions.forEach(q => q.classList.remove('active'));
-    
-    switch(currentQId) {
-        case '0': // Email
-            showQuestion('1');
-            break;
-        case '1': // Residence - passed hard stop
-            showQuestion('2');
-            break;
-        case '2': // Passport
-            // All passport answers continue - no hard stop
-            if (answer === '6plus') {
-                updateProgress(calculatePoints('passport', '6plus'));
-            } else {
-                // Under 6 months or expired gets 0 points but continues
-                // Suggestion will show at the end if needed
-                updateProgress(0);
+            if (!userEmail || !userEmail.includes('@')) {
+                alert('Please enter a valid email address');
+                emailInput.focus();
+                return;
             }
-            showQuestion('3');
-            break;
-        case '3': // Remote income
-            if (answer === 'no') {
-                calculateTimelineAndShowResult('no-remote');
-            } else {
-                updateProgress(calculatePoints('remote-income', answer));
-                if (answer === 'yes-employed') {
-                    showQuestion('4a'); // Go straight to workplace permission
-                } else {
-                    showQuestion('4c');
+            
+            document.querySelector('[data-question="0"]').classList.remove('active');
+            document.getElementById('bottom-progress').classList.add('active');
+            showQuestion(1);
+            questionPath.push('0');
+        }
+
+        function submitCountry() {
+            const country = document.getElementById('selected-country').value;
+            const isEligible = DTV_ELIGIBLE_COUNTRIES.includes(country);
+            
+            if (!isEligible) {
+                document.getElementById('hard-stop-country').classList.add('show');
+                return;
+            }
+            
+            answers['1'] = country;
+            questionPath.push('1');
+            
+            document.querySelector('[data-question="1"]').classList.remove('active');
+            showQuestion(2);
+        }
+
+        function selectOption(questionId, value) {
+            const question = document.querySelector('[data-question="' + questionId + '"]');
+            question.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            question.querySelector('[data-value="' + value + '"]').classList.add('selected');
+            
+            answers[questionId] = value;
+            questionPath.push(String(questionId));
+            
+            // Calculate points
+            let points = 0;
+            if (questionId === 2 && value === '6plus') points = 15;
+            else if (questionId === 3 && value !== 'no') points = 30;
+            else if (questionId === '4a' && value !== 'no') points = 20;
+            else if (questionId === '4c') points = 20;
+            else if (questionId === 5 && value !== 'under-1k') points = 15;
+            
+            updateProgress(points);
+            
+            // Handle routing
+            setTimeout(() => {
+                if (questionId === 2) {
+                    showQuestion(3);
+                } else if (questionId === 3) {
+                    if (value === 'no') {
+                        showNoRemoteResult();
+                    } else if (value === 'yes-employed') {
+                        showQuestion('4a');
+                    } else {
+                        showQuestion('4c');
+                    }
+                } else if (questionId === '4a') {
+                    if (value === 'no') {
+                        document.getElementById('hard-stop-permission').classList.add('show');
+                    } else {
+                        showQuestion(5);
+                    }
+                } else if (questionId === '4c') {
+                    showQuestion(5);
+                } else if (questionId === 5) {
+                    if (value === 'under-1k') {
+                        showLowIncomeResult();
+                    } else {
+                        showQuestion(6);
+                    }
                 }
+            }, 300);
+        }
+
+        function showQuestion(questionId) {
+            document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+            const nextQ = document.querySelector('[data-question="' + questionId + '"]');
+            if (nextQ) {
+                nextQ.classList.add('active');
+                updateBottomProgressBar();
             }
-            break;
-        case '4a': // Workplace permission
-            if (answer === 'no') {
-                // Hard stop - can't get permission
-                showHardStop('employer-denies-remote');
+        }
+
+        function updateProgress(points) {
+            currentScore += points;
+            updateBottomProgressBar();
+        }
+
+        function updateBottomProgressBar() {
+            const currentQ = questionPath.length;
+            const percentage = Math.round((currentScore / MAX_SCORE) * 100);
+            
+            document.getElementById('progress-question').textContent = 'Q' + currentQ + ' of 6';
+            document.getElementById('progress-percent').textContent = percentage + '%';
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            
+            const dots = document.querySelectorAll('.progress-dots .dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index < currentQ - 1) {
+                    dot.classList.add('completed');
+                } else if (index === currentQ - 1) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function updateRequiredAmount() {
+            const currency = document.getElementById('currency-select').value;
+            const display = document.getElementById('required-amount-display');
+            
+            if (currency === 'GBP') {
+                display.innerHTML = '<strong>Required: £11,000 GBP</strong> (or 500,000 THB)<br><span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>';
             } else {
-                updateProgress(calculatePoints('work-permission', answer));
-                showQuestion('5');
+                display.innerHTML = '<strong>Required: $14,000 USD</strong> (or 500,000 THB)<br><span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>';
             }
-            break;
-        case '4c': // Tax docs
-            updateProgress(calculatePoints('tax-docs', answer));
-            showQuestion('5');
-            break;
-        case '5': // Monthly income
-            updateProgress(calculatePoints('monthly-income', answer));
-            if (answer === 'under-1k') {
-                calculateTimelineAndShowResult('low-income');
+        }
+
+        function submitFunds() {
+            const currency = document.getElementById('currency-select').value;
+            const amount = parseFloat(document.getElementById('funds-amount').value);
+            
+            if (isNaN(amount) || amount < 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+            
+            const requiredAmount = currency === 'GBP' ? REQUIRED_GBP : REQUIRED_USD;
+            const isSufficient = amount >= requiredAmount;
+            
+            // Calculate points
+            let points = 0;
+            if (amount >= requiredAmount) {
+                points = 20;
+            } else if (amount >= requiredAmount * 0.7) {
+                points = 10;
+            } else if (amount >= requiredAmount * 0.5) {
+                points = 5;
+            }
+            
+            currentScore += points;
+            answers['6'] = { currency, amount, sufficient: isSufficient };
+            questionPath.push('6');
+            
+            showFinalResult();
+        }
+
+        function showFinalResult() {
+            document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+            document.getElementById('bottom-progress').classList.remove('active');
+            
+            const percentage = Math.round((currentScore / MAX_SCORE) * 100);
+            const issues = [];
+            let totalWeeks = 0;
+            
+            // Check passport
+            if (answers['2'] === 'under-6' || answers['2'] === 'expired') {
+                issues.push({
+                    icon: '🛂',
+                    title: 'Passport Renewal',
+                    description: 'Your passport has less than 6 months validity.',
+                    time: '4 weeks',
+                    weeks: 4,
+                    guideHelp: 'The guide shows you how to fast-track your passport renewal.'
+                });
+                totalWeeks += 4;
+            }
+            
+            // Check income
+            if (answers['5'] === 'under-1k') {
+                issues.push({
+                    icon: '💰',
+                    title: 'Increase Income',
+                    description: 'You need to show £1,000+ monthly income.',
+                    time: '8 weeks',
+                    weeks: 8,
+                    guideHelp: 'The guide includes strategies to increase your remote income.'
+                });
+                totalWeeks += 8;
+            }
+            
+            // Check permission
+            if (answers['4a'] === 'need-to-ask') {
+                issues.push({
+                    icon: '📝',
+                    title: 'Workplace Permission',
+                    description: 'You need written permission from your employer.',
+                    time: '1 week',
+                    weeks: 1,
+                    guideHelp: 'The guide provides email templates and a permission letter.'
+                });
+                totalWeeks += 1;
+            }
+            
+            // Check funds
+            const funds = answers['6'];
+            if (funds && !funds.sufficient) {
+                const neededAmount = funds.currency === 'GBP' ? 11000 : 14000;
+                const shortfall = neededAmount - funds.amount;
+                const monthsNeeded = Math.max(1, Math.ceil(shortfall / 1000));
+                const weeksNeeded = monthsNeeded * 4;
+                
+                issues.push({
+                    icon: '🏦',
+                    title: 'Build Up Savings',
+                    description: `You need ${funds.currency === 'GBP' ? '£11,000' : '$14,000'} in your account.`,
+                    time: monthsNeeded + ' month' + (monthsNeeded > 1 ? 's' : ''),
+                    weeks: weeksNeeded,
+                    guideHelp: 'The guide explains acceptable proof of funds sources.'
+                });
+                totalWeeks += weeksNeeded;
+            }
+            
+            // Build result HTML
+            let statusMessage, statusColor;
+            if (percentage >= 80) {
+                statusMessage = "You're in a strong position";
+                statusColor = "#10B981";
+            } else if (percentage >= 50) {
+                statusMessage = "You may face some challenges";
+                statusColor = "#7C3AED";
             } else {
-                showQuestion('6');
+                statusMessage = "There are things to work on";
+                statusColor = "#7C3AED";
             }
-            break;
-        case '6': // Bank balance - after submitFunds, calculate final result
-            // submitFunds() already called, now calculate final result
-            calculateFinalResult();
-            break;
-    }
-}
-
-// Initialize click handlers
-document.querySelectorAll('.quiz-option').forEach(option => {
-    option.addEventListener('click', function() {
-        const questionEl = this.closest('.quiz-question');
-        const questionId = questionEl.dataset.question;
-        
-        questionEl.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
-        this.classList.add('selected');
-        
-        setTimeout(() => {
-            routeQuiz(questionId, this.dataset.value);
-        }, 300);
-    });
-});
-
-function calculateTimelineAndShowResult(resultId) {
-    questions.forEach(q => q.classList.remove('active'));
-    progressContainer.style.display = 'none';
-    
-    const resultEl = document.getElementById('result-' + resultId);
-    if (resultEl) {
-        resultEl.classList.add('show');
-    }
-}
-
-function calculateFinalResult() {
-    questions.forEach(q => q.classList.remove('active'));
-    progressContainer.style.display = 'none';
-    
-    // Build list of things that need attention
-    const issues = [];
-    let totalWeeks = 0;
-    
-    // Check passport
-    const passportAnswer = answers['2'];
-    if (passportAnswer === 'under-6' || passportAnswer === 'expired') {
-        issues.push({
-            icon: '🛂',
-            title: 'Passport Renewal',
-            description: 'Your passport has less than 6 months validity.',
-            time: '4 weeks',
-            weeks: 4
-        });
-        totalWeeks += 4;
-    }
-    
-    // Check income
-    const incomeAnswer = answers['5'];
-    if (incomeAnswer === 'under-1k') {
-        issues.push({
-            icon: '💰',
-            title: 'Increase Income',
-            description: 'You need to show £1,000+ monthly income.',
-            time: '8 weeks',
-            weeks: 8
-        });
-        totalWeeks += 8;
-    }
-    
-    // Check workplace permission
-    const permissionAnswer = answers['4a'];
-    if (permissionAnswer === 'need-to-ask') {
-        issues.push({
-            icon: '📝',
-            title: 'Workplace Permission Letter',
-            description: 'You need written permission from your employer.',
-            time: '1 week',
-            weeks: 1
-        });
-        totalWeeks += 1;
-    }
-    
-    // Check funds
-    const fundsAnswer = answers['6'];
-    if (fundsAnswer && !fundsAnswer.sufficient) {
-        const neededAmount = fundsAnswer.currency === 'GBP' ? 11000 : 14000;
-        const shortfall = neededAmount - fundsAnswer.amount;
-        const monthsNeeded = Math.ceil(shortfall / 1000);
-        const weeksNeeded = monthsNeeded * 4;
-        const displayAmount = fundsAnswer.currency === 'GBP' ? '£11,000' : '$14,000';
-        
-        issues.push({
-            icon: '🏦',
-            title: 'Build Up Savings',
-            description: `You need ${displayAmount} in your account.`,
-            time: monthsNeeded + ' month' + (monthsNeeded > 1 ? 's' : ''),
-            weeks: weeksNeeded
-        });
-        totalWeeks += weeksNeeded;
-    }
-    
-    // Determine result type based on number of issues
-    let resultId = issues.length === 0 ? 'likely' : 'challenges';
-    
-    const resultEl = document.getElementById('result-' + resultId);
-    if (resultEl) {
-        resultEl.classList.add('show');
-        
-        // Build the issues list HTML
-        let issuesHTML = '';
-        if (issues.length > 0) {
-            issuesHTML = `
-                <div class="issues-section">
-                    <h3>📋 Things That Need Attention</h3>
-                    <div class="issues-list">
-                        ${issues.map(issue => `
-                            <div class="issue-item">
-                                <div class="issue-icon">${issue.icon}</div>
-                                <div class="issue-content">
-                                    <h4>${issue.title}</h4>
-                                    <p>${issue.description}</p>
-                                    <span class="issue-time">⏱️ ${issue.time}</span>
-                                </div>
+            
+            let issuesHTML = '';
+            if (issues.length > 0) {
+                issuesHTML = issues.map(issue => `
+                    <div class="issue-card">
+                        <div class="issue-icon">${issue.icon}</div>
+                        <div class="issue-content">
+                            <h4>${issue.title}</h4>
+                            <p>${issue.description}</p>
+                            <div class="issue-time">⏱️ ${issue.time}</div>
+                            <div class="guide-help">
+                                <strong>How the guide helps:</strong> ${issue.guideHelp}
                             </div>
-                        `).join('')}
+                        </div>
                     </div>
-                    <div class="total-timeline">
-                        <strong>Estimated time to ready: ${Math.ceil(totalWeeks / 4)} months</strong>
+                `).join('');
+            }
+            
+            const resultHTML = `
+                <div class="result-card">
+                    <div class="result-percentage" style="border-color: ${statusColor}">
+                        <span>${percentage}%</span>
+                        <small>Ready</small>
                     </div>
+                    <h2>${statusMessage}</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        ${issues.length > 0 
+                            ? `Estimated time to ready: ${Math.ceil(totalWeeks / 4)} months` 
+                            : 'You can start your DTV application now'}
+                    </p>
+                </div>
+                
+                ${issues.length > 0 ? `
+                    <div class="issues-list">
+                        ${issuesHTML}
+                    </div>
+                ` : ''}
+                
+                <div style="text-align: center; padding: 2rem;">
+                    <a href="#products" class="btn-primary" style="font-size: 1.1rem; padding: 1.25rem 2.5rem;">
+                        Get the Guide
+                    </a>
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                        Step-by-step instructions to get your DTV
+                    </p>
                 </div>
             `;
-        } else {
-            issuesHTML = `
-                <div class="issues-section">
-                    <h3>✅ You're Ready!</h3>
-                    <p>You meet all the basic requirements. You can start your DTV application now.</p>
+            
+            document.getElementById('result-content').innerHTML = resultHTML;
+            document.getElementById('result-container').classList.add('show');
+        }
+
+        function showNoRemoteResult() {
+            document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+            document.getElementById('bottom-progress').classList.remove('active');
+            
+            document.getElementById('result-content').innerHTML = `
+                <div class="result-card">
+                    <div class="result-percentage" style="border-color: var(--accent-pink)">
+                        <span>🎯</span>
+                    </div>
+                    <h2>DTV Remote Work visa isn't right for you</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        But there's the <strong>DTV2 — Thai Soft Power</strong> option for Muay Thai, cooking classes, language courses, or medical treatment.
+                    </p>
+                    
+                    <a href="#consultation" class="btn-primary">Book a Consultation</a>
                 </div>
             `;
+            document.getElementById('result-container').classList.add('show');
         }
-        
-        // Insert issues section at the beginning
-        const issuesDiv = document.createElement('div');
-        issuesDiv.innerHTML = issuesHTML;
-        resultEl.insertBefore(issuesDiv, resultEl.firstChild);
-        
-        // Update timeline text
-        const timelineText = resultEl.querySelector('[id^="timeline-text"]');
-        if (timelineText) {
-            timelineText.textContent = issues.length === 0 ? 'Ready to Apply' : 'Action Required';
+
+        function showLowIncomeResult() {
+            document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+            document.getElementById('bottom-progress').classList.remove('active');
+            
+            document.getElementById('result-content').innerHTML = `
+                <div class="result-card">
+                    <div class="result-percentage" style="border-color: var(--accent-cyan)">
+                        <span>💰</span>
+                    </div>
+                    <h2>Income Below Threshold</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        The guide includes strategies to increase your remote income and alternative income sources Thai immigration accepts.
+                    </p>
+                    
+                    <a href="#products" class="btn-primary">Get the Guide</a>
+                </div>
+            `;
+            document.getElementById('result-container').classList.add('show');
         }
-    }
-}
-
-// FAQ Accordion
-document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', () => {
-        const item = question.parentElement;
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!isOpen) {
-            item.classList.add('open');
-        }
-    });
-});
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    });
-});
-
-
-// Bottom Progress Bar Functions
-function updateBottomProgress(currentQ, percentage) {
-    const bottomProgress = document.getElementById('bottom-progress');
-    if (!bottomProgress) return;
-    
-    const questionDisplay = bottomProgress.querySelector('.question-number-display');
-    const percentDisplay = bottomProgress.querySelector('.progress-percent-display');
-    const progressFill = document.getElementById('bottom-progress-fill');
-    const dots = document.querySelectorAll('.question-dots .dot');
-    
-    bottomProgress.classList.add('active');
-    if (questionDisplay) questionDisplay.textContent = 'Q' + currentQ + ' of 6';
-    if (percentDisplay) percentDisplay.textContent = percentage + '%';
-    if (progressFill) progressFill.style.width = percentage + '%';
-    
-    dots.forEach(function(dot, index) {
-        dot.classList.remove('active', 'completed');
-        if (index < currentQ - 1) {
-            dot.classList.add('completed');
-        } else if (index === currentQ - 1) {
-            dot.classList.add('active');
-        }
-    });
-}
-
-function hideBottomProgress() {
-    const bottomProgress = document.getElementById('bottom-progress');
-    if (bottomProgress) bottomProgress.classList.remove('active');
-}
-</script>
+    </script>
 </body>
 </html>
