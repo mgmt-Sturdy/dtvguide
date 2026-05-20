@@ -1726,17 +1726,10 @@ function routeQuiz(currentQId, answer) {
             } else {
                 updateProgress(calculatePoints('remote-income', answer));
                 if (answer === 'employed') {
-                    showQuestion('employer-remote-check');
+                    showQuestion('4a'); // Go straight to workplace permission
                 } else {
                     showQuestion('4c');
                 }
-            }
-            break;
-        case 'employer-remote-check':
-            if (answer === 'no') {
-                showHardStop('employer-denies-remote');
-            } else {
-                showQuestion('4a');
             }
             break;
         case '4a': // Workplace permission
