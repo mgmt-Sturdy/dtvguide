@@ -1348,6 +1348,32 @@
                 </div>
             `;
             document.getElementById('result-container').classList.add('show');
+            
+            // Save to Google Sheet
+            saveToGoogleSheet();
+        }
+        
+        // Save quiz data to Google Sheet
+        function saveToGoogleSheet() {
+            const percentage = Math.round((currentScore / MAX_SCORE) * 100);
+            const country = answers['1'] || '';
+            
+            const data = {
+                email: userEmail,
+                country: country,
+                score: percentage + '%'
+            };
+            
+            fetch('https://script.google.com/macros/s/AKfycbwJoiYKO48-MTYseNns5iMbG2TCxuwRtMbtXrgb1qORZhOLPqEEz8MrBYvv73qzrCgX/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => console.log('Data saved to sheet'))
+            .catch(err => console.error('Error saving:', err));
         }
     </script>
 </body>
