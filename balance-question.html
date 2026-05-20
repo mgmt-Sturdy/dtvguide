@@ -1,0 +1,106 @@
+<!-- Question 6: Bank Balance with Currency Selector -->
+<div class="quiz-question" data-question="6">
+    <h3>This visa requires proof of funds. Can you show in your application the required amount?</h3>
+    <p>Select your currency and enter how much you can show.</p>
+    
+    <div class="funds-input-container">
+        <div class="currency-selector">
+            <select id="currency-select" onchange="updateRequiredAmount()">
+                <option value="GBP">🇬🇧 GBP (British Pounds)</option>
+                <option value="USD">🇺🇸 USD (US Dollars)</option>
+            </select>
+        </div>
+        
+        <div class="amount-input-wrapper">
+            <input type="number" 
+                   id="funds-amount" 
+                   class="funds-amount-input" 
+                   placeholder="Enter amount"
+                   min="0"
+                   step="100">
+        </div>
+        
+        <div class="required-amount-display" id="required-amount-display">
+            <strong>Required: £11,000 GBP</strong> (or 500,000 THB)
+            <br>
+            <span class="currency-note">Amount can vary due to currency fluctuations. Proof of funds will be required.</span>
+        </div>
+        
+        <button class="btn btn-primary" id="funds-continue" onclick="submitFunds()">Continue</button>
+    </div>
+</div>
+
+<style>
+.funds-input-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.currency-selector {
+    margin-bottom: 1rem;
+}
+
+.currency-selector select {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--cream-dark);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--charcoal);
+    cursor: pointer;
+    width: 100%;
+}
+
+.amount-input-wrapper {
+    margin-bottom: 1rem;
+}
+
+.funds-amount-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 2px solid var(--cream-dark);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--charcoal);
+}
+
+.funds-amount-input:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+}
+
+.required-amount-display {
+    background: var(--cream);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid var(--gold-deep);
+}
+
+.currency-note {
+    font-size: 0.85rem;
+    color: var(--charcoal-light);
+}
+
+.funds-status {
+    margin: 1rem 0;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.funds-status.sufficient {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.funds-status.insufficient {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+</style>

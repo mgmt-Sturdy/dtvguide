@@ -875,6 +875,62 @@
         .selected-country-display.not-eligible {
             border-left: 4px solid #cc0000;
         }
+
+        /* Funds Question Styles */
+        .funds-input-container {
+            max-width: 400px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+        
+        .currency-selector {
+            margin-bottom: 1rem;
+        }
+        
+        .currency-selector select {
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 2px solid var(--cream-dark);
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--charcoal);
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .amount-input-wrapper {
+            margin-bottom: 1rem;
+        }
+        
+        .funds-amount-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+            border: 2px solid var(--cream-dark);
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--charcoal);
+        }
+        
+        .funds-amount-input:focus {
+            outline: none;
+            border-color: var(--gold-deep);
+        }
+        
+        .required-amount-display {
+            background: var(--cream);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--gold-deep);
+        }
+        
+        .currency-note {
+            font-size: 0.85rem;
+            color: var(--charcoal-light);
+        }
+
 </style>
 </head>
 <body>
@@ -1083,14 +1139,35 @@
                     </div>
                 </div>
 
-                <!-- Question 6: Bank Balance -->
+                <!-- Question 6: Bank Balance with Currency Selector -->
                 <div class="quiz-question" data-question="6">
-                    <h3>Can you show 500,000 THB (approx. £11,000–£12,000) in a bank account?</h3>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-value="yes-have">Yes, already have it</div>
-                        <div class="quiz-option" data-value="yes-spread">Yes, spread across accounts</div>
-                        <div class="quiz-option" data-value="soon">Will have it in 2-3 months</div>
-                        <div class="quiz-option" data-value="no">No, won't be possible</div>
+                    <h3>This visa requires proof of funds. Can you show in your application the required amount?</h3>
+                    <p>Select your currency and enter how much you can show.</p>
+                    
+                    <div class="funds-input-container">
+                        <div class="currency-selector">
+                            <select id="currency-select" onchange="updateRequiredAmount()">
+                                <option value="GBP">🇬🇧 GBP (British Pounds)</option>
+                                <option value="USD">🇺🇸 USD (US Dollars)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="amount-input-wrapper">
+                            <input type="number" 
+                                   id="funds-amount" 
+                                   class="funds-amount-input" 
+                                   placeholder="Enter amount"
+                                   min="0"
+                                   step="100">
+                        </div>
+                        
+                        <div class="required-amount-display" id="required-amount-display">
+                            <strong>Required: £11,000 GBP</strong> (or 500,000 THB)
+                            <br>
+                            <span class="currency-note">Amount can vary due to currency fluctuations. Proof of funds will be required.</span>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="funds-continue" onclick="submitFunds()">Continue</button>
                     </div>
                 </div>
 
@@ -1306,6 +1383,68 @@
     </footer>
 
         <script>
+
+// Bank Balance Question Functions
+const REQUIRED_GBP = 11000;
+const REQUIRED_USD = 14000;
+const REQUIRED_THB = 500000;
+
+function updateRequiredAmount() {
+    const currency = document.getElementById('currency-select').value;
+    const display = document.getElementById('required-amount-display');
+    
+    if (currency === 'GBP') {
+        display.innerHTML = `
+            <strong>Required: £${REQUIRED_GBP.toLocaleString()} GBP</strong> (or ${REQUIRED_THB.toLocaleString()} THB)
+            <br>
+            <span class="currency-note">Amount can vary due to currency fluctuations. Proof of funds will be required.</span>
+        `;
+    } else if (currency === 'USD') {
+        display.innerHTML = `
+            <strong>Required: $${REQUIRED_USD.toLocaleString()} USD</strong> (or ${REQUIRED_THB.toLocaleString()} THB)
+            <br>
+            <span class="currency-note">Amount can vary due to currency fluctuations. Proof of funds will be required.</span>
+        `;
+    }
+}
+
+function submitFunds() {
+    const currency = document.getElementById('currency-select').value;
+    const amount = parseFloat(document.getElementById('funds-amount').value);
+    
+    if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid amount');
+        return;
+    }
+    
+    const requiredAmount = currency === 'GBP' ? REQUIRED_GBP : REQUIRED_USD;
+    const isSufficient = amount >= requiredAmount;
+    
+    // Store answer
+    answers['6'] = {
+        currency: currency,
+        amount: amount,
+        sufficient: isSufficient
+    };
+    questionPath.push('6');
+    
+    // Calculate points based on amount
+    let points = 0;
+    if (amount >= requiredAmount) {
+        points = 20;
+    } else if (amount >= requiredAmount * 0.7) {
+        points = 10;
+    } else if (amount >= requiredAmount * 0.5) {
+        points = 5;
+    }
+    
+    updateProgress(points);
+    
+    // Show next question
+    showQuestion('7');
+}
+
+
 // DTV Eligible Countries List
 const DTV_ELIGIBLE_COUNTRIES = [
     'Andorra', 'Argentina', 'Australia', 'Austria', 'Bahrain', 'Belgium', 
@@ -1620,9 +1759,8 @@ function routeQuiz(currentQId, answer) {
                 showQuestion('6');
             }
             break;
-        case '6': // Bank balance
-            updateProgress(calculatePoints('bank-balance', answer));
-            showQuestion('7');
+        case '6': // Bank balance - handled by submitFunds() function
+            // This is handled by the submitFunds() function above
             break;
         case '7': // Timeline
             calculateFinalResult();
