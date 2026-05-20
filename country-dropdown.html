@@ -1,0 +1,109 @@
+<!-- Country Selection Dropdown with Search -->
+<div class="quiz-question" data-question="1">
+    <h3>What country do you hold citizenship in?</h3>
+    <p>Select your country of citizenship from the dropdown below.</p>
+    
+    <div class="country-search-container">
+        <input type="text" 
+               id="country-search" 
+               class="country-search-input" 
+               placeholder="Search for your country..." 
+               autocomplete="off">
+        <div class="country-dropdown" id="country-dropdown">
+            <!-- Countries populated by JavaScript -->
+        </div>
+    </div>
+    
+    <input type="hidden" id="selected-country" value="">
+    <div class="selected-country-display" id="selected-country-display"></div>
+    
+    <button class="btn btn-primary" id="country-continue" disabled onclick="submitCountry()">Continue</button>
+</div>
+
+<style>
+.country-search-container {
+    position: relative;
+    max-width: 400px;
+    margin: 1.5rem auto;
+}
+
+.country-search-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--cream-dark);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--charcoal);
+}
+
+.country-search-input:focus {
+    outline: none;
+    border-color: var(--gold-deep);
+}
+
+.country-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    background: var(--white);
+    border: 2px solid var(--cream-dark);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    z-index: 1000;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.country-dropdown.active {
+    display: block;
+}
+
+.country-option {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--cream-dark);
+    transition: background 0.2s;
+}
+
+.country-option:hover {
+    background: var(--cream);
+}
+
+.country-option.dtv-eligible {
+    border-left: 3px solid var(--green-soft);
+}
+
+.country-option.not-eligible {
+    color: var(--charcoal-light);
+}
+
+.country-option.not-eligible::after {
+    content: " (Not eligible)";
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.selected-country-display {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--cream);
+    border-radius: 8px;
+    display: none;
+}
+
+.selected-country-display.active {
+    display: block;
+}
+
+.selected-country-display.eligible {
+    border-left: 4px solid var(--green-soft);
+}
+
+.selected-country-display.not-eligible {
+    border-left: 4px solid #cc0000;
+}
+</style>
