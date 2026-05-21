@@ -906,6 +906,7 @@
     <div class="top-progress-bar" id="top-progress">
         <div class="top-progress-content">
             <div class="progress-header">
+                <button onclick="goBack()" style="background: transparent; border: 1px solid var(--charcoal-light); color: var(--charcoal); padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">← Back</button>
                 <span class="progress-question" id="progress-question">Q1 of 6</span>
                 <span class="progress-percent" id="progress-percent">0%</span>
             </div>
@@ -978,7 +979,7 @@
 
         const REQUIRED_GBP = 11000;
         const REQUIRED_USD = 14000;
-        const MAX_SCORE = 80;
+        const MAX_SCORE = 100;
 
         let currentScore = 0;
         let userEmail = '';
@@ -1102,11 +1103,7 @@
                 } else if (questionId === '4c') {
                     showQuestion(5);
                 } else if (questionId === 5) {
-                    if (value === 'under-1k') {
-                        showLowIncomeResult();
-                    } else {
-                        showQuestion(6);
-                    }
+                    showQuestion(6);
                 }
             }, 300);
         }
@@ -1118,6 +1115,75 @@
                 nextQ.classList.add('active');
                 updateBottomProgressBar();
             }
+        }
+
+        function goBack() {
+            if (questionPath.length === 0) return;
+            
+            // Remove the last question from path
+            const lastQuestion = questionPath.pop();
+            
+            // Subtract points for the last answer if applicable
+            if (lastQuestion === '2' && answers['2'] === '6plus') currentScore -= 15;
+            else if (lastQuestion === '3' && answers['3'] !== 'no') currentScore -= 30;
+            else if (lastQuestion === '4a' && answers['4a'] !== 'no') currentScore -= 20;
+            else if (lastQuestion === '4c') currentScore -= 20;
+            else if (lastQuestion === '5' && answers['5'] !== 'under-1k') currentScore -= 15;
+            else if (lastQuestion === '6' && answers['6']) {
+                const funds = answers['6'];
+                const requiredAmount = funds.currency === 'GBP' ? REQUIRED_GBP : REQUIRED_USD;
+                if (funds.amount >= requiredAmount) currentScore -= 20;
+                else if (funds.amount >= requiredAmount * 0.7) currentScore -= 10;
+                else if (funds.amount >= requiredAmount * 0.5) currentScore -= 5;
+            }
+            
+            // Clear the answer for that question
+            delete answers[lastQuestion];
+            
+            // Show previous question or start
+            const prevQuestion = questionPath.length > 0 ? questionPath[questionPath.length - 1] : '0';
+            if (prevQuestion === '0') {
+                document.getElementById('top-progress').classList.remove('active');
+                showQuestion(0);
+            } else if (prevQuestion === '1') {
+                // Reset country selection display
+                document.getElementById('selected-country').value = '';
+                document.getElementById('country-search').value = '';
+                document.getElementById('country-continue').disabled = true;
+                showQuestion(1);
+            } else {
+                showQuestion(prevQuestion);
+            }
+        }
+
+        function restartQuiz() {
+            // Reset all state
+            currentScore = 0;
+            userEmail = '';
+            questionPath = [];
+            
+            // Clear all answers
+            for (let key in answers) {
+                delete answers[key];
+            }
+            
+            // Hide result container
+            document.getElementById('result-container').classList.remove('show');
+            document.getElementById('top-progress').classList.remove('active');
+            
+            // Reset country input
+            document.getElementById('selected-country').value = '';
+            document.getElementById('country-search').value = '';
+            document.getElementById('country-continue').disabled = true;
+            
+            // Clear all selections
+            document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            
+            // Show first question
+            showQuestion(0);
+            
+            // Clear email input
+            document.getElementById('quiz-email').value = '';
         }
 
         function updateProgress(points) {
@@ -1307,6 +1373,9 @@
                     <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
                         Step-by-step instructions to get your DTV
                     </p>
+                    <button onclick="restartQuiz()" style="margin-top: 1.5rem; background: transparent; border: 1px solid var(--charcoal-light); color: var(--charcoal); padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">
+                        ↺ Start Again
+                    </button>
                 </div>
             `;
             
@@ -1329,32 +1398,12 @@
                     </p>
                     
                     <a href="#products" class="btn-primary">See Other Options</a>
+                    <button onclick="restartQuiz()" style="display: block; margin: 1.5rem auto 0; background: transparent; border: 1px solid var(--charcoal-light); color: var(--charcoal); padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">
+                        ↺ Start Again
+                    </button>
                 </div>
             `;
             document.getElementById('result-container').classList.add('show');
-        }
-
-        function showLowIncomeResult() {
-            document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
-            document.getElementById('top-progress').classList.remove('active');
-            
-            document.getElementById('result-content').innerHTML = `
-                <div class="result-card">
-                    <div class="result-percentage" style="border-color: var(--accent-cyan)">
-                        <span>💰</span>
-                    </div>
-                    <h2>Income Below Threshold</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-                        The guide includes strategies to increase your remote income and alternative income sources Thai immigration accepts.
-                    </p>
-                    
-                    <a href="#products" class="btn-primary">Get the Guide</a>
-                </div>
-            `;
-            document.getElementById('result-container').classList.add('show');
-            
-            // Save to Google Sheet
-            saveToGoogleSheet('');
         }
         
         // Save quiz data to Google Sheet
