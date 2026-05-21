@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTV Document Checklist — Step-by-Step Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --violet-deep: #5B21B6;
+            --violet-main: #7C3AED;
+            --violet-light: #A78BFA;
+            --accent-pink: #EC4899;
+            --accent-cyan: #06B6D4;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F7FF;
+            --bg-tertiary: #F3F0FF;
+            --text-primary: #0F0F0F;
+            --text-secondary: #4B5563;
+            --text-muted: #9CA3AF;
+            --border: #E5E7EB;
+            --shadow-soft: 0 4px 20px rgba(124, 58, 237, 0.08);
+            --shadow-medium: 0 8px 40px rgba(124, 58, 237, 0.12);
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        .nav-floating {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 0.6rem 1rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-medium);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--violet-main);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 1.5rem 4rem;
+        }
+
+        /* Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--violet-deep), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            border-radius: 100px;
+            border: 2px solid var(--border);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            border-color: var(--violet-main);
+            background: var(--bg-tertiary);
+            color: var(--violet-deep);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .step.active .step-number {
+            background: var(--violet-main);
+            color: white;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-medium);
+            margin-bottom: 2rem;
+        }
+
+        .quiz-question {
+            display: none;
+        }
+
+        .quiz-question.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-header {
+            margin-bottom: 2rem;
+        }
+
+        .question-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--violet-main);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-title {
+            font-size: 1.75rem;
+            color: var(--text-primary);
+        }
+
+        /* Options */
+        .options-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: var(--violet-light);
+            box-shadow: var(--shadow-soft);
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected {
+            border-color: var(--violet-main);
+            background: var(--bg-tertiary);
+        }
+
+        .option-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 24px;
+            height: 24px;
+            background: var(--violet-main);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .option-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .option-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--violet-main), var(--accent-pink));
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--violet-light);
+            color: var(--violet-main);
+        }
+
+        .btn-restart {
+            background: white;
+            color: var(--violet-main);
+            border: 2px solid var(--violet-main);
+            margin-top: 2rem;
+        }
+
+        .btn-restart:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* Results Section */
+        .results-container {
+            display: none;
+        }
+
+        .results-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-header {
+            background: linear-gradient(135deg, var(--violet-deep), var(--accent-pink));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .results-header h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .results-header p {
+            opacity: 0.9;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--violet-main);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .info-box strong {
+            color: var(--violet-deep);
+        }
+
+        /* Documents List */
+        .documents-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--violet-light);
+        }
+
+        .document-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .document-item:hover {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .document-header {
+            padding: 1.25rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            cursor: pointer;
+        }
+
+        .document-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--violet-main), var(--accent-pink));
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .document-title-group {
+            flex: 1;
+        }
+
+        .document-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .document-what {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .document-toggle {
+            color: var(--violet-main);
+            font-size: 1.2rem;
+            transition: transform 0.2s ease;
+        }
+
+        .document-item.expanded .document-toggle {
+            transform: rotate(180deg);
+        }
+
+        .document-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .document-item.expanded .document-content {
+            max-height: 1000px;
+        }
+
+        .document-details {
+            padding: 0 1.25rem 1.25rem 4.25rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .document-details ul {
+            margin: 0.75rem 0 0.75rem 1.25rem;
+        }
+
+        .document-details li {
+            margin-bottom: 0.5rem;
+        }
+
+        .document-details strong {
+            color: var(--violet-deep);
+        }
+
+        .file-hint {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .urgent-note {
+            background: #FEF3C7;
+            border-left: 3px solid var(--warning);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .urgent-note strong {
+            color: #92400E;
+        }
+
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .page-footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .quiz-container {
+                padding: 1.5rem;
+            }
+
+            .question-title {
+                font-size: 1.25rem;
+            }
+
+            .option-card {
+                padding: 1rem;
+            }
+
+            .document-details {
+                padding: 0 1rem 1rem 1rem;
+            }
+
+            .document-number {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-floating">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="documents.html" class="nav-link" style="color: var(--violet-main);">Documents</a>
+        <a href="#products" class="nav-link">Guide</a>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <h1>📋 Step 1: Gather Your Documents</h1>
+            <p>Know exactly what you need to collect before applying. Answer 3 quick questions to get your personalized checklist.</p>
+        </header>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step active" id="step-1">
+                <span class="step-number">1</span>
+                <span>Employment</span>
+            </div>
+            <div class="step" id="step-2">
+                <span class="step-number">2</span>
+                <span>Income Sources</span>
+            </div>
+            <div class="step" id="step-3">
+                <span class="step-number">3</span>
+                <span>Income Level</span>
+            </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div class="quiz-container" id="quiz-container">
+            <!-- Question 1 -->
+            <div class="quiz-question active" id="question-1">
+                <div class="question-header">
+                    <div class="question-label">Step 1 of 3</div>
+                    <h2 class="question-title">What's your employment situation?</h2>
+                </div>
+                
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(1, 'employed')">
+                        <div class="option-icon">💼</div>
+                        <div class="option-title">Employed (Full-Time Job)</div>
+                        <div class="option-desc">You have a job with a company and receive a salary</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(1, 'self-employed')">
+                        <div class="option-icon">🏢</div>
+                        <div class="option-title">Self-Employed (Sole Trader)</div>
+                        <div class="option-desc">You have a business but it's not a limited company</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(1, 'content-creator')">
+                        <div class="option-icon">📱</div>
+                        <div class="option-title">Content Creator / Influencer</div>
+                        <div class="option-desc">Income from YouTube, TikTok, Instagram, etc.</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(1, 'business-owner')">
+                        <div class="option-icon">👑</div>
+                        <div class="option-title">Company Director (Limited Company)</div>
+                        <div class="option-desc">You're a director of one or more limited companies</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <div></div>
+                    <button class="btn btn-primary" id="btn-1" onclick="nextQuestion()" disabled>Continue →</button>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-question" id="question-2">
+                <div class="question-header">
+                    <div class="question-label">Step 2 of 3</div>
+                    <h2 class="question-title">Do you have any other income sources?</h2>
+                </div>
+                
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(2, 'no')">
+                        <div class="option-icon">✓</div>
+                        <div class="option-title">No, just my main income</div>
+                        <div class="option-desc">Single source of income</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(2, 'dividends')">
+                        <div class="option-icon">📈</div>
+                        <div class="option-title">Yes - Dividends / Investments</div>
+                        <div class="option-desc">Additional passive income from investments</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(2, 'multiple')">
+                        <div class="option-icon">💰</div>
+                        <div class="option-title">Yes - Multiple streams</div>
+                        <div class="option-desc">Freelance, side business, part-time work, etc.</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="goBack()">← Back</button>
+                    <button class="btn btn-primary" id="btn-2" onclick="nextQuestion()" disabled>Continue →</button>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-question" id="question-3">
+                <div class="question-header">
+                    <div class="question-label">Step 3 of 3</div>
+                    <h2 class="question-title">What's your approximate monthly income?</h2>
+                </div>
+                
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(3, 'low')">
+                        <div class="option-icon">£</div>
+                        <div class="option-title">£1,000 - £2,000 / month</div>
+                        <div class="option-desc">Lower income range</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(3, 'medium')">
+                        <div class="option-icon">££</div>
+                        <div class="option-title">£2,000 - £5,000 / month</div>
+                        <div class="option-desc">Mid-range income</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(3, 'high')">
+                        <div class="option-icon">£££</div>
+                        <div class="option-title">£5,000+ / month</div>
+                        <div class="option-desc">Higher income range</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="goBack()">← Back</button>
+                    <button class="btn btn-primary" id="btn-3" onclick="showResults()" disabled>Get My Checklist →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container" id="results-container">
+            <div class="results-header">
+                <h2 id="results-title"></h2>
+                <p id="results-summary"></p>
+            </div>
+
+            <div class="info-box">
+                <strong>✓ What to do:</strong> Gather EVERY document listed below and put them in a folder on your computer. These are the source documents you'll use in the next steps. Don't skip anything — you'll need all of them.
+            </div>
+
+            <div id="documents-list"></div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-restart" onclick="restartQuiz()">↺ Start Over (Change Employment Type)</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>✨ Created from an actual approved Thailand DTV visa application</p>
+            <p>Step 1 of 5: Gather Documents → Process with AI → Generate PDFs → Submit</p>
+        </footer>
+    </div>
+
+    <script>
+        // State
+        let currentQuestion = 1;
+        const answers = {};
+
+        // Document data
+        const documentData = {
+            common: [
+                {
+                    id: 'C1',
+                    title: 'Passport Biodata Page',
+                    what: 'Copy of your passport ID page (scan or photograph)',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>Copy of passport biodata page (page with your photo)</li>
+                            <li>Take a photograph or picture of the page</li>
+                            <li>Color photograph, all text and photo clearly readable</li>
+                            <li>Save as PDF or JPG (max 3MB)</li>
+                            <li>Passport must have 6+ months validity remaining</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Passport_Biodata.pdf</div>
+                    `
+                },
+                {
+                    id: 'C2',
+                    title: 'Passport Photograph',
+                    what: 'Professional color photo (shoulder level and above)',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>Color photo, 35mm × 45mm (or 4×6 inches)</li>
+                            <li>Taken within last 6 months</li>
+                            <li>Plain white or light background</li>
+                            <li>Cropped from shoulder level and above (shoulders visible)</li>
+                            <li>Full face visible, neutral expression</li>
+                            <li>No glasses, sunglasses, or hats</li>
+                            <li>Take in natural daylight (best during daytime with natural lighting)</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Passport_Photo.jpg</div>
+                    `
+                },
+                {
+                    id: 'C3',
+                    title: 'Proof of Current Location',
+                    what: 'Document showing you are NOT currently in Thailand',
+                    details: `
+                        <strong>Choose ONE — proof you're outside Thailand:</strong>
+                        <ul>
+                            <li>Flight ticket or booking confirmation (showing travel date)</li>
+                            <li>Hotel booking confirmation in another country</li>
+                            <li>Airbnb or rental booking in another country</li>
+                            <li>Passport stamp showing recent entry to another country</li>
+                            <li>Travel itinerary or airline confirmation</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
+                    `
+                },
+                {
+                    id: 'C4',
+                    title: 'DTV Work Restrictions Consent Letter',
+                    what: 'Your formal declaration about DTV visa work rules',
+                    details: `
+                        <strong>Use provided template or AI prompt to generate:</strong>
+                        <ul>
+                            <li>Formal letter confirming your full name</li>
+                            <li>Include your passport number</li>
+                            <li>Include your National Insurance number</li>
+                            <li>State you understand DTV work restrictions</li>
+                            <li>Confirm you will NOT work for Thai employers</li>
+                            <li>Confirm all work will be remote for overseas employers</li>
+                            <li>Sign and date it</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Work_Restrictions_Letter.pdf</div>
+                    `
+                },
+                {
+                    id: 'C5',
+                    title: 'Home Country Residence Consent Letter',
+                    what: 'Your declaration accepting DTV visa conditions',
+                    details: `
+                        <strong>Use provided template or AI prompt to generate:</strong>
+                        <ul>
+                            <li>Formal letter with your full name and passport number</li>
+                            <li>Include your National Insurance number</li>
+                            <li>Confirm your current residence (in your home country)</li>
+                            <li>Confirm you consent to all DTV visa conditions</li>
+                            <li>Confirm you understand the visa restrictions</li>
+                            <li>Sign and date it</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Residence_Consent_Letter.pdf</div>
+                    `
+                }
+            ],
+            employed: [
+                {
+                    id: 'E1',
+                    title: 'Bank Statements — 3 Months Online History',
+                    what: 'Download from the bank account where your salary is paid',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>3 months of statements from your personal bank account (the account your employer pays your salary into)</li>
+                            <li>Download from online banking</li>
+                            <li>Must show: account holder name, account type, opening/closing balances, transactions</li>
+                            <li>Shows your financial history and salary deposits</li>
+                            <li>PDF format from your bank's online portal</li>
+                            <li>Do NOT need to be stamped by bank</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Bank_Statements_3Months.pdf</div>
+                    `
+                },
+                {
+                    id: 'E2',
+                    title: 'Recent Payslips (3-6 Months)',
+                    what: 'Salary documents from your employer',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>3-6 of your most recent payslips from your employer</li>
+                            <li>Must show: your name, employer name, gross salary, deductions, net pay, tax withheld</li>
+                            <li>Recent payslips (last 3-6 months)</li>
+                            <li>Can be digital or printed/scanned</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Payslips_Recent.pdf</div>
+                    `
+                },
+                {
+                    id: 'E3',
+                    title: 'Employment Contract or Offer Letter',
+                    what: 'Official employment agreement from company',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>Your original employment contract OR job offer letter</li>
+                            <li>Must show: job title, employer name, salary, start date, employment type (full-time, permanent)</li>
+                            <li>On company letterhead preferred</li>
+                            <li>If you don't have original, ask your HR department for a certified copy</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Employment_Contract.pdf</div>
+                    `
+                },
+                {
+                    id: 'E4',
+                    title: 'Employer Permission Letter — Work Abroad',
+                    what: 'Letter from your employer giving permission to work remotely on DTV visa',
+                    details: `
+                        <strong>Get from your employer/HR department:</strong>
+                        <ul>
+                            <li>Formal letter on company letterhead</li>
+                            <li>Must confirm: your employment status and job title</li>
+                            <li>Dates of employment (start date and ongoing)</li>
+                            <li>Permission granted to work remotely/abroad on DTV visa</li>
+                            <li>Confirmation of salary/income during DTV period</li>
+                            <li>State that remote work from Thailand is approved</li>
+                            <li>Must be signed and dated by HR manager or company director</li>
+                            <li>Include company contact details and registration number</li>
+                            <li>Can be email from HR or formal letter</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Employer_Permission_Letter.pdf</div>
+                    `
+                },
+                {
+                    id: 'E5',
+                    title: 'Tax Documentation',
+                    what: 'Proof of your salary and tax status',
+                    details: `
+                        <strong>Choose ONE:</strong>
+                        <ul>
+                            <li>P60 from your employer (end of tax year), OR</li>
+                            <li>3 recent payslips showing your salary</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: P60_2026.pdf OR Payslips_Recent.pdf</div>
+                    `
+                },
+                {
+                    id: 'E6',
+                    title: 'Professional Portfolio',
+                    what: 'Materials to create a professional portfolio for submission',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>Recent CV or resume (if you have one)</li>
+                            <li>LinkedIn profile URL or screenshot</li>
+                            <li>Professional website or portfolio link</li>
+                            <li>Company website or official company information</li>
+                            <li>Any professional certifications or qualifications</li>
+                        </ul>
+                        <strong>Purpose:</strong> We will use these materials to create a professional portfolio document for you to submit with your visa application.
+                        <div class="file-hint">💾 File name: Professional_Portfolio.pdf</div>
+                    `
+                },
+                {
+                    id: 'E7',
+                    title: 'Bank Statement — Official Stamped Verification',
+                    what: 'Get from your local bank branch (NOT online) — DO THIS LAST',
+                    details: `
+                        <div class="urgent-note">
+                            <strong>⏰ FINAL STEP — Get this closer to submission date:</strong>
+                        </div>
+                        <ul>
+                            <li>Please visit your local bank branch in person</li>
+                            <li>Get the print out of your personal bank statements for the last 3 months</li>
+                            <li>Must have the official bank stamp clearly visible</li>
+                            <li>Must show minimum closing balance of £11,000 GBP</li>
+                            <li>Balance must be dated within last 15 days</li>
+                            <li>Balance should have been held for at least 10 days</li>
+                            <li><strong>Get this statement in your final week before submitting</strong></li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Bank_Statement_Official_Stamped.pdf</div>
+                    `
+                }
+            ],
+            'self-employed': [
+                {
+                    id: 'SE1',
+                    title: 'Business Evidence — Invoices OR Bank Statements',
+                    what: 'Show your business is operating (choose one option)',
+                    details: `
+                        <strong>CHOOSE OPTION A OR OPTION B:</strong>
+
+                        <strong>Option A: Recent Business Invoices (Preferred)</strong>
+                        <ul>
+                            <li>3-6 recent invoices you've issued to clients</li>
+                            <li>Must show: your business name, client name, amount, date, description of services</li>
+                            <li>Should be from last 3-6 months</li>
+                            <li>Shows your business is active and operating with regular clients</li>
+                        </ul>
+
+                        <strong>Option B: 3 Months Business Bank Statements</strong>
+                        <ul>
+                            <li>3 months of statements from your business bank account online banking</li>
+                            <li>Must show: business account holder name, business name, transactions</li>
+                            <li>Shows your business financial history</li>
+                            <li>PDF format from your bank's online portal</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Business_Invoices.pdf OR Business_Bank_Statements.pdf</div>
+                    `
+                },
+                {
+                    id: 'SE2',
+                    title: 'Business Contracts or Service Agreements (Optional)',
+                    what: 'Extra evidence showing recurring business with clients',
+                    details: `
+                        <strong>Optional but recommended:</strong>
+                        <ul>
+                            <li>Any contracts or service agreements with clients</li>
+                            <li>Retainer agreements or ongoing service contracts</li>
+                            <li>Demonstrates your business has recurring income and established clients</li>
+                            <li>Must show: client name, services provided, payment terms, your business details</li>
+                            <li>Can be simple written agreements or formal contracts</li>
+                            <li>Shows legitimacy and stability of your business operations</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Business_Contracts.pdf</div>
+                    `
+                },
+                {
+                    id: 'SE3',
+                    title: 'Personal Bank Statements — 3 Months Online History',
+                    what: 'Download from your personal bank account',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>3 months of personal bank account statements from online banking</li>
+                            <li>Shows your personal income and savings</li>
+                            <li>Shows your financial history and balance trajectory</li>
+                            <li>PDF from your bank's online portal</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Personal_Bank_Statements.pdf</div>
+                    `
+                },
+                {
+                    id: 'SE4',
+                    title: 'Companies House Registration',
+                    what: 'Current company registration document',
+                    details: `
+                        <strong>Get from Companies House:</strong>
+                        <ul>
+                            <li>Download from Companies House website</li>
+                            <li>Must be current and active company</li>
+                            <li>Shows: company number, director names (you), status must say "Active"</li>
+                            <li>Certified copy (download includes official seal)</li>
+                            <li>Must be dated within 3 months of application</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Company_House_Registration.pdf</div>
+                    `
+                },
+                {
+                    id: 'SE5',
+                    title: 'Business Accounts or Tax Returns',
+                    what: 'Official business financial documents',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>Most recent business accounts (if you have them), OR</li>
+                            <li>Most recent tax return with business details</li>
+                            <li>Shows: business income, profit/loss, company details</li>
+                            <li>From Companies House OR your accountant</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Business_Accounts.pdf</div>
+                    `
+                },
+                {
+                    id: 'SE6',
+                    title: 'Tax Submission Evidence',
+                    what: 'Proof your business is registered and you've paid taxes',
+                    details: `
+                        <strong>Choose one or more:</strong>
+                        <ul>
+                            <li>Companies House confirmation showing your accounts have been submitted</li>
+                            <li>Receipt showing you've paid VAT (if registered for VAT)</li>
+                            <li>Receipt showing you've paid Corporation Tax</li>
+                            <li>HMRC tax payment confirmation</li>
+                            <li>Self-assessment payment receipt</li>
+                            <li>Any official government tax submission confirmation</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
+                    `
+                },
+                {
+                    id: 'SE7',
+                    title: 'Personal Bank Statement — Official Stamped Verification',
+                    what: 'Get from your personal bank branch — DO THIS LAST',
+                    details: `
+                        <div class="urgent-note">
+                            <strong>⏰ FINAL STEP — Get this closer to submission date:</strong>
+                        </div>
+                        <ul>
+                            <li>Please visit your personal bank branch in person</li>
+                            <li>Get the print out of your personal bank statements for the last 3 months</li>
+                            <li>Must have the official bank stamp clearly visible</li>
+                            <li>Must show minimum closing balance of £11,000 GBP</li>
+                            <li>Balance must be dated within last 15 days</li>
+                            <li>Balance should have been held for at least 10 days</li>
+                            <li><strong>Get this statement in your final week before submitting</strong></li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Personal_Bank_Statement_Official.pdf</div>
+                    `
+                }
+            ],
+            'content-creator': [
+                {
+                    id: 'CC1',
+                    title: 'Personal Bank Statements — 3 Months Online History',
+                    what: 'Download from your personal bank account',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>3 months of personal bank statements from online banking</li>
+                            <li>Must show: account holder name, balance history</li>
+                            <li>Shows where your content creation income deposits</li>
+                            <li>Shows your financial history and balance trajectory</li>
+                            <li>PDF from your bank's online portal</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Bank_Statements_3Months.pdf</div>
+                    `
+                },
+                {
+                    id: 'CC2',
+                    title: 'Platform Revenue Screenshots (YouTube, TikTok, Facebook, etc.)',
+                    what: 'Earnings dashboards from each platform you use',
+                    details: `
+                        <strong>For EACH platform you earn from, screenshot:</strong>
+                        <ul>
+                            <li><strong>YouTube Studio:</strong> Revenue tab showing current month + last 3 months earnings</li>
+                            <li><strong>TikTok Creator Fund:</strong> Creator earnings dashboard showing earnings</li>
+                            <li><strong>Facebook/Instagram:</strong> Monetization earnings dashboard</li>
+                            <li><strong>Twitch:</strong> Creator dashboard earnings</li>
+                            <li><strong>Any other platform:</strong> Earnings/revenue dashboard</li>
+                            <li>Include: your name, earnings amount, date screenshot was taken</li>
+                            <li>Write date in corner or note when screenshot taken</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Platform_Revenue_Screenshots.pdf</div>
+                    `
+                },
+                {
+                    id: 'CC3',
+                    title: 'Brand Deal Paid Invoices (3 Recent Examples)',
+                    what: 'Invoices you sent to brands (that have been paid)',
+                    details: `
+                        <strong>Gather 3 PAID invoices showing:</strong>
+                        <ul>
+                            <li>Invoice number and date</li>
+                            <li>Brand name (company that paid you)</li>
+                            <li>Amount (fee for the campaign)</li>
+                            <li>Services provided (description of content you created)</li>
+                            <li>Your details (name, address, contact)</li>
+                            <li>These are invoices YOU created and sent to brands</li>
+                            <li>Must be invoices that have been PAID</li>
+                            <li>Should be from last 3-6 months</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Brand_Deal_Paid_Invoices.pdf</div>
+                    `
+                },
+                {
+                    id: 'CC4',
+                    title: 'Bank Account Evidence — Brand Deal Payments',
+                    what: 'Bank account proof linking paid invoices to deposits',
+                    details: `
+                        <strong>Gather bank statements showing incoming payments from brands:</strong>
+                        <ul>
+                            <li>Bank statement excerpts or screenshots showing deposits from brands</li>
+                            <li>Must show: payment received into your bank account, brand name or source, amount, date</li>
+                            <li>3 examples matching your 3 paid invoices above</li>
+                            <li>Must clearly link to the amounts on your invoices</li>
+                            <li>Can be bank statement pages showing the incoming transfers</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Bank_Statement_Brand_Deposits.pdf</div>
+                    `
+                },
+                {
+                    id: 'CC5',
+                    title: 'Personal Bank Statement — Official Stamped Verification',
+                    what: 'Get from your bank branch — DO THIS LAST',
+                    details: `
+                        <div class="urgent-note">
+                            <strong>⏰ FINAL STEP — Get this closer to submission date:</strong>
+                        </div>
+                        <ul>
+                            <li>Please visit your local bank branch in person</li>
+                            <li>Get the print out of your personal bank statements for the last 3 months</li>
+                            <li>Must have the official bank stamp clearly visible</li>
+                            <li>Must show minimum closing balance of £11,000 GBP</li>
+                            <li>Balance must be dated within last 15 days</li>
+                            <li>Balance should have been held for at least 10 days</li>
+                            <li><strong>Get this statement in your final week before submitting</strong></li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Bank_Statement_Official_Stamped.pdf</div>
+                    `
+                }
+            ],
+            'business-owner': [
+                {
+                    id: 'BO1',
+                    title: 'Company Evidence — Invoices, Bank Statements, or Contracts',
+                    what: 'Show your company (or companies) is operating',
+                    details: `
+                        <strong>Choose ONE or MORE companies that support your application:</strong>
+                        <ul>
+                            <li>If using one company's income: provide evidence for that company only</li>
+                            <li>If using joint income from multiple companies: provide evidence for each company</li>
+                        </ul>
+
+                        <strong>For each company — CHOOSE ONE:</strong>
+
+                        <strong>Option A: Recent Company Invoices (Preferred)</strong>
+                        <ul>
+                            <li>3-6 recent invoices issued by the company to clients</li>
+                            <li>Must show: company name, client name, amount, date, description of services/products</li>
+                            <li>Should be from last 3-6 months</li>
+                        </ul>
+
+                        <strong>Option B: 3 Months Company Bank Statements</strong>
+                        <ul>
+                            <li>3 months of statements from the company's business bank account</li>
+                            <li>Must show: company name, account holder, transactions</li>
+                        </ul>
+
+                        <strong>Option C: Service Agreements / Client Contracts</strong>
+                        <ul>
+                            <li>Any contracts or service agreements with clients</li>
+                            <li>Retainer agreements or ongoing service contracts</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Company_Evidence.pdf</div>
+                    `
+                },
+                {
+                    id: 'BO2',
+                    title: 'Personal Bank Statements — 3 Months Online History',
+                    what: 'Download from your personal bank account',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>3 months of personal bank statements from online banking</li>
+                            <li>Shows your personal income from the company (dividends, salary)</li>
+                            <li>Shows your financial history and balance trajectory</li>
+                            <li>PDF from your bank's online portal</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Personal_Bank_Statements.pdf</div>
+                    `
+                },
+                {
+                    id: 'BO3',
+                    title: 'Companies House Registration (for each company)',
+                    what: 'Current company registration documents',
+                    details: `
+                        <strong>Get from Companies House:</strong>
+                        <ul>
+                            <li>Download from Companies House website for EACH company you're a director of</li>
+                            <li>Must be current and active companies</li>
+                            <li>Shows: company number, director names (you), status must say "Active"</li>
+                            <li>Certified copy (download includes official seal)</li>
+                            <li>Must be dated within 3 months of application</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Companies_House_Registration_All.pdf</div>
+                    `
+                },
+                {
+                    id: 'BO4',
+                    title: 'Company Accounts or Tax Returns',
+                    what: 'Official financial documents for each company',
+                    details: `
+                        <strong>Gather for each company:</strong>
+                        <ul>
+                            <li>Most recent company accounts, OR</li>
+                            <li>Most recent Corporation Tax return with company details</li>
+                            <li>Shows: company income, profit/loss, company details</li>
+                            <li>From Companies House OR your accountant</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Company_Accounts.pdf</div>
+                    `
+                },
+                {
+                    id: 'BO5',
+                    title: 'Dividend Vouchers or Salary Evidence',
+                    what: 'Proof of income from your companies',
+                    details: `
+                        <strong>Gather:</strong>
+                        <ul>
+                            <li>Dividend vouchers from your company(ies) showing dividend payments to you</li>
+                            <li>OR Payslips if you take a salary from the company</li>
+                            <li>Shows: company name, amount paid to you, date, your name</li>
+                            <li>Links your personal income to the company income</li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Dividend_Vouchers_OR_Payslips.pdf</div>
+                    `
+                },
+                {
+                    id: 'BO6',
+                    title: 'Personal Bank Statement — Official Stamped Verification',
+                    what: 'Get from your personal bank branch — DO THIS LAST',
+                    details: `
+                        <div class="urgent-note">
+                            <strong>⏰ FINAL STEP — Get this closer to submission date:</strong>
+                        </div>
+                        <ul>
+                            <li>Please visit your personal bank branch in person</li>
+                            <li>Get the print out of your personal bank statements for the last 3 months</li>
+                            <li>Must have the official bank stamp clearly visible</li>
+                            <li>Must show minimum closing balance of £11,000 GBP</li>
+                            <li>Balance must be dated within last 15 days</li>
+                            <li>Balance should have been held for at least 10 days</li>
+                            <li><strong>Get this statement in your final week before submitting</strong></li>
+                        </ul>
+                        <div class="file-hint">💾 File name: Personal_Bank_Statement_Official.pdf</div>
+                    `
+                }
+            ]
+        };
+
+        // Functions
+        function selectOption(questionNum, value) {
+            answers[questionNum] = value;
+            
+            // Update UI
+            document.querySelectorAll(`#question-${questionNum} .option-card`).forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            // Enable button
+            document.getElementById(`btn-${questionNum}`).disabled = false;
+        }
+
+        function nextQuestion() {
+            document.getElementById(`question-${currentQuestion}`).classList.remove('active');
+            currentQuestion++;
+            document.getElementById(`question-${currentQuestion}`).classList.add('active');
+            
+            // Update progress steps
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.toggle('active', index < currentQuestion);
+            });
+        }
+
+        function goBack() {
+            document.getElementById(`question-${currentQuestion}`).classList.remove('active');
+            currentQuestion--;
+            document.getElementById(`question-${currentQuestion}`).classList.add('active');
+            
+            // Update progress steps
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.toggle('active', index < currentQuestion);
+            });
+        }
+
+        function showResults() {
+            const employmentType = answers[1];
+            const employmentData = {
+                'employed': {
+                    title: 'Employed (Full-Time Job)',
+                    summary: "You'll need bank statements, payslips, employment contract, and tax documents"
+                },
+                'self-employed': {
+                    title: 'Self-Employed (Sole Trader)',
+                    summary: "You'll need business bank statements, personal bank statements, Companies House registration, and business accounts"
+                },
+                'content-creator': {
+                    title: 'Content Creator / Influencer',
+                    summary: "You'll need bank statements, platform revenue screenshots, brand deal contracts, invoices, and payment proofs"
+                },
+                'business-owner': {
+                    title: 'Business Owner / Director (Multiple Companies)',
+                    summary: "You'll need business bank statements for each company, personal bank statements, Companies House registrations, and business accounts for all companies"
+                }
+            };
+
+            const data = employmentData[employmentType];
+            document.getElementById('results-title').textContent = data.title;
+            document.getElementById('results-summary').textContent = data.summary;
+
+            // Build documents list
+            const specificDocs = documentData[employmentType] || [];
+            const allDocs = [...documentData.common, ...specificDocs];
+            
+            let html = '';
+            
+            // Common documents section
+            html += '<div class="documents-section">';
+            html += '<h3 class="section-title">Common Documents (Everyone Needs These)</h3>';
+            documentData.common.forEach(doc => {
+                html += createDocumentHTML(doc);
+            });
+            html += '</div>';
+            
+            // Specific documents section
+            if (specificDocs.length > 0) {
+                html += '<div class="documents-section">';
+                html += '<h3 class="section-title">Documents for ' + data.title + '</h3>';
+                specificDocs.forEach(doc => {
+                    html += createDocumentHTML(doc);
+                });
+                html += '</div>';
+            }
+            
+            document.getElementById('documents-list').innerHTML = html;
+
+            // Show results, hide quiz
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('results-container').classList.add('active');
+            document.querySelector('.progress-steps').style.display = 'none';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function createDocumentHTML(doc) {
+            return `
+                <div class="document-item" onclick="toggleDocument(this)">
+                    <div class="document-header">
+                        <div class="document-number">${doc.id}</div>
+                        <div class="document-title-group">
+                            <div class="document-title">${doc.title}</div>
+                            <div class="document-what">${doc.what}</div>
+                        </div>
+                        <div class="document-toggle">▼</div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-details">
+                            ${doc.details}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleDocument(element) {
+            element.classList.toggle('expanded');
+        }
+
+        function restartQuiz() {
+            // Reset state
+            currentQuestion = 1;
+            for (let key in answers) {
+                delete answers[key];
+            }
+            
+            // Reset UI
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelectorAll('.quiz-question').forEach(q => {
+                q.classList.remove('active');
+            });
+            document.getElementById('question-1').classList.add('active');
+            
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.toggle('active', index === 0);
+            });
+            
+            document.querySelectorAll('.btn-primary').forEach(btn => {
+                if (btn.id !== 'btn-1') btn.disabled = true;
+            });
+            
+            // Show quiz, hide results
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('results-container').classList.remove('active');
+            document.querySelector('.progress-steps').style.display = 'flex';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
