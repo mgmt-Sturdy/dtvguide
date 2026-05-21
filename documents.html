@@ -680,7 +680,7 @@
     <script>
         // State
         let currentQuestion = 1;
-        const answers = {};
+        let answers = {};
 
         // Document data
         const documentData = {
@@ -1229,16 +1229,29 @@
 
         // Functions
         function selectOption(questionNum, value, element) {
+            console.log('selectOption called:', questionNum, value, element);
+            
+            // Store the answer
             answers[questionNum] = value;
             
-            // Update UI
-            document.querySelectorAll(`#question-${questionNum} .option-card`).forEach(card => {
+            // Update UI - remove selected from all cards in this question
+            const questionDiv = document.getElementById('question-' + questionNum);
+            const allCards = questionDiv.querySelectorAll('.option-card');
+            allCards.forEach(card => {
                 card.classList.remove('selected');
             });
+            
+            // Add selected to clicked card
             element.classList.add('selected');
             
-            // Enable button
-            document.getElementById(`btn-${questionNum}`).disabled = false;
+            // Enable the continue button for this question
+            const btn = document.getElementById('btn-' + questionNum);
+            if (btn) {
+                btn.disabled = false;
+                console.log('Button enabled:', 'btn-' + questionNum);
+            } else {
+                console.error('Button not found:', 'btn-' + questionNum);
+            }
         }
 
         function nextQuestion() {
