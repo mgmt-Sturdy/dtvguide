@@ -561,22 +561,22 @@
                 </div>
                 
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(1, 'employed')">
+                    <div class="option-card" onclick="selectOption(1, 'employed', this)">
                         <div class="option-icon">💼</div>
                         <div class="option-title">Employed (Full-Time Job)</div>
                         <div class="option-desc">You have a job with a company and receive a salary</div>
                     </div>
-                    <div class="option-card" onclick="selectOption(1, 'self-employed')">
+                    <div class="option-card" onclick="selectOption(1, 'self-employed', this)">
                         <div class="option-icon">🏢</div>
                         <div class="option-title">Self-Employed (Sole Trader)</div>
                         <div class="option-desc">You have a business but it's not a limited company</div>
                     </div>
-                    <div class="option-card" onclick="selectOption(1, 'content-creator')">
+                    <div class="option-card" onclick="selectOption(1, 'content-creator', this)">
                         <div class="option-icon">📱</div>
                         <div class="option-title">Content Creator / Influencer</div>
                         <div class="option-desc">Income from YouTube, TikTok, Instagram, etc.</div>
                     </div>
-                    <div class="option-card" onclick="selectOption(1, 'business-owner')">
+                    <div class="option-card" onclick="selectOption(1, 'business-owner', this)">
                         <div class="option-icon">👑</div>
                         <div class="option-title">Company Director (Limited Company)</div>
                         <div class="option-desc">You're a director of one or more limited companies</div>
@@ -597,17 +597,17 @@
                 </div>
                 
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(2, 'no')">
+                    <div class="option-card" onclick="selectOption(2, 'no', this)">
                         <div class="option-icon">✓</div>
                         <div class="option-title">No, just my main income</div>
                         <div class="option-desc">Single source of income</div>
                     </div>
-                    <div class="option-card" onclick="selectOption(2, 'dividends')">
+                    <div class="option-card" onclick="selectOption(2, 'dividends', this)">
                         <div class="option-icon">📈</div>
                         <div class="option-title">Yes - Dividends / Investments</div>
                         <div class="option-desc">Additional passive income from investments</div>
                     </div>
-                    <div class="option-card" onclick="selectOption(2, 'multiple')">
+                    <div class="option-card" onclick="selectOption(2, 'multiple', this)">
                         <div class="option-icon">💰</div>
                         <div class="option-title">Yes - Multiple streams</div>
                         <div class="option-desc">Freelance, side business, part-time work, etc.</div>
@@ -628,17 +628,17 @@
                 </div>
                 
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(3, 'low')">
+                    <div class="option-card" onclick="selectOption(3, 'low', this)">
                         <div class="option-icon">£</div>
                         <div class="option-title">£1,000 - £2,000 / month</div>
                         <div class="option-desc">Lower income range</div>
                     </div>
-                    <div class="option-card" onclick="selectOption(3, 'medium')">
+                    <div class="option-card" onclick="selectOption(3, 'medium', this)">
                         <div class="option-icon">££</div>
                         <div class="option-title">£2,000 - £5,000 / month</div>
                         <div class="option-desc">Mid-range income</div>
                     </div>
-                    <div class="option-card" onclick="selectOption(3, 'high')">
+                    <div class="option-card" onclick="selectOption(3, 'high', this)">
                         <div class="option-icon">£££</div>
                         <div class="option-title">£5,000+ / month</div>
                         <div class="option-desc">Higher income range</div>
@@ -1228,14 +1228,14 @@
         };
 
         // Functions
-        function selectOption(questionNum, value) {
+        function selectOption(questionNum, value, element) {
             answers[questionNum] = value;
             
             // Update UI
             document.querySelectorAll(`#question-${questionNum} .option-card`).forEach(card => {
                 card.classList.remove('selected');
             });
-            event.currentTarget.classList.add('selected');
+            element.classList.add('selected');
             
             // Enable button
             document.getElementById(`btn-${questionNum}`).disabled = false;
