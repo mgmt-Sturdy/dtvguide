@@ -137,7 +137,7 @@ const newQuizSection = `            <div class="quiz-box">
                     </ul>
                     <p>Same 5-year visa, same £300 fee — just a different purpose.</p>
                     <p style="margin-top: 1.5rem;"><strong>Want help figuring out your best option?</strong></p>
-                    <a href="#consultation" class="btn btn-primary">Book a Consultation</a>
+                    <a href="#products" class="btn btn-primary">See Other Options</a>
                 </div>
 
                 <!-- Result: Need Passport Renewal -->
