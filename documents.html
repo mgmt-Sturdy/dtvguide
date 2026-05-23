@@ -1064,20 +1064,13 @@
                         title: "Accountant Confirmation Letter or HMRC Tax Statement",
                         what: "Confirmation of tax paid from your accountant or HMRC",
                         details: `
-                            <p>Click the document type you have:</p>
-                            <div class="doc-option" onclick="generatePrompt('cc7', 'accountant')">
-                                <strong>Confirmation letter from your Accountant confirming tax paid</strong>
-                            </div>
-                            <div class="doc-option" onclick="generatePrompt('cc7', 'taxcalc')">
-                                <strong>Personal tax calculation showing tax paid</strong>
-                            </div>
-                            <div class="doc-option" onclick="generatePrompt('cc7', 'hmrc')">
-                                <strong>Letter from HM Revenue and Customs (HMRC) concerning your tax income</strong>
-                            </div>
-                            <div class="doc-option" onclick="generatePrompt('cc7', 'receipt')">
-                                <strong>Receipt of tax paid for the latest financial year</strong>
-                            </div>
-                            <div id="cc7-prompt" class="prompt-box"></div>
+                            <p>Provide one of the following showing <strong>tax paid confirmation</strong>:</p>
+                            <ul>
+                                <li><strong>Confirmation letter from your Accountant confirming tax paid</strong></li>
+                                <li><strong>Personal tax calculation showing tax paid</strong></li>
+                                <li><strong>Letter from HM Revenue and Customs (HMRC) concerning your tax income</strong></li>
+                                <li><strong>Receipt of tax paid for the latest financial year</strong></li>
+                            </ul>
                             <em>Must specifically show tax has been paid on your content creator income. Official letterhead preferred.</em>
                             <div class="download-hint">💾 File name: Confirmation_of_Tax_Paid.pdf</div>
                         `
