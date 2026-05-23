@@ -1702,7 +1702,7 @@ Required for: ${docData.title}
 
 ${aiPrompt ? 'AI PROMPT (for reference):\n' + aiPrompt : 'TIP: Use the AI prompt generator on the website to create this document,\nor use the prompt file in your document folder.'}
 `;
-                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.txt`, createWordDoc(title, templateContent));
+                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.txt`);
                 }
             });
             
