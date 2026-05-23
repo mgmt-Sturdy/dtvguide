@@ -1354,12 +1354,8 @@
 
         // Functions
 
-        // Handle document dropdown selection and generate AI prompt
-        function handleDocSelect(selectElement, section) {
-            const value = selectElement.value;
-            if (!value) return;
-            
-            const prompts = {
+        // Global prompts for document generation
+        const prompts = {
                 'c3': {
                     'utility': 'Generate a utility bill (electricity, water, or gas) as proof of residence outside Thailand. Include: my name, current address abroad, bill date (recent), utility company name, account number.',
                     'license': 'Generate a local driver\'s license showing my current address abroad as proof of residence. Include: my name, license number, address, issue/expiry dates.',
@@ -1418,6 +1414,11 @@
                     'receipt': 'Generate receipt of tax paid for latest financial year. Include: my name, tax year, amount paid, payment date, HMRC reference.'
                 }
             };
+        
+        // Handle document dropdown selection and generate AI prompt  
+        function handleDocSelect(selectElement, section) {
+            const value = selectElement.value;
+            if (!value) return;
             
             const promptBox = document.getElementById(section + '-prompt');
             if (promptBox && prompts[section] && prompts[section][value]) {
