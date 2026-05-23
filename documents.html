@@ -1499,28 +1499,67 @@
             docItems.forEach(item => {
                 const numEl = item.querySelector('.document-number');
                 const titleEl = item.querySelector('.document-title');
+                const promptBox = item.querySelector('.prompt-box');
                 
                 if (numEl && titleEl) {
-                    const num = numEl.textContent.trim();
+                    const num = numEl.textContent.trim().toLowerCase();
                     const title = titleEl.textContent.trim();
                     docList.push({ num, title });
                     
-                    // Create empty folder in uploads
-                    uploadsFolder.folder(`${num} - ${title.substring(0, 40)}`);
+                    // Create folder in uploads
+                    const docFolder = uploadsFolder.folder(`${num.toUpperCase()} - ${title.substring(0, 40)}`);
+                    
+                    // Try to get AI prompt from the dropdown if selected
+                    let aiPrompt = '';
+                    const selectEl = item.querySelector('.doc-select');
+                    if (selectEl && selectEl.value) {
+                        const section = num.substring(0, 3); // e.g., 'bo1' -> 'bo1'
+                        const value = selectEl.value;
+                        if (prompts[section] && prompts[section][value]) {
+                            aiPrompt = prompts[section][value];
+                        }
+                    }
+                    
+                    // Create AI prompt file in the folder
+                    const promptFileContent = `AI PROMPT FOR: ${title}
+${'='.repeat(title.length + 14)}
+
+Document Code: ${num.toUpperCase()}
+Employment Type: ${docData.title}
+
+${aiPrompt ? 'GENERATED AI PROMPT:' : 'DEFAULT AI PROMPT:'}
+${'='.repeat(20)}
+${aiPrompt || '[Select an option from the dropdown on the website to generate a specific AI prompt for this document]\n\nAlternatively, describe what you need and ask ChatGPT/Claude to help you create this document.'}
+
+HOW TO USE:
+-----------
+1. Copy the prompt above
+2. Go to ChatGPT or Claude
+3. Paste the prompt and send it
+4. The AI will generate your document
+5. Save the result and upload it back to this folder
+
+TIP: You can drag this entire folder into ChatGPT and ask:
+"Help me generate all these documents for my Thailand DTV visa"
+`;
+                    docFolder.file(`00 - AI PROMPT - ${num.toUpperCase()}.txt`, promptFileContent);
+                    
+                    // Create placeholder for their document
+                    docFolder.file(`01 - Your ${num.toUpperCase()} Document (replace this).txt`, 
+                        `Replace this file with your actual ${title} document.\n\nSupported formats: PDF, JPG, PNG`);
                     
                     // Create template file
                     const templateContent = `TEMPLATE: ${title}
 ${'='.repeat(title.length + 9)}
 
-Document: ${num}
+Document: ${num.toUpperCase()}
 Required for: ${docData.title}
 
 [Fill in your details here]
 
-TIP: Use the AI prompt generator on the website to create this document,
-or upload your actual document to the "Your Documents" folder.
+${aiPrompt ? 'AI PROMPT (for reference):\n' + aiPrompt : 'TIP: Use the AI prompt generator on the website to create this document,\nor use the prompt file in your document folder.'}
 `;
-                    templatesFolder.file(`${num} - ${title.substring(0, 30)}.txt`, templateContent);
+                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.txt`, templateContent);
                 }
             });
             
