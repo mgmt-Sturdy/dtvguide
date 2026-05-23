@@ -449,6 +449,61 @@
         .prompt-box.visible {
             display: block;
         }
+
+        /* Document Status Tracking */
+        .document-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .document-title-section {
+            flex: 1;
+        }
+
+        .document-status {
+            margin-left: auto;
+        }
+
+        .status-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .status-checkbox:hover {
+            border-color: var(--violet-light);
+        }
+
+        .status-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--violet-main);
+            cursor: pointer;
+        }
+
+        .status-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            box-shadow: var(--shadow-soft);
+        }
+
+        #progressBar {
+            background: linear-gradient(90deg, var(--violet-main), var(--accent-pink));
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
@@ -557,6 +612,17 @@
                     <strong>✓ What to do:</strong> Gather EVERY document listed below and put them in a folder on your computer. These are the source documents you'll use in the next steps. Don't skip anything — you'll need all of them.
                 </div>
 
+                <!-- Progress Bar -->
+                <div class="progress-container" style="margin: 30px 0; padding: 20px; background: var(--bg-tertiary); border-radius: 12px; border: 2px solid var(--violet-light);">
+                    <div class="progress-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-weight: 600; color: var(--violet-deep);">📊 Document Collection Progress</span>
+                        <span id="progressText" style="font-weight: 500; color: var(--text-secondary);">0 of 0 documents complete (0%)</span>
+                    </div>
+                    <div class="progress-bar-bg" style="width: 100%; height: 20px; background: var(--border); border-radius: 10px; overflow: hidden;">
+                        <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--violet-main), var(--accent-pink)); transition: width 0.3s ease; border-radius: 10px;"></div>
+                    </div>
+                </div>
+
                 <div id="documentsContainer"></div>
 
                 <button class="btn btn-primary" onclick="downloadDocumentFolder()" style="margin: 30px 0; background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); font-size: 16px; padding: 15px 30px; border: none; border-radius: 12px; color: white; cursor: pointer;">
@@ -624,7 +690,6 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
-                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -785,7 +850,6 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
-                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -826,7 +890,6 @@
                                 <option value="invoices">3-6 recent business invoices paid by clients</option>
                                 <option value="statements">3 months business bank statements</option>
                             </select>
-                            <div id="se1-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Business_Invoices_Examples.pdf OR Business_Bank_Statements_3Months.pdf</div>
                         `
                     },
@@ -881,7 +944,6 @@
                                 <option value="corporation">Corporation Tax payment receipt</option>
                                 <option value="hmrc">HMRC tax payment confirmation</option>
                             </select>
-                            <div id="se7-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
@@ -958,7 +1020,6 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
-                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -1057,7 +1118,6 @@
                                 <option value="platform">Platform 1099s or tax documents (YouTube/TikTok)</option>
                                 <option value="hmrc">HMRC tax payment confirmation</option>
                             </select>
-                            <div id="cc5-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
@@ -1074,7 +1134,6 @@
                                 <option value="hmrc">Letter from HM Revenue and Customs (HMRC) concerning your tax income</option>
                                 <option value="receipt">Receipt of tax paid for the latest financial year</option>
                             </select>
-                            <div id="cc7-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <p style="margin-top:15px;"><strong>What this document must show:</strong></p>
                             <ul style="margin-top:10px;">
                                 <li>Tax has been paid on your content creator income</li>
@@ -1141,7 +1200,6 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
-                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -1184,7 +1242,6 @@
                                 <option value="statements">3 months company bank statements</option>
                                 <option value="contracts">Service agreements or client contracts</option>
                             </select>
-                            <div id="bo1-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Company_Evidence.pdf</div>
                         `
                     },
@@ -1213,7 +1270,6 @@
                                 <option value="certified">Option 1: Order a certified company certificate (recommended)</option>
                                 <option value="snapshot">Option 2: Company snapshot (free PDF)</option>
                             </select>
-                            <div id="bo3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <p style="margin-top:15px;"><strong>Get it here:</strong> <a href="https://find-and-update.company-information.service.gov.uk/company/YOUR_COMPANY_NUMBER/more" target="_blank">https://find-and-update.company-information.service.gov.uk/company/YOUR_COMPANY_NUMBER/more</a></p>
                             <div class="download-hint">💾 File name: Certificate_of_Incorporation.pdf</div>
                         `
@@ -1232,7 +1288,6 @@
                                 <option value="vat">VAT receipts (if registered)</option>
                                 <option value="selfassessment">Self-assessment payment receipt</option>
                             </select>
-                            <div id="bo4-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence_All_Companies.pdf</div>
                         `
                     },
@@ -1250,7 +1305,6 @@
                                 <option value="receipt">Receipt of tax paid for the latest financial year</option>
                             </select>
                             <p style="margin-top:15px;"><strong>What this document must show:</strong></p>
-                            <div id="bo5-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <ul style="margin-top:10px;">
                                 <li>Tax has been paid on your income (salary or dividends)</li>
                                 <li>Official letterhead or HMRC branding</li>
@@ -1448,15 +1502,50 @@
 
         function createDocumentHTML(doc) {
             return `
-                <div class="document-item">
-                    <div class="document-number">${doc.num}</div>
-                    <div class="document-title">${doc.title}</div>
-                    <div class="document-what">${doc.what}</div>
+                <div class="document-item" data-doc-id="${doc.num}">
+                    <div class="document-header">
+                        <div class="document-number">${doc.num}</div>
+                        <div class="document-title-section">
+                            <div class="document-title">${doc.title}</div>
+                            <div class="document-what">${doc.what}</div>
+                        </div>
+                        <div class="document-status">
+                            <label class="status-checkbox">
+                                <input type="checkbox" class="doc-complete" data-doc="${doc.num}" onchange="updateProgress()">
+                                <span class="status-text">Incomplete</span>
+                            </label>
+                        </div>
+                    </div>
                     <div class="document-details">
                         ${doc.details}
                     </div>
                 </div>
             `;
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.doc-complete');
+            const total = checkboxes.length;
+            const completed = document.querySelectorAll('.doc-complete:checked').length;
+            const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            if (progressBar && progressText) {
+                progressBar.style.width = percentage + '%';
+                progressText.textContent = completed + ' of ' + total + ' documents complete (' + percentage + '%)';
+            }
+            
+            // Update individual status text
+            checkboxes.forEach(cb => {
+                const statusText = cb.parentElement.querySelector('.status-text');
+                if (statusText) {
+                    statusText.textContent = cb.checked ? '✓ Complete' : 'Incomplete';
+                    statusText.style.color = cb.checked ? '#10B981' : '#9CA3AF';
+                }
+            });
         }
 
         function restartQuiz() {
