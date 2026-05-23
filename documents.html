@@ -1600,6 +1600,8 @@
 
         // Generate and download folder structure
         async function downloadDocumentFolder() {
+            console.log('Download button clicked');
+            
             // Check if libraries are loaded
             if (typeof JSZip === 'undefined') {
                 alert('Error: JSZip library not loaded. Please refresh the page.');
