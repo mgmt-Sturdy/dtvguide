@@ -944,15 +944,17 @@
                         title: "Proof of Current Location",
                         what: "Official document establishing your current residence abroad (NOT in Thailand)",
                         details: `
-                            <p>To prove you are not currently in Thailand, you need an official document establishing your current residence or physical presence abroad. Acceptable documents include:</p>
-                            <ul>
-                                <li><strong>Utility bill</strong> (electricity, water, or gas) in your name showing your current address</li>
-                                <li><strong>Local driver's license</strong> showing your current address abroad</li>
-                                <li><strong>Passport entry stamp</strong> for your current country of residence</li>
-                                <li>Flight ticket or booking confirmation (showing travel date)</li>
-                                <li>Hotel booking confirmation in another country</li>
-                                <li>Airbnb or rental booking in another country</li>
-                            </ul>
+                            <p>Select proof of your current location outside Thailand:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'c3')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="utility">Utility bill (electricity, water, gas) in my name</option>
+                                <option value="license">Local driver's license showing my address</option>
+                                <option value="stamp">Passport entry stamp for current country</option>
+                                <option value="flight">Flight ticket/booking confirmation (departure from Thailand)</option>
+                                <option value="hotel">Hotel booking confirmation in another country</option>
+                                <option value="airbnb">Airbnb or rental booking in another country</option>
+                            </select>
+                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -1116,15 +1118,17 @@
                         title: "Proof of Current Location",
                         what: "Official document establishing your current residence abroad (NOT in Thailand)",
                         details: `
-                            <p>To prove you are not currently in Thailand, you need an official document establishing your current residence or physical presence abroad. Acceptable documents include:</p>
-                            <ul>
-                                <li><strong>Utility bill</strong> (electricity, water, or gas) in your name showing your current address</li>
-                                <li><strong>Local driver's license</strong> showing your current address abroad</li>
-                                <li><strong>Passport entry stamp</strong> for your current country of residence</li>
-                                <li>Flight ticket or booking confirmation (showing travel date)</li>
-                                <li>Hotel booking confirmation in another country</li>
-                                <li>Airbnb or rental booking in another country</li>
-                            </ul>
+                            <p>Select proof of your current location outside Thailand:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'c3')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="utility">Utility bill (electricity, water, gas) in my name</option>
+                                <option value="license">Local driver's license showing my address</option>
+                                <option value="stamp">Passport entry stamp for current country</option>
+                                <option value="flight">Flight ticket/booking confirmation (departure from Thailand)</option>
+                                <option value="hotel">Hotel booking confirmation in another country</option>
+                                <option value="airbnb">Airbnb or rental booking in another country</option>
+                            </select>
+                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
