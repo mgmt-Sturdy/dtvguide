@@ -812,19 +812,13 @@
                         title: "Business Evidence — Invoices OR Bank Statements",
                         what: "Show your business is operating (choose one option)",
                         details: `
-                            <p>CHOOSE OPTION A OR OPTION B:</p>
-
-                            <p>Option A: Recent Business Invoices (Preferred)</p>
-                            <ul>
-                                <li><strong>3-6 recent invoices paid by clients</strong></li>
-                            </ul>
-                            <em>Must show: your business name, client name, amount, date, description of services. Should be from last 3-6 months. Shows your business is active and operating with regular clients.</em>
-
-                            <p>Option B: 3 Months Business Bank Statements</p>
-                            <ul>
-                                <li><strong>3 months of statements from your business bank account</strong></li>
-                            </ul>
-                            <em>Must show: business account holder name, business name, transactions. Shows your business financial history. PDF format from your bank's online portal.</em>
+                            <p>Select your business evidence type:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'se1')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="invoices">3-6 recent business invoices paid by clients</option>
+                                <option value="statements">3 months business bank statements</option>
+                            </select>
+                            <div id="se1-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Business_Invoices_Examples.pdf OR Business_Bank_Statements_3Months.pdf</div>
                         `
                     },
@@ -870,14 +864,16 @@
                         title: "Tax Submission Evidence",
                         what: "Proof your business is registered and you have paid taxes with National Insurance number",
                         details: `
-                            <p>Must include your <strong>National Insurance number</strong> on all documents</p>
-                            <p>Choose one or more:</p>
-                            <ul>
-                                <li><strong>SA302 or tax calculation from HMRC (showing tax paid and NI contributions)</strong></li>
-                                <li>Self-assessment payment receipt</li>
-                                <li>HMRC tax payment confirmation</li>
-                            </ul>
-                            <em>Receipt showing you have paid VAT (if registered for VAT). Receipt showing you have paid Corporation Tax. Any official government tax submission confirmation.</em>
+                            <p><strong>Required:</strong> Include your National Insurance number on all documents</p>
+                            <p>Select your tax evidence type:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'se7')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="sa302">SA302 or tax calculation from HMRC</option>
+                                <option value="vat">VAT receipts (if registered for VAT)</option>
+                                <option value="corporation">Corporation Tax payment receipt</option>
+                                <option value="hmrc">HMRC tax payment confirmation</option>
+                            </select>
+                            <div id="se7-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
