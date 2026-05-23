@@ -1228,14 +1228,20 @@
                         title: "Accountant Confirmation Letter or HMRC Tax Statement",
                         what: "Confirmation of tax paid from your accountant or HMRC",
                         details: `
-                            <p>Provide one of the following showing <strong>tax paid confirmation</strong>:</p>
-                            <ul>
-                                <li><strong>Confirmation letter from your Accountant confirming tax paid</strong></li>
-                                <li><strong>Personal tax calculation showing tax paid</strong></li>
-                                <li><strong>Letter from HM Revenue and Customs (HMRC) concerning your tax income</strong></li>
-                                <li><strong>Receipt of tax paid for the latest financial year</strong></li>
+                            <p>Select the document type you have:</p>
+                            <select class="doc-select" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="accountant">Confirmation letter from your Accountant confirming tax paid</option>
+                                <option value="taxcalc">Personal tax calculation showing tax paid</option>
+                                <option value="hmrc">Letter from HM Revenue and Customs (HMRC) concerning your tax income</option>
+                                <option value="receipt">Receipt of tax paid for the latest financial year</option>
+                            </select>
+                            <p style="margin-top:15px;"><strong>What this document must show:</strong></p>
+                            <ul style="margin-top:10px;">
+                                <li>Tax has been paid on your income (salary or dividends)</li>
+                                <li>Official letterhead or HMRC branding</li>
+                                <li>Your name and tax year clearly stated</li>
                             </ul>
-                            <em>Must specifically show tax has been paid on your income (salary or dividends). Official letterhead preferred.</em>
                             <div class="download-hint">💾 File name: Confirmation_of_Tax_Paid.pdf</div>
                         `
                     },
