@@ -507,6 +507,7 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
 
 </head>
 <body>
@@ -1598,6 +1599,35 @@
             document.getElementById('results').classList.remove('active');
         }
 
+        // Helper function to create Word document content (base64 for zip)
+        function createWordDoc(title, content) {
+            // Simple Word XML format
+            const wordXML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?mso-application progid="Word.Document"?>
+<w:wordDocument xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
+                xmlns:v="urn:schemas-microsoft-com:vml"
+                xmlns:o="urn:schemas-microsoft-com:office:office"
+                xmlns:wx="http://schemas.microsoft.com/office/word/2003/auxHint">
+    <w:body>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Heading1"/>
+            </w:pPr>
+            <w:r>
+                <w:t>${title.replace(/[<>]/g, '')}</w:t>
+            </w:r>
+        </w:p>
+        ${content.split('\n').map(line => `
+        <w:p>
+            <w:r>
+                <w:t>${line.replace(/[<>]/g, '')}</w:t>
+            </w:r>
+        </w:p>`).join('')}
+    </w:body>
+</w:wordDocument>`;
+            return wordXML;
+        }
+
         // Generate and download folder structure
         async function downloadDocumentFolder() {
             console.log('Download button clicked');
@@ -1687,11 +1717,11 @@ HOW TO USE:
 TIP: You can drag this entire folder into ChatGPT and ask:
 "Help me generate all these documents for my Thailand DTV visa"
 `;
-                    docFolder.file(`00 - AI PROMPT - ${num.toUpperCase()}.rtf`, promptFileContent);
+                    docFolder.file(`00 - AI PROMPT - ${num.toUpperCase()}.doc`, createWordDoc(`AI PROMPT - ${title}`, promptFileContent));
                     
 
                     
-                    // Create template file
+                    // Create template file (proper Word document)
                     const templateContent = `TEMPLATE: ${title}
 ${'='.repeat(title.length + 9)}
 
@@ -1702,7 +1732,7 @@ Required for: ${docData.title}
 
 ${aiPrompt ? 'AI PROMPT (for reference):\n' + aiPrompt : 'TIP: Use the AI prompt generator on the website to create this document,\nor use the prompt file in your document folder.'}
 `;
-                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.rtf`, templateContent);
+                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.doc`, createWordDoc(title, templateContent));
                 }
             });
             
@@ -1728,7 +1758,7 @@ DOCUMENTS NEEDED:
             });
             readmeContent += `\n\nTIP: Upload this folder to ChatGPT or Claude and ask:
 "Help me fill out these DTV visa document templates"\n`;
-            templatesFolder.file("README - Start Here.rtf", readmeContent);
+            templatesFolder.file("README - Start Here.doc", createWordDoc("README - Start Here", readmeContent));
             
             // Create README for uploads
             uploadsFolder.file("README.txt", `YOUR DOCUMENTS
