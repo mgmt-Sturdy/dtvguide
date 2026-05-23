@@ -1265,7 +1265,7 @@
             const prompts = {
                 'c3': {
                     'utility': 'Generate a utility bill (electricity, water, or gas) as proof of residence outside Thailand. Include: my name, current address abroad, bill date (recent), utility company name, account number.',
-                    'license': 'Generate a local driver's license showing my current address abroad as proof of residence. Include: my name, license number, address, issue/expiry dates.',
+                    'license': 'Generate a local driver\'s license showing my current address abroad as proof of residence. Include: my name, license number, address, issue/expiry dates.',
                     'stamp': 'Generate a passport entry stamp showing recent entry to my current country of residence. Include: country name, entry date, stamp details.',
                     'flight': 'Generate a flight ticket or booking confirmation showing departure from Thailand. Include: my name, departure airport (DMK/BKK), destination, flight date, booking reference.',
                     'hotel': 'Generate a hotel booking confirmation in another country as proof of location. Include: my name, hotel name, address, check-in/out dates, booking reference.',
@@ -1307,7 +1307,7 @@
             
             const promptBox = document.getElementById(section + '-prompt');
             if (promptBox && prompts[section] && prompts[section][value]) {
-                promptBox.innerHTML = '<strong>AI Prompt:</strong><br><textarea style="width:100%; min-height:80px; margin-top:10px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px;">' + prompts[section][value] + '</textarea><br><br><button onclick="copyPrompt('' + section + '')" style="background:var(--violet-main); color:white; padding:8px 16px; border:none; border-radius:6px; cursor:pointer; font-family:inherit;">Copy Prompt</button>';
+                promptBox.innerHTML = '<strong>AI Prompt:</strong><br><textarea style="width:100%; min-height:80px; margin-top:10px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px;">' + prompts[section][value] + '</textarea><br><br><button onclick="copyPrompt('\'' + section + '\'')" style="background:var(--violet-main); color:white; padding:8px 16px; border:none; border-radius:6px; cursor:pointer; font-family:inherit;">Copy Prompt</button>';
                 promptBox.style.display = 'block';
             }
         }
