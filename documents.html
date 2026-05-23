@@ -1684,7 +1684,7 @@ HOW TO USE:
 TIP: You can drag this entire folder into ChatGPT and ask:
 "Help me generate all these documents for my Thailand DTV visa"
 `;
-                    docFolder.file(`00 - AI PROMPT - ${num.toUpperCase()}.txt`, promptFileContent);
+                    docFolder.file(`00 - AI PROMPT - ${num.toUpperCase()}.doc`, promptFileContent);
                     
 
                     
@@ -1699,7 +1699,7 @@ Required for: ${docData.title}
 
 ${aiPrompt ? 'AI PROMPT (for reference):\n' + aiPrompt : 'TIP: Use the AI prompt generator on the website to create this document,\nor use the prompt file in your document folder.'}
 `;
-                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.txt`, templateContent);
+                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.doc`, templateContent);
                 }
             });
             
@@ -1725,10 +1725,10 @@ DOCUMENTS NEEDED:
             });
             readmeContent += `\n\nTIP: Upload this folder to ChatGPT or Claude and ask:
 "Help me fill out these DTV visa document templates"\n`;
-            templatesFolder.file("README - Start Here.txt", readmeContent);
+            templatesFolder.file("README - Start Here.doc", readmeContent);
             
             // Create README for uploads
-            uploadsFolder.file("README.txt", `YOUR DOCUMENTS
+            uploadsFolder.file("README.doc", `YOUR DOCUMENTS
 ==============
 
 Upload your completed/real documents into each numbered folder.
