@@ -274,7 +274,7 @@
         }
 
         /* Documents Section */
-        .documents-section {
+        .rtfuments-section {
             margin-bottom: 40px;
         }
 
@@ -287,7 +287,7 @@
             border-bottom: 3px solid var(--violet-main);
         }
 
-        .document-item {
+        .rtfument-item {
             background: var(--bg-secondary);
             border-left: 4px solid var(--violet-main);
             padding: 20px;
@@ -295,7 +295,7 @@
             border-radius: 8px;
         }
 
-        .document-number {
+        .rtfument-number {
             display: inline-block;
             background: var(--violet-main);
             color: white;
@@ -310,21 +310,21 @@
             font-size: 14px;
         }
 
-        .document-title {
+        .rtfument-title {
             font-size: 18px;
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 8px;
         }
 
-        .document-what {
+        .rtfument-what {
             font-size: 14px;
             color: var(--text-secondary);
             margin-bottom: 12px;
             font-style: italic;
         }
 
-        .document-details {
+        .rtfument-details {
             background: white;
             padding: 16px;
             border-radius: 6px;
@@ -333,16 +333,16 @@
             color: var(--text-secondary);
         }
 
-        .document-details ul {
+        .rtfument-details ul {
             margin-left: 20px;
             margin-top: 10px;
         }
 
-        .document-details li {
+        .rtfument-details li {
             margin-bottom: 8px;
         }
 
-        .document-details strong {
+        .rtfument-details strong {
             color: var(--violet-deep);
         }
 
@@ -422,7 +422,7 @@
         }
 
         /* Document Option Buttons */
-        .doc-option {
+        .rtf-option {
             background: var(--bg-secondary);
             border: 2px solid var(--border);
             border-radius: 8px;
@@ -432,7 +432,7 @@
             transition: all 0.2s ease;
         }
 
-        .doc-option:hover {
+        .rtf-option:hover {
             border-color: var(--violet-light);
             background: var(--bg-tertiary);
         }
@@ -451,18 +451,18 @@
         }
 
         /* Document Status Tracking */
-        .document-header {
+        .rtfument-header {
             display: flex;
             align-items: flex-start;
             gap: 15px;
             margin-bottom: 15px;
         }
 
-        .document-title-section {
+        .rtfument-title-section {
             flex: 1;
         }
 
-        .document-status {
+        .rtfument-status {
             margin-left: auto;
         }
 
@@ -1355,9 +1355,9 @@
                     'airbnb': 'Generate an Airbnb or rental booking confirmation in another country. Include: my name, property address, host name, rental dates, booking reference.'
                 },
                 'e5': {
-                    'payslips': 'I have uploaded my raw payslips. Please analyze them and create a professional Salary & Tax Contributions Summary document for my Thailand DTV visa application. Include: monthly breakdown table with basic pay, bonus, gross pay, income tax, employee NI, and net pay for each month; year-to-date summary with totals; employee and employer details including NI number, payroll ID, tax code; notes section explaining tax code. Format as a professional business document. IMPORTANT: Save as a Word document (.docx).',
-                    'p60': 'Generate a P60 End of Year Certificate showing my total pay and tax for the tax year. Include: my employer name and PAYE reference, my name and NI number, total pay for the year, total tax deducted, tax code used. IMPORTANT: Save as a Word document (.docx).',
-                    'summary': 'Create a Salary and Tax Contributions Summary document using the information from my uploaded payslips. Format as a professional table showing monthly breakdowns and year-to-date totals with employer details. IMPORTANT: Save as a Word document (.docx).'
+                    'payslips': 'I have uploaded my raw payslips. Please analyze them and create a professional Salary & Tax Contributions Summary document for my Thailand DTV visa application. Include: monthly breakdown table with basic pay, bonus, gross pay, income tax, employee NI, and net pay for each month; year-to-date summary with totals; employee and employer details including NI number, payroll ID, tax code; notes section explaining tax code. Format as a professional business document. IMPORTANT: Save as a Word document (.rtfx).',
+                    'p60': 'Generate a P60 End of Year Certificate showing my total pay and tax for the tax year. Include: my employer name and PAYE reference, my name and NI number, total pay for the year, total tax deducted, tax code used. IMPORTANT: Save as a Word document (.rtfx).',
+                    'summary': 'Create a Salary and Tax Contributions Summary document using the information from my uploaded payslips. Format as a professional table showing monthly breakdowns and year-to-date totals with employer details. IMPORTANT: Save as a Word document (.rtfx).'
                 },
                 'se1': {
                     'invoices': 'Generate 3-6 recent business invoices paid by clients. For each invoice include: my business name, client name, amount, date, description of services, invoice number.',
@@ -1540,9 +1540,9 @@
 
         // Update progress bar
         function updateProgress() {
-            const checkboxes = document.querySelectorAll('.doc-complete');
+            const checkboxes = document.querySelectorAll('.rtf-complete');
             const total = checkboxes.length;
-            const completed = document.querySelectorAll('.doc-complete:checked').length;
+            const completed = document.querySelectorAll('.rtf-complete:checked').length;
             const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
             
             const progressBar = document.getElementById('progressBar');
@@ -1614,12 +1614,12 @@
             const uploadsFolder = zip.folder("02 - Your Documents (Upload Here)");
             
             // Get all document items from the results
-            const docItems = document.querySelectorAll('.document-item');
+            const docItems = document.querySelectorAll('.rtfument-item');
             const docList = [];
             
             docItems.forEach(item => {
-                const numEl = item.querySelector('.document-number');
-                const titleEl = item.querySelector('.document-title');
+                const numEl = item.querySelector('.rtfument-number');
+                const titleEl = item.querySelector('.rtfument-title');
                 const promptBox = item.querySelector('.prompt-box');
                 
                 if (numEl && titleEl) {
@@ -1642,7 +1642,7 @@
                     
                     // Try to get AI prompt from the dropdown if selected
                     let aiPrompt = '';
-                    const selectEl = item.querySelector('.doc-select');
+                    const selectEl = item.querySelector('.rtf-select');
                     if (selectEl && selectEl.value && section) {
                         const value = selectEl.value;
                         if (prompts[section] && prompts[section][value]) {
@@ -1672,13 +1672,13 @@ HOW TO USE:
 2. Go to ChatGPT or Claude
 3. Paste the prompt and send it
 4. The AI will generate your document
-5. IMPORTANT: Ask the AI to save it as a Word document (.docx)
+5. IMPORTANT: Ask the AI to save it as a Word document (.rtfx)
 6. Download the Word doc and upload it back to this folder
 
 TIP: You can drag this entire folder into ChatGPT and ask:
 "Help me generate all these documents for my Thailand DTV visa"
 `;
-                    docFolder.file(`00 - AI PROMPT - ${num.toUpperCase()}.doc`, promptFileContent);
+                    docFolder.file(`00 - AI PROMPT - ${num.toUpperCase()}.rtf`, promptFileContent);
                     
 
                     
@@ -1693,7 +1693,7 @@ Required for: ${docData.title}
 
 ${aiPrompt ? 'AI PROMPT (for reference):\n' + aiPrompt : 'TIP: Use the AI prompt generator on the website to create this document,\nor use the prompt file in your document folder.'}
 `;
-                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.doc`, templateContent);
+                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.rtf`, templateContent);
                 }
             });
             
@@ -1719,10 +1719,10 @@ DOCUMENTS NEEDED:
             });
             readmeContent += `\n\nTIP: Upload this folder to ChatGPT or Claude and ask:
 "Help me fill out these DTV visa document templates"\n`;
-            templatesFolder.file("README - Start Here.doc", readmeContent);
+            templatesFolder.file("README - Start Here.rtf", readmeContent);
             
             // Create README for uploads
-            uploadsFolder.file("README.doc", `YOUR DOCUMENTS
+            uploadsFolder.file("README.rtf", `YOUR DOCUMENTS
 ==============
 
 Upload your completed/real documents into each numbered folder.
