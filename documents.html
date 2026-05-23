@@ -1289,7 +1289,7 @@
             
             const promptBox = document.getElementById(section + '-prompt');
             if (promptBox && prompts[section] && prompts[section][option]) {
-                promptBox.innerHTML = '<strong>AI Prompt:</strong><br><textarea style="width:100%; min-height:80px; margin-top:10px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit;">' + prompts[section][option] + '</textarea><br><br><button onclick="copyPrompt(\' + section + '\')" style="background:var(--violet-main); color:white; padding:8px 16px; border:none; border-radius:6px; cursor:pointer;">Copy Prompt</button>';
+                promptBox.innerHTML = '<strong>AI Prompt:</strong><br><textarea style="width:100%; min-height:80px; margin-top:10px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit;">' + prompts[section][option] + '</textarea><br><br><button onclick="copyPrompt('"'"' + section + '"'"')" style="background:var(--violet-main); color:white; padding:8px 16px; border:none; border-radius:6px; cursor:pointer;">Copy Prompt</button>';
                 promptBox.style.display = 'block';
             }
         }
