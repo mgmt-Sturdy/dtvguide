@@ -1039,15 +1039,15 @@
                         title: "Tax Submission Evidence",
                         what: "Proof of income and tax paid with National Insurance number",
                         details: `
-                            <p>Must include your <strong>National Insurance number</strong> on all documents</p>
-                            <p>Choose one or more:</p>
-                            <ul>
-                                <li><strong>SA302 or tax calculation from HMRC</strong></li>
-                                <li>Self-assessment payment receipt</li>
-                                <li>HMRC tax payment confirmation</li>
-                                <li>Platform 1099s or tax documents (if applicable)</li>
-                            </ul>
-                            <em>Shows your content creator income has been declared and tax paid. Include documents showing total income, tax paid, and National Insurance contributions.</em>
+                            <p><strong>Required:</strong> Include your National Insurance number on all documents</p>
+                            <p>Select your tax evidence type:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'cc5')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="sa302">SA302 or tax calculation from HMRC</option>
+                                <option value="platform">Platform 1099s or tax documents (YouTube/TikTok)</option>
+                                <option value="hmrc">HMRC tax payment confirmation</option>
+                            </select>
+                            <div id="cc5-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
@@ -1159,27 +1159,15 @@
                         title: "Company Evidence — Invoices, Bank Statements, or Contracts",
                         what: "Show your company (or companies) is operating",
                         details: `
-                            <p>If using one company's income: provide evidence for that company only</p>
-                            <p>If using joint income from multiple companies: provide evidence for each company</p>
-                            <p>For each company — CHOOSE ONE OF THESE OPTIONS (A, B, or C):</p>
-                            <p>Option A: Recent Company Invoices (Preferred)</p>
-
-                            <ul>
-                                <li><strong>3-6 recent invoices paid by clients</strong></li>
-                            </ul>
-                            <em>Must show: company name, client name, amount, date, description of services/products. Should be from last 3-6 months. Shows business is active and operating with regular clients.</em>
-
-                            <p>Option B: 3 Months Company Bank Statements</p>
-                            <ul>
-                                <li><strong>3 months of statements from the company's business bank account</strong></li>
-                            </ul>
-                            <em>Must show: company name, account holder, transactions. Shows business financial history.</em>
-
-                            <p>Option C: Service Agreements / Client Contracts</p>
-                            <ul>
-                                <li><strong>Any contracts or service agreements with clients</strong></li>
-                            </ul>
-                            <em>Retainer agreements or ongoing service contracts.</em>
+                            <p><strong>Note:</strong> If using multiple companies, provide evidence for each</p>
+                            <p>Select your company evidence type:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'bo1')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="invoices">3-6 recent company invoices paid by clients</option>
+                                <option value="statements">3 months company bank statements</option>
+                                <option value="contracts">Service agreements or client contracts</option>
+                            </select>
+                            <div id="bo1-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Company_Evidence.pdf</div>
                         `
                     },
@@ -1216,16 +1204,16 @@
                         title: "Tax Submission Evidence",
                         what: "Proof of business taxes paid with National Insurance number",
                         details: `
-                            <p>Must include your <strong>National Insurance number</strong> on all documents</p>
-                            <p>Choose one or more:</p>
-                            <ul>
-                                <li><strong>SA302 or tax calculation from HMRC</strong></li>
-                                <li>Corporation Tax payment receipt</li>
-                                <li>Self-assessment payment receipt</li>
-                                <li>HMRC tax payment confirmation</li>
-                                <li>VAT receipts (if registered for VAT)</li>
-                            </ul>
-                            <em>Shows your business income has been declared and tax paid. Include documents for each company showing total income, tax paid, and National Insurance contributions.</em>
+                            <p><strong>Required:</strong> Include your National Insurance number on all documents</p>
+                            <p>Select your tax evidence type:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'bo4')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="sa302">SA302 or tax calculation from HMRC</option>
+                                <option value="corporation">Corporation Tax payment receipt</option>
+                                <option value="vat">VAT receipts (if registered)</option>
+                                <option value="selfassessment">Self-assessment payment receipt</option>
+                            </select>
+                            <div id="bo4-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence_All_Companies.pdf</div>
                         `
                     },
@@ -1235,7 +1223,7 @@
                         what: "Confirmation of tax paid from your accountant or HMRC",
                         details: `
                             <p>Select the document type you have:</p>
-                            <select class="doc-select" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white;">
+                            <select class="doc-select" onchange="handleDocSelect(this, 'bo5')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
                                 <option value="" selected disabled>-- Choose your document --</option>
                                 <option value="accountant">Confirmation letter from your Accountant confirming tax paid</option>
                                 <option value="taxcalc">Personal tax calculation showing tax paid</option>
@@ -1243,6 +1231,7 @@
                                 <option value="receipt">Receipt of tax paid for the latest financial year</option>
                             </select>
                             <p style="margin-top:15px;"><strong>What this document must show:</strong></p>
+                            <div id="bo5-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <ul style="margin-top:10px;">
                                 <li>Tax has been paid on your income (salary or dividends)</li>
                                 <li>Official letterhead or HMRC branding</li>
