@@ -1609,9 +1609,15 @@ your documents for the DTV visa application.
 `);
             
             // Generate and download ZIP
-            const blob = await zip.generateAsync({ type: "blob" });
-            const safeTitle = docData.title.replace(/[^a-z0-9]/gi, '_').substring(0, 30);
-            saveAs(blob, `DTV_Documents_${safeTitle}_${new Date().toISOString().split('T')[0]}.zip`);
+            try {
+                const blob = await zip.generateAsync({ type: "blob" });
+                const safeTitle = docData.title.replace(/[^a-z0-9]/gi, '_').substring(0, 30);
+                saveAs(blob, `DTV_Documents_${safeTitle}_${new Date().toISOString().split('T')[0]}.zip`);
+                console.log('Download started successfully');
+            } catch (error) {
+                console.error('Download failed:', error);
+                alert('Download failed. Check console for details.');
+            }
         }
     </script>
 </body>
