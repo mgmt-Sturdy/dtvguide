@@ -1482,6 +1482,16 @@
 
         // Generate and download folder structure
         async function downloadDocumentFolder() {
+            // Check if libraries are loaded
+            if (typeof JSZip === 'undefined') {
+                alert('Error: JSZip library not loaded. Please refresh the page.');
+                return;
+            }
+            if (typeof saveAs === 'undefined') {
+                alert('Error: FileSaver library not loaded. Please refresh the page.');
+                return;
+            }
+            
             const zip = new JSZip();
             const employmentType = answers[1];
             const docData = documents[employmentType];
