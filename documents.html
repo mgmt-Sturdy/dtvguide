@@ -1502,18 +1502,27 @@
                 const promptBox = item.querySelector('.prompt-box');
                 
                 if (numEl && titleEl) {
-                    const num = numEl.textContent.trim().toLowerCase();
+                    const num = numEl.textContent.trim();
+                    const numLower = num.toLowerCase();
                     const title = titleEl.textContent.trim();
                     docList.push({ num, title });
                     
                     // Create folder in uploads
-                    const docFolder = uploadsFolder.folder(`${num.toUpperCase()} - ${title.substring(0, 40)}`);
+                    const docFolder = uploadsFolder.folder(`${num} - ${title.substring(0, 40)}`);
+                    
+                    // Map document number to prompt section
+                    // C3->c3, BO1->bo1, SE7->se7, CC5->cc5, etc.
+                    let section = '';
+                    if (numLower.startsWith('c')) section = 'c' + numLower.substring(1); // c3, c4, etc.
+                    else if (numLower.startsWith('bo')) section = numLower; // bo1, bo2, etc.
+                    else if (numLower.startsWith('se')) section = numLower; // se1, se7, etc.
+                    else if (numLower.startsWith('cc')) section = numLower; // cc3, cc5, etc.
+                    else if (numLower.startsWith('e')) section = 'e' + numLower.substring(1); // e1, e5, etc.
                     
                     // Try to get AI prompt from the dropdown if selected
                     let aiPrompt = '';
                     const selectEl = item.querySelector('.doc-select');
-                    if (selectEl && selectEl.value) {
-                        const section = num.substring(0, 3); // e.g., 'bo1' -> 'bo1'
+                    if (selectEl && selectEl.value && section) {
                         const value = selectEl.value;
                         if (prompts[section] && prompts[section][value]) {
                             aiPrompt = prompts[section][value];
