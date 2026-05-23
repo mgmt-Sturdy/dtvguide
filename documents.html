@@ -945,16 +945,16 @@
                     {
                         num: "SE7",
                         title: "Tax Submission Evidence",
-                        what: "Proof your business is registered and you have paid taxes with National Insurance number",
+                        what: "Proof of tax payments made to HMRC within last 12 months",
                         details: `
                             <p><strong>Required:</strong> Include your National Insurance number on all documents</p>
-                            <p>Select your tax evidence type:</p>
+                            <p>Provide one or more of the following (within last 12 months):</p>
                             <select class="doc-select" onchange="handleDocSelect(this, 'se7')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
                                 <option value="" selected disabled>-- Choose your document --</option>
-                                <option value="sa302">SA302 or tax calculation from HMRC</option>
-                                <option value="vat">VAT receipts (if registered for VAT)</option>
-                                <option value="corporation">Corporation Tax payment receipt</option>
                                 <option value="hmrc">HMRC tax payment confirmation</option>
+                                <option value="selfassessment">Self-assessment payment receipt</option>
+                                <option value="vat">VAT payment receipts (if registered)</option>
+                                <option value="other">Any other HMRC tax payment documentation</option>
                             </select>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
                         `
@@ -1129,15 +1129,16 @@
                     {
                         num: "CC5",
                         title: "Tax Submission Evidence",
-                        what: "Proof of income and tax paid with National Insurance number",
+                        what: "Proof of tax payments made to HMRC within last 12 months",
                         details: `
                             <p><strong>Required:</strong> Include your National Insurance number on all documents</p>
-                            <p>Select your tax evidence type:</p>
+                            <p>Provide one or more of the following (within last 12 months):</p>
                             <select class="doc-select" onchange="handleDocSelect(this, 'cc5')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
                                 <option value="" selected disabled>-- Choose your document --</option>
-                                <option value="sa302">SA302 or tax calculation from HMRC</option>
-                                <option value="platform">Platform 1099s or tax documents (YouTube/TikTok)</option>
                                 <option value="hmrc">HMRC tax payment confirmation</option>
+                                <option value="selfassessment">Self-assessment payment receipt</option>
+                                <option value="vat">VAT payment receipts (if registered)</option>
+                                <option value="other">Any other HMRC tax payment documentation</option>
                             </select>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
                         `
@@ -1298,18 +1299,19 @@
                     {
                         num: "BO4",
                         title: "Tax Submission Evidence",
-                        what: "Proof of business taxes paid with National Insurance number",
+                        what: "Proof of tax payments made to HMRC within last 12 months",
                         details: `
                             <p><strong>Required:</strong> Include your National Insurance number on all documents</p>
-                            <p>Select your tax evidence type:</p>
+                            <p>Provide one or more of the following (within last 12 months):</p>
                             <select class="doc-select" onchange="handleDocSelect(this, 'bo4')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
                                 <option value="" selected disabled>-- Choose your document --</option>
-                                <option value="sa302">SA302 or tax calculation from HMRC</option>
-                                <option value="corporation">Corporation Tax payment receipt</option>
-                                <option value="vat">VAT receipts (if registered)</option>
+                                <option value="hmrc">HMRC tax payment confirmation</option>
                                 <option value="selfassessment">Self-assessment payment receipt</option>
+                                <option value="corporation">Corporation Tax payment receipt</option>
+                                <option value="vat">VAT payment receipts (if registered)</option>
+                                <option value="other">Any other HMRC tax payment documentation</option>
                             </select>
-                            <div class="download-hint">💾 File name: Tax_Submission_Evidence_All_Companies.pdf</div>
+                            <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
                     {
@@ -1376,15 +1378,16 @@
                     'statements': 'Generate 3 months of business bank statements. Include: business account holder name, business name, transactions showing client payments, opening/closing balances.'
                 },
                 'se7': {
-                    'sa302': 'Generate an SA302 or tax calculation from HMRC showing self-employed tax paid. Include: my name, National Insurance number, tax year, total income, tax paid, NI contributions.',
-                    'vat': 'Generate VAT receipts showing VAT paid (if registered). Include: my business name, VAT number, period, amount paid, HMRC reference.',
-                    'corporation': 'Generate Corporation Tax payment receipt. Include: my company name, tax year, amount paid, payment date, HMRC reference.',
-                    'hmrc': 'Generate HMRC tax payment confirmation for self-assessment. Include: my name, UTR, tax year, amount paid, payment date.'
+                    'hmrc': 'Generate HMRC tax payment confirmation showing self-employed tax paid. Include: my name, National Insurance number, tax year, amount paid, payment date, HMRC reference number.',
+                    'selfassessment': 'Generate self-assessment payment receipt. Include: my name, UTR, tax year, amount paid, payment date, HMRC reference.',
+                    'vat': 'Generate VAT payment receipts. Include: my business name, VAT number, period, amount paid, payment date, HMRC reference.',
+                    'other': 'Generate documentation showing tax payments made to HMRC. Include: my name, type of tax, amount paid, payment date, HMRC reference, tax year.'
                 },
                 'cc5': {
-                    'sa302': 'Generate an SA302 or tax calculation from HMRC for content creator income. Include: my name, National Insurance number, tax year, total content creator income, tax paid, NI contributions.',
-                    'platform': 'Generate platform 1099s or tax documents showing content creator income. Include: platform name (YouTube/TikTok/Instagram), my name, tax year, total earnings.',
-                    'hmrc': 'Generate HMRC tax payment confirmation. Include: my name, UTR, tax year, amount paid on content creator income.'
+                    'hmrc': 'Generate HMRC tax payment confirmation for content creator income. Include: my name, National Insurance number, tax year, amount paid, payment date, HMRC reference.',
+                    'selfassessment': 'Generate self-assessment payment receipt for content creator income. Include: my name, UTR, tax year, amount paid, payment date.',
+                    'vat': 'Generate VAT payment receipts (if registered). Include: my business name, VAT number, period, amount paid, HMRC reference.',
+                    'other': 'Generate documentation showing tax payments made to HMRC for content creator income. Include: payment type, amount, date, HMRC reference.'
                 },
                 'cc7': {
                     'accountant': 'Generate an accountant confirmation letter confirming tax paid for content creator income. Include: my name, business/content creator name, total income for the year, tax paid amount, accountant signature and details.',
@@ -1402,10 +1405,11 @@
                     'snapshot': 'Generate a Companies House company snapshot PDF. Include: company name [YOUR_COMPANY_NAME], company number [YOUR_COMPANY_NUMBER], incorporation date [YOUR_INCORPORATION_DATE], registered address, director information, company status Active.'
                 },
                 'bo4': {
-                    'sa302': 'Generate SA302 or tax calculation from HMRC for business owner. Include: my name, NI number, tax year, salary/dividends income, tax paid.',
+                    'hmrc': 'Generate HMRC tax payment confirmation for business taxes paid. Include: my name, NI number, tax type, amount paid, payment date, HMRC reference.',
+                    'selfassessment': 'Generate self-assessment payment receipt. Include: my name, UTR, tax year, amount paid on salary/dividends, payment date.',
                     'corporation': 'Generate Corporation Tax payment receipt. Include: company name, tax year, taxable profits, amount paid, HMRC reference.',
-                    'vat': 'Generate VAT receipts if registered. Include: company name, VAT number, period, amount paid.',
-                    'selfassessment': 'Generate Self-assessment payment receipt for dividend tax. Include: my name, UTR, tax year, dividend amount, tax paid.'
+                    'vat': 'Generate VAT payment receipts. Include: company name, VAT number, period, amount paid, payment date.',
+                    'other': 'Generate documentation showing tax payments made to HMRC. Include: tax type, amount paid, payment date, HMRC reference number.'
                 },
                 'bo5': {
                     'accountant': 'Generate an accountant confirmation letter confirming tax paid. Include: my name, company name, salary/dividends for the year, tax paid amount, accountant signature and details.',
