@@ -1256,8 +1256,8 @@
 
         // Functions
 
-
         function selectOption(questionNum, value, element) {
+            answers[questionNum] = value;
             
             // Update UI
             const questionDiv = document.getElementById('question-' + questionNum);
