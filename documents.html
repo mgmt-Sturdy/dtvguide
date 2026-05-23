@@ -606,10 +606,17 @@
                         title: "Proof of Current Location",
                         what: "Document showing you are NOT currently in Thailand",
                         details: `
-                            <ul>
-                                <li><strong>Proof you are currently outside Thailand</strong></li>
-                            </ul>
-                            <em>Choose one: Flight ticket or booking confirmation, hotel booking in another country, Airbnb/rental booking, passport stamp showing recent entry to another country, or travel itinerary.</em>
+                            <p>Select proof of your current location outside Thailand:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'c3')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="utility">Utility bill (electricity, water, gas) in my name</option>
+                                <option value="license">Local driver's license showing my address</option>
+                                <option value="stamp">Passport entry stamp for current country</option>
+                                <option value="flight">Flight ticket/booking confirmation (departure from Thailand)</option>
+                                <option value="hotel">Hotel booking confirmation in another country</option>
+                                <option value="airbnb">Airbnb or rental booking in another country</option>
+                            </select>
+                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -760,18 +767,17 @@
                         title: "Proof of Current Location",
                         what: "Official document establishing your current residence abroad (NOT in Thailand)",
                         details: `
-                            <ul>
-                                <li><strong>Proof you are currently outside Thailand</strong></li>
-                            </ul>
-                            <p>To prove you are not currently in Thailand, you need an official document establishing your current residence or physical presence abroad. Acceptable documents include:</p>
-                            <ul>
-                                <li><strong>Utility bill</strong> (electricity, water, or gas) in your name showing your current address</li>
-                                <li><strong>Local driver's license</strong> showing your current address abroad</li>
-                                <li><strong>Passport entry stamp</strong> for your current country of residence</li>
-                                <li>Flight ticket or booking confirmation (showing departure from Thailand)</li>
-                                <li>Hotel booking confirmation in another country</li>
-                                <li>Airbnb or rental booking in another country</li>
-                            </ul>
+                            <p>Select proof of your current location outside Thailand:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'c3')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="utility">Utility bill (electricity, water, gas) in my name</option>
+                                <option value="license">Local driver's license showing my address</option>
+                                <option value="stamp">Passport entry stamp for current country</option>
+                                <option value="flight">Flight ticket/booking confirmation (departure from Thailand)</option>
+                                <option value="hotel">Hotel booking confirmation in another country</option>
+                                <option value="airbnb">Airbnb or rental booking in another country</option>
+                            </select>
+                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -1261,6 +1267,71 @@
         };
 
         // Functions
+
+        // Handle document dropdown selection and generate AI prompt
+        function handleDocSelect(selectElement, section) {
+            const value = selectElement.value;
+            if (!value) return;
+            
+            const prompts = {
+                'c3': {
+                    'utility': 'Generate a utility bill (electricity, water, or gas) as proof of residence outside Thailand. Include: my name, current address abroad, bill date (recent), utility company name, account number.',
+                    'license': 'Generate a local driver's license showing my current address abroad as proof of residence. Include: my name, license number, address, issue/expiry dates.',
+                    'stamp': 'Generate a passport entry stamp showing recent entry to my current country of residence. Include: country name, entry date, stamp details.',
+                    'flight': 'Generate a flight ticket or booking confirmation showing departure from Thailand. Include: my name, departure airport (DMK/BKK), destination, flight date, booking reference.',
+                    'hotel': 'Generate a hotel booking confirmation in another country as proof of location. Include: my name, hotel name, address, check-in/out dates, booking reference.',
+                    'airbnb': 'Generate an Airbnb or rental booking confirmation in another country. Include: my name, property address, host name, rental dates, booking reference.'
+                },
+                'se1': {
+                    'invoices': 'Generate 3-6 recent business invoices paid by clients. For each invoice include: my business name, client name, amount, date, description of services, invoice number.',
+                    'statements': 'Generate 3 months of business bank statements. Include: business account holder name, business name, transactions showing client payments, opening/closing balances.'
+                },
+                'se7': {
+                    'sa302': 'Generate an SA302 or tax calculation from HMRC showing self-employed tax paid. Include: my name, National Insurance number, tax year, total income, tax paid, NI contributions.',
+                    'vat': 'Generate VAT receipts showing VAT paid (if registered). Include: my business name, VAT number, period, amount paid, HMRC reference.',
+                    'corporation': 'Generate Corporation Tax payment receipt. Include: my company name, tax year, amount paid, payment date, HMRC reference.',
+                    'hmrc': 'Generate HMRC tax payment confirmation for self-assessment. Include: my name, UTR, tax year, amount paid, payment date.'
+                },
+                'cc5': {
+                    'sa302': 'Generate an SA302 or tax calculation from HMRC for content creator income. Include: my name, National Insurance number, tax year, total content creator income, tax paid, NI contributions.',
+                    'platform': 'Generate platform 1099s or tax documents showing content creator income. Include: platform name (YouTube/TikTok/Instagram), my name, tax year, total earnings.',
+                    'hmrc': 'Generate HMRC tax payment confirmation. Include: my name, UTR, tax year, amount paid on content creator income.'
+                },
+                'bo1': {
+                    'invoices': 'Generate 3-6 recent company invoices paid by clients. For each: company name, client name, amount, date, services provided.',
+                    'statements': 'Generate 3 months of company bank statements. Include: company name, account holder, transactions, opening/closing balances.',
+                    'contracts': 'Generate service agreements or client contracts. Include: client name, services provided, payment terms, contract dates.'
+                },
+                'bo4': {
+                    'sa302': 'Generate SA302 or tax calculation from HMRC for business owner. Include: my name, NI number, tax year, salary/dividends income, tax paid.',
+                    'corporation': 'Generate Corporation Tax payment receipt. Include: company name, tax year, taxable profits, amount paid, HMRC reference.',
+                    'vat': 'Generate VAT receipts if registered. Include: company name, VAT number, period, amount paid.',
+                    'selfassessment': 'Generate Self-assessment payment receipt for dividend tax. Include: my name, UTR, tax year, dividend amount, tax paid.'
+                },
+                'bo5': {
+                    'accountant': 'Generate an accountant confirmation letter confirming tax paid. Include: my name, company name, salary/dividends for the year, tax paid amount, accountant signature and details.',
+                    'taxcalc': 'Generate a personal tax calculation showing tax paid. Include: my name, tax year, total income/dividends, tax calculations, final tax paid.',
+                    'hmrc': 'Generate HMRC letter concerning tax income. Include: my name, NI number, tax year, income/dividends declared, tax paid confirmation.',
+                    'receipt': 'Generate receipt of tax paid for latest financial year. Include: my name, tax year, amount paid, payment date, HMRC reference.'
+                }
+            };
+            
+            const promptBox = document.getElementById(section + '-prompt');
+            if (promptBox && prompts[section] && prompts[section][value]) {
+                promptBox.innerHTML = '<strong>AI Prompt:</strong><br><textarea style="width:100%; min-height:80px; margin-top:10px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px;">' + prompts[section][value] + '</textarea><br><br><button onclick="copyPrompt('' + section + '')" style="background:var(--violet-main); color:white; padding:8px 16px; border:none; border-radius:6px; cursor:pointer; font-family:inherit;">Copy Prompt</button>';
+                promptBox.style.display = 'block';
+            }
+        }
+        
+        function copyPrompt(section) {
+            const promptBox = document.getElementById(section + '-prompt');
+            const textarea = promptBox.querySelector('textarea');
+            if (textarea) {
+                textarea.select();
+                document.execCommand('copy');
+                alert('Prompt copied! You can paste this into ChatGPT or Claude.');
+            }
+        }
 
         function selectOption(questionNum, value, element) {
             answers[questionNum] = value;
