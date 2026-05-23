@@ -1256,36 +1256,8 @@
 
         // Functions
 
-        // Generate prompt based on document type selected
-        function generatePrompt(section, option) {
-            const prompts = {
-                'cc7': {
-                    'accountant': 'Generate an accountant confirmation letter confirming tax paid for a content creator. Include: my name, my business name, total income for the year, tax paid amount, accountant's signature and registration details.',
-                    'taxcalc': 'Generate a personal tax calculation showing tax paid for a content creator. Include: my name, tax year, total income, tax calculations, final tax paid amount.',
-                    'hmrc': 'Generate a letter from HM Revenue and Customs concerning tax income for a content creator. Include: my name, National Insurance number, tax year, income declared, tax paid confirmation.',
-                    'receipt': 'Generate a receipt of tax paid for the latest financial year for a content creator. Include: my name, tax year, amount paid, payment date, HMRC reference number.'
-                }
-            };
-            
-            const promptBox = document.getElementById(section + '-prompt');
-            if (promptBox && prompts[section] && prompts[section][option]) {
-                promptBox.innerHTML = '<strong>AI Prompt:</strong><br><textarea style="width:100%; min-height:80px; margin-top:10px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit;">' + prompts[section][option] + '</textarea><br><br><button onclick="copyPrompt('' + section + '')" style="background:var(--violet-main); color:white; padding:8px 16px; border:none; border-radius:6px; cursor:pointer;">Copy Prompt</button>';
-                promptBox.style.display = 'block';
-            }
-        }
-        
-        function copyPrompt(section) {
-            const promptBox = document.getElementById(section + '-prompt');
-            const textarea = promptBox.querySelector('textarea');
-            if (textarea) {
-                textarea.select();
-                document.execCommand('copy');
-                alert('Prompt copied to clipboard!');
-            }
-        }
 
         function selectOption(questionNum, value, element) {
-            answers[questionNum] = value;
             
             // Update UI
             const questionDiv = document.getElementById('question-' + questionNum);
