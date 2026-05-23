@@ -450,6 +450,9 @@
             display: block;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
 </head>
 <body>
     <!-- Navigation -->
@@ -556,6 +559,11 @@
 
                 <div id="documentsContainer"></div>
 
+                <button class="btn btn-primary" onclick="downloadDocumentFolder()" style="margin: 30px 0; background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); font-size: 16px; padding: 15px 30px; border: none; border-radius: 12px; color: white; cursor: pointer;">
+                    📁 Download My Document Folder
+                </button>
+                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Get templates + empty folders to organize your documents for AI upload</p>
+                
                 <button class="restart-btn" onclick="restartQuiz()">← Change Employment Type</button>
             </div>
         </div>
@@ -1470,6 +1478,92 @@
             // Show quiz, hide results
             document.getElementById('quiz').style.display = 'block';
             document.getElementById('results').classList.remove('active');
+        }
+
+        // Generate and download folder structure
+        async function downloadDocumentFolder() {
+            const zip = new JSZip();
+            const employmentType = answers[1];
+            const docData = documents[employmentType];
+            
+            // Create Templates folder
+            const templatesFolder = zip.folder("01 - Templates to Fill");
+            
+            // Create Your Documents folder  
+            const uploadsFolder = zip.folder("02 - Your Documents (Upload Here)");
+            
+            // Get all document items from the results
+            const docItems = document.querySelectorAll('.document-item');
+            const docList = [];
+            
+            docItems.forEach(item => {
+                const numEl = item.querySelector('.document-number');
+                const titleEl = item.querySelector('.document-title');
+                
+                if (numEl && titleEl) {
+                    const num = numEl.textContent.trim();
+                    const title = titleEl.textContent.trim();
+                    docList.push({ num, title });
+                    
+                    // Create empty folder in uploads
+                    uploadsFolder.folder(`${num} - ${title.substring(0, 40)}`);
+                    
+                    // Create template file
+                    const templateContent = `TEMPLATE: ${title}
+${'='.repeat(title.length + 9)}
+
+Document: ${num}
+Required for: ${docData.title}
+
+[Fill in your details here]
+
+TIP: Use the AI prompt generator on the website to create this document,
+or upload your actual document to the "Your Documents" folder.
+`;
+                    templatesFolder.file(`${num} - ${title.substring(0, 30)}.txt`, templateContent);
+                }
+            });
+            
+            // Create README for templates
+            let readmeContent = `DTV DOCUMENT TEMPLATES
+=====================
+
+Employment Type: ${docData.title}
+Generated: ${new Date().toLocaleDateString()}
+
+HOW TO USE:
+-----------
+1. Open each template file in the "01 - Templates to Fill" folder
+2. Fill in your details OR use the AI prompt on the website
+3. Save completed documents to the "02 - Your Documents" folder
+4. Upload all documents when applying for DTV visa
+
+DOCUMENTS NEEDED:
+-----------------
+`;
+            docList.forEach(doc => {
+                readmeContent += `\n${doc.num}: ${doc.title}`;
+            });
+            readmeContent += `\n\nTIP: Upload this folder to ChatGPT or Claude and ask:
+"Help me fill out these DTV visa document templates"\n`;
+            templatesFolder.file("README - Start Here.txt", readmeContent);
+            
+            // Create README for uploads
+            uploadsFolder.file("README.txt", `YOUR DOCUMENTS
+==============
+
+Upload your completed/real documents into each numbered folder.
+
+Each folder matches a document from your checklist.
+
+TIP: Upload this folder to AI and ask for help organizing
+your documents for the DTV visa application.
+`);
+            
+            // Generate and download ZIP
+            const blob = await zip.generateAsync({ type: "blob" });
+            const safeTitle = docData.title.replace(/[^a-z0-9]/gi, '_').substring(0, 30);
+            saveAs(blob, `DTV_Documents_${safeTitle}_${new Date().toISOString().split('T')[0]}.zip`);
         }
     </script>
 </body>
