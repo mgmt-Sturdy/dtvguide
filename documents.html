@@ -420,6 +420,35 @@
                 padding: 1rem;
             }
         }
+
+        /* Document Option Buttons */
+        .doc-option {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .doc-option:hover {
+            border-color: var(--violet-light);
+            background: var(--bg-tertiary);
+        }
+
+        .prompt-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border-left: 4px solid var(--violet-main);
+        }
+
+        .prompt-box.visible {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -1035,13 +1064,20 @@
                         title: "Accountant Confirmation Letter or HMRC Tax Statement",
                         what: "Confirmation of tax paid from your accountant or HMRC",
                         details: `
-                            <p>Provide one of the following showing <strong>tax paid confirmation</strong>:</p>
-                            <ul>
-                                <li><strong>Confirmation letter from your Accountant confirming tax paid</strong></li>
-                                <li><strong>Personal tax calculation showing tax paid</strong></li>
-                                <li><strong>Letter from HM Revenue and Customs (HMRC) concerning your tax income</strong></li>
-                                <li><strong>Receipt of tax paid for the latest financial year</strong></li>
-                            </ul>
+                            <p>Click the document type you have:</p>
+                            <div class="doc-option" onclick="generatePrompt('cc7', 'accountant')">
+                                <strong>Confirmation letter from your Accountant confirming tax paid</strong>
+                            </div>
+                            <div class="doc-option" onclick="generatePrompt('cc7', 'taxcalc')">
+                                <strong>Personal tax calculation showing tax paid</strong>
+                            </div>
+                            <div class="doc-option" onclick="generatePrompt('cc7', 'hmrc')">
+                                <strong>Letter from HM Revenue and Customs (HMRC) concerning your tax income</strong>
+                            </div>
+                            <div class="doc-option" onclick="generatePrompt('cc7', 'receipt')">
+                                <strong>Receipt of tax paid for the latest financial year</strong>
+                            </div>
+                            <div id="cc7-prompt" class="prompt-box"></div>
                             <em>Must specifically show tax has been paid on your content creator income. Official letterhead preferred.</em>
                             <div class="download-hint">💾 File name: Confirmation_of_Tax_Paid.pdf</div>
                         `
@@ -1226,6 +1262,35 @@
         };
 
         // Functions
+
+        // Generate prompt based on document type selected
+        function generatePrompt(section, option) {
+            const prompts = {
+                'cc7': {
+                    'accountant': 'Generate an accountant confirmation letter confirming tax paid for a content creator. Include: my name, my business name, total income for the year, tax paid amount, accountant's signature and registration details.',
+                    'taxcalc': 'Generate a personal tax calculation showing tax paid for a content creator. Include: my name, tax year, total income, tax calculations, final tax paid amount.',
+                    'hmrc': 'Generate a letter from HM Revenue and Customs concerning tax income for a content creator. Include: my name, National Insurance number, tax year, income declared, tax paid confirmation.',
+                    'receipt': 'Generate a receipt of tax paid for the latest financial year for a content creator. Include: my name, tax year, amount paid, payment date, HMRC reference number.'
+                }
+            };
+            
+            const promptBox = document.getElementById(section + '-prompt');
+            if (promptBox && prompts[section] && prompts[section][option]) {
+                promptBox.innerHTML = '<strong>AI Prompt:</strong><br><textarea style="width:100%; min-height:80px; margin-top:10px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit;">' + prompts[section][option] + '</textarea><br><br><button onclick="copyPrompt('' + section + '')" style="background:var(--violet-main); color:white; padding:8px 16px; border:none; border-radius:6px; cursor:pointer;">Copy Prompt</button>';
+                promptBox.style.display = 'block';
+            }
+        }
+        
+        function copyPrompt(section) {
+            const promptBox = document.getElementById(section + '-prompt');
+            const textarea = promptBox.querySelector('textarea');
+            if (textarea) {
+                textarea.select();
+                document.execCommand('copy');
+                alert('Prompt copied to clipboard!');
+            }
+        }
+
         function selectOption(questionNum, value, element) {
             answers[questionNum] = value;
             
