@@ -1563,9 +1563,7 @@ TIP: You can drag this entire folder into ChatGPT and ask:
 `;
                     docFolder.file(`00 - AI PROMPT - ${num.toUpperCase()}.txt`, promptFileContent);
                     
-                    // Create placeholder for their document
-                    docFolder.file(`01 - Your ${num.toUpperCase()} Document (replace this).txt`, 
-                        `Replace this file with your actual ${title} document.\n\nSupported formats: PDF, JPG, PNG`);
+
                     
                     // Create template file
                     const templateContent = `TEMPLATE: ${title}
