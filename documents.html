@@ -1070,14 +1070,21 @@
                         title: "Accountant Confirmation Letter or HMRC Tax Statement",
                         what: "Confirmation of tax paid from your accountant or HMRC",
                         details: `
-                            <p>Provide one of the following showing <strong>tax paid confirmation</strong>:</p>
-                            <ul>
-                                <li><strong>Confirmation letter from your Accountant confirming tax paid</strong></li>
-                                <li><strong>Personal tax calculation showing tax paid</strong></li>
-                                <li><strong>Letter from HM Revenue and Customs (HMRC) concerning your tax income</strong></li>
-                                <li><strong>Receipt of tax paid for the latest financial year</strong></li>
+                            <p>Select the document type you have:</p>
+                            <select class="doc-select" onchange="handleDocSelect(this, 'cc7')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
+                                <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="accountant">Confirmation letter from your Accountant confirming tax paid</option>
+                                <option value="taxcalc">Personal tax calculation showing tax paid</option>
+                                <option value="hmrc">Letter from HM Revenue and Customs (HMRC) concerning your tax income</option>
+                                <option value="receipt">Receipt of tax paid for the latest financial year</option>
+                            </select>
+                            <div id="cc7-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
+                            <p style="margin-top:15px;"><strong>What this document must show:</strong></p>
+                            <ul style="margin-top:10px;">
+                                <li>Tax has been paid on your content creator income</li>
+                                <li>Official letterhead or HMRC branding</li>
+                                <li>Your name and tax year clearly stated</li>
                             </ul>
-                            <em>Must specifically show tax has been paid on your content creator income. Official letterhead preferred.</em>
                             <div class="download-hint">💾 File name: Confirmation_of_Tax_Paid.pdf</div>
                         `
                     }
@@ -1290,6 +1297,12 @@
                     'sa302': 'Generate an SA302 or tax calculation from HMRC for content creator income. Include: my name, National Insurance number, tax year, total content creator income, tax paid, NI contributions.',
                     'platform': 'Generate platform 1099s or tax documents showing content creator income. Include: platform name (YouTube/TikTok/Instagram), my name, tax year, total earnings.',
                     'hmrc': 'Generate HMRC tax payment confirmation. Include: my name, UTR, tax year, amount paid on content creator income.'
+                },
+                'cc7': {
+                    'accountant': 'Generate an accountant confirmation letter confirming tax paid for content creator income. Include: my name, business/content creator name, total income for the year, tax paid amount, accountant signature and details.',
+                    'taxcalc': 'Generate a personal tax calculation showing tax paid for content creator income. Include: my name, tax year, total content creator income, tax calculations, final tax paid amount.',
+                    'hmrc': 'Generate an HMRC letter concerning content creator tax income. Include: my name, National Insurance number, tax year, content creator income declared, tax paid confirmation.',
+                    'receipt': 'Generate a receipt of tax paid for the latest financial year for content creator income. Include: my name, tax year, amount paid, payment date, HMRC reference number.'
                 },
                 'bo1': {
                     'invoices': 'Generate 3-6 recent company invoices paid by clients. For each: company name, client name, amount, date, services provided.',
