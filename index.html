@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DTV Visa Guide — Stay in Thailand Legally</title>
+    <title>DTV Visa Quiz — Check Your Eligibility</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -722,7 +722,6 @@
 <body>
     <!-- Navigation -->
     <nav class="nav-floating">
-        <a href="#guide" class="nav-link">Guide</a>
         <a href="#about" class="nav-link">About</a>
         <a href="#quiz" class="nav-cta">Check Eligibility</a>
     </nav>
@@ -750,18 +749,18 @@
     <section class="hero">
         <div class="hero-badge">
             <span>✨</span>
-            New: Thailand DTV Guide 2026
+            Thailand DTV Eligibility Checker
         </div>
 
         <div style="margin-bottom: 1.5rem;">
             <img src="https://flagcdn.com/w160/th.png" alt="Thailand flag" style="width: 80px; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
         </div>
 
-        <h1>Stay in Thailand Legally</h1>
+        <h1>Check Your DTV Eligibility</h1>
 
         <p class="hero-subtitle">
-            The exact system I used to get my 5-year DTV visa as a UK entrepreneur. 
-            No more visa runs. No more uncertainty. Just a clear path to living in Thailand.
+            Check if you qualify for Thailand's 5-year DTV visa. 
+            Get your personalized eligibility score and timeline in 30 seconds.
         </p>
 
         <div class="hero-cta">
@@ -771,7 +770,6 @@
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
             </a>
-            <a href="#guide" class="btn-secondary">See the Guide</a>
         </div>
     </section>
 
@@ -1382,11 +1380,19 @@
                 ` : ''}
                 
                 <div style="text-align: center; padding: 2rem;">
-                    <a href="#products" class="btn-primary" style="font-size: 1.1rem; padding: 1.25rem 2.5rem;">
-                        Get the Guide
-                    </a>
-                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
-                        Step-by-step instructions to get your DTV
+                    <h3 style="margin-bottom: 1rem; color: var(--violet-main);">📧 Join the Waiting List</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+                        The DTV Guide launches soon. Get notified first and secure early-bird pricing.
+                    </p>
+                    <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto;">
+                        <input type="email" id="waitinglist-email" placeholder="Enter your email" style="padding: 1rem; border: 2px solid var(--border); border-radius: 12px; font-size: 1rem; text-align: center;">
+                        <button onclick="joinWaitingList()" class="btn-primary" style="font-size: 1.1rem; padding: 1.25rem 2.5rem;">
+                            Join Waiting List
+                        </button>
+                    </div>
+                    <p id="waitinglist-message" style="margin-top: 1rem; color: var(--violet-main); font-weight: 600; display: none;"></p>
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">
+                        Be the first to know when the guide is ready
                     </p>
                     <button onclick="restartQuiz()" style="margin-top: 2rem; background: var(--cream-dark); border: 2px solid var(--charcoal); color: var(--charcoal); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; display: block; width: 100%; max-width: 280px; margin-left: auto; margin-right: auto;">
                         ↺ Start Again
@@ -1415,8 +1421,8 @@
                         But there's the <strong>DTV2 — Thai Soft Power</strong> option for Muay Thai, cooking classes, language courses, or medical treatment.
                     </p>
                     
-                    <a href="#products" class="btn-primary">See Other Options</a>
-                    <button onclick="restartQuiz()" style="display: block; margin: 2rem auto 0; background: var(--cream-dark); border: 2px solid var(--charcoal); color: var(--charcoal); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; width: 100%; max-width: 280px;">
+                    <button onclick="restartQuiz()" class="btn-primary" style="margin-bottom: 1rem;">Check Another Path</button>
+                    <button onclick="location.reload()" style="display: block; margin: 0 auto; background: var(--cream-dark); border: 2px solid var(--charcoal); color: var(--charcoal); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; width: 100%; max-width: 280px;">
                         ↺ Start Again
                     </button>
                 </div>
@@ -1448,6 +1454,43 @@
             })
             .then(() => console.log('Data saved to sheet'))
             .catch(err => console.error('Error saving:', err));
+        }
+
+        // Join waiting list
+        function joinWaitingList() {
+            const email = document.getElementById('waitinglist-email').value;
+            const message = document.getElementById('waitinglist-message');
+            
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Save to sheet with waiting list status
+            const data = {
+                email: email,
+                country: answers['1'] || '',
+                score: 'Waiting List'
+            };
+            
+            fetch('https://script.google.com/macros/s/AKfycbyVFuixLFl-hs7cn_6cjxRLCrVJn6IHAotXh8w4NjW_rNDWD8rdQbSqJdhDuVDqJeR8/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                message.textContent = '✅ You\'re on the list! We\'ll email you when the guide launches.';
+                message.style.display = 'block';
+                document.getElementById('waitinglist-email').value = '';
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                message.textContent = '❌ Something went wrong. Please try again.';
+                message.style.display = 'block';
+            });
         }
     </script>
 </body>
