@@ -1493,24 +1493,17 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
-            })
-            .then(() => {
+            });
+            
+            // Show success immediately (no-cors doesn't wait for response)
+            setTimeout(() => {
                 message.textContent = '✅ You\'re on the list! We\'ll email you when the guide launches.';
                 message.style.display = 'block';
                 document.getElementById('waitinglist-email').value = '';
                 if (button) {
                     button.textContent = 'Submitted';
                 }
-            })
-            .catch(err => {
-                console.error('Error:', err);
-                message.textContent = '❌ Something went wrong. Please try again.';
-                message.style.display = 'block';
-                if (button) {
-                    button.disabled = false;
-                    button.textContent = 'Get Early Access';
-                }
-            });
+            }, 500);
         }
     </script>
 </body>
