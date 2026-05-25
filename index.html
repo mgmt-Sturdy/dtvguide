@@ -2025,10 +2025,30 @@
         function saveToGoogleSheet(status) {
             const percentage = Math.round((currentScore / MAX_SCORE) * 100);
             const country = answers['2'] || '';
+            const age = answers['1'] || '';
+            const passport = answers['3'] || '';
+            const remoteIncome = answers['4'] || '';
+            const workplacePermission = answers['5a'] || '';
+            const taxDocs = answers['5c'] || '';
+            const monthlyIncome = answers['5'] || '';
+            const fundsData = answers['6'] || {};
+            const fundsAmount = fundsData.amount || '';
+            const fundsCurrency = fundsData.currency || '';
+            const fundsSufficient = fundsData.sufficient ? 'Yes' : 'No';
             
             const data = {
+                timestamp: new Date().toISOString(),
                 email: userEmail,
                 country: country,
+                age: age,
+                passport: passport,
+                remoteIncome: remoteIncome,
+                workplacePermission: workplacePermission,
+                taxDocs: taxDocs,
+                monthlyIncome: monthlyIncome,
+                fundsAmount: fundsAmount,
+                fundsCurrency: fundsCurrency,
+                fundsSufficient: fundsSufficient,
                 score: status || percentage + '%'
             };
             
