@@ -1762,11 +1762,11 @@
                 return;
             }
             
-            // Disable button to prevent double submission
+            // Disable button and show submitted immediately
             const button = document.querySelector('button[onclick="joinWaitingList()"]');
             if (button) {
                 button.disabled = true;
-                button.textContent = 'Submitting...';
+                button.textContent = 'Submitted';
             }
             
             // Save to sheet with waiting list status
@@ -1790,9 +1790,6 @@
                 message.textContent = '✅ You\'re on the list! We\'ll email you when the guide launches.';
                 message.style.display = 'block';
                 document.getElementById('waitinglist-email').value = '';
-                if (button) {
-                    button.textContent = 'Submitted';
-                }
             }, 500);
         }
     </script>
