@@ -802,11 +802,17 @@
                 <h3>How old are you?</h3>
                 <p>You must be at least 20 years old to apply for the DTV visa.</p>
 
-                <div class="quiz-options">
-                    <div class="quiz-option" data-value="20+" onclick="selectOption(1, '20+')">20 or older</div>
-                    <div class="quiz-option" data-value="18-19" onclick="selectOption(1, '18-19')">18-19</div>
-                    <div class="quiz-option" data-value="under-18" onclick="selectOption(1, 'under-18')">Under 18</div>
+                <div style="margin-bottom: 1rem;">
+                    <select id="age-select" style="width: 100%; padding: 1rem; border: 2px solid var(--border); border-radius: 12px; font-size: 1rem; background: white;">
+                        <option value="">Select your age...</option>
+                        <script>
+                            for (let i = 16; i <= 120; i++) {
+                                document.write(`<option value="${i}">${i} years old</option>`);
+                            }
+                        </script>
+                    </select>
                 </div>
+                <button class="btn-primary" id="age-continue" onclick="submitAge()" disabled style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;">Continue</button>
             </div>
 
             <!-- Question 2: Country -->
@@ -1059,6 +1065,31 @@
             questionPath.push('0');
         }
 
+        function submitAge() {
+            const age = parseInt(document.getElementById('age-select').value);
+            
+            if (!age) {
+                alert('Please select your age');
+                return;
+            }
+            
+            answers['1'] = age;
+            questionPath.push('1');
+            
+            document.querySelector('[data-question="1"]').classList.remove('active');
+            showQuestion(2);
+        }
+
+        // Enable age continue button when age is selected
+        document.addEventListener('DOMContentLoaded', function() {
+            const ageSelect = document.getElementById('age-select');
+            if (ageSelect) {
+                ageSelect.addEventListener('change', function() {
+                    document.getElementById('age-continue').disabled = !this.value;
+                });
+            }
+        });
+
         function submitCountry() {
             const country = document.getElementById('selected-country').value;
             const isEligible = DTV_ELIGIBLE_COUNTRIES.includes(country);
@@ -1288,26 +1319,18 @@
             let totalWeeks = 0;
             
             // Check age
-            if (answers['1'] === '18-19') {
+            const age = parseInt(answers['1']);
+            if (age && age < 20) {
+                const yearsUntil20 = 20 - age;
                 issues.push({
                     icon: '🎂',
                     title: 'Turn 20 Years Old',
                     description: 'You must be at least 20 years old to apply for the DTV visa.',
-                    time: '2 years',
-                    weeks: 104,
+                    time: yearsUntil20 + ' year' + (yearsUntil20 > 1 ? 's' : ''),
+                    weeks: yearsUntil20 * 52,
                     guideHelp: 'The guide explains age requirements and what you can prepare while waiting.'
                 });
-                totalWeeks += 104;
-            } else if (answers['1'] === 'under-18') {
-                issues.push({
-                    icon: '🎂',
-                    title: 'Turn 20 Years Old',
-                    description: 'You must be at least 20 years old to apply for the DTV visa.',
-                    time: '2+ years',
-                    weeks: 104,
-                    guideHelp: 'The guide explains age requirements and what you can prepare while waiting.'
-                });
-                totalWeeks += 104;
+                totalWeeks += yearsUntil20 * 52;
             }
             
             // Check passport
