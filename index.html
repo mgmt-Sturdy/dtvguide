@@ -1332,13 +1332,7 @@
                 if (questionId === 1) {
                     showQuestion(2);
                 } else if (questionId === 2) {
-                    const country = document.getElementById('selected-country').value;
-                    if (!DTV_ELIGIBLE_COUNTRIES.includes(country)) {
-                        saveToGoogleSheet('Ineligible Country: ' + country);
-                        showNoRemoteResult();
-                    } else {
-                        showQuestion(3);
-                    }
+                    showQuestion(3);
                 } else if (questionId === 3) {
                     showQuestion(4);
                 } else if (questionId === 4) {
