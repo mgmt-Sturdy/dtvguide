@@ -1472,10 +1472,17 @@
                 return;
             }
             
+            // Disable button to prevent double submission
+            const button = document.querySelector('button[onclick="joinWaitingList()"]');
+            if (button) {
+                button.disabled = true;
+                button.textContent = 'Submitting...';
+            }
+            
             // Save to sheet with waiting list status
             const data = {
                 email: email,
-                country: answers['1'] || '',
+                country: (typeof answers !== 'undefined' && answers['1']) ? answers['1'] : '',
                 score: 'Waiting List'
             };
             
@@ -1491,11 +1498,18 @@
                 message.textContent = '✅ You\'re on the list! We\'ll email you when the guide launches.';
                 message.style.display = 'block';
                 document.getElementById('waitinglist-email').value = '';
+                if (button) {
+                    button.textContent = 'Subscribed!';
+                }
             })
             .catch(err => {
                 console.error('Error:', err);
                 message.textContent = '❌ Something went wrong. Please try again.';
                 message.style.display = 'block';
+                if (button) {
+                    button.disabled = false;
+                    button.textContent = 'Get Early Access';
+                }
             });
         }
     </script>
