@@ -1755,7 +1755,7 @@
         }
 
         function submitFunds() {
-            const currency = document.getElementById('currency-select').value;
+            const currency = userCurrency;
             const amount = parseFloat(document.getElementById('funds-amount').value);
             
             if (isNaN(amount) || amount < 0) {
@@ -1763,7 +1763,8 @@
                 return;
             }
             
-            const requiredAmount = currency === 'GBP' ? REQUIRED_GBP : REQUIRED_USD;
+            const rate = EXCHANGE_RATES[currency] || 1;
+            const requiredAmount = Math.round(14000 * rate);
             const isSufficient = amount >= requiredAmount;
             
             // Calculate points
