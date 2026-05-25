@@ -893,15 +893,15 @@
                 <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
                     <div class="currency-selector">
                         <select id="currency-select" onchange="updateRequiredAmount()">
-                            <option value="GBP">🇬🇧 GBP (British Pounds)</option>
                             <option value="USD">🇺🇸 USD (US Dollars)</option>
+                            <option value="GBP">🇬🇧 GBP (British Pounds)</option>
                         </select>
                     </div>
 
                     <input type="number" id="funds-amount" class="amount-input" placeholder="Enter amount" min="0" step="100">
 
                     <div id="required-amount-display" style="background: var(--bg-tertiary); padding: 1rem; border-radius: 12px; border-left: 3px solid var(--violet-main);">
-                        <strong>Required: £11,000 GBP</strong> (or 500,000 THB)
+                        <strong>Required: $14,000 USD</strong> (or £11,000 GBP / 500,000 THB)
                         <br>
                         <span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>
                     </div>
@@ -1244,9 +1244,9 @@
             const display = document.getElementById('required-amount-display');
             
             if (currency === 'GBP') {
-                display.innerHTML = '<strong>Required: £11,000 GBP</strong> (or 500,000 THB)<br><span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>';
+                display.innerHTML = '<strong>Required: £11,000 GBP</strong> (or $14,000 USD / 500,000 THB)<br><span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>';
             } else {
-                display.innerHTML = '<strong>Required: $14,000 USD</strong> (or 500,000 THB)<br><span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>';
+                display.innerHTML = '<strong>Required: $14,000 USD</strong> (or £11,000 GBP / 500,000 THB)<br><span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>';
             }
         }
 
@@ -1373,7 +1373,7 @@
                 issues.push({
                     icon: '🏦',
                     title: 'Build Up Savings',
-                    description: `You need ${funds.currency === 'GBP' ? '£11,000' : '$14,000'} in your account.`,
+                    description: `You need ${funds.currency === 'USD' ? '$14,000 USD' : '£11,000 GBP'} in your account.`,
                     time: monthsNeeded + ' month' + (monthsNeeded > 1 ? 's' : ''),
                     weeks: weeksNeeded,
                     guideHelp: 'The guide explains acceptable proof of funds sources.'
