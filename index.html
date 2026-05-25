@@ -796,9 +796,22 @@
                 </p>
             </div>
 
-            <!-- Question 1: Country -->
+            <!-- Question 1: Age -->
             <div class="quiz-question" data-question="1">
                 <div class="question-number">Q1</div>
+                <h3>How old are you?</h3>
+                <p>You must be at least 20 years old to apply for the DTV visa.</p>
+
+                <div class="quiz-options">
+                    <div class="quiz-option" data-value="20+" onclick="selectOption(1, '20+')">20 or older</div>
+                    <div class="quiz-option" data-value="18-19" onclick="selectOption(1, '18-19')">18-19</div>
+                    <div class="quiz-option" data-value="under-18" onclick="selectOption(1, 'under-18')">Under 18</div>
+                </div>
+            </div>
+
+            <!-- Question 2: Country -->
+            <div class="quiz-question" data-question="2">
+                <div class="question-number">Q2</div>
                 <h3>What country do you hold citizenship in?</h3>
                 <p>Select your country from the dropdown.</p>
 
@@ -811,9 +824,9 @@
                 <button class="btn-primary" id="country-continue" onclick="submitCountry()" disabled style="width: 100%; margin-top: 1rem; text-align: center; display: flex; justify-content: center; align-items: center;">Continue</button>
             </div>
 
-            <!-- Question 2: Passport -->
-            <div class="quiz-question" data-question="2">
-                <div class="question-number">Q2</div>
+            <!-- Question 3: Passport -->
+            <div class="quiz-question" data-question="3">
+                <div class="question-number">Q3</div>
                 <h3>Does your passport have at least 6 months validity?</h3>
                 <div class="quiz-options">
                     <div class="quiz-option" data-value="6plus" onclick="selectOption(2, '6plus')">Yes, 6+ months remaining</div>
@@ -822,44 +835,44 @@
                 </div>
             </div>
 
-            <!-- Question 3: Remote Income -->
-            <div class="quiz-question" data-question="3">
-                <div class="question-number">Q3</div>
+            <!-- Question 4: Remote Income -->
+            <div class="quiz-question" data-question="4">
+                <div class="question-number">Q4</div>
                 <h3>Do you currently have remote income?</h3>
                 <div class="quiz-options">
-                    <div class="quiz-option" data-value="yes-employed" onclick="selectOption(3, 'yes-employed')">Yes — employed and work remotely</div>
-                    <div class="quiz-option" data-value="yes-self" onclick="selectOption(3, 'yes-self')">Yes — self-employed / run my own business</div>
-                    <div class="quiz-option" data-value="yes-freelance" onclick="selectOption(3, 'yes-freelance')">Yes — freelancer with clients</div>
-                    <div class="quiz-option" data-value="no" onclick="selectOption(3, 'no')">No, I don't have remote income</div>
+                    <div class="quiz-option" data-value="yes-employed" onclick="selectOption(4, 'yes-employed')">Yes — employed and work remotely</div>
+                    <div class="quiz-option" data-value="yes-self" onclick="selectOption(4, 'yes-self')">Yes — self-employed / run my own business</div>
+                    <div class="quiz-option" data-value="yes-freelance" onclick="selectOption(4, 'yes-freelance')">Yes — freelancer with clients</div>
+                    <div class="quiz-option" data-value="no" onclick="selectOption(4, 'no')">No, I don't have remote income</div>
                 </div>
             </div>
 
-            <!-- Question 4a: Workplace Permission -->
-            <div class="quiz-question" data-question="4a">
-                <div class="question-number">Q4a</div>
+            <!-- Question 5a: Workplace Permission -->
+            <div class="quiz-question" data-question="5a">
+                <div class="question-number">Q5a</div>
                 <h3>Do you have permission from your workplace to work abroad?</h3>
                 <div class="quiz-options">
-                    <div class="quiz-option" data-value="yes-have" onclick="selectOption('4a', 'yes-have')">Yes, I already have it in writing</div>
-                    <div class="quiz-option" data-value="yes-can-get" onclick="selectOption('4a', 'yes-can-get')">Yes, I can get it — they're flexible</div>
-                    <div class="quiz-option" data-value="need-to-ask" onclick="selectOption('4a', 'need-to-ask')">I need to ask / not sure</div>
-                    <div class="quiz-option" data-value="no" onclick="selectOption('4a', 'no')">No, definitely not allowed</div>
+                    <div class="quiz-option" data-value="yes-have" onclick="selectOption('5a', 'yes-have')">Yes, I already have it in writing</div>
+                    <div class="quiz-option" data-value="yes-can-get" onclick="selectOption('5a', 'yes-can-get')">Yes, I can get it — they're flexible</div>
+                    <div class="quiz-option" data-value="need-to-ask" onclick="selectOption('5a', 'need-to-ask')">I need to ask / not sure</div>
+                    <div class="quiz-option" data-value="no" onclick="selectOption('5a', 'no')">No, definitely not allowed</div>
                 </div>
             </div>
 
-            <!-- Question 4c: Tax Docs -->
-            <div class="quiz-question" data-question="4c">
-                <div class="question-number">Q4c</div>
+            <!-- Question 5c: Tax Docs -->
+            <div class="quiz-question" data-question="5c">
+                <div class="question-number">Q5c</div>
                 <h3>What tax documentation do you have?</h3>
                 <div class="quiz-options">
-                    <div class="quiz-option" data-value="paye-payslips" onclick="selectOption('4c', 'paye-payslips')">PAYE — 12 months of payslips</div>
-                    <div class="quiz-option" data-value="self-filed" onclick="selectOption('4c', 'self-filed')">Self-employed — tax return filed</div>
-                    <div class="quiz-option" data-value="self-not-yet" onclick="selectOption('4c', 'self-not-yet')">Self-employed — not filed yet</div>
-                    <div class="quiz-option" data-value="mix" onclick="selectOption('4c', 'mix')">Mix of PAYE payslips and self-employed tax returns</div>
+                    <div class="quiz-option" data-value="paye-payslips" onclick="selectOption('5c', 'paye-payslips')">PAYE — 12 months of payslips</div>
+                    <div class="quiz-option" data-value="self-filed" onclick="selectOption('5c', 'self-filed')">Self-employed — tax return filed</div>
+                    <div class="quiz-option" data-value="self-not-yet" onclick="selectOption('5c', 'self-not-yet')">Self-employed — not filed yet</div>
+                    <div class="quiz-option" data-value="mix" onclick="selectOption('5c', 'mix')">Mix of PAYE payslips and self-employed tax returns</div>
                 </div>
             </div>
 
-            <!-- Question 5: Monthly Income -->
-            <div class="quiz-question" data-question="5">
+            <!-- Question 6: Monthly Income -->
+            <div class="quiz-question" data-question="6">
                 <div class="question-number">Q5</div>
                 <h3>What's your average monthly income?</h3>
                 <p>Include salary, dividends, all sources.</p>
@@ -1057,11 +1070,11 @@
                 return;
             }
             
-            answers['1'] = country;
-            questionPath.push('1');
+            answers['2'] = country;
+            questionPath.push('2');
             
-            document.querySelector('[data-question="1"]').classList.remove('active');
-            showQuestion(2);
+            document.querySelector('[data-question="2"]').classList.remove('active');
+            showQuestion(3);
         }
 
         function selectOption(questionId, value) {
@@ -1074,39 +1087,49 @@
             
             // Calculate points
             let points = 0;
-            if (questionId === 2 && value === '6plus') points = 15;
-            else if (questionId === 3 && value !== 'no') points = 30;
-            else if (questionId === '4a' && value !== 'no') points = 20;
-            else if (questionId === '4c' && value === 'self-not-yet') points = 10; // Partial points - need to file
-            else if (questionId === '4c') points = 20;
-            else if (questionId === 5 && value !== 'under-1k') points = 15;
+            if (questionId === 3 && value === '6plus') points = 15;
+            else if (questionId === 4 && value !== 'no') points = 30;
+            else if (questionId === '5a' && value !== 'no') points = 20;
+            else if (questionId === '5c' && value === 'self-not-yet') points = 10; // Partial points - need to file
+            else if (questionId === '5c') points = 20;
+            else if (questionId === 6 && value !== 'under-1k') points = 15;
             
             updateProgress(points);
             
             // Handle routing
             setTimeout(() => {
-                if (questionId === 2) {
-                    showQuestion(3);
+                if (questionId === 1) {
+                    showQuestion(2);
+                } else if (questionId === 2) {
+                    const country = document.getElementById('selected-country').value;
+                    if (!DTV_ELIGIBLE_COUNTRIES.includes(country)) {
+                        saveToGoogleSheet('Ineligible Country: ' + country);
+                        showNoRemoteResult();
+                    } else {
+                        showQuestion(3);
+                    }
                 } else if (questionId === 3) {
+                    showQuestion(4);
+                } else if (questionId === 4) {
                     if (value === 'no') {
                         showNoRemoteResult();
                     } else if (value === 'yes-employed') {
-                        showQuestion('4a');
+                        showQuestion('5a');
                     } else {
-                        showQuestion('4c');
+                        showQuestion('5c');
                     }
-                } else if (questionId === '4a') {
+                } else if (questionId === '5a') {
                     if (value === 'no') {
                         // Save hard stop data
                         saveToGoogleSheet('No workplace permission');
                         document.getElementById('hard-stop-permission').classList.add('show');
                     } else {
-                        showQuestion(5);
+                        showQuestion(6);
                     }
-                } else if (questionId === '4c') {
-                    showQuestion(5);
-                } else if (questionId === 5) {
+                } else if (questionId === '5c') {
                     showQuestion(6);
+                } else if (questionId === 6) {
+                    showQuestion(7);
                 }
             }, 300);
         }
@@ -1127,14 +1150,14 @@
             const lastQuestion = questionPath.pop();
             
             // Subtract points for the last answer if applicable
-            if (lastQuestion === '2' && answers['2'] === '6plus') currentScore -= 15;
-            else if (lastQuestion === '3' && answers['3'] !== 'no') currentScore -= 30;
-            else if (lastQuestion === '4a' && answers['4a'] !== 'no') currentScore -= 20;
-            else if (lastQuestion === '4c' && answers['4c'] === 'self-not-yet') currentScore -= 10; // Partial points
-            else if (lastQuestion === '4c') currentScore -= 20;
-            else if (lastQuestion === '5' && answers['5'] !== 'under-1k') currentScore -= 15;
-            else if (lastQuestion === '6' && answers['6']) {
-                const funds = answers['6'];
+            if (lastQuestion === '3' && answers['3'] === '6plus') currentScore -= 15;
+            else if (lastQuestion === '4' && answers['4'] !== 'no') currentScore -= 30;
+            else if (lastQuestion === '5a' && answers['5a'] !== 'no') currentScore -= 20;
+            else if (lastQuestion === '5c' && answers['5c'] === 'self-not-yet') currentScore -= 10; // Partial points
+            else if (lastQuestion === '5c') currentScore -= 20;
+            else if (lastQuestion === '6' && answers['6'] !== 'under-1k') currentScore -= 15;
+            else if (lastQuestion === '7' && answers['7']) {
+                const funds = answers['7'];
                 const requiredAmount = funds.currency === 'GBP' ? REQUIRED_GBP : REQUIRED_USD;
                 if (funds.amount >= requiredAmount) currentScore -= 20;
                 else if (funds.amount >= requiredAmount * 0.7) currentScore -= 10;
@@ -1150,11 +1173,13 @@
                 document.getElementById('top-progress').classList.remove('active');
                 showQuestion(0);
             } else if (prevQuestion === '1') {
+                showQuestion(1);
+            } else if (prevQuestion === '2') {
                 // Reset country selection display
                 document.getElementById('selected-country').value = '';
                 document.getElementById('country-search').value = '';
                 document.getElementById('country-continue').disabled = true;
-                showQuestion(1);
+                showQuestion(2);
             } else {
                 showQuestion(prevQuestion);
             }
@@ -1248,8 +1273,8 @@
             }
             
             currentScore += points;
-            answers['6'] = { currency, amount, sufficient: isSufficient };
-            questionPath.push('6');
+            answers['7'] = { currency, amount, sufficient: isSufficient };
+            questionPath.push('7');
             
             showFinalResult();
         }
@@ -1262,8 +1287,31 @@
             const issues = [];
             let totalWeeks = 0;
             
+            // Check age
+            if (answers['1'] === '18-19') {
+                issues.push({
+                    icon: '🎂',
+                    title: 'Turn 20 Years Old',
+                    description: 'You must be at least 20 years old to apply for the DTV visa.',
+                    time: '2 years',
+                    weeks: 104,
+                    guideHelp: 'The guide explains age requirements and what you can prepare while waiting.'
+                });
+                totalWeeks += 104;
+            } else if (answers['1'] === 'under-18') {
+                issues.push({
+                    icon: '🎂',
+                    title: 'Turn 20 Years Old',
+                    description: 'You must be at least 20 years old to apply for the DTV visa.',
+                    time: '2+ years',
+                    weeks: 104,
+                    guideHelp: 'The guide explains age requirements and what you can prepare while waiting.'
+                });
+                totalWeeks += 104;
+            }
+            
             // Check passport
-            if (answers['2'] === 'under-6' || answers['2'] === 'expired') {
+            if (answers['3'] === 'under-6' || answers['3'] === 'expired') {
                 issues.push({
                     icon: '🛂',
                     title: 'Passport Renewal',
@@ -1276,7 +1324,7 @@
             }
             
             // Check income
-            if (answers['5'] === 'under-1k') {
+            if (answers['6'] === 'under-1k') {
                 issues.push({
                     icon: '💰',
                     title: 'Increase Income',
@@ -1289,7 +1337,7 @@
             }
             
             // Check permission
-            if (answers['4a'] === 'need-to-ask') {
+            if (answers['5a'] === 'need-to-ask') {
                 issues.push({
                     icon: '📝',
                     title: 'Workplace Permission',
@@ -1302,7 +1350,7 @@
             }
             
             // Check tax filing status
-            if (answers['4c'] === 'self-not-yet') {
+            if (answers['5c'] === 'self-not-yet') {
                 issues.push({
                     icon: '📊',
                     title: 'File Your Tax Return',
@@ -1315,7 +1363,7 @@
             }
             
             // Check funds
-            const funds = answers['6'];
+            const funds = answers['7'];
             if (funds && !funds.sufficient) {
                 const neededAmount = funds.currency === 'GBP' ? 11000 : 14000;
                 const shortfall = neededAmount - funds.amount;
@@ -1442,7 +1490,7 @@
         // Save quiz data to Google Sheet
         function saveToGoogleSheet(status) {
             const percentage = Math.round((currentScore / MAX_SCORE) * 100);
-            const country = answers['1'] || '';
+            const country = answers['2'] || '';
             
             const data = {
                 email: userEmail,
@@ -1482,7 +1530,7 @@
             // Save to sheet with waiting list status
             const data = {
                 email: email,
-                country: (typeof answers !== 'undefined' && answers['1']) ? answers['1'] : '',
+                country: (typeof answers !== 'undefined' && answers['2']) ? answers['2'] : '',
                 score: 'Waiting List'
             };
             
