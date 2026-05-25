@@ -980,6 +980,19 @@
                         <select id="currency-select" onchange="updateRequiredAmount()">
                             <option value="USD">🇺🇸 USD (US Dollars)</option>
                             <option value="GBP">🇬🇧 GBP (British Pounds)</option>
+                            <option value="EUR">🇪🇺 EUR (Euro)</option>
+                            <option value="AUD">🇦🇺 AUD (Australian Dollar)</option>
+                            <option value="CAD">🇨🇦 CAD (Canadian Dollar)</option>
+                            <option value="NZD">🇳🇿 NZD (New Zealand Dollar)</option>
+                            <option value="CHF">🇨🇭 CHF (Swiss Franc)</option>
+                            <option value="JPY">🇯🇵 JPY (Japanese Yen)</option>
+                            <option value="CNY">🇨🇳 CNY (Chinese Yuan)</option>
+                            <option value="SGD">🇸🇬 SGD (Singapore Dollar)</option>
+                            <option value="HKD">🇭🇰 HKD (Hong Kong Dollar)</option>
+                            <option value="THB">🇹🇭 THB (Thai Baht)</option>
+                            <option value="ZAR">🇿🇦 ZAR (South African Rand)</option>
+                            <option value="BRL">🇧🇷 BRL (Brazilian Real)</option>
+                            <option value="INR">🇮🇳 INR (Indian Rupee)</option>
                         </select>
                     </div>
 
@@ -1280,12 +1293,158 @@
             'Vanuatu': ['Contact Canberra, Australia (Embassy)']
         };
 
+        // Country to Currency Mapping
+        const COUNTRY_CURRENCY = {
+            // Europe - EUR
+            'Austria': 'EUR', 'Belgium': 'EUR', 'Finland': 'EUR', 'France': 'EUR', 'Germany': 'EUR',
+            'Greece': 'EUR', 'Ireland': 'EUR', 'Italy': 'EUR', 'Luxembourg': 'EUR', 'Netherlands': 'EUR',
+            'Portugal': 'EUR', 'Spain': 'EUR', 'Slovakia': 'EUR', 'Slovenia': 'EUR', 'Estonia': 'EUR',
+            'Latvia': 'EUR', 'Lithuania': 'EUR', 'Malta': 'EUR', 'Cyprus': 'EUR',
+            // Europe - GBP
+            'United Kingdom': 'GBP',
+            // Europe - CHF
+            'Switzerland': 'CHF',
+            // Europe - SEK
+            'Sweden': 'SEK',
+            // Europe - NOK
+            'Norway': 'NOK',
+            // Europe - DKK
+            'Denmark': 'DKK',
+            // Europe - PLN
+            'Poland': 'PLN',
+            // Europe - CZK
+            'Czech Republic': 'CZK',
+            // Europe - HUF
+            'Hungary': 'HUF',
+            // Europe - RON
+            'Romania': 'RON',
+            // Europe - BGN
+            'Bulgaria': 'BGN',
+            // Europe - HRK
+            'Croatia': 'EUR',
+            // Europe - RUB
+            'Russia': 'RUB',
+            // North America
+            'United States': 'USD', 'Canada': 'CAD', 'Mexico': 'MXN',
+            // Oceania
+            'Australia': 'AUD', 'New Zealand': 'NZD',
+            // Asia
+            'Japan': 'JPY', 'China': 'CNY', 'South Korea': 'KRW', 'India': 'INR',
+            'Singapore': 'SGD', 'Hong Kong': 'HKD', 'Taiwan': 'TWD', 'Malaysia': 'MYR',
+            'Indonesia': 'IDR', 'Philippines': 'PHP', 'Thailand': 'THB', 'Vietnam': 'VND',
+            'Bangladesh': 'BDT', 'Pakistan': 'PKR', 'Sri Lanka': 'LKR', 'Nepal': 'NPR',
+            'Myanmar': 'MMK', 'Cambodia': 'KHR', 'Laos': 'LAK', 'Brunei': 'BND',
+            // Middle East
+            'Israel': 'ILS', 'Turkey': 'TRY', 'Saudi Arabia': 'SAR', 'UAE': 'AED',
+            'Kuwait': 'KWD', 'Qatar': 'QAR', 'Bahrain': 'BHD', 'Oman': 'OMR',
+            'Jordan': 'JOD', 'Lebanon': 'LBP', 'Iraq': 'IQD', 'Iran': 'IRR',
+            // Africa
+            'South Africa': 'ZAR', 'Nigeria': 'NGN', 'Kenya': 'KES', 'Ghana': 'GHS',
+            'Egypt': 'EGP', 'Morocco': 'MAD', 'Algeria': 'DZD', 'Tunisia': 'TND',
+            'Libya': 'LYD', 'Sudan': 'SDG', 'Ethiopia': 'ETB', 'Tanzania': 'TZS',
+            'Uganda': 'UGX', 'Rwanda': 'RWF', 'Zimbabwe': 'ZWL', 'Zambia': 'ZMW',
+            'Botswana': 'BWP', 'Namibia': 'NAD', 'Mozambique': 'MZN', 'Madagascar': 'MGA',
+            'Mauritius': 'MUR', 'Seychelles': 'SCR', 'Malawi': 'MWK',
+            // South America
+            'Brazil': 'BRL', 'Argentina': 'ARS', 'Chile': 'CLP', 'Colombia': 'COP',
+            'Peru': 'PEN', 'Venezuela': 'VES', 'Ecuador': 'USD', 'Uruguay': 'UYU',
+            'Paraguay': 'PYG', 'Bolivia': 'BOB',
+            // Default
+            'DEFAULT': 'USD'
+        };
+
+        // Exchange Rates (approximate, should be updated regularly)
+        const EXCHANGE_RATES = {
+            'USD': 1,
+            'GBP': 0.79,
+            'EUR': 0.92,
+            'AUD': 1.52,
+            'CAD': 1.36,
+            'NZD': 1.63,
+            'CHF': 0.88,
+            'SEK': 10.5,
+            'NOK': 10.7,
+            'DKK': 6.9,
+            'PLN': 4.0,
+            'CZK': 23.0,
+            'HUF': 350,
+            'RON': 4.6,
+            'BGN': 1.8,
+            'RUB': 92,
+            'MXN': 17,
+            'JPY': 151,
+            'CNY': 7.2,
+            'KRW': 1340,
+            'INR': 83,
+            'SGD': 1.35,
+            'HKD': 7.8,
+            'TWD': 32,
+            'MYR': 4.7,
+            'IDR': 15800,
+            'PHP': 56,
+            'THB': 36,
+            'VND': 24800,
+            'BDT': 109,
+            'PKR': 278,
+            'LKR': 300,
+            'NPR': 133,
+            'MMK': 2090,
+            'KHR': 4100,
+            'LAK': 20800,
+            'BND': 1.35,
+            'ILS': 3.7,
+            'TRY': 32,
+            'SAR': 3.75,
+            'AED': 3.67,
+            'KWD': 0.31,
+            'QAR': 3.64,
+            'BHD': 0.38,
+            'OMR': 0.38,
+            'JOD': 0.71,
+            'LBP': 89500,
+            'IQD': 1310,
+            'IRR': 42000,
+            'ZAR': 18.5,
+            'NGN': 1500,
+            'KES': 130,
+            'GHS': 15,
+            'EGP': 48,
+            'MAD': 10,
+            'DZD': 134,
+            'TND': 3.1,
+            'LYD': 4.8,
+            'SDG': 600,
+            'ETB': 57,
+            'TZS': 2580,
+            'UGX': 3800,
+            'RWF': 1300,
+            'ZWL': 36000,
+            'ZMW': 26,
+            'BWP': 13.5,
+            'NAD': 18.5,
+            'MZN': 64,
+            'MGA': 4500,
+            'MUR': 46,
+            'SCR': 14,
+            'MWK': 1700,
+            'BRL': 5.1,
+            'ARS': 860,
+            'CLP': 930,
+            'COP': 3900,
+            'PEN': 3.7,
+            'VES': 36,
+            'UYU': 39,
+            'PYG': 7500,
+            'BOB': 6.9
+        };
+
         const REQUIRED_GBP = 11000;
         const REQUIRED_USD = 14000;
         const MAX_SCORE = 100;
 
         let currentScore = 0;
         let userEmail = '';
+        let userCurrency = 'USD';
         let questionPath = [];
         const answers = {};
 
@@ -1384,8 +1543,45 @@
             answers['2'] = country;
             questionPath.push('2');
             
+            // Set currency based on country
+            userCurrency = COUNTRY_CURRENCY[country] || 'USD';
+            
+            // Update income question with local currency
+            updateIncomeQuestion(userCurrency);
+            
+            // Update funds question currency
+            const currencySelect = document.getElementById('currency-select');
+            if (currencySelect) {
+                currencySelect.value = userCurrency;
+                updateRequiredAmount();
+            }
+            
             document.querySelector('[data-question="2"]').classList.remove('active');
             showQuestion(3);
+        }
+
+        function updateIncomeQuestion(currency) {
+            const symbols = { 'USD': '$', 'GBP': '£', 'EUR': '€', 'AUD': 'A$', 'CAD': 'C$', 'NZD': 'NZ$', 'CHF': 'CHF', 'SEK': 'SEK', 'NOK': 'NOK', 'DKK': 'DKK', 'PLN': 'PLN', 'CZK': 'CZK', 'HUF': 'HUF', 'RON': 'RON', 'BGN': 'BGN', 'RUB': '₽', 'MXN': 'MX$', 'JPY': '¥', 'CNY': 'CN¥', 'KRW': '₩', 'INR': '₹', 'SGD': 'S$', 'HKD': 'HK$', 'TWD': 'NT$', 'MYR': 'RM', 'IDR': 'Rp', 'PHP': '₱', 'THB': '฿', 'VND': '₫', 'BDT': '৳', 'PKR': '₨', 'LKR': 'Rs', 'NPR': 'Rs', 'MMK': 'K', 'KHR': '៛', 'LAK': '₭', 'BND': 'B$', 'ILS': '₪', 'TRY': '₺', 'SAR': '﷼', 'AED': 'د.إ', 'KWD': 'د.ك', 'QAR': '﷼', 'BHD': 'د.ب', 'OMR': 'ر.ع.', 'JOD': 'د.ا', 'LBP': 'ل.ل', 'IQD': 'د.ع', 'IRR': '﷼', 'ZAR': 'R', 'NGN': '₦', 'KES': 'KSh', 'GHS': 'GH₵', 'EGP': '£E', 'MAD': 'DH', 'DZD': 'DA', 'TND': 'DT', 'LYD': 'LD', 'SDG': '£Sd', 'ETB': 'Br', 'TZS': 'TSh', 'UGX': 'USh', 'RWF': 'FRw', 'ZWL': 'Z$', 'ZMW': 'K', 'BWP': 'P', 'NAD': 'N$', 'MZN': 'MT', 'MGA': 'Ar', 'MUR': '₨', 'SCR': '₨', 'MWK': 'K', 'BRL': 'R$', 'ARS': '$', 'CLP': 'CLP$', 'COP': '$', 'PEN': 'S/', 'VES': 'Bs', 'UYU': '$U', 'PYG': '₲', 'BOB': 'Bs' };
+            const symbol = symbols[currency] || '$';
+            const rate = EXCHANGE_RATES[currency] || 1;
+            
+            // Calculate local amounts
+            const formatAmount = (usd) => {
+                const local = Math.round(usd * rate);
+                if (currency === 'JPY' || currency === 'KRW' || currency === 'IDR' || currency === 'VND' || currency === 'LBP' || currency === 'IQD' || currency === 'IRR') {
+                    return symbol + local.toLocaleString();
+                }
+                return symbol + local.toLocaleString();
+            };
+            
+            // Update income options
+            const options = document.querySelectorAll('[data-question="5"] .quiz-option');
+            if (options.length >= 4) {
+                options[0].textContent = `${formatAmount(3800)}+ / month`;
+                options[1].textContent = `${formatAmount(2500)}–${formatAmount(3800)} / month`;
+                options[2].textContent = `${formatAmount(1250)}–${formatAmount(2500)} / month`;
+                options[3].textContent = `Under ${formatAmount(1250)} / month`;
+            }
         }
 
         function selectOption(questionId, value) {
@@ -1547,14 +1743,15 @@
         }
 
         function updateRequiredAmount() {
-            const currency = document.getElementById('currency-select').value;
+            const currency = document.getElementById('currency-select').value || userCurrency;
             const display = document.getElementById('required-amount-display');
+            const rate = EXCHANGE_RATES[currency] || 1;
+            const symbols = { 'USD': '$', 'GBP': '£', 'EUR': '€', 'AUD': 'A$', 'CAD': 'C$', 'NZD': 'NZ$', 'CHF': 'CHF', 'SEK': 'SEK', 'NOK': 'NOK', 'DKK': 'DKK', 'PLN': 'PLN', 'CZK': 'CZK', 'HUF': 'HUF', 'RON': 'RON', 'BGN': 'BGN', 'RUB': '₽', 'MXN': 'MX$', 'JPY': '¥', 'CNY': 'CN¥', 'KRW': '₩', 'INR': '₹', 'SGD': 'S$', 'HKD': 'HK$', 'TWD': 'NT$', 'MYR': 'RM', 'IDR': 'Rp', 'PHP': '₱', 'THB': '฿', 'VND': '₫', 'BDT': '৳', 'PKR': '₨', 'LKR': 'Rs', 'NPR': 'Rs', 'MMK': 'K', 'KHR': '៛', 'LAK': '₭', 'BND': 'B$', 'ILS': '₪', 'TRY': '₺', 'SAR': '﷼', 'AED': 'د.إ', 'KWD': 'د.ك', 'QAR': '﷼', 'BHD': 'د.ب', 'OMR': 'ر.ع.', 'JOD': 'د.ا', 'LBP': 'ل.ل', 'IQD': 'د.ع', 'IRR': '﷼', 'ZAR': 'R', 'NGN': '₦', 'KES': 'KSh', 'GHS': 'GH₵', 'EGP': '£E', 'MAD': 'DH', 'DZD': 'DA', 'TND': 'DT', 'LYD': 'LD', 'SDG': '£Sd', 'ETB': 'Br', 'TZS': 'TSh', 'UGX': 'USh', 'RWF': 'FRw', 'ZWL': 'Z$', 'ZMW': 'K', 'BWP': 'P', 'NAD': 'N$', 'MZN': 'MT', 'MGA': 'Ar', 'MUR': '₨', 'SCR': '₨', 'MWK': 'K', 'BRL': 'R$', 'ARS': '$', 'CLP': 'CLP$', 'COP': '$', 'PEN': 'S/', 'VES': 'Bs', 'UYU': '$U', 'PYG': '₲', 'BOB': 'Bs' };
+            const symbol = symbols[currency] || '$';
+            const localAmount = Math.round(14000 * rate);
+            const formattedAmount = localAmount.toLocaleString();
             
-            if (currency === 'GBP') {
-                display.innerHTML = '<strong>Required: £11,000 GBP</strong> (or $14,000 USD / 500,000 THB)<br><span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>';
-            } else {
-                display.innerHTML = '<strong>Required: $14,000 USD</strong> (or £11,000 GBP / 500,000 THB)<br><span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>';
-            }
+            display.innerHTML = `<strong>Required: ${symbol}${formattedAmount} ${currency}</strong> (approx. $14,000 USD / 500,000 THB)<br><span style="font-size: 0.85rem; color: var(--text-secondary);">Amount can vary due to currency. Proof of funds required.</span>`;
         }
 
         function submitFunds() {
