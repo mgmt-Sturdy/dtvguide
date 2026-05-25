@@ -1295,60 +1295,81 @@
 
         // Country to Currency Mapping
         const COUNTRY_CURRENCY = {
-            // Europe - EUR
-            'Austria': 'EUR', 'Belgium': 'EUR', 'Finland': 'EUR', 'France': 'EUR', 'Germany': 'EUR',
-            'Greece': 'EUR', 'Ireland': 'EUR', 'Italy': 'EUR', 'Luxembourg': 'EUR', 'Netherlands': 'EUR',
-            'Portugal': 'EUR', 'Spain': 'EUR', 'Slovakia': 'EUR', 'Slovenia': 'EUR', 'Estonia': 'EUR',
-            'Latvia': 'EUR', 'Lithuania': 'EUR', 'Malta': 'EUR', 'Cyprus': 'EUR',
-            // Europe - GBP
-            'United Kingdom': 'GBP',
-            // Europe - CHF
-            'Switzerland': 'CHF',
-            // Europe - SEK
-            'Sweden': 'SEK',
-            // Europe - NOK
+            // A
+            'Afghanistan': 'AFN', 'Albania': 'ALL', 'Algeria': 'DZD', 'Andorra': 'EUR', 'Angola': 'AOA',
+            'Antigua and Barbuda': 'XCD', 'Argentina': 'ARS', 'Armenia': 'AMD', 'Australia': 'AUD', 'Austria': 'EUR',
+            'Azerbaijan': 'AZN',
+            // B
+            'Bahamas': 'BSD', 'Bahrain': 'BHD', 'Bangladesh': 'BDT', 'Barbados': 'BBD', 'Belarus': 'BYN',
+            'Belgium': 'EUR', 'Belize': 'BZD', 'Benin': 'XOF', 'Bhutan': 'BTN', 'Bolivia': 'BOB',
+            'Bosnia and Herzegovina': 'BAM', 'Botswana': 'BWP', 'Brazil': 'BRL', 'Brunei': 'BND', 'Bulgaria': 'BGN',
+            'Burkina Faso': 'XOF', 'Burundi': 'BIF',
+            // C
+            'Cambodia': 'KHR', 'Cameroon': 'XAF', 'Canada': 'CAD', 'Cape Verde': 'CVE', 'Central African Republic': 'XAF',
+            'Chad': 'XAF', 'Chile': 'CLP', 'China': 'CNY', 'Colombia': 'COP', 'Comoros': 'KMF',
+            'Congo': 'XAF', 'DR Congo': 'CDF', 'Costa Rica': 'CRC', 'Croatia': 'EUR', 'Cuba': 'CUP',
+            'Cyprus': 'EUR', 'Czech Republic': 'CZK',
+            // D
+            'Denmark': 'DKK', 'Djibouti': 'DJF', 'Dominica': 'XCD', 'Dominican Republic': 'DOP',
+            // E
+            'Ecuador': 'USD', 'Egypt': 'EGP', 'El Salvador': 'USD', 'Equatorial Guinea': 'XAF', 'Eritrea': 'ERN',
+            'Estonia': 'EUR', 'Eswatini': 'SZL', 'Ethiopia': 'ETB',
+            // F
+            'Fiji': 'FJD', 'Finland': 'EUR', 'France': 'EUR',
+            // G
+            'Gabon': 'XAF', 'Gambia': 'GMD', 'Georgia': 'GEL', 'Germany': 'EUR', 'Ghana': 'GHS',
+            'Greece': 'EUR', 'Grenada': 'XCD', 'Guatemala': 'GTQ', 'Guinea': 'GNF', 'Guinea-Bissau': 'XOF',
+            'Guyana': 'GYD',
+            // H
+            'Haiti': 'HTG', 'Honduras': 'HNL', 'Hong Kong': 'HKD', 'Hungary': 'HUF',
+            // I
+            'Iceland': 'ISK', 'India': 'INR', 'Indonesia': 'IDR', 'Iran': 'IRR', 'Iraq': 'IQD',
+            'Ireland': 'EUR', 'Israel': 'ILS', 'Italy': 'EUR', 'Ivory Coast': 'XOF',
+            // J
+            'Jamaica': 'JMD', 'Japan': 'JPY', 'Jordan': 'JOD',
+            // K
+            'Kazakhstan': 'KZT', 'Kenya': 'KES', 'Kiribati': 'AUD', 'Kuwait': 'KWD', 'Kyrgyzstan': 'KGS',
+            // L
+            'Laos': 'LAK', 'Latvia': 'EUR', 'Lebanon': 'LBP', 'Lesotho': 'LSL', 'Liberia': 'LRD',
+            'Libya': 'LYD', 'Liechtenstein': 'CHF', 'Lithuania': 'EUR', 'Luxembourg': 'EUR',
+            // M
+            'Madagascar': 'MGA', 'Malawi': 'MWK', 'Malaysia': 'MYR', 'Maldives': 'MVR', 'Mali': 'XOF',
+            'Malta': 'EUR', 'Marshall Islands': 'USD', 'Mauritania': 'MRU', 'Mauritius': 'MUR', 'Mexico': 'MXN',
+            'Micronesia': 'USD', 'Moldova': 'MDL', 'Monaco': 'EUR', 'Mongolia': 'MNT', 'Montenegro': 'EUR',
+            'Morocco': 'MAD', 'Mozambique': 'MZN', 'Myanmar': 'MMK',
+            // N
+            'Namibia': 'NAD', 'Nauru': 'AUD', 'Nepal': 'NPR', 'Netherlands': 'EUR', 'New Zealand': 'NZD',
+            'Nicaragua': 'NIO', 'Niger': 'XOF', 'Nigeria': 'NGN', 'North Korea': 'KPW', 'North Macedonia': 'MKD',
             'Norway': 'NOK',
-            // Europe - DKK
-            'Denmark': 'DKK',
-            // Europe - PLN
-            'Poland': 'PLN',
-            // Europe - CZK
-            'Czech Republic': 'CZK',
-            // Europe - HUF
-            'Hungary': 'HUF',
-            // Europe - RON
-            'Romania': 'RON',
-            // Europe - BGN
-            'Bulgaria': 'BGN',
-            // Europe - HRK
-            'Croatia': 'EUR',
-            // Europe - RUB
-            'Russia': 'RUB',
-            // North America
-            'United States': 'USD', 'Canada': 'CAD', 'Mexico': 'MXN',
-            // Oceania
-            'Australia': 'AUD', 'New Zealand': 'NZD',
-            // Asia
-            'Japan': 'JPY', 'China': 'CNY', 'South Korea': 'KRW', 'India': 'INR',
-            'Singapore': 'SGD', 'Hong Kong': 'HKD', 'Taiwan': 'TWD', 'Malaysia': 'MYR',
-            'Indonesia': 'IDR', 'Philippines': 'PHP', 'Thailand': 'THB', 'Vietnam': 'VND',
-            'Bangladesh': 'BDT', 'Pakistan': 'PKR', 'Sri Lanka': 'LKR', 'Nepal': 'NPR',
-            'Myanmar': 'MMK', 'Cambodia': 'KHR', 'Laos': 'LAK', 'Brunei': 'BND',
-            // Middle East
-            'Israel': 'ILS', 'Turkey': 'TRY', 'Saudi Arabia': 'SAR', 'UAE': 'AED',
-            'Kuwait': 'KWD', 'Qatar': 'QAR', 'Bahrain': 'BHD', 'Oman': 'OMR',
-            'Jordan': 'JOD', 'Lebanon': 'LBP', 'Iraq': 'IQD', 'Iran': 'IRR',
-            // Africa
-            'South Africa': 'ZAR', 'Nigeria': 'NGN', 'Kenya': 'KES', 'Ghana': 'GHS',
-            'Egypt': 'EGP', 'Morocco': 'MAD', 'Algeria': 'DZD', 'Tunisia': 'TND',
-            'Libya': 'LYD', 'Sudan': 'SDG', 'Ethiopia': 'ETB', 'Tanzania': 'TZS',
-            'Uganda': 'UGX', 'Rwanda': 'RWF', 'Zimbabwe': 'ZWL', 'Zambia': 'ZMW',
-            'Botswana': 'BWP', 'Namibia': 'NAD', 'Mozambique': 'MZN', 'Madagascar': 'MGA',
-            'Mauritius': 'MUR', 'Seychelles': 'SCR', 'Malawi': 'MWK',
-            // South America
-            'Brazil': 'BRL', 'Argentina': 'ARS', 'Chile': 'CLP', 'Colombia': 'COP',
-            'Peru': 'PEN', 'Venezuela': 'VES', 'Ecuador': 'USD', 'Uruguay': 'UYU',
-            'Paraguay': 'PYG', 'Bolivia': 'BOB',
+            // O
+            'Oman': 'OMR',
+            // P
+            'Pakistan': 'PKR', 'Palau': 'USD', 'Panama': 'PAB', 'Papua New Guinea': 'PGK', 'Paraguay': 'PYG',
+            'Peru': 'PEN', 'Philippines': 'PHP', 'Poland': 'PLN', 'Portugal': 'EUR',
+            // Q
+            'Qatar': 'QAR',
+            // R
+            'Romania': 'RON', 'Russia': 'RUB', 'Rwanda': 'RWF',
+            // S
+            'Saint Kitts and Nevis': 'XCD', 'Saint Lucia': 'XCD', 'Saint Vincent and the Grenadines': 'XCD',
+            'Samoa': 'WST', 'San Marino': 'EUR', 'Sao Tome and Principe': 'STN', 'Saudi Arabia': 'SAR', 'Senegal': 'XOF',
+            'Serbia': 'RSD', 'Seychelles': 'SCR', 'Sierra Leone': 'SLE', 'Singapore': 'SGD', 'Slovakia': 'EUR',
+            'Slovenia': 'EUR', 'Solomon Islands': 'SBD', 'Somalia': 'SOS', 'South Africa': 'ZAR', 'South Korea': 'KRW',
+            'South Sudan': 'SSP', 'Spain': 'EUR', 'Sri Lanka': 'LKR', 'Sudan': 'SDG', 'Suriname': 'SRD',
+            'Sweden': 'SEK', 'Switzerland': 'CHF', 'Syria': 'SYP',
+            // T
+            'Taiwan': 'TWD', 'Tajikistan': 'TJS', 'Tanzania': 'TZS', 'Thailand': 'THB', 'Timor-Leste': 'USD',
+            'Togo': 'XOF', 'Tonga': 'TOP', 'Trinidad and Tobago': 'TTD', 'Tunisia': 'TND', 'Turkey': 'TRY',
+            'Turkmenistan': 'TMT', 'Tuvalu': 'AUD',
+            // U
+            'Uganda': 'UGX', 'Ukraine': 'UAH', 'UAE': 'AED', 'United Kingdom': 'GBP', 'United States': 'USD',
+            'Uruguay': 'UYU', 'Uzbekistan': 'UZS',
+            // V
+            'Vanuatu': 'VUV', 'Vatican City': 'EUR', 'Venezuela': 'VES', 'Vietnam': 'VND',
+            // Y
+            'Yemen': 'YER',
+            // Z
+            'Zambia': 'ZMW', 'Zimbabwe': 'ZWL',
             // Default
             'DEFAULT': 'USD'
         };
@@ -1404,6 +1425,88 @@
             'LBP': 89500,
             'IQD': 1310,
             'IRR': 42000,
+            'AFN': 71,
+            'ALL': 93,
+            'DZD': 134,
+            'AOA': 830,
+            'XCD': 2.7,
+            'AMD': 387,
+            'AZN': 1.7,
+            'BSD': 1,
+            'BHD': 0.38,
+            'BBD': 2,
+            'BYN': 3.27,
+            'BZD': 2,
+            'XOF': 605,
+            'BTN': 83,
+            'BAM': 1.8,
+            'BIF': 2850,
+            'CVE': 101,
+            'XAF': 605,
+            'CDF': 2800,
+            'CRC': 515,
+            'CUP': 25,
+            'DJF': 178,
+            'DOP': 59,
+            'ERN': 15,
+            'ETB': 57,
+            'FJD': 2.24,
+            'GMD': 67,
+            'GEL': 2.75,
+            'GHS': 15,
+            'GNF': 8550,
+            'GYD': 209,
+            'HTG': 132,
+            'HNL': 25,
+            'ISK': 138,
+            'JMD': 157,
+            'JOD': 0.71,
+            'KZT': 500,
+            'KGS': 87,
+            'LAK': 20800,
+            'LSL': 18.5,
+            'LRD': 194,
+            'LYD': 4.8,
+            'MGA': 4500,
+            'MVR': 15.4,
+            'MRU': 39,
+            'MDL': 18,
+            'MNT': 3450,
+            'MAD': 10,
+            'MZN': 64,
+            'NAD': 18.5,
+            'ANG': 1.8,
+            'NIO': 37,
+            'KPW': 900,
+            'MKD': 56,
+            'OMR': 0.38,
+            'XPF': 109,
+            'PAB': 1,
+            'PGK': 3.9,
+            'PYG': 7500,
+            'PEN': 3.7,
+            'RSD': 108,
+            'SLE': 22.5,
+            'SBD': 8.4,
+            'SOS': 570,
+            'SSP': 3000,
+            'SRD': 36,
+            'SZL': 18.5,
+            'SYP': 13000,
+            'TJS': 10.9,
+            'TZS': 2580,
+            'TOP': 2.36,
+            'TTD': 6.78,
+            'TMT': 3.5,
+            'UGX': 3800,
+            'UAH': 41,
+            'UYU': 39,
+            'UZS': 12600,
+            'VUV': 120,
+            'VES': 36,
+            'YER': 250,
+            'ZMW': 26,
+            'ZWL': 36000,
             'ZAR': 18.5,
             'NGN': 1500,
             'KES': 130,
