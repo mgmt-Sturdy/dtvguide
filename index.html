@@ -238,6 +238,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3) translateY(-50px); }
+            50% { opacity: 1; transform: scale(1.05) translateY(0); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
         .quiz-question h3 {
             font-size: 1.75rem;
             margin-bottom: 0.5rem;
@@ -835,21 +842,16 @@
             Thailand DTV Eligibility Checker
         </div>
 
-        <div style="margin-bottom: 1.5rem;">
-            <img src="https://flagcdn.com/w160/th.png" alt="Thailand flag" style="width: 80px; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <div style="margin-bottom: 2rem; animation: bounceIn 1s ease-out;">
+            <img src="https://flagcdn.com/w320/th.png" alt="Thailand flag" style="width: 160px; height: auto; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.15);">
         </div>
 
-        <h1>Check Your DTV Eligibility</h1>
+        <h1>Check your DTV (Nomad) eligibility</h1>
 
-        <p class="hero-subtitle">
-            Check if you qualify for Thailand's 5-year DTV visa. 
-            Get your personalized eligibility score and timeline in 30 seconds.
-        </p>
-
-        <div class="hero-cta">
-            <a href="#quiz" class="btn-primary">
+        <div class="hero-cta" style="margin-top: 2rem;">
+            <a href="#quiz" class="btn-primary" style="font-size: 1.2rem; padding: 1.25rem 2.5rem;">
                 Check Your Eligibility
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
             </a>
@@ -862,7 +864,7 @@
             <!-- Question 0: Email -->
             <div class="quiz-question active" data-question="0">
                 <div class="question-number">Q0</div>
-                <h3>Let's check your DTV (Nomad) eligibility</h3>
+                <h3>Check your DTV (Nomad) eligibility</h3>
                 <p>Enter your email and we'll send you your results so you can come back to them.</p>
 
                 <div class="email-input-wrapper">
