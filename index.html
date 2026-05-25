@@ -1233,18 +1233,17 @@
                 const filtered = ALL_COUNTRIES.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
                 
                 filtered.forEach(country => {
-                    const isEligible = DTV_ELIGIBLE_COUNTRIES.includes(country);
                     const option = document.createElement('div');
-                    option.className = 'country-option' + (isEligible ? ' dtv-eligible' : '');
-                    option.textContent = country + (isEligible ? '' : ' (not eligible)');
-                    option.onclick = () => selectCountry(country, isEligible);
+                    option.className = 'country-option';
+                    option.textContent = country;
+                    option.onclick = () => selectCountry(country);
                     dropdown.appendChild(option);
                 });
                 
                 dropdown.classList.toggle('active', filtered.length > 0);
             }
 
-            window.selectCountry = function(country, isEligible) {
+            window.selectCountry = function(country) {
                 document.getElementById('selected-country').value = country;
                 searchInput.value = country;
                 dropdown.classList.remove('active');
