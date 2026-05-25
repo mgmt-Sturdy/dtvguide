@@ -151,6 +151,7 @@
         .btn-primary {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             background: linear-gradient(135deg, var(--violet-main), var(--accent-pink));
             color: white;
@@ -163,6 +164,7 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+            text-align: center;
         }
 
         .btn-primary:hover {
@@ -173,6 +175,7 @@
         .btn-secondary {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             background: transparent;
             color: var(--text-primary);
@@ -184,6 +187,7 @@
             border: 2px solid var(--border);
             cursor: pointer;
             transition: all 0.2s;
+            text-align: center;
         }
 
         .btn-secondary:hover {
@@ -784,7 +788,7 @@
 
                 <div class="email-input-wrapper">
                     <input type="email" id="quiz-email" class="email-input" placeholder="your@email.com">
-                    <button class="btn-primary" onclick="saveEmailAndContinue()" style="width: 100%; text-align: center;">Start the Quiz</button>
+                    <button class="btn-primary" onclick="saveEmailAndContinue()" style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;">Start the Quiz</button>
                 </div>
 
                 <p style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
@@ -804,7 +808,7 @@
                 </div>
 
                 <input type="hidden" id="selected-country" value="">
-                <button class="btn-primary" id="country-continue" onclick="submitCountry()" disabled style="width: 100%; margin-top: 1rem; text-align: center;">Continue</button>
+                <button class="btn-primary" id="country-continue" onclick="submitCountry()" disabled style="width: 100%; margin-top: 1rem; text-align: center; display: flex; justify-content: center; align-items: center;">Continue</button>
             </div>
 
             <!-- Question 2: Passport -->
@@ -890,7 +894,7 @@
                     </div>
                 </div>
 
-                <button class="btn-primary" onclick="submitFunds()" style="width: 100%; text-align: center;">Continue</button>
+                <button class="btn-primary" onclick="submitFunds()" style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;">Continue</button>
             </div>
 
             <!-- Results -->
@@ -904,7 +908,7 @@
     <div class="top-progress-bar" id="top-progress">
         <div class="top-progress-content">
             <div class="progress-header">
-                <button onclick="goBack()" style="background: transparent; border: 1px solid var(--charcoal-light); color: var(--charcoal); padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">← Back</button>
+                <button onclick="goBack()" style="background: transparent; border: 1px solid var(--charcoal-light); color: var(--charcoal); padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; text-align: center; display: flex; justify-content: center; align-items: center;">← Back</button>
                 <span class="progress-question" id="progress-question">Q1 of 6</span>
                 <span class="progress-percent" id="progress-percent">0%</span>
             </div>
@@ -1305,7 +1309,7 @@
                     description: 'You need evidence of tax payments for your DTV application.',
                     time: '2 weeks',
                     weeks: 2,
-                    guideHelp: 'The guide explains what tax evidence you need and how to get it before filing.'
+                    guideHelp: 'The guide explains what tax evidence you need before filing.'
                 });
                 totalWeeks += 2;
             }
@@ -1386,7 +1390,7 @@
                     </p>
                     <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto;">
                         <input type="email" id="waitinglist-email" placeholder="Enter your email" style="padding: 1rem; border: 2px solid var(--border); border-radius: 12px; font-size: 1rem; text-align: center;">
-                        <button onclick="joinWaitingList()" class="btn-primary" style="font-size: 1.1rem; padding: 1.25rem 2.5rem;">
+                        <button onclick="joinWaitingList()" class="btn-primary" style="font-size: 1.1rem; padding: 1.25rem 2.5rem; text-align: center; display: flex; justify-content: center; align-items: center;">
                             Join Waiting List
                         </button>
                     </div>
@@ -1394,7 +1398,7 @@
                     <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">
                         Be the first to know when the guide is ready
                     </p>
-                    <button onclick="restartQuiz()" style="margin-top: 2rem; background: var(--cream-dark); border: 2px solid var(--charcoal); color: var(--charcoal); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; display: block; width: 100%; max-width: 280px; margin-left: auto; margin-right: auto;">
+                    <button onclick="restartQuiz()" style="margin-top: 2rem; background: var(--cream-dark); border: 2px solid var(--charcoal); color: var(--charcoal); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; display: flex; width: 100%; max-width: 280px; margin-left: auto; margin-right: auto; text-align: center; justify-content: center; align-items: center;">
                         ↺ Start Again
                     </button>
                 </div>
@@ -1421,8 +1425,8 @@
                         But there's the <strong>DTV2 — Thai Soft Power</strong> option for Muay Thai, cooking classes, language courses, or medical treatment.
                     </p>
                     
-                    <button onclick="restartQuiz()" class="btn-primary" style="margin-bottom: 1rem;">Check Another Path</button>
-                    <button onclick="location.reload()" style="display: block; margin: 0 auto; background: var(--cream-dark); border: 2px solid var(--charcoal); color: var(--charcoal); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; width: 100%; max-width: 280px;">
+                    <button onclick="restartQuiz()" class="btn-primary" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center; align-items: center;">Check Another Path</button>
+                    <button onclick="location.reload()" style="display: flex; margin: 0 auto; background: var(--cream-dark); border: 2px solid var(--charcoal); color: var(--charcoal); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; width: 100%; max-width: 280px; text-align: center; justify-content: center; align-items: center;">
                         ↺ Start Again
                     </button>
                 </div>
