@@ -861,24 +861,8 @@
     <!-- Quiz Section -->
     <section class="quiz-section" id="quiz">
         <div class="quiz-container">
-            <!-- Question 0: Email -->
-            <div class="quiz-question active" data-question="0">
-                <div class="question-number">Q0</div>
-                <h3>Check your DTV eligibility</h3>
-                <p>Enter your email and we'll send you your results so you can come back to them.</p>
-
-                <div class="email-input-wrapper">
-                    <input type="email" id="quiz-email" class="email-input" placeholder="your@email.com">
-                    <button class="btn-primary" onclick="saveEmailAndContinue()" style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;">Start the Quiz</button>
-                </div>
-
-                <p style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
-                    Takes 30 seconds. No spam.
-                </p>
-            </div>
-
             <!-- Question 1: Age -->
-            <div class="quiz-question" data-question="1">
+            <div class="quiz-question active" data-question="1">
                 <div class="question-number">Q1</div>
                 <h3>How old are you?</h3>
                 <p>You must be at least 20 years old to apply for the DTV visa.</p>
@@ -1332,24 +1316,6 @@
             };
         });
 
-        function saveEmailAndContinue() {
-            console.log('saveEmailAndContinue called');
-            const emailInput = document.getElementById('quiz-email');
-            userEmail = emailInput.value.trim();
-            
-            if (!userEmail || !userEmail.includes('@')) {
-                alert('Please enter a valid email address');
-                emailInput.focus();
-                return;
-            }
-            
-            console.log('Email valid, proceeding to question 1');
-            document.querySelector('[data-question="0"]').classList.remove('active');
-            document.getElementById('top-progress').classList.add('active');
-            showQuestion(1);
-            questionPath.push('0');
-        }
-
         function submitAge() {
             const age = parseInt(document.getElementById('age-select').value);
             
@@ -1362,6 +1328,7 @@
             questionPath.push('1');
             
             document.querySelector('[data-question="1"]').classList.remove('active');
+            document.getElementById('top-progress').classList.add('active');
             showQuestion(2);
         }
 
