@@ -1539,6 +1539,8 @@
         const REQUIRED_USD = 14000;
         const MAX_SCORE = 100;
 
+        // Remote income is worth 70 points - major factor
+
         let currentScore = 0;
         let userEmail = '';
         let userCurrency = 'USD';
@@ -1676,12 +1678,11 @@
             
             // Calculate points
             let points = 0;
-            if (questionId === 3 && value === '6plus') points = 15;
-            else if (questionId === 4 && value !== 'no') points = 30;
-            else if (questionId === '5a' && value !== 'no') points = 20;
-            else if (questionId === '5c' && value === 'self-not-yet') points = 10; // Partial points - need to file
-            else if (questionId === '5c') points = 20;
-            else if (questionId === 6 && value !== 'under-1k') points = 15;
+            if (questionId === 3 && value === '6plus') points = 10; // Passport
+            else if (questionId === 4 && value !== 'no') points = 70; // Remote income - MAJOR factor (70%)
+            else if (questionId === '5a' && value !== 'no') points = 10; // Workplace permission
+            else if (questionId === '5c') points = 5; // Tax docs
+            else if (questionId === 6 && value !== 'under-1k') points = 5; // Income level
             
             updateProgress(points);
             
@@ -1732,12 +1733,11 @@
             const lastQuestion = questionPath.pop();
             
             // Subtract points for the last answer if applicable
-            if (lastQuestion === '3' && answers['3'] === '6plus') currentScore -= 15;
-            else if (lastQuestion === '4' && answers['4'] !== 'no') currentScore -= 30;
-            else if (lastQuestion === '5a' && answers['5a'] !== 'no') currentScore -= 20;
-            else if (lastQuestion === '5c' && answers['5c'] === 'self-not-yet') currentScore -= 10; // Partial points
-            else if (lastQuestion === '5c') currentScore -= 20;
-            else if (lastQuestion === '6' && answers['6'] !== 'under-1k') currentScore -= 15;
+            if (lastQuestion === '3' && answers['3'] === '6plus') currentScore -= 10;
+            else if (lastQuestion === '4' && answers['4'] !== 'no') currentScore -= 70; // Remote income worth 70%
+            else if (lastQuestion === '5a' && answers['5a'] !== 'no') currentScore -= 10;
+            else if (lastQuestion === '5c') currentScore -= 5;
+            else if (lastQuestion === '6' && answers['6'] !== 'under-1k') currentScore -= 5;
             else if (lastQuestion === '7' && answers['7']) {
                 const funds = answers['7'];
                 const requiredAmount = funds.currency === 'GBP' ? REQUIRED_GBP : REQUIRED_USD;
@@ -1908,6 +1908,18 @@
                     guideHelp: 'The guide includes guidance on passport requirements for the DTV application.'
                 });
                 totalWeeks += 4;
+            }
+            
+            // Check REMOTE INCOME - MAJOR FACTOR (70%)
+            if (answers['4'] === 'no') {
+                issues.push({
+                    icon: '💼',
+                    title: 'NO REMOTE INCOME',
+                    description: 'You need remote income to qualify for the DTV visa. This is the biggest factor in your application.',
+                    time: 'Consider DTV2 Thai Soft Power visa instead',
+                    weeks: 0,
+                    guideHelp: 'The guide explains alternative visa options including DTV2 for Muay Thai, cooking classes, or language courses.'
+                });
             }
             
             // Check income
