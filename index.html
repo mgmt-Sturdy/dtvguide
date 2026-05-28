@@ -722,7 +722,6 @@
 <body>
     <!-- Navigation -->
     <nav class="nav-floating">
-        <a href="#about" class="nav-link">About</a>
         <a href="#quiz" class="nav-cta">Check Eligibility</a>
     </nav>
 
@@ -783,7 +782,7 @@
                 <p>Enter your email and we'll send you your results so you can come back to them.</p>
 
                 <div class="email-input-wrapper">
-                    <input type="email" id="quiz-email" class="email-input" placeholder="your@email.com">
+                    <input type="email" id="quiz-email" class="email-input" placeholder="Enter your email">
                     <button class="btn-primary" onclick="saveEmailAndContinue()" style="width: 100%; text-align: center;">Start the Quiz</button>
                 </div>
 
@@ -1044,15 +1043,8 @@
 
         function submitCountry() {
             const country = document.getElementById('selected-country').value;
-            const isEligible = DTV_ELIGIBLE_COUNTRIES.includes(country);
             
-            if (!isEligible) {
-                // Save hard stop data
-                saveToGoogleSheet('Ineligible Country: ' + country);
-                document.getElementById('hard-stop-country').classList.add('show');
-                return;
-            }
-            
+            // No hard stop - let everyone continue regardless of country
             answers['1'] = country;
             questionPath.push('1');
             
@@ -1084,21 +1076,18 @@
                 if (questionId === 2) {
                     showQuestion(3);
                 } else if (questionId === 3) {
-                    if (value === 'no') {
-                        showNoRemoteResult();
-                    } else if (value === 'yes-employed') {
+                    // No hard stop - let everyone continue, even without remote work
+                    if (value === 'yes-employed') {
                         showQuestion('4a');
+                    } else if (value === 'no') {
+                        // Skip workplace permission for non-remote workers
+                        showQuestion('4c');
                     } else {
                         showQuestion('4c');
                     }
                 } else if (questionId === '4a') {
-                    if (value === 'no') {
-                        // Save hard stop data
-                        saveToGoogleSheet('No workplace permission');
-                        document.getElementById('hard-stop-permission').classList.add('show');
-                    } else {
-                        showQuestion(5);
-                    }
+                    // No hard stop - let everyone continue
+                    showQuestion(5);
                 } else if (questionId === '4c') {
                     showQuestion(5);
                 } else if (questionId === 5) {
