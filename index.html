@@ -1801,7 +1801,7 @@
         }
 
         function updateBottomProgressBar() {
-            const currentQ = questionPath.length;
+            const currentQ = Math.max(1, questionPath.length);
             const percentage = Math.round((currentScore / MAX_SCORE) * 100);
             
             document.getElementById('progress-question').textContent = 'Q' + currentQ + ' of 6';
