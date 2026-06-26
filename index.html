@@ -361,91 +361,6 @@
             box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
         }
 
-        /* Top Progress Bar */
-        .top-progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            z-index: 999;
-            display: none;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .top-progress-bar.active {
-            display: block;
-        }
-
-        .top-progress-content {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .progress-question {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-primary);
-        }
-
-        .progress-percent {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--violet-main);
-        }
-
-        .progress-track {
-            height: 6px;
-            background: var(--bg-tertiary);
-            border-radius: 100px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--violet-main), var(--accent-pink));
-            border-radius: 100px;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 0%;
-        }
-
-        .progress-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .progress-dots .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .progress-dots .dot.active {
-            background: var(--violet-main);
-            transform: scale(1.3);
-        }
-
-        .progress-dots .dot.completed {
-            background: var(--accent-cyan);
-        }
-
         /* Country Search */
         .country-search-container {
             position: relative;
@@ -792,10 +707,6 @@
                 padding: 1rem;
             }
 
-            .top-progress-bar {
-                padding: 0.75rem 1rem;
-            }
-
             .hard-stop-content {
                 padding: 2rem 1.5rem;
             }
@@ -1008,28 +919,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Top Progress Bar -->
-    <div class="top-progress-bar" id="top-progress">
-        <div class="top-progress-content">
-            <div class="progress-header">
-                <button onclick="goBack()" style="background: transparent; border: 1px solid var(--charcoal-light); color: var(--charcoal); padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; text-align: center; display: flex; justify-content: center; align-items: center;">← Back</button>
-                <span class="progress-question" id="progress-question">Q1 of 6</span>
-                <span class="progress-percent" id="progress-percent">0%</span>
-            </div>
-            <div class="progress-track">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-            <div class="progress-dots" id="progress-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-        </div>
-    </div>
 
     <script>
         // DTV Eligible Countries
@@ -1611,8 +1500,6 @@
                     document.getElementById('age-continue').disabled = !this.value;
                 });
             }
-            // Show progress bar at start since question 1 is active
-            document.getElementById('top-progress').classList.add('active');
             updateBottomProgressBar();
         });
 
@@ -1777,7 +1664,6 @@
             
             // Hide result container
             document.getElementById('result-container').classList.remove('show');
-            document.getElementById('top-progress').classList.remove('active');
             
             // Reset country input
             document.getElementById('selected-country').value = '';
@@ -1789,7 +1675,6 @@
             
             // Show first question
             showQuestion(1);
-            document.getElementById('top-progress').classList.add('active');
             
             // Clear email input
             document.getElementById('quiz-email').value = '';
@@ -1801,22 +1686,7 @@
         }
 
         function updateBottomProgressBar() {
-            const currentQ = Math.max(1, questionPath.length);
-            const percentage = Math.round((currentScore / MAX_SCORE) * 100);
-            
-            document.getElementById('progress-question').textContent = 'Q' + currentQ + ' of 6';
-            document.getElementById('progress-percent').textContent = percentage + '%';
-            document.getElementById('progress-fill').style.width = percentage + '%';
-            
-            const dots = document.querySelectorAll('.progress-dots .dot');
-            dots.forEach((dot, index) => {
-                dot.classList.remove('active', 'completed');
-                if (index < currentQ - 1) {
-                    dot.classList.add('completed');
-                } else if (index === currentQ - 1) {
-                    dot.classList.add('active');
-                }
-            });
+            // Progress bar removed - no longer needed
         }
 
         function updateRequiredAmount() {
@@ -1876,7 +1746,6 @@
 
         function showFinalResult() {
             document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
-            document.getElementById('top-progress').classList.remove('active');
             
             const percentage = Math.round((currentScore / MAX_SCORE) * 100);
             const issues = [];
@@ -2085,7 +1954,6 @@
 
         function showNoRemoteResult() {
             document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
-            document.getElementById('top-progress').classList.remove('active');
             
             document.getElementById('result-content').innerHTML = `
                 <div class="result-card">
