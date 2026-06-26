@@ -137,30 +137,6 @@
             margin-bottom: 25px;
             color: var(--text-primary);
         }
-
-        /* Step Indicator */
-        .step-indicator {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 30px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .step-dot {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--bg-tertiary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--text-secondary);
-        }
-
-        .step-dot.active {
             background: linear-gradient(135deg, var(--violet-main), var(--accent-pink));
             color: white;
         }
@@ -475,11 +451,6 @@
             <div class="quiz-section active" id="quiz">
 
                 <div id="question-1" class="quiz-question">
-                    <div class="step-indicator">
-                        <div class="step-dot active">1</div>
-                        <span>Employment type</span>
-                        <span style="margin-left: auto; color: var(--violet-main);">Step 1 of 3</span>
-                    </div>
                     <h2>What's your employment situation?</h2>
                     <div class="option" onclick="selectOption(1, 'employed', this)">
                         <div class="option-text">💼 Employed (Full-Time Job)</div>
@@ -500,11 +471,6 @@
                 </div>
 
                 <div id="question-2" class="quiz-question" style="display:none;">
-                    <div class="step-indicator">
-                        <div class="step-dot active">2</div>
-                        <span>Other income sources</span>
-                        <span style="margin-left: auto; color: var(--violet-main);">Step 2 of 3</span>
-                    </div>
                     <h2>Do you have any other income sources?</h2>
                     <div class="option" onclick="selectOption(2, 'no', this)">
                         <div class="option-text">No, just my main income</div>
@@ -521,11 +487,6 @@
                 </div>
 
                 <div id="question-3" class="quiz-question" style="display:none;">
-                    <div class="step-indicator">
-                        <div class="step-dot active">3</div>
-                        <span>Monthly income</span>
-                        <span style="margin-left: auto; color: var(--violet-main);">Step 3 of 3</span>
-                    </div>
                     <h2>What's your approximate monthly income?</h2>
                     <div class="option" onclick="selectOption(3, 'low', this)">
                         <div class="option-text">£1,000 - £2,000 / month</div>
