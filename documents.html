@@ -137,30 +137,6 @@
             margin-bottom: 25px;
             color: var(--text-primary);
         }
-
-        /* Step Indicator */
-        .step-indicator {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 30px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .step-dot {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--bg-tertiary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--text-secondary);
-        }
-
-        .step-dot.active {
             background: linear-gradient(135deg, var(--violet-main), var(--accent-pink));
             color: white;
         }
@@ -215,6 +191,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .btn-primary {
@@ -449,65 +429,7 @@
         .prompt-box.visible {
             display: block;
         }
-
-        /* Document Status Tracking */
-        .document-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .document-title-section {
-            flex: 1;
-        }
-
-        .document-status {
-            margin-left: auto;
-        }
-
-        .status-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            padding: 8px 12px;
-            background: var(--bg-tertiary);
-            border-radius: 8px;
-            border: 2px solid var(--border);
-            transition: all 0.2s;
-        }
-
-        .status-checkbox:hover {
-            border-color: var(--violet-light);
-        }
-
-        .status-checkbox input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--violet-main);
-            cursor: pointer;
-        }
-
-        .status-text {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            box-shadow: var(--shadow-soft);
-        }
-
-        #progressBar {
-            background: linear-gradient(90deg, var(--violet-main), var(--accent-pink));
-        }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-
 </head>
 <body>
     <!-- Navigation -->
@@ -529,11 +451,6 @@
             <div class="quiz-section active" id="quiz">
 
                 <div id="question-1" class="quiz-question">
-                    <div class="step-indicator">
-                        <div class="step-dot active">1</div>
-                        <span>Employment type</span>
-                        <span style="margin-left: auto; color: var(--violet-main);">Step 1 of 3</span>
-                    </div>
                     <h2>What's your employment situation?</h2>
                     <div class="option" onclick="selectOption(1, 'employed', this)">
                         <div class="option-text">💼 Employed (Full-Time Job)</div>
@@ -554,11 +471,6 @@
                 </div>
 
                 <div id="question-2" class="quiz-question" style="display:none;">
-                    <div class="step-indicator">
-                        <div class="step-dot active">2</div>
-                        <span>Other income sources</span>
-                        <span style="margin-left: auto; color: var(--violet-main);">Step 2 of 3</span>
-                    </div>
                     <h2>Do you have any other income sources?</h2>
                     <div class="option" onclick="selectOption(2, 'no', this)">
                         <div class="option-text">No, just my main income</div>
@@ -575,11 +487,6 @@
                 </div>
 
                 <div id="question-3" class="quiz-question" style="display:none;">
-                    <div class="step-indicator">
-                        <div class="step-dot active">3</div>
-                        <span>Monthly income</span>
-                        <span style="margin-left: auto; color: var(--violet-main);">Step 3 of 3</span>
-                    </div>
                     <h2>What's your approximate monthly income?</h2>
                     <div class="option" onclick="selectOption(3, 'low', this)">
                         <div class="option-text">£1,000 - £2,000 / month</div>
@@ -612,36 +519,8 @@
                     <strong>✓ What to do:</strong> Gather EVERY document listed below and put them in a folder on your computer. These are the source documents you'll use in the next steps. Don't skip anything — you'll need all of them.
                 </div>
 
-                <!-- Instructions -->
-                <div class="instructions-box" style="margin: 20px 0; padding: 25px; background: linear-gradient(135deg, var(--violet-deep), var(--violet-main)); border-radius: 12px; color: white;">
-                    <h3 style="margin: 0 0 15px 0; font-size: 20px;">📋 How to Use This Page</h3>
-                    <ol style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                        <li><strong>Complete all dropdown menus</strong> on this page until you reach the end</li>
-                        <li><strong>Download your personalised template/AI prompts</strong> using the button below</li>
-                        <li><strong>If using AI prompts:</strong> Upload the required documents from the "02 - Your Documents" folder</li>
-                        <li><strong>Drag your documents</strong> into the folder and then drag straight into your AI provider (ChatGPT/Claude)</li>
-                    </ol>
-                    <p style="margin: 15px 0 0 0; font-size: 14px; opacity: 0.9;">💡 <strong>Tip:</strong> Tick the checkboxes as you complete each document to track your progress!</p>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="progress-container" style="margin: 30px 0; padding: 20px; background: var(--bg-tertiary); border-radius: 12px; border: 2px solid var(--violet-light);">
-                    <div class="progress-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <span style="font-weight: 600; color: var(--violet-deep);">📊 Document Collection Progress</span>
-                        <span id="progressText" style="font-weight: 500; color: var(--text-secondary);">0 of 0 documents complete (0%)</span>
-                    </div>
-                    <div class="progress-bar-bg" style="width: 100%; height: 20px; background: var(--border); border-radius: 10px; overflow: hidden;">
-                        <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--violet-main), var(--accent-pink)); transition: width 0.3s ease; border-radius: 10px;"></div>
-                    </div>
-                </div>
-
                 <div id="documentsContainer"></div>
 
-                <button class="btn btn-primary" onclick="downloadDocumentFolder()" style="margin: 30px 0; background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); font-size: 16px; padding: 15px 30px; border: none; border-radius: 12px; color: white; cursor: pointer;">
-                    📁 Download My Document Folder
-                </button>
-                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Get templates + empty folders to organize your documents for AI upload</p>
-                
                 <button class="restart-btn" onclick="restartQuiz()">← Change Employment Type</button>
             </div>
         </div>
@@ -702,6 +581,7 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
+                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -862,6 +742,7 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
+                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -902,6 +783,7 @@
                                 <option value="invoices">3-6 recent business invoices paid by clients</option>
                                 <option value="statements">3 months business bank statements</option>
                             </select>
+                            <div id="se1-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Business_Invoices_Examples.pdf OR Business_Bank_Statements_3Months.pdf</div>
                         `
                     },
@@ -945,17 +827,18 @@
                     {
                         num: "SE7",
                         title: "Tax Submission Evidence",
-                        what: "Proof of tax payments made to HMRC within last 12 months",
+                        what: "Proof your business is registered and you have paid taxes with National Insurance number",
                         details: `
                             <p><strong>Required:</strong> Include your National Insurance number on all documents</p>
-                            <p>Provide one or more of the following (within last 12 months):</p>
+                            <p>Select your tax evidence type:</p>
                             <select class="doc-select" onchange="handleDocSelect(this, 'se7')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
                                 <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="sa302">SA302 or tax calculation from HMRC</option>
+                                <option value="vat">VAT receipts (if registered for VAT)</option>
+                                <option value="corporation">Corporation Tax payment receipt</option>
                                 <option value="hmrc">HMRC tax payment confirmation</option>
-                                <option value="selfassessment">Self-assessment payment receipt</option>
-                                <option value="vat">VAT payment receipts (if registered)</option>
-                                <option value="other">Any other HMRC tax payment documentation</option>
                             </select>
+                            <div id="se7-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
@@ -1032,6 +915,7 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
+                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -1107,39 +991,30 @@
                     },
                     {
                         num: "CC4",
-                        title: "Bank Account Evidence",
-                        what: "Bank account where you receive content creation income",
+                        title: "Bank Account Evidence — Brand Deal Payments",
+                        what: "Bank account proof linking paid invoices to deposits",
                         details: `
-                            <p><strong>Use whichever bank account you receive payments into:</strong></p>
                             <ul>
-                                <li>Brand deal payments</li>
-                                <li>Platform payments (YouTube, TikTok, etc.)</li>
-                                <li>Sponsorship income</li>
-                                <li>Any content creation related payments</li>
+                                <li><strong>Bank statement excerpts or screenshots showing deposits from brands</strong></li>
                             </ul>
-                            <p><strong>Provide:</strong> Bank statement excerpts or screenshots showing deposits</p>
-                            <ul>
-                                <li><strong>Must show:</strong> payment received, source/brand name, amount, date</li>
-                                <li><strong>3 examples</strong> matching your paid invoices</li>
-                                <li>Can be screenshots of incoming transfers</li>
-                            </ul>
+                            <em>Must show: payment received into your bank account, brand name or source, amount, date 3 examples matching your 3 paid invoices above Must clearly link to the amounts on your invoices Can be bank statement pages showing the incoming transfers</em>
                             <div class="download-hint">💾 File name: Bank_Statement_Brand_Deposits.pdf</div>
                         `
                     },
                     {
                         num: "CC5",
                         title: "Tax Submission Evidence",
-                        what: "Proof of tax payments made to HMRC within last 12 months",
+                        what: "Proof of income and tax paid with National Insurance number",
                         details: `
                             <p><strong>Required:</strong> Include your National Insurance number on all documents</p>
-                            <p>Provide one or more of the following (within last 12 months):</p>
+                            <p>Select your tax evidence type:</p>
                             <select class="doc-select" onchange="handleDocSelect(this, 'cc5')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
                                 <option value="" selected disabled>-- Choose your document --</option>
+                                <option value="sa302">SA302 or tax calculation from HMRC</option>
+                                <option value="platform">Platform 1099s or tax documents (YouTube/TikTok)</option>
                                 <option value="hmrc">HMRC tax payment confirmation</option>
-                                <option value="selfassessment">Self-assessment payment receipt</option>
-                                <option value="vat">VAT payment receipts (if registered)</option>
-                                <option value="other">Any other HMRC tax payment documentation</option>
                             </select>
+                            <div id="cc5-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
@@ -1156,6 +1031,7 @@
                                 <option value="hmrc">Letter from HM Revenue and Customs (HMRC) concerning your tax income</option>
                                 <option value="receipt">Receipt of tax paid for the latest financial year</option>
                             </select>
+                            <div id="cc7-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <p style="margin-top:15px;"><strong>What this document must show:</strong></p>
                             <ul style="margin-top:10px;">
                                 <li>Tax has been paid on your content creator income</li>
@@ -1180,7 +1056,7 @@
                 ]
             },
             'business-owner': {
-                title: "Business Owner / Director",
+                title: "Business Owner / Director (Multiple Companies)",
                 summary: "You will need business bank statements for each company, personal bank statements, Company House registrations, and business accounts for all companies",
                 common: [
                     {
@@ -1222,6 +1098,7 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
+                            <div id="c3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
@@ -1256,7 +1133,7 @@
                         title: "Company Evidence — Invoices, Bank Statements, or Contracts",
                         what: "Show your company (or companies) is operating",
                         details: `
-                            <p><strong>Note:</strong> Provide evidence for your company</p>
+                            <p><strong>Note:</strong> If using multiple companies, provide evidence for each</p>
                             <p>Select your company evidence type:</p>
                             <select class="doc-select" onchange="handleDocSelect(this, 'bo1')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
                                 <option value="" selected disabled>-- Choose your document --</option>
@@ -1264,6 +1141,7 @@
                                 <option value="statements">3 months company bank statements</option>
                                 <option value="contracts">Service agreements or client contracts</option>
                             </select>
+                            <div id="bo1-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <div class="download-hint">💾 File name: Company_Evidence.pdf</div>
                         `
                     },
@@ -1284,14 +1162,15 @@
                         title: "Companies House Incorporation Certificate (for each company)",
                         what: "Your company registration certificate from Companies House",
                         details: `
-                            <p><strong>Get your Certificate of Incorporation from Companies House</strong></p>
-                            <p>Example: [YOUR_COMPANY_NAME] (Company Number [YOUR_COMPANY_NUMBER]) incorporated [YOUR_INCORPORATION_DATE]</p>
+                            <p><strong>Get your Certificate of Incorporation from Companies House for EACH company you are a director of</strong></p>
+                            <p>Example: STURDY OFF PRODUCTIONS LTD (Company Number 14364644) incorporated 20th September 2022</p>
                             <p>Select how you will obtain the certificate:</p>
                             <select class="doc-select" onchange="handleDocSelect(this, 'bo3')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
                                 <option value="" selected disabled>-- Choose your option --</option>
                                 <option value="certified">Option 1: Order a certified company certificate (recommended)</option>
                                 <option value="snapshot">Option 2: Company snapshot (free PDF)</option>
                             </select>
+                            <div id="bo3-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <p style="margin-top:15px;"><strong>Get it here:</strong> <a href="https://find-and-update.company-information.service.gov.uk/company/YOUR_COMPANY_NUMBER/more" target="_blank">https://find-and-update.company-information.service.gov.uk/company/YOUR_COMPANY_NUMBER/more</a></p>
                             <div class="download-hint">💾 File name: Certificate_of_Incorporation.pdf</div>
                         `
@@ -1299,19 +1178,19 @@
                     {
                         num: "BO4",
                         title: "Tax Submission Evidence",
-                        what: "Proof of tax payments made to HMRC within last 12 months",
+                        what: "Proof of business taxes paid with National Insurance number",
                         details: `
                             <p><strong>Required:</strong> Include your National Insurance number on all documents</p>
-                            <p>Provide one or more of the following (within last 12 months):</p>
+                            <p>Select your tax evidence type:</p>
                             <select class="doc-select" onchange="handleDocSelect(this, 'bo4')" style="width:100%; padding:12px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:inherit; background:white; margin-bottom:10px;">
                                 <option value="" selected disabled>-- Choose your document --</option>
-                                <option value="hmrc">HMRC tax payment confirmation</option>
-                                <option value="selfassessment">Self-assessment payment receipt</option>
+                                <option value="sa302">SA302 or tax calculation from HMRC</option>
                                 <option value="corporation">Corporation Tax payment receipt</option>
-                                <option value="vat">VAT payment receipts (if registered)</option>
-                                <option value="other">Any other HMRC tax payment documentation</option>
+                                <option value="vat">VAT receipts (if registered)</option>
+                                <option value="selfassessment">Self-assessment payment receipt</option>
                             </select>
-                            <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
+                            <div id="bo4-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
+                            <div class="download-hint">💾 File name: Tax_Submission_Evidence_All_Companies.pdf</div>
                         `
                     },
                     {
@@ -1328,6 +1207,7 @@
                                 <option value="receipt">Receipt of tax paid for the latest financial year</option>
                             </select>
                             <p style="margin-top:15px;"><strong>What this document must show:</strong></p>
+                            <div id="bo5-prompt" class="prompt-box" style="display:none; margin-top:15px; padding:15px; background:var(--bg-tertiary); border-radius:8px; border-left:4px solid var(--violet-main);"></div>
                             <ul style="margin-top:10px;">
                                 <li>Tax has been paid on your income (salary or dividends)</li>
                                 <li>Official letterhead or HMRC branding</li>
@@ -1368,26 +1248,20 @@
                     'hotel': 'Generate a hotel booking confirmation in another country as proof of location. Include: my name, hotel name, address, check-in/out dates, booking reference.',
                     'airbnb': 'Generate an Airbnb or rental booking confirmation in another country. Include: my name, property address, host name, rental dates, booking reference.'
                 },
-                'e5': {
-                    'payslips': 'I have uploaded my raw payslips. Please analyze them and create a professional Salary & Tax Contributions Summary document for my Thailand DTV visa application. Include: monthly breakdown table with basic pay, bonus, gross pay, income tax, employee NI, and net pay for each month; year-to-date summary with totals; employee and employer details including NI number, payroll ID, tax code; notes section explaining tax code. Format as a professional business document. IMPORTANT: Save as a Word document (.docx).',
-                    'p60': 'Generate a P60 End of Year Certificate showing my total pay and tax for the tax year. Include: my employer name and PAYE reference, my name and NI number, total pay for the year, total tax deducted, tax code used. IMPORTANT: Save as a Word document (.docx).',
-                    'summary': 'Create a Salary and Tax Contributions Summary document using the information from my uploaded payslips. Format as a professional table showing monthly breakdowns and year-to-date totals with employer details. IMPORTANT: Save as a Word document (.docx).'
-                },
                 'se1': {
                     'invoices': 'Generate 3-6 recent business invoices paid by clients. For each invoice include: my business name, client name, amount, date, description of services, invoice number.',
                     'statements': 'Generate 3 months of business bank statements. Include: business account holder name, business name, transactions showing client payments, opening/closing balances.'
                 },
                 'se7': {
-                    'hmrc': 'Generate HMRC tax payment confirmation showing self-employed tax paid. Include: my name, National Insurance number, tax year, amount paid, payment date, HMRC reference number.',
-                    'selfassessment': 'Generate self-assessment payment receipt. Include: my name, UTR, tax year, amount paid, payment date, HMRC reference.',
-                    'vat': 'Generate VAT payment receipts. Include: my business name, VAT number, period, amount paid, payment date, HMRC reference.',
-                    'other': 'Generate documentation showing tax payments made to HMRC. Include: my name, type of tax, amount paid, payment date, HMRC reference, tax year.'
+                    'sa302': 'Generate an SA302 or tax calculation from HMRC showing self-employed tax paid. Include: my name, National Insurance number, tax year, total income, tax paid, NI contributions.',
+                    'vat': 'Generate VAT receipts showing VAT paid (if registered). Include: my business name, VAT number, period, amount paid, HMRC reference.',
+                    'corporation': 'Generate Corporation Tax payment receipt. Include: my company name, tax year, amount paid, payment date, HMRC reference.',
+                    'hmrc': 'Generate HMRC tax payment confirmation for self-assessment. Include: my name, UTR, tax year, amount paid, payment date.'
                 },
                 'cc5': {
-                    'hmrc': 'Generate HMRC tax payment confirmation for content creator income. Include: my name, National Insurance number, tax year, amount paid, payment date, HMRC reference.',
-                    'selfassessment': 'Generate self-assessment payment receipt for content creator income. Include: my name, UTR, tax year, amount paid, payment date.',
-                    'vat': 'Generate VAT payment receipts (if registered). Include: my business name, VAT number, period, amount paid, HMRC reference.',
-                    'other': 'Generate documentation showing tax payments made to HMRC for content creator income. Include: payment type, amount, date, HMRC reference.'
+                    'sa302': 'Generate an SA302 or tax calculation from HMRC for content creator income. Include: my name, National Insurance number, tax year, total content creator income, tax paid, NI contributions.',
+                    'platform': 'Generate platform 1099s or tax documents showing content creator income. Include: platform name (YouTube/TikTok/Instagram), my name, tax year, total earnings.',
+                    'hmrc': 'Generate HMRC tax payment confirmation. Include: my name, UTR, tax year, amount paid on content creator income.'
                 },
                 'cc7': {
                     'accountant': 'Generate an accountant confirmation letter confirming tax paid for content creator income. Include: my name, business/content creator name, total income for the year, tax paid amount, accountant signature and details.',
@@ -1401,15 +1275,14 @@
                     'contracts': 'Generate service agreements or client contracts. Include: client name, services provided, payment terms, contract dates.'
                 },
                 'bo3': {
-                    'certified': 'Generate a Companies House certified certificate of incorporation. Include: company name [YOUR_COMPANY_NAME], company number [YOUR_COMPANY_NUMBER], incorporation date [YOUR_INCORPORATION_DATE], director names, official Companies House seal and certification.',
-                    'snapshot': 'Generate a Companies House company snapshot PDF. Include: company name [YOUR_COMPANY_NAME], company number [YOUR_COMPANY_NUMBER], incorporation date [YOUR_INCORPORATION_DATE], registered address, director information, company status Active.'
+                    'certified': 'Generate a Companies House certified certificate of incorporation. Include: company name STURDY OFF PRODUCTIONS LTD, company number 14364644, incorporation date 20th September 2022, director names, official Companies House seal and certification.',
+                    'snapshot': 'Generate a Companies House company snapshot PDF. Include: company name STURDY OFF PRODUCTIONS LTD, company number 14364644, incorporation date 20th September 2022, registered address, director information, company status Active.'
                 },
                 'bo4': {
-                    'hmrc': 'Generate HMRC tax payment confirmation for business taxes paid. Include: my name, NI number, tax type, amount paid, payment date, HMRC reference.',
-                    'selfassessment': 'Generate self-assessment payment receipt. Include: my name, UTR, tax year, amount paid on salary/dividends, payment date.',
+                    'sa302': 'Generate SA302 or tax calculation from HMRC for business owner. Include: my name, NI number, tax year, salary/dividends income, tax paid.',
                     'corporation': 'Generate Corporation Tax payment receipt. Include: company name, tax year, taxable profits, amount paid, HMRC reference.',
-                    'vat': 'Generate VAT payment receipts. Include: company name, VAT number, period, amount paid, payment date.',
-                    'other': 'Generate documentation showing tax payments made to HMRC. Include: tax type, amount paid, payment date, HMRC reference number.'
+                    'vat': 'Generate VAT receipts if registered. Include: company name, VAT number, period, amount paid.',
+                    'selfassessment': 'Generate Self-assessment payment receipt for dividend tax. Include: my name, UTR, tax year, dividend amount, tax paid.'
                 },
                 'bo5': {
                     'accountant': 'Generate an accountant confirmation letter confirming tax paid. Include: my name, company name, salary/dividends for the year, tax paid amount, accountant signature and details.',
@@ -1418,6 +1291,23 @@
                     'receipt': 'Generate receipt of tax paid for latest financial year. Include: my name, tax year, amount paid, payment date, HMRC reference.'
                 }
             };
+            
+            const promptBox = document.getElementById(section + '-prompt');
+            if (promptBox && prompts[section] && prompts[section][value]) {
+                const promptText = prompts[section][value];
+                promptBox.innerHTML = `<strong>AI Prompt:</strong><br><textarea style="width:100%; min-height:80px; margin-top:10px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px;">${promptText}</textarea><br><br><button onclick="copyPrompt('${section}')" style="background:var(--violet-main); color:white; padding:8px 16px; border:none; border-radius:6px; cursor:pointer; font-family:inherit;">Copy Prompt</button>`;
+                promptBox.style.display = 'block';
+            }
+        }
+        
+        function copyPrompt(section) {
+            const promptBox = document.getElementById(section + '-prompt');
+            const textarea = promptBox.querySelector('textarea');
+            if (textarea) {
+                textarea.select();
+                document.execCommand('copy');
+                alert('Prompt copied! You can paste this into ChatGPT or Claude.');
+            }
         }
 
         function selectOption(questionNum, value, element) {
@@ -1485,6 +1375,7 @@
             
             // Common documents
             html += '<div class="documents-section">';
+            html += '<h3 class="section-title">Common Documents (Everyone Needs These)</h3>';
             employmentData.common.forEach(doc => {
                 html += createDocumentHTML(doc);
             });
@@ -1509,50 +1400,15 @@
 
         function createDocumentHTML(doc) {
             return `
-                <div class="document-item" data-doc-id="${doc.num}">
-                    <div class="document-header">
-                        <div class="document-number">${doc.num}</div>
-                        <div class="document-title-section">
-                            <div class="document-title">${doc.title}</div>
-                            <div class="document-what">${doc.what}</div>
-                        </div>
-                        <div class="document-status">
-                            <label class="status-checkbox">
-                                <input type="checkbox" class="doc-complete" data-doc="${doc.num}" onchange="updateProgress()">
-                                <span class="status-text">Incomplete</span>
-                            </label>
-                        </div>
-                    </div>
+                <div class="document-item">
+                    <div class="document-number">${doc.num}</div>
+                    <div class="document-title">${doc.title}</div>
+                    <div class="document-what">${doc.what}</div>
                     <div class="document-details">
                         ${doc.details}
                     </div>
                 </div>
             `;
-        }
-
-        // Update progress bar
-        function updateProgress() {
-            const checkboxes = document.querySelectorAll('.doc-complete');
-            const total = checkboxes.length;
-            const completed = document.querySelectorAll('.doc-complete:checked').length;
-            const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
-            
-            const progressBar = document.getElementById('progressBar');
-            const progressText = document.getElementById('progressText');
-            
-            if (progressBar && progressText) {
-                progressBar.style.width = percentage + '%';
-                progressText.textContent = completed + ' of ' + total + ' documents complete (' + percentage + '%)';
-            }
-            
-            // Update individual status text
-            checkboxes.forEach(cb => {
-                const statusText = cb.parentElement.querySelector('.status-text');
-                if (statusText) {
-                    statusText.textContent = cb.checked ? '✓ Complete' : 'Incomplete';
-                    statusText.style.color = cb.checked ? '#10B981' : '#9CA3AF';
-                }
-            });
         }
 
         function restartQuiz() {
@@ -1579,162 +1435,6 @@
             // Show quiz, hide results
             document.getElementById('quiz').style.display = 'block';
             document.getElementById('results').classList.remove('active');
-        }
-
-        // Generate and download folder structure
-        async function downloadDocumentFolder() {
-            console.log('Download button clicked');
-            
-            // Check if libraries are loaded
-            if (typeof JSZip === 'undefined') {
-                alert('Error: JSZip library not loaded. Please refresh the page.');
-                return;
-            }
-            if (typeof saveAs === 'undefined') {
-                alert('Error: FileSaver library not loaded. Please refresh the page.');
-                return;
-            }
-            
-            const zip = new JSZip();
-            const employmentType = answers[1];
-            const docData = documents[employmentType];
-            
-            // Create Templates folder
-            const templatesFolder = zip.folder("01 - Templates to Fill");
-            
-            // Create Your Documents folder  
-            const uploadsFolder = zip.folder("02 - Your Documents (Upload Here)");
-            
-            // Get all document items from the results
-            const docItems = document.querySelectorAll('.document-item');
-            const docList = [];
-            
-            docItems.forEach(item => {
-                const numEl = item.querySelector('.document-number');
-                const titleEl = item.querySelector('.document-title');
-                const promptBox = item.querySelector('.prompt-box');
-                
-                if (numEl && titleEl) {
-                    const num = numEl.textContent.trim();
-                    const numLower = num.toLowerCase();
-                    const title = titleEl.textContent.trim();
-                    docList.push({ num, title });
-                    
-                    // Create folder in uploads
-                    const docFolder = uploadsFolder.folder(`${num} - ${title.substring(0, 40)}`);
-                    
-                    // Map document number to prompt section
-                    // C3->c3, BO1->bo1, SE7->se7, CC5->cc5, etc.
-                    let section = '';
-                    if (numLower.startsWith('c')) section = 'c' + numLower.substring(1); // c3, c4, etc.
-                    else if (numLower.startsWith('bo')) section = numLower; // bo1, bo2, etc.
-                    else if (numLower.startsWith('se')) section = numLower; // se1, se7, etc.
-                    else if (numLower.startsWith('cc')) section = numLower; // cc3, cc5, etc.
-                    else if (numLower.startsWith('e')) section = 'e' + numLower.substring(1); // e1, e5, etc.
-                    
-                    // Try to get AI prompt from the dropdown if selected
-                    let aiPrompt = '';
-                    const selectEl = item.querySelector('.doc-select');
-                    if (selectEl && selectEl.value && section) {
-                        const value = selectEl.value;
-                        if (prompts[section] && prompts[section][value]) {
-                            aiPrompt = prompts[section][value];
-                        }
-                    }
-                    
-                    // Create AI prompt file in the folder
-                    let specialInstructions = '';
-                    if (num === 'E5') {
-                        specialInstructions = `\n\nSPECIAL INSTRUCTIONS FOR E5 (TAX DOCUMENTATION):\n--------------------------------------------------\nThis document requires your raw payslips. Please:\n1. Upload your payslips (PDF or images) to this folder\n2. The AI will analyze them and generate a Salary & Tax Summary\n3. Include payslips showing: monthly basic pay, any bonuses, tax deducted, NI contributions\n4. Payslips should cover the last 3-6 months\n`;
-                    }
-                    
-                    const promptFileContent = `AI PROMPT FOR: ${title}
-${'='.repeat(title.length + 14)}
-
-Document Code: ${num.toUpperCase()}
-Employment Type: ${docData.title}
-
-${aiPrompt ? 'GENERATED AI PROMPT:' : 'DEFAULT AI PROMPT:'}
-${'='.repeat(20)}
-${aiPrompt || '[Select an option from the dropdown on the website to generate a specific AI prompt for this document]\n\nAlternatively, describe what you need and ask ChatGPT/Claude to help you create this document.'}${specialInstructions}
-
-HOW TO USE:
------------
-1. Copy the prompt above
-2. Go to ChatGPT or Claude
-3. Paste the prompt and send it
-4. The AI will generate your document
-5. IMPORTANT: Ask the AI to save it as a Word document (.docx)
-6. Download the Word doc and upload it back to this folder
-
-TIP: You can drag this entire folder into ChatGPT and ask:
-"Help me generate all these documents for my Thailand DTV visa"
-`;
-                    docFolder.file(`00 - AI PROMPT - ${num.toUpperCase()}.txt`, promptFileContent);
-                    
-
-                    
-                    // Create template file (proper Word document)
-                    const templateContent = `TEMPLATE: ${title}
-${'='.repeat(title.length + 9)}
-
-Document: ${num.toUpperCase()}
-Required for: ${docData.title}
-
-[Fill in your details here]
-
-${aiPrompt ? 'AI PROMPT (for reference):\n' + aiPrompt : 'TIP: Use the AI prompt generator on the website to create this document,\nor use the prompt file in your document folder.'}
-`;
-                    templatesFolder.file(`${num.toUpperCase()} - ${title.substring(0, 30)}.txt`);
-                }
-            });
-            
-            // Create README for templates
-            let readmeContent = `DTV DOCUMENT TEMPLATES
-=====================
-
-Employment Type: ${docData.title}
-Generated: ${new Date().toLocaleDateString()}
-
-HOW TO USE:
------------
-1. Open each template file in the "01 - Templates to Fill" folder
-2. Fill in your details OR use the AI prompt on the website
-3. Save completed documents to the "02 - Your Documents" folder
-4. Upload all documents when applying for DTV visa
-
-DOCUMENTS NEEDED:
------------------
-`;
-            docList.forEach(doc => {
-                readmeContent += `\n${doc.num}: ${doc.title}`;
-            });
-            readmeContent += `\n\nTIP: Upload this folder to ChatGPT or Claude and ask:
-"Help me fill out these DTV visa document templates"\n`;
-            templatesFolder.file("README - Start Here.txt", readmeContent);
-            
-            // Create README for uploads
-            uploadsFolder.file("README.txt", `YOUR DOCUMENTS
-==============
-
-Upload your completed/real documents into each numbered folder.
-
-Each folder matches a document from your checklist.
-
-TIP: Upload this folder to AI and ask for help organizing
-your documents for the DTV visa application.
-`);
-            
-            // Generate and download ZIP
-            try {
-                const blob = await zip.generateAsync({ type: "blob" });
-                const safeTitle = docData.title.replace(/[^a-z0-9]/gi, '_').substring(0, 30);
-                saveAs(blob, `DTV_Documents_${safeTitle}_${new Date().toISOString().split('T')[0]}.zip`);
-                console.log('Download started successfully');
-            } catch (error) {
-                console.error('Download failed:', error);
-                alert('Download failed. Check console for details.');
-            }
         }
     </script>
 </body>
