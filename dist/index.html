@@ -247,16 +247,7 @@
             animation: fadeIn 0.4s ease;
         }
 
-        /* Hide quiz content until JS loads (SEO fix) */
-        .quiz-content.js-loading .quiz-question,
-        .quiz-content.js-loading .result-container {
-            display: none !important;
-        }
-
-        .quiz-content.js-loaded .quiz-question:first-of-type {
-            display: block;
-        }
-
+        /* Show only active question */
         .quiz-question.active {
             display: block;
         }
@@ -806,7 +797,7 @@
     <section class="quiz-section" id="quiz">
         <div class="quiz-container quiz-content js-loading">
             <!-- Question 1: Age -->
-            <div class="quiz-question active" data-question="1">
+            <div class="quiz-question" data-question="1">
                 <div class="question-number">Q1</div>
                 <h3>How old are you?</h3>
                 <p>You must be at least 20 years old to apply for the DTV visa.</p>
@@ -1542,6 +1533,10 @@
                     document.getElementById('age-continue').disabled = !this.value;
                 });
             }
+            
+            // Show first question on load (after noscript/CSS hides others)
+            showQuestion(1);
+            
             updateBottomProgressBar();
         });
 
