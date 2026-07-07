@@ -1595,9 +1595,18 @@
                 return;
             }
             
-            const zip = new JSZip();
+            // Get employment type from answers or fallback to current results
             const employmentType = answers[1];
+            if (!employmentType) {
+                alert('Please complete the quiz first to select your employment type.');
+                return;
+            }
+            
             const docData = documents[employmentType];
+            if (!docData) {
+                alert('Error: Could not find document data for your employment type. Please refresh and try again.');
+                return;
+            }
             
             // Create Templates folder
             const templatesFolder = zip.folder("01 - Templates to Fill");
@@ -1637,7 +1646,7 @@
                     const selectEl = item.querySelector('.doc-select');
                     if (selectEl && selectEl.value && section) {
                         const value = selectEl.value;
-                        if (prompts[section] && prompts[section][value]) {
+                        if (typeof prompts !== 'undefined' && prompts[section] && prompts[section][value]) {
                             aiPrompt = prompts[section][value];
                         }
                     }
