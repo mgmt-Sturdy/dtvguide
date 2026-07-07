@@ -1608,6 +1608,9 @@
                 return;
             }
             
+            // Create new ZIP
+            const zip = new JSZip();
+            
             // Create Templates folder
             const templatesFolder = zip.folder("01 - Templates to Fill");
             
