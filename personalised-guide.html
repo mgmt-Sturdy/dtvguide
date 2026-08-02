@@ -152,6 +152,7 @@ footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-siz
 
 <!-- QUIZ -->
 <section id="quiz">
+<p style="text-align:right;font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;">Signed in as <span id="signedInEmail"></span> · <a href="#" onclick="signOut(); return false;" style="color:var(--violet-main);">Not you? Sign out</a></p>
 <div id="q1" class="quiz-step">
 <h2>What's your employment situation?</h2>
 <div class="option" onclick="selectOption(1,'employed')"><div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg> Employed (Full-Time)</div><div class="option-desc">You have a job with a company</div></div>
@@ -198,10 +199,9 @@ footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-siz
 <script>
 // ---- Config ----
 const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxTSYWRWLgHEArL0XosN-Ji1A1lUrR6EV6UJBLfxvvHATplL1sO4vTROq7S59Cy9Nqi/exec';
-// TODO: replace with the real Stripe Payment Link once created (Stripe dashboard -> Payment Links).
-// Success redirect on that link should be set to:
+// Success redirect on this link should be set to:
 //   https://www.dtvguide.com/personalised-guide.html?session_id={CHECKOUT_SESSION_ID}
-const STRIPE_PAYMENT_LINK_URL = 'REPLACE_WITH_STRIPE_PAYMENT_LINK';
+const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/28EbJ370f06N2ikdE70Fi00';
 
 // Emails granted free access without going through Stripe (comps, your own testing, etc.)
 const COMPED_EMAILS = ['mgmt@sturdyoff.com'];
@@ -217,8 +217,15 @@ function showLocked() {
 
 function unlockContent(email) {
     if (email) localStorage.setItem('dtv_guide_email', email);
+    document.getElementById('signedInEmail').textContent = email || '';
     document.getElementById('locked').classList.remove('active');
     document.getElementById('quiz').classList.add('active');
+}
+
+function signOut() {
+    localStorage.removeItem('dtv_guide_email');
+    document.getElementById('results').classList.remove('active');
+    showLocked();
 }
 
 async function verify(params) {

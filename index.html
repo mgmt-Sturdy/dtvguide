@@ -1811,7 +1811,7 @@
         function showFinalResult() {
             document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
             
-            const percentage = Math.round((currentScore / MAX_SCORE) * 100);
+            const percentage = Math.min(100, Math.round((currentScore / MAX_SCORE) * 100));
             const issues = [];
             let totalWeeks = 0;
             
@@ -2037,7 +2037,7 @@
         
         // Save quiz data to Google Sheet (fire-and-forget for compatibility with existing script)
         function saveToGoogleSheet(status) {
-            const percentage = Math.round((currentScore / MAX_SCORE) * 100);
+            const percentage = Math.min(100, Math.round((currentScore / MAX_SCORE) * 100));
             const country = answers['2'] || '';
             const passport = answers['3'] || '';
             const remoteIncome = answers['4'] || '';
