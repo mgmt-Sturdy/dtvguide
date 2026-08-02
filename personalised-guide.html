@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>Personalised Guide — DTV Document Templates</title>
+<link rel="icon" type="image/png" href="assets/thailand-flag.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<style>
+:root {
+    --violet-deep: #5B21B6;
+    --violet-main: #7C3AED;
+    --violet-light: #A78BFA;
+    --accent-pink: #EC4899;
+    --accent-cyan: #06B6D4;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8F7FF;
+    --bg-tertiary: #F3F0FF;
+    --text-primary: #0F0F0F;
+    --text-secondary: #4B5563;
+    --text-muted: #9CA3AF;
+    --border: #E5E7EB;
+    --shadow-soft: 0 4px 20px rgba(124, 58, 237, 0.08);
+    --shadow-medium: 0 8px 40px rgba(124, 58, 237, 0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1.2; }
+
+.nav-floating { position: fixed; top: 1rem; right: 1rem; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 100px; padding: 0.6rem 1rem; z-index: 1000; box-shadow: var(--shadow-medium); display: flex; gap: 1rem; align-items: center; }
+.nav-logo { display: none; }
+.nav-links { display: flex; gap: 1rem; align-items: center; }
+.nav-link { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
+.nav-link:hover { color: var(--violet-main); }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 6rem 1.5rem 4rem; }
+
+.page-header { text-align: center; margin-bottom: 3rem; padding: 2rem 0; }
+.page-header h1 { font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--violet-deep), var(--accent-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-header p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+.main-content { background: white; border-radius: 20px; padding: 3rem; box-shadow: var(--shadow-medium); margin-bottom: 2rem; }
+@media (max-width: 640px) { .main-content { padding: 1.75rem; } .unlock-form { flex-direction: column; } .unlock-form button { white-space: nowrap; } }
+
+section { display: none; }
+section.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Locked state */
+.price-tag { display: inline-block; background: var(--bg-tertiary); color: var(--violet-deep); font-weight: 700; font-size: 1.5rem; padding: 0.5rem 1.5rem; border-radius: 100px; margin: 1rem 0 1.5rem; }
+.feature-list { text-align: left; max-width: 480px; margin: 0 auto 2rem; }
+.feature-list li { list-style: none; padding: 0.6rem 0; color: var(--text-secondary); display: flex; gap: 0.6rem; align-items: flex-start; }
+.feature-list li::before { content: "✓"; color: var(--violet-main); font-weight: 700; }
+.unlock-row { max-width: 420px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center; }
+.unlock-row p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+.unlock-form { display: flex; gap: 0.5rem; }
+.unlock-form input { flex: 1; padding: 0.75rem 1rem; border: 2px solid var(--border); border-radius: 10px; font-size: 0.95rem; font-family: inherit; }
+.unlock-form input:focus { outline: none; border-color: var(--violet-light); }
+.status-msg { margin-top: 0.75rem; font-size: 0.85rem; }
+.status-msg.error { color: #DC2626; }
+.status-msg.ok { color: #16A34A; }
+
+.option { background: var(--bg-secondary); border: 2px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 15px; cursor: pointer; transition: all 0.3s ease; }
+.option:hover { border-color: var(--violet-light); box-shadow: var(--shadow-soft); }
+.option.selected { border-color: var(--violet-main); background: var(--bg-tertiary); }
+.option-text { font-size: 16px; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+.option-text svg { flex-shrink: 0; color: var(--violet-main); }
+.option-desc { font-size: 13px; color: var(--text-secondary); margin-top: 5px; }
+
+.button-group { display: flex; gap: 15px; margin-top: 30px; }
+button { padding: 12px 28px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+.btn-primary { background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); color: white; }
+.btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-secondary { background: var(--bg-secondary); color: var(--text-secondary); border: 2px solid var(--border); }
+.btn-secondary:hover { background: var(--bg-tertiary); border-color: var(--violet-light); }
+.btn-cta { display: inline-flex; align-items: center; justify-content: center; padding: 1rem 2.5rem; font-size: 1.05rem; text-decoration: none; }
+
+.results-header { background: linear-gradient(135deg, var(--violet-deep), var(--accent-pink)); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; }
+.results-header h2 { font-size: 28px; margin-bottom: 10px; color: white; }
+.results-header p { font-size: 16px; opacity: 0.9; }
+
+.document-item { background: var(--bg-secondary); border-left: 4px solid var(--violet-main); border-radius: 8px; padding: 25px; margin-bottom: 20px; }
+.document-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.document-number { background: var(--violet-main); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.document-title { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+.document-what { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; }
+.document-details { background: white; padding: 16px; border-radius: 6px; font-size: 14px; color: var(--text-secondary); }
+.document-details strong { color: var(--violet-main); }
+.btn-download { background: linear-gradient(135deg, #48bb78, #38a169); color: white; padding: 10px 20px; font-size: 14px; margin-top: 15px; }
+.btn-download:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(72,187,120,0.3); }
+.btn-zip { background: linear-gradient(135deg, #ed8936, #dd6b20); color: white; padding: 18px 36px; font-size: 20px; width: 100%; margin-bottom: 10px; }
+.btn-zip:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(237,137,54,0.3); }
+.info-box { background: var(--bg-tertiary); border-left: 4px solid var(--violet-main); padding: 20px; border-radius: 8px; margin-bottom: 30px; font-size: 14px; }
+
+footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<nav class="nav-floating">
+    <a href="index.html" class="nav-logo">DTV Guide</a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="personalised-guide.html" class="nav-link" style="color: var(--violet-main);">Personalised Guide</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+    </div>
+</nav>
+
+<div class="container">
+<header class="page-header">
+    <h1>Your Personalised DTV Guide</h1>
+    <p>Ready-to-fill document templates, matched to your exact situation.</p>
+</header>
+
+<div class="main-content">
+
+<!-- LOCKED / SIGN-IN STATE -->
+<section id="locked" class="active">
+    <div style="text-align:center">
+        <h2>Skip the guesswork. Get the exact letters you need.</h2>
+        <div class="price-tag" id="priceTag">One-time purchase</div>
+        <ul class="feature-list">
+            <li>Every consent, employment, and funds letter for your category — pre-written, just fill in your details</li>
+            <li>Covers employed, self-employed, content creator, and company director applicants</li>
+            <li>Built from actually-approved DTV applications</li>
+            <li>Instant access after purchase, download anytime</li>
+        </ul>
+
+        <div class="unlock-row" style="border-top:none;padding-top:0;margin-top:0;">
+            <p style="font-weight:600;color:var(--text-primary);">Sign in with your email to access</p>
+            <form class="unlock-form" onsubmit="return unlockWithEmail(event)">
+                <input type="email" id="unlockEmail" placeholder="Enter your email" required>
+                <button type="submit" class="btn-primary">Sign In</button>
+            </form>
+            <p id="unlockStatus" class="status-msg"></p>
+        </div>
+
+        <p id="verifyingMsg" style="display:none;color:var(--text-muted);font-size:0.9rem;margin-top:1rem;">Checking your payment…</p>
+
+        <div class="unlock-row">
+            <p>Don't have access yet?</p>
+            <a id="buyButton" href="#" class="btn-secondary btn-cta">Get My Personalised Guide →</a>
+        </div>
+    </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+<div id="q1" class="quiz-step">
+<h2>What's your employment situation?</h2>
+<div class="option" onclick="selectOption(1,'employed')"><div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg> Employed (Full-Time)</div><div class="option-desc">You have a job with a company</div></div>
+<div class="option" onclick="selectOption(1,'self-employed')"><div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg> Self-Employed / Freelancer</div><div class="option-desc">You work for yourself as a sole trader</div></div>
+<div class="option" onclick="selectOption(1,'content-creator')"><div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l4 4V6l-4 4H4a1 1 0 0 0-1 1z"/><path d="M15 8a3 3 0 0 1 0 8"/><path d="M18 6a6 6 0 0 1 0 12"/></svg> Content Creator / Influencer</div><div class="option-desc">Income from YouTube, TikTok, Instagram, etc.</div></div>
+<div class="option" onclick="selectOption(1,'business-owner')"><div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg> Company Director</div><div class="option-desc">You run a limited company</div></div>
+</div>
+
+<div class="button-group">
+<button class="btn-primary" id="nextBtn" onclick="showResults()" disabled>See My Documents →</button>
+</div>
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+<div class="results-header">
+<h2 id="resultTitle">Your Documents</h2>
+<p id="resultSummary">Based on your answers</p>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<button class="btn-zip" onclick="downloadAll()" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg> Download All Templates</button>
+<p style="color:var(--text-secondary);font-size:14px">Or download individual templates below</p>
+</div>
+
+<div class="info-box">
+<strong>✓ What to do:</strong> Gather EVERY document listed below. These are the templates you need. Don't skip anything — you'll need all of them.
+</div>
+
+<div id="documentsContainer"></div>
+
+<div style="margin-top:40px;text-align:center">
+<button class="btn-secondary" onclick="restart()">← Start Over (Change Answers)</button>
+</div>
+</section>
+
+</div>
+</div>
+
+<footer>
+<p>Thailand DTV Visa — Personalised Document Guide</p>
+</footer>
+
+<script>
+// ---- Config ----
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxTSYWRWLgHEArL0XosN-Ji1A1lUrR6EV6UJBLfxvvHATplL1sO4vTROq7S59Cy9Nqi/exec';
+// TODO: replace with the real Stripe Payment Link once created (Stripe dashboard -> Payment Links).
+// Success redirect on that link should be set to:
+//   https://www.dtvguide.com/personalised-guide.html?session_id={CHECKOUT_SESSION_ID}
+const STRIPE_PAYMENT_LINK_URL = 'REPLACE_WITH_STRIPE_PAYMENT_LINK';
+
+// Emails granted free access without going through Stripe (comps, your own testing, etc.)
+const COMPED_EMAILS = ['mgmt@sturdyoff.com'];
+
+document.getElementById('buyButton').href = STRIPE_PAYMENT_LINK_URL;
+
+// ---- Paywall gate ----
+function showLocked() {
+    document.getElementById('locked').classList.add('active');
+    document.getElementById('quiz').classList.remove('active');
+    document.getElementById('results').classList.remove('active');
+}
+
+function unlockContent(email) {
+    if (email) localStorage.setItem('dtv_guide_email', email);
+    document.getElementById('locked').classList.remove('active');
+    document.getElementById('quiz').classList.add('active');
+}
+
+async function verify(params) {
+    try {
+        const res = await fetch(WEBAPP_URL + '?' + new URLSearchParams(params).toString());
+        return await res.json();
+    } catch (err) {
+        return { ok: false, error: 'network_error' };
+    }
+}
+
+async function unlockWithEmail(evt) {
+    evt.preventDefault();
+    const email = document.getElementById('unlockEmail').value.trim();
+    const statusEl = document.getElementById('unlockStatus');
+    statusEl.textContent = 'Checking…';
+    statusEl.className = 'status-msg';
+
+    if (COMPED_EMAILS.includes(email.toLowerCase())) {
+        statusEl.textContent = 'Unlocked!';
+        statusEl.className = 'status-msg ok';
+        unlockContent(email);
+        return false;
+    }
+
+    const result = await verify({ action: 'verifyEmail', email });
+    if (result.ok) {
+        statusEl.textContent = 'Unlocked!';
+        statusEl.className = 'status-msg ok';
+        unlockContent(email);
+    } else {
+        statusEl.textContent = "We couldn't find a purchase with that email. Double check it, or use the button above to buy.";
+        statusEl.className = 'status-msg error';
+    }
+    return false;
+}
+
+async function init() {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    const savedEmail = localStorage.getItem('dtv_guide_email');
+
+    if (sessionId) {
+        document.getElementById('verifyingMsg').style.display = 'block';
+        const result = await verify({ action: 'verifySession', session_id: sessionId });
+        document.getElementById('verifyingMsg').style.display = 'none';
+        if (result.ok) {
+            unlockContent(result.email);
+            history.replaceState(null, '', window.location.pathname);
+            return;
+        }
+        // Fall through to locked state if verification failed
+    }
+
+    if (savedEmail) {
+        unlockContent(savedEmail);
+        return;
+    }
+
+    showLocked();
+}
+
+init();
+
+// ---- Quiz + document templates ----
+let empType = '';
+
+const docSets = {
+'employed': [
+{num:'01', title:'Salary & Tax Confirmation Letter', what:'A letter from your employer confirming your salary, tax deductions, and employment status', content:`[COMPANY NAME / ISSUING ENTITY]
+[COMPANY ADDRESS LINE 1, LINE 2, POSTCODE, COUNTRY]
+[COMPANY REGISTRATION NUMBER] | Registered in [COUNTRY / JURISDICTION]
+[DATE OF LETTER]
+Ref: [REFERENCE NUMBER]
+
+To Whom It May Concern
+
+Re: Confirmation of Employment, Salary & Tax Contributions — [FULL LEGAL NAME]
+
+I, [NAME OF SIGNATORY], in my capacity as [ROLE OF SIGNATORY] of [COMPANY / FIRM NAME], hereby confirm the following details regarding the employment and remuneration of [FULL LEGAL NAME] for the [COUNTRY] tax year [TAX YEAR].
+
+[COMPANY NAME] is a [COUNTRY]-registered [COMPANY TYPE] ([COMPANY REGISTRATION NUMBER]), incorporated on [INCORPORATION DATE]. [FULL LEGAL NAME] has been employed since [EMPLOYMENT START DATE] in the role of [JOB TITLE], paid [PAYMENT FREQUENCY] through [PAYMENT METHOD]. Tax code: [TAX CODE]. [TAX/NATIONAL ID LABEL]: [TAX / NI NUMBER].
+
+Year-to-date gross pay: [GROSS YTD] | Total tax deducted: [TAX YTD] | Total NI / social-security contributions: [NI YTD]
+
+All salary payments are processed through [PAYROLL METHOD] and reported to [TAX AUTHORITY] accordingly.
+
+I confirm that all information provided above is true, accurate, and derived from official [SOURCE]. This letter is provided in support of [FULL LEGAL NAME]'s application for the Thailand Destination Thailand Visa (DTV).
+
+Yours faithfully,
+
+_______________________________
+[SIGNATORY FULL NAME] — printed name
+[SIGNATORY ROLE], [COMPANY / FIRM NAME]
+Date: [DATE]`},
+{num:'02', title:'Professional Portfolio', what:'A document showcasing your career history, skills, education, and key achievements', content:`Professional Portfolio
+Employed (Full-Time)
+
+About the Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Job title: [AS ON YOUR CONTRACT]
+Employer: [EMPLOYER NAME]
+Employer website: [COMPANY WEBSITE]
+Employed since: [START DATE]
+Years of experience: [NUMBER]
+Field: [2-4 WORDS]
+What you do day-to-day: [ONE SHORT CLAUSE]
+Work style: [FULLY REMOTE / HYBRID]
+LinkedIn: [URL]
+
+The applicant is a full-time employee of the employer shown above and performs this role remotely with the employer's written approval.
+
+Employment History
+Period: [YEAR]–PRESENT
+Job title: [JOB TITLE]
+Employer: [EMPLOYER]
+
+Education & Certifications
+Qualification: [DEGREE / CERTIFICATE]
+Institution: [INSTITUTION]
+Year: [YEAR]
+
+Key Achievements
+[ACHIEVEMENT 1 — one line]
+[ACHIEVEMENT 2 — one line (or delete line)]
+
+Declaration
+I, [FULL LEGAL NAME], certify that the information in this document is true and accurate to the best of my knowledge, and is provided in support of my application for the Destination Thailand Visa (DTV).
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'03', title:'Remote Working Statement', what:'Confirmation your employer has approved remote work from Thailand', content:`Remote Working Statement
+Employed (Full-Time)
+
+Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Passport no.: [PASSPORT NUMBER]
+
+Employment Status
+Employer: [EMPLOYER NAME]
+Employer country: [COUNTRY]
+Job title: [JOB TITLE]
+Contract type: [FULL-TIME / PART-TIME / CONTRACT]
+Start date: [START DATE]
+
+Remote Work Approval
+I, [FULL LEGAL NAME], confirm that my employer, [EMPLOYER NAME], has approved me to perform my role remotely from Thailand while holding a Destination Thailand Visa (DTV).
+
+This arrangement:
+• Is temporary and subject to ongoing review
+• Does not change my employment contract or obligations
+• Requires me to maintain suitable workspace and internet connectivity
+• Means all work is performed for and billed to [EMPLOYER NAME] outside Thailand
+
+I understand that:
+• I must remain tax-resident in [HOME COUNTRY]
+• My employer will continue to deduct [TAX/NATIONAL ID LABEL] contributions
+• I am responsible for complying with all Thai visa conditions
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'04', title:'Proof of Funds', what:'Bank statements showing you have at least THB 500,000', content:`Proof of Funds
+
+Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Date prepared: [DATE]
+
+Bank Details
+Bank name: [BANK NAME]
+Account holder: [FULL LEGAL NAME]
+Account number: [ACCOUNT NUMBER]
+Sort code: [SORT CODE] (UK) / IBAN: [IBAN] (EU/ROW)
+Currency: [CURRENCY]
+Current balance: [AMOUNT]
+Date of balance: [DATE]
+
+Evidence Attached
+• 3 months of bank statements ([MONTH 1], [MONTH 2], [MONTH 3])
+• Average monthly income: [AMOUNT]
+• Source of funds: [SALARY / SAVINGS / INVESTMENTS / OTHER]
+
+I confirm that the funds shown above are genuinely available to me and will be used to support my stay in Thailand under the Destination Thailand Visa (DTV).
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'05', title:'Processing Consent Letter', what:'Your undertaking to stay available during visa processing', content:`Consent Letter — Application Processing Undertaking
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], hereby give my consent to the processing of my personal data contained in my Destination Thailand Visa (DTV) application and the documents submitted in support thereof.
+
+I confirm that:
+1. All information provided is true, accurate, and complete to the best of my knowledge
+2. I understand that providing false information may result in refusal and future bans
+3. I will remain in [HOME COUNTRY] during the processing period
+4. I will respond promptly to any requests for additional information
+5. I will not travel to Thailand until my visa is approved and affixed to my passport
+
+I authorise the Royal Thai Embassy / Consulate to verify any of the information provided with third parties as necessary.
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'06', title:'Work Restrictions Consent Letter', what:'Confirmation you understand DTV visa work restrictions', content:`Work Restrictions Consent Letter
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], understand and agree to the following work restrictions under the Destination Thailand Visa (DTV):
+
+1. I will NOT seek or undertake employment with any Thai employer
+2. I will NOT work in a capacity that requires a Thai work permit
+3. I will NOT receive income sourced from within Thailand
+4. I will continue to work remotely for my [COUNTRY]-based employer(s)
+5. All work performed will be for entities outside Thailand and paid into non-Thai accounts
+6. I understand that breach of these conditions may result in visa cancellation and deportation
+
+I confirm that my presence in Thailand is solely for the purpose of remote working for overseas employers and that I have no intention to compete with the Thai labour market.
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'07', title:'Residence Consent Letter', what:'Declaration of your current home country residence', content:`Residence Consent Letter
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], declare the following:
+
+Current Residence
+Address: [FULL ADDRESS]
+City: [CITY]
+Postcode: [POSTCODE]
+Country: [COUNTRY]
+Resident since: [DATE]
+Proof of address attached: [UTILITY BILL / BANK STATEMENT / COUNCIL TAX / OTHER]
+
+Intentions in Thailand
+• Purpose of stay: [REMOTE WORK / DIGITAL NOMAD / RETIREMENT / OTHER]
+• Planned length of stay: [LENGTH] months
+• Accommodation in Thailand: [HOTEL / APARTMENT / FRIEND / OTHER]
+• Emergency contact in [HOME COUNTRY]: [NAME], [PHONE], [RELATIONSHIP]
+
+I confirm that:
+1. I am applying from my country of residence as required
+2. I will maintain my [HOME COUNTRY] address throughout the visa period
+3. I will inform the Thai authorities of any change of address
+4. I will leave Thailand before my visa expires or apply for extension in good time
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`}
+],
+'self-employed': [
+{num:'01', title:'Professional Portfolio', what:'Your professional background as a self-employed individual', content:`Professional Portfolio
+Self-Employed / Freelancer
+
+About the Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Profession: [YOUR PROFESSION]
+Business name: [BUSINESS NAME] (if applicable)
+Website: [WEBSITE URL]
+LinkedIn: [URL]
+Years of experience: [NUMBER]
+
+Services Offered
+[Service 1]: [Brief description]
+[Service 2]: [Brief description]
+[Service 3]: [Brief description]
+
+Client History
+Client: [CLIENT NAME]
+Project: [PROJECT DESCRIPTION]
+Period: [START] – [END]
+Location: [CLIENT LOCATION]
+
+Key Achievements
+[ACHIEVEMENT 1]
+[ACHIEVEMENT 2]
+
+Declaration
+I, [FULL LEGAL NAME], certify that the information in this document is true and accurate to the best of my knowledge, and is provided in support of my application for the Destination Thailand Visa (DTV).
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'02', title:'Remote Working Statement', what:'Confirmation your self-employed work is location-independent', content:`Remote Working Statement
+Self-Employed / Freelancer
+
+Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Passport no.: [PASSPORT NUMBER]
+
+Business Details
+Business name: [BUSINESS NAME]
+Profession: [YOUR PROFESSION]
+Services: [LIST KEY SERVICES]
+Clients located in: [COUNTRIES]
+All invoicing to: [COUNTRY / COUNTRIES]
+
+Remote Work Declaration
+I, [FULL LEGAL NAME], confirm that my self-employed work can be performed from any location with internet connectivity, including Thailand while holding a Destination Thailand Visa (DTV).
+
+I understand that:
+• My clients are based outside Thailand
+• I will not solicit work from Thai employers
+• All income will be invoiced to overseas clients
+• I remain tax-resident in [HOME COUNTRY]
+• I am responsible for my own tax reporting
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'03', title:'Proof of Funds', what:'Bank statements showing sufficient funds', content:`Proof of Funds
+
+Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Date prepared: [DATE]
+
+Bank Details
+Bank name: [BANK NAME]
+Account holder: [FULL LEGAL NAME]
+Account number: [ACCOUNT NUMBER]
+Sort code: [SORT CODE] (UK) / IBAN: [IBAN] (EU/ROW)
+Currency: [CURRENCY]
+Current balance: [AMOUNT]
+Date of balance: [DATE]
+
+Evidence Attached
+• 3 months of bank statements ([MONTH 1], [MONTH 2], [MONTH 3])
+• Average monthly income: [AMOUNT]
+• Source of funds: [CLIENT PAYMENTS / SAVINGS / INVESTMENTS / OTHER]
+
+I confirm that the funds shown above are genuinely available to me and will be used to support my stay in Thailand under the Destination Thailand Visa (DTV).
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'04', title:'Processing Consent Letter', what:'Your undertaking during visa processing', content:`Consent Letter — Application Processing Undertaking
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], hereby give my consent to the processing of my personal data contained in my Destination Thailand Visa (DTV) application and the documents submitted in support thereof.
+
+I confirm that:
+1. All information provided is true, accurate, and complete to the best of my knowledge
+2. I understand that providing false information may result in refusal and future bans
+3. I will remain in [HOME COUNTRY] during the processing period
+4. I will respond promptly to any requests for additional information
+5. I will not travel to Thailand until my visa is approved and affixed to my passport
+
+I authorise the Royal Thai Embassy / Consulate to verify any of the information provided with third parties as necessary.
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'05', title:'Work Restrictions Consent Letter', what:'Confirmation you understand DTV work restrictions', content:`Work Restrictions Consent Letter
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], understand and agree to the following work restrictions under the Destination Thailand Visa (DTV):
+
+1. I will NOT seek or undertake employment with any Thai employer
+2. I will NOT work in a capacity that requires a Thai work permit
+3. I will NOT receive income sourced from within Thailand
+4. I will continue to work remotely for my overseas clients
+5. All work performed will be for entities outside Thailand and paid into non-Thai accounts
+6. I understand that breach of these conditions may result in visa cancellation and deportation
+
+I confirm that my presence in Thailand is solely for the purpose of remote working for overseas clients and that I have no intention to compete with the Thai labour market.
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'06', title:'Residence Consent Letter', what:'Declaration of your home country residence', content:`Residence Consent Letter
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], declare the following:
+
+Current Residence
+Address: [FULL ADDRESS]
+City: [CITY]
+Postcode: [POSTCODE]
+Country: [COUNTRY]
+Resident since: [DATE]
+Proof of address attached: [UTILITY BILL / BANK STATEMENT / COUNCIL TAX / OTHER]
+
+Intentions in Thailand
+• Purpose of stay: [REMOTE WORK / DIGITAL NOMAD / RETIREMENT / OTHER]
+• Planned length of stay: [LENGTH] months
+• Accommodation in Thailand: [HOTEL / APARTMENT / FRIEND / OTHER]
+• Emergency contact in [HOME COUNTRY]: [NAME], [PHONE], [RELATIONSHIP]
+
+I confirm that:
+1. I am applying from my country of residence as required
+2. I will maintain my [HOME COUNTRY] address throughout the visa period
+3. I will inform the Thai authorities of any change of address
+4. I will leave Thailand before my visa expires or apply for extension in good time
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`}
+],
+'content-creator': [
+{num:'01', title:'Professional Portfolio', what:'Your digital presence and audience reach', content:`Professional Portfolio
+Content Creator / Influencer
+
+About the Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Content niche: [YOUR NICHE]
+Primary platforms: [YOUTUBE / TIKTOK / INSTAGRAM / TWITCH / OTHER]
+Audience size: [NUMBER] followers/subscribers
+Website: [WEBSITE URL]
+LinkedIn: [URL]
+Years creating content: [NUMBER]
+
+Platform Details
+Platform: [PLATFORM NAME]
+Handle: [@HANDLE]
+Followers: [NUMBER]
+Content focus: [BRIEF DESCRIPTION]
+Monetisation: [ADSENSE / BRAND DEALS / AFFILIATES / PATREON / OTHER]
+
+Brand Partnerships
+Brand: [BRAND NAME]
+Campaign: [CAMPAIGN DESCRIPTION]
+Period: [START] – [END]
+
+Declaration
+I, [FULL LEGAL NAME], certify that the information in this document is true and accurate to the best of my knowledge, and is provided in support of my application for the Destination Thailand Visa (DTV).
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'02', title:'Remote Working Statement', what:'Confirmation your content creation is location-independent', content:`Remote Working Statement
+Content Creator / Influencer
+
+Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Passport no.: [PASSPORT NUMBER]
+
+Content Business Details
+Primary platforms: [PLATFORMS]
+Content niche: [NICHE]
+Monetisation methods: [ADSENSE / BRAND DEALS / AFFILIATES / PATREON / OTHER]
+Revenue sources located in: [COUNTRIES]
+All payments to: [COUNTRY]
+
+Remote Work Declaration
+I, [FULL LEGAL NAME], confirm that my content creation work can be performed from any location with internet connectivity, including Thailand while holding a Destination Thailand Visa (DTV).
+
+I understand that:
+• My audience and revenue sources are global, not Thai-specific
+• I will not create content for Thai employers
+• All income will be from overseas platforms and advertisers
+• I remain tax-resident in [HOME COUNTRY]
+• I am responsible for my own tax reporting
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'03', title:'Proof of Funds', what:'Bank statements showing sufficient funds', content:`Proof of Funds
+
+Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Date prepared: [DATE]
+
+Bank Details
+Bank name: [BANK NAME]
+Account holder: [FULL LEGAL NAME]
+Account number: [ACCOUNT NUMBER]
+Sort code: [SORT CODE] (UK) / IBAN: [IBAN] (EU/ROW)
+Currency: [CURRENCY]
+Current balance: [AMOUNT]
+Date of balance: [DATE]
+
+Evidence Attached
+• 3 months of bank statements ([MONTH 1], [MONTH 2], [MONTH 3])
+• Average monthly income: [AMOUNT]
+• Source of funds: [PLATFORM REVENUE / BRAND DEALS / AFFILIATES / OTHER]
+
+I confirm that the funds shown above are genuinely available to me and will be used to support my stay in Thailand under the Destination Thailand Visa (DTV).
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'04', title:'Processing Consent Letter', what:'Your undertaking during visa processing', content:`Consent Letter — Application Processing Undertaking
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], hereby give my consent to the processing of my personal data contained in my Destination Thailand Visa (DTV) application and the documents submitted in support thereof.
+
+I confirm that:
+1. All information provided is true, accurate, and complete to the best of my knowledge
+2. I understand that providing false information may result in refusal and future bans
+3. I will remain in [HOME COUNTRY] during the processing period
+4. I will respond promptly to any requests for additional information
+5. I will not travel to Thailand until my visa is approved and affixed to my passport
+
+I authorise the Royal Thai Embassy / Consulate to verify any of the information provided with third parties as necessary.
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'05', title:'Work Restrictions Consent Letter', what:'Confirmation you understand DTV work restrictions', content:`Work Restrictions Consent Letter
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], understand and agree to the following work restrictions under the Destination Thailand Visa (DTV):
+
+1. I will NOT seek or undertake employment with any Thai employer
+2. I will NOT work in a capacity that requires a Thai work permit
+3. I will NOT receive income sourced from within Thailand
+4. I will continue to create content for my global audience
+5. All income will be from overseas platforms and advertisers
+6. I understand that breach of these conditions may result in visa cancellation and deportation
+
+I confirm that my presence in Thailand is solely for the purpose of remote content creation for a global audience and that I have no intention to compete with the Thai labour market.
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'06', title:'Residence Consent Letter', what:'Declaration of your home country residence', content:`Residence Consent Letter
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], declare the following:
+
+Current Residence
+Address: [FULL ADDRESS]
+City: [CITY]
+Postcode: [POSTCODE]
+Country: [COUNTRY]
+Resident since: [DATE]
+Proof of address attached: [UTILITY BILL / BANK STATEMENT / COUNCIL TAX / OTHER]
+
+Intentions in Thailand
+• Purpose of stay: [REMOTE WORK / DIGITAL NOMAD / RETIREMENT / OTHER]
+• Planned length of stay: [LENGTH] months
+• Accommodation in Thailand: [HOTEL / APARTMENT / FRIEND / OTHER]
+• Emergency contact in [HOME COUNTRY]: [NAME], [PHONE], [RELATIONSHIP]
+
+I confirm that:
+1. I am applying from my country of residence as required
+2. I will maintain my [HOME COUNTRY] address throughout the visa period
+3. I will inform the Thai authorities of any change of address
+4. I will leave Thailand before my visa expires or apply for extension in good time
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`}
+],
+'business-owner': [
+{num:'01', title:'Professional Portfolio', what:'Your company and director role information', content:`Professional Portfolio
+Company Director
+
+About the Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Role: [DIRECTOR / CEO / MANAGING DIRECTOR]
+Company: [COMPANY NAME]
+Company website: [WEBSITE URL]
+LinkedIn: [URL]
+Years in role: [NUMBER]
+
+Company Details
+Company name: [COMPANY NAME]
+Registration number: [COMPANY REGISTRATION NUMBER]
+Incorporated: [DATE]
+Jurisdiction: [COUNTRY]
+Business type: [LIMITED COMPANY / LLC / CORPORATION / OTHER]
+Employees: [NUMBER]
+Turnover: [AMOUNT]
+
+Business Activities
+[Activity 1]: [Description]
+[Activity 2]: [Description]
+[Activity 3]: [Description]
+
+Key Achievements
+[ACHIEVEMENT 1]
+[ACHIEVEMENT 2]
+
+Declaration
+I, [FULL LEGAL NAME], certify that the information in this document is true and accurate to the best of my knowledge, and is provided in support of my application for the Destination Thailand Visa (DTV).
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'02', title:'Remote Working Statement', what:'Confirmation your company is managed remotely', content:`Remote Working Statement
+Company Director
+
+Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Passport no.: [PASSPORT NUMBER]
+
+Company Details
+Company name: [COMPANY NAME]
+Registration number: [COMPANY REGISTRATION NUMBER]
+Jurisdiction: [COUNTRY]
+Business type: [LIMITED COMPANY / LLC / CORPORATION / OTHER]
+
+Remote Management Declaration
+I, [FULL LEGAL NAME], confirm that my duties as [ROLE] of [COMPANY NAME] can be performed remotely from Thailand while holding a Destination Thailand Visa (DTV).
+
+The company:
+• Is registered and operates in [COUNTRY]
+• Has clients based outside Thailand
+• Is managed through digital communication tools
+• Does not require my physical presence in [COUNTRY]
+
+I understand that:
+• I remain responsible for company compliance in [COUNTRY]
+• All company income is generated outside Thailand
+• I will not solicit Thai clients or employees
+• I remain tax-resident in [HOME COUNTRY]
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'03', title:'Proof of Funds', what:'Bank statements showing sufficient funds', content:`Proof of Funds
+
+Applicant
+Full name: [FULL LEGAL NAME]
+Nationality: [NATIONALITY]
+Date prepared: [DATE]
+
+Bank Details
+Bank name: [BANK NAME]
+Account holder: [FULL LEGAL NAME]
+Account number: [ACCOUNT NUMBER]
+Sort code: [SORT CODE] (UK) / IBAN: [IBAN] (EU/ROW)
+Currency: [CURRENCY]
+Current balance: [AMOUNT]
+Date of balance: [DATE]
+
+Evidence Attached
+• 3 months of bank statements ([MONTH 1], [MONTH 2], [MONTH 3])
+• Average monthly income: [AMOUNT]
+• Source of funds: [DIVIDENDS / DIRECTOR SALARY / COMPANY DISTRIBUTIONS / OTHER]
+
+I confirm that the funds shown above are genuinely available to me and will be used to support my stay in Thailand under the Destination Thailand Visa (DTV).
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'04', title:'Processing Consent Letter', what:'Your undertaking during visa processing', content:`Consent Letter — Application Processing Undertaking
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], hereby give my consent to the processing of my personal data contained in my Destination Thailand Visa (DTV) application and the documents submitted in support thereof.
+
+I confirm that:
+1. All information provided is true, accurate, and complete to the best of my knowledge
+2. I understand that providing false information may result in refusal and future bans
+3. I will remain in [HOME COUNTRY] during the processing period
+4. I will respond promptly to any requests for additional information
+5. I will not travel to Thailand until my visa is approved and affixed to my passport
+
+I authorise the Royal Thai Embassy / Consulate to verify any of the information provided with third parties as necessary.
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'05', title:'Work Restrictions Consent Letter', what:'Confirmation you understand DTV work restrictions', content:`Work Restrictions Consent Letter
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], understand and agree to the following work restrictions under the Destination Thailand Visa (DTV):
+
+1. I will NOT seek or undertake employment with any Thai employer
+2. I will NOT work in a capacity that requires a Thai work permit
+3. I will NOT receive income sourced from within Thailand
+4. I will continue to manage my overseas company remotely
+5. All company income will be generated outside Thailand
+6. I understand that breach of these conditions may result in visa cancellation and deportation
+
+I confirm that my presence in Thailand is solely for the purpose of remotely managing my [COUNTRY]-based company and that I have no intention to compete with the Thai labour market.
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`},
+{num:'06', title:'Residence Consent Letter', what:'Declaration of your home country residence', content:`Residence Consent Letter
+
+Date: [DATE]
+To: The Royal Thai Embassy / Royal Thai Consulate
+
+Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
+
+I, [FULL LEGAL NAME], declare the following:
+
+Current Residence
+Address: [FULL ADDRESS]
+City: [CITY]
+Postcode: [POSTCODE]
+Country: [COUNTRY]
+Resident since: [DATE]
+Proof of address attached: [UTILITY BILL / BANK STATEMENT / COUNCIL TAX / OTHER]
+
+Intentions in Thailand
+• Purpose of stay: [REMOTE WORK / DIGITAL NOMAD / RETIREMENT / OTHER]
+• Planned length of stay: [LENGTH] months
+• Accommodation in Thailand: [HOTEL / APARTMENT / FRIEND / OTHER]
+• Emergency contact in [HOME COUNTRY]: [NAME], [PHONE], [RELATIONSHIP]
+
+I confirm that:
+1. I am applying from my country of residence as required
+2. I will maintain my [HOME COUNTRY] address throughout the visa period
+3. I will inform the Thai authorities of any change of address
+4. I will leave Thailand before my visa expires or apply for extension in good time
+
+_______________________________
+[FULL LEGAL NAME] — printed name
+Date: [DATE]`}
+]
+};
+
+function selectOption(q, val) {
+    document.querySelectorAll('#q' + q + ' .option').forEach(o => o.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+    document.getElementById('nextBtn').disabled = false;
+    empType = val;
+}
+
+function showResults() {
+    document.getElementById('quiz').classList.remove('active');
+    document.getElementById('results').classList.add('active');
+
+    const data = docSets[empType];
+    document.getElementById('resultTitle').textContent = 'Your Document Templates';
+    document.getElementById('resultSummary').textContent = 'Based on your answers, here are the documents you need to gather.';
+
+    const container = document.getElementById('documentsContainer');
+    let html = '<div class="documents-section"><div class="section-title" style="display:flex;align-items:center;gap:10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6M9 15h6"/></svg> Your Document Templates</div></div>';
+    data.forEach(doc => {
+        html += `
+<div class="document-item">
+<div class="document-header">
+<div class="document-number">${doc.num}</div>
+<div class="document-title">${doc.title}</div>
+</div>
+<div class="document-what">${doc.what}</div>
+<div class="document-details">Replace all <strong>[PLACEHOLDER]</strong> text with your real details.</div>
+<div style="text-align:right;margin-top:15px">
+<button class="btn-download" onclick="downloadDoc('${doc.num}')" style="display:inline-flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg> Download Template ${doc.num}</button>
+</div>
+</div>
+`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function findDoc(num) {
+    return (docSets[empType] || []).find(d => d.num === num);
+}
+
+function slugify(text) {
+    return text.replace(/[^a-z0-9]+/gi, '_').replace(/^_+|_+$/g, '');
+}
+
+function downloadDoc(num) {
+    const doc = findDoc(num);
+    if (!doc) return;
+    const blob = new Blob([doc.content], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, `${doc.num}_${slugify(doc.title)}.txt`);
+}
+
+function downloadAll() {
+    const data = docSets[empType];
+    if (!data) return;
+    const zip = new JSZip();
+    data.forEach(doc => {
+        zip.file(`${doc.num}_${slugify(doc.title)}.txt`, doc.content);
+    });
+    zip.generateAsync({ type: 'blob' }).then(blob => {
+        saveAs(blob, `DTV_Personalised_Guide_${empType}.zip`);
+    });
+}
+
+function restart() {
+    empType = '';
+    document.getElementById('results').classList.remove('active');
+    document.getElementById('quiz').classList.add('active');
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.getElementById('nextBtn').disabled = true;
+}
+</script>
+</body>
+</html>

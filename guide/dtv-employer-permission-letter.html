@@ -35,6 +35,8 @@
         body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; }
         h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1.2; }
         .nav-floating { position: fixed; top: 1rem; right: 1rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 100px; padding: 0.6rem 1rem; z-index: 1000; box-shadow: var(--shadow-medium); display: flex; gap: 1rem; align-items: center; }
+        .nav-logo { display: none; }
+        .nav-links { display: flex; gap: 1rem; align-items: center; }
         .nav-link { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
         .nav-link:hover { color: var(--violet-main); }
         .nav-cta { background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); color: white; padding: 0.6rem 1.25rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.85rem; }
@@ -51,21 +53,24 @@
         .highlight-box { background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary)); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
         .highlight-box h3 { margin-top: 0; color: var(--violet-main); }
         .template-box { background: #f8f9fa; border: 2px dashed var(--border); border-radius: 12px; padding: 1.5rem; margin: 2rem 0; font-family: monospace; font-size: 0.9rem; white-space: pre-wrap; }
-        .download-box { background: linear-gradient(135deg, var(--violet-deep), var(--violet-main)); color: white; padding: 2rem; border-radius: 12px; text-align: center; margin: 2rem 0; }
+        .download-box { background: var(--violet-deep); color: white; padding: 2rem; border-radius: 12px; text-align: center; margin: 2rem 0; }
         .download-box h3 { color: white; margin-top: 0; }
-        .download-btn { display: inline-block; background: white; color: var(--violet-deep); padding: 0.75rem 1.5rem; border-radius: 100px; text-decoration: none; font-weight: 600; margin-top: 1rem; }
+        .download-btn { display: inline-block; background: white; color: var(--violet-deep); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 1rem; }
         .cta-section { text-align: center; padding: 4rem 2rem; background: var(--bg-secondary); margin-top: 4rem; }
         .cta-button { display: inline-block; background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); color: white; padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 1.1rem; box-shadow: var(--shadow-medium); transition: transform 0.2s; }
         .cta-button:hover { transform: translateY(-2px); }
         .last-updated { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin: 3rem 0 1rem; }
-        @media (max-width: 768px) { .guide-header h1 { font-size: 1.8rem; } .nav-floating { left: 1rem; right: 1rem; justify-content: center; } }
+        @media (max-width: 768px) { .guide-header h1 { font-size: 1.8rem; } .nav-floating { padding: 1rem; } .nav-links { gap: 1rem; } }
     </style>
 </head>
 <body>
     <nav class="nav-floating">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/faq" class="nav-link">FAQ</a>
-        <a href="/" class="nav-cta">Check Eligibility</a>
+        <a href="/" class="nav-logo">DTV Guide</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/personalised-guide.html" class="nav-link">Personalised Guide</a>
+            <a href="/faq" class="nav-link">FAQ</a>
+        </div>
     </nav>
 
     <header class="guide-header">

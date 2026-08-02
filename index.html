@@ -91,6 +91,16 @@
             align-items: center;
         }
 
+        .nav-logo {
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
         .nav-link {
             text-decoration: none;
             color: var(--text-secondary);
@@ -548,6 +558,7 @@
             height: 48px;
             border-radius: 12px;
             background: var(--bg-tertiary);
+            color: var(--violet-main);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -614,8 +625,10 @@
         }
 
         .hard-stop-icon {
-            font-size: 5rem;
+            color: var(--violet-main);
             margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
         }
 
         /* Responsive */
@@ -635,13 +648,11 @@
             }
 
             .nav-floating {
-                top: 0.5rem;
-                right: 0.5rem;
-                padding: 0.5rem 1rem;
+                padding: 1rem;
             }
 
-            .nav-link {
-                display: none;
+            .nav-links {
+                gap: 1rem;
             }
 
             .nav-cta {
@@ -751,13 +762,18 @@
 <body>
     <!-- Navigation -->
     <nav class="nav-floating">
-        <a href="#about" class="nav-link">About</a>
+        <a href="index.html" class="nav-logo">DTV Guide</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link" style="color: var(--violet-main);">Home</a>
+            <a href="personalised-guide.html" class="nav-link">Personalised Guide</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+        </div>
     </nav>
 
     <!-- Hard Stop Screens -->
     <div class="hard-stop" id="hard-stop-country">
         <div class="hard-stop-content">
-            <div class="hard-stop-icon">🌍</div>
+            <div class="hard-stop-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
             <h2>DTV Not Available</h2>
             <p>Sorry, the Thailand DTV is currently only available for UK, Ireland, US, Canada, Australia, EU countries, and select others.</p>
             <a href="#" class="btn-secondary" onclick="event.preventDefault(); location.reload()">Start Over</a>
@@ -766,7 +782,7 @@
 
     <div class="hard-stop" id="hard-stop-permission">
         <div class="hard-stop-content">
-            <div class="hard-stop-icon">💼</div>
+            <div class="hard-stop-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></div>
             <h2>Remote Work Required</h2>
             <p>You'll need to get permission from your employer to work remotely from Thailand. Come back once you have written approval.</p>
             <a href="#" class="btn-secondary" onclick="event.preventDefault(); location.reload()">Start Over</a>
@@ -784,7 +800,6 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-badge">
-            <span>✨</span>
             Thailand DTV Eligibility Checker
         </div>
 
@@ -936,8 +951,9 @@
                     <input type="email" id="quiz-email" class="email-input" placeholder="Enter your email" required>
                     
                     <!-- Privacy notice -->
-                    <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0;">
-                        🔒 We respect your privacy. No spam. 
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0; display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                        We respect your privacy. No spam.
                         <a href="#privacy" style="color: var(--violet-main);">Privacy Policy</a>
                     </p>
                     
@@ -1804,7 +1820,7 @@
             if (age && age < 20) {
                 const yearsUntil20 = 20 - age;
                 issues.push({
-                    icon: '🎂',
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>',
                     title: 'Turn 20 Years Old',
                     description: 'You must be at least 20 years old to apply for the DTV visa.',
                     time: yearsUntil20 + ' year' + (yearsUntil20 > 1 ? 's' : ''),
@@ -1817,7 +1833,7 @@
             // Check passport
             if (answers['3'] === 'under-6' || answers['3'] === 'expired') {
                 issues.push({
-                    icon: '🛂',
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M15 9h3M15 13h3M6 17h12"/></svg>',
                     title: 'Passport Renewal',
                     description: 'Your passport has less than 6 months validity.',
                     time: '4 weeks',
@@ -1830,7 +1846,7 @@
             // Check REMOTE INCOME - MAJOR FACTOR (70%)
             if (answers['4'] === 'no') {
                 issues.push({
-                    icon: '💼',
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>',
                     title: 'NO REMOTE INCOME',
                     description: 'You need remote income to qualify for the DTV visa. This is the biggest factor in your application.',
                     time: '6 months to establish',
@@ -1843,7 +1859,7 @@
             // Check income
             if (answers['6'] === 'under-1k') {
                 issues.push({
-                    icon: '💰',
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>',
                     title: 'Increase Income',
                     description: 'You need to show £1,000+ monthly income.',
                     time: '8 weeks',
@@ -1856,7 +1872,7 @@
             // Check permission
             if (answers['5a'] === 'need-to-ask') {
                 issues.push({
-                    icon: '📝',
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
                     title: 'Workplace Permission',
                     description: 'You need written permission from your employer.',
                     time: '1 week',
@@ -1869,7 +1885,7 @@
             // Check tax filing status
             if (answers['5c'] === 'self-not-yet') {
                 issues.push({
-                    icon: '📊',
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>',
                     title: 'File Your Tax Return',
                     description: 'You need evidence of tax payments for your DTV application.',
                     time: '2 weeks',
@@ -1888,7 +1904,7 @@
                 const weeksNeeded = monthsNeeded * 4;
                 
                 issues.push({
-                    icon: '🏦',
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10M20 21V10M2 10l10-6 10 6M6 10v6M10 10v6M14 10v6M18 10v6"/></svg>',
                     title: 'Build Up Savings',
                     description: `You need ${funds.currency === 'USD' ? '$14,000 USD' : '£11,000 GBP'} in your account.`,
                     time: monthsNeeded + ' month' + (monthsNeeded > 1 ? 's' : ''),
@@ -1951,22 +1967,16 @@
                     </p>
                     
                     <div style="text-align: center; padding: 1.5rem; background: var(--bg-secondary); border-radius: 16px; margin-top: 1rem;">
-                        <h3 style="margin-bottom: 1rem; color: var(--violet-main); font-size: 1.1rem;">📧 Get the Complete DTV Guide</h3>
+                        <h3 style="margin-bottom: 1rem; color: var(--violet-main); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; gap: 8px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6M9 15h6"/></svg> Get Your Personalised Guide</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9rem;">
-                            Get the guide that breaks down exactly what you need to do — based on real approved applications and feedback from the embassy. Includes AI prompts that save you hours.
+                            Ready-to-fill document templates matched to your situation — based on real approved applications and feedback from the embassy.
                         </p>
-                        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 350px; margin: 0 auto;">
-                            <input type="email" id="waitinglist-email" placeholder="Enter your email" style="padding: 0.75rem; border: 2px solid var(--border); border-radius: 12px; font-size: 0.95rem; text-align: center;">
-                            <button onclick="joinWaitingList()" class="btn-primary" style="font-size: 1rem; padding: 1rem 2rem; text-align: center; display: flex; justify-content: center; align-items: center;">
-                                Get Early Access
-                            </button>
-                        </div>
-                        <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.8rem;">
-                            Limited spots available. Launching soon.
-                        </p>
+                        <a href="personalised-guide.html" class="btn-primary" style="font-size: 1rem; padding: 1rem 2rem; text-align: center; display: flex; justify-content: center; align-items: center; text-decoration: none; max-width: 350px; margin: 0 auto;">
+                            Get My Personalised Guide →
+                        </a>
                     </div>
                 </div>
-                
+
                 ${issues.length > 0 ? `
                     <div class="issues-list">
                         ${issuesHTML}
@@ -1974,7 +1984,7 @@
                 ` : ''}
                 
                 <div style="text-align: center; padding: 2rem; background: var(--bg-tertiary); border-radius: 16px; margin: 1rem 0;">
-                    <h3 style="margin-bottom: 1rem; color: var(--violet-main);">🏛️ Nearest Thai Embassies for ${userCountry || 'your location'}</h3>
+                    <h3 style="margin-bottom: 1rem; color: var(--violet-main); display: flex; align-items: center; justify-content: center; gap: 8px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10M20 21V10M2 10l10-6 10 6M6 10v6M10 10v6M14 10v6M18 10v6"/></svg> Nearest Thai Embassies for ${userCountry || 'your location'}</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">
                         Apply for your DTV visa at one of these locations:
                     </p>
@@ -1987,7 +1997,7 @@
                 </div>
                 
                 <div style="text-align: center; padding: 2rem;">
-                    <button onclick="restartQuiz()" style="background: var(--cream-dark); border: 2px solid var(--charcoal); color: var(--charcoal); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; display: flex; width: 100%; max-width: 280px; margin: 0 auto; text-align: center; justify-content: center; align-items: center;">
+                    <button onclick="restartQuiz()" style="background: var(--bg-tertiary); border: 2px solid var(--text-primary); color: var(--text-primary); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; display: flex; width: 100%; max-width: 280px; margin: 0 auto; text-align: center; justify-content: center; align-items: center;">
                         ↺ Start Again
                     </button>
                 </div>
@@ -2006,7 +2016,7 @@
             document.getElementById('result-content').innerHTML = `
                 <div class="result-card">
                     <div class="result-percentage" style="border-color: var(--accent-pink)">
-                        <span>🎯</span>
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--violet-main)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-12-12v18m0 0H5a2 2 0 0 1-2-2V9m18 12h-4a2 2 0 0 1-2-2v-4"/></svg>
                     </div>
                     <h2>DTV Remote Work visa isn't right for you</h2>
                     <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
@@ -2014,7 +2024,7 @@
                     </p>
                     
                     <button onclick="restartQuiz()" class="btn-primary" style="margin-bottom: 1rem; text-align: center; display: flex; justify-content: center; align-items: center;">Check Another Path</button>
-                    <button onclick="location.reload()" style="display: flex; margin: 0 auto; background: var(--cream-dark); border: 2px solid var(--charcoal); color: var(--charcoal); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; width: 100%; max-width: 280px; text-align: center; justify-content: center; align-items: center;">
+                    <button onclick="location.reload()" style="display: flex; margin: 0 auto; background: var(--bg-tertiary); border: 2px solid var(--text-primary); color: var(--text-primary); padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; width: 100%; max-width: 280px; text-align: center; justify-content: center; align-items: center;">
                         ↺ Start Again
                     </button>
                 </div>
@@ -2067,46 +2077,6 @@
                 },
                 body: JSON.stringify(data)
             }).catch(err => console.log('Save attempted'));
-        }
-
-        // Join waiting list
-        function joinWaitingList() {
-            const email = document.getElementById('waitinglist-email').value.trim();
-            const message = document.getElementById('waitinglist-message');
-            
-            if (!email || !email.includes('@')) {
-                message.textContent = '⚠️ Please enter a valid email address';
-                message.style.display = 'block';
-                return;
-            }
-            
-            const button = document.querySelector('button[onclick="joinWaitingList()"]');
-            if (button) {
-                button.disabled = true;
-                button.textContent = 'Submitted';
-            }
-            
-            const data = {
-                email: email,
-                country: (typeof answers !== 'undefined' && answers['2']) ? answers['2'] : '',
-                score: 'Waiting List',
-                honeypot: document.querySelector('input[name="website"]')?.value || ''
-            };
-            
-            fetch('https://script.google.com/macros/s/AKfycbxTSYWRWLgHEArL0XosN-Ji1A1lUrR6EV6UJBLfxvvHATplL1sO4vTROq7S59Cy9Nqi/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            
-            setTimeout(() => {
-                message.textContent = '✅ You\'re on the list! We\'ll email you when the guide launches.';
-                message.style.display = 'block';
-                document.getElementById('waitinglist-email').value = '';
-            }, 500);
         }
 
         // Show error message for failed saves

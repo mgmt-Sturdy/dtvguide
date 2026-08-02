@@ -62,6 +62,16 @@
             align-items: center;
         }
 
+        .nav-logo {
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
         .nav-link {
             text-decoration: none;
             color: var(--text-secondary);
@@ -190,6 +200,14 @@
             font-size: 16px;
             font-weight: 500;
             color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-text svg {
+            flex-shrink: 0;
+            color: var(--violet-main);
         }
 
         .option-desc {
@@ -370,6 +388,23 @@
             margin-top: 12px;
             font-size: 13px;
             color: #92400e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-hint::before {
+            content: "";
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            background-color: #92400e;
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3v4a1 1 0 0 0 1 1h4'/%3E%3Cpath d='M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3v4a1 1 0 0 0 1 1h4'/%3E%3Cpath d='M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z'/%3E%3C/svg%3E");
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            mask-size: contain;
         }
 
         /* Restart Button */
@@ -512,15 +547,18 @@
 <body>
     <!-- Navigation -->
     <nav class="nav-floating">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="documents.html" class="nav-link" style="color: var(--violet-main);">Documents</a>
-        <a href="#products" class="nav-link">Guide</a>
+        <a href="index.html" class="nav-logo">DTV Guide</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="personalised-guide.html" class="nav-link">Personalised Guide</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+        </div>
     </nav>
 
     <div class="container">
         <!-- Header -->
         <header class="page-header">
-            <h1>📋 Step 1: Gather Your Documents</h1>
+            <h1>Step 1: Gather Your Documents</h1>
             <p>Know exactly what you need to collect before applying</p>
         </header>
 
@@ -536,19 +574,19 @@
                     </div>
                     <h2>What's your employment situation?</h2>
                     <div class="option" onclick="selectOption(1, 'employed', this)">
-                        <div class="option-text">💼 Employed (Full-Time Job)</div>
+                        <div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg> Employed (Full-Time Job)</div>
                         <div class="option-desc">You have a job with a company and receive a salary</div>
                     </div>
                     <div class="option" onclick="selectOption(1, 'self-employed', this)">
-                        <div class="option-text">🏢 Self-Employed (Sole Trader)</div>
+                        <div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg> Self-Employed (Sole Trader)</div>
                         <div class="option-desc">You have a business but it's not a limited company</div>
                     </div>
                     <div class="option" onclick="selectOption(1, 'content-creator', this)">
-                        <div class="option-text">📱 Content Creator / Influencer</div>
+                        <div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l4 4V6l-4 4H4a1 1 0 0 0-1 1z"/><path d="M15 8a3 3 0 0 1 0 8"/><path d="M18 6a6 6 0 0 1 0 12"/></svg> Content Creator / Influencer</div>
                         <div class="option-desc">Income from YouTube, TikTok, Instagram, etc.</div>
                     </div>
                     <div class="option" onclick="selectOption(1, 'business-owner', this)">
-                        <div class="option-text">👑 Company Director (Limited Company)</div>
+                        <div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg> Company Director (Limited Company)</div>
                         <div class="option-desc">You're a director of one or more limited companies</div>
                     </div>
                 </div>
@@ -609,25 +647,25 @@
                 </div>
 
                 <div class="info-box">
-                    <strong>✓ What to do:</strong> Gather EVERY document listed below and put them in a folder on your computer. These are the source documents you'll use in the next steps. Don't skip anything — you'll need all of them.
+                    <strong>What to do:</strong> Gather EVERY document listed below and put them in a folder on your computer. These are the source documents you'll use in the next steps. Don't skip anything — you'll need all of them.
                 </div>
 
                 <!-- Instructions -->
                 <div class="instructions-box" style="margin: 20px 0; padding: 25px; background: linear-gradient(135deg, var(--violet-deep), var(--violet-main)); border-radius: 12px; color: white;">
-                    <h3 style="margin: 0 0 15px 0; font-size: 20px;">📋 How to Use This Page</h3>
+                    <h3 style="margin: 0 0 15px 0; font-size: 20px; display: flex; align-items: center; gap: 10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6M9 15h6"/></svg> How to Use This Page</h3>
                     <ol style="margin: 0; padding-left: 20px; line-height: 1.8;">
                         <li><strong>Complete all dropdown menus</strong> on this page until you reach the end</li>
                         <li><strong>Download your personalised template/AI prompts</strong> using the button below</li>
                         <li><strong>If using AI prompts:</strong> Upload the required documents from the "02 - Your Documents" folder</li>
                         <li><strong>Drag your documents</strong> into the folder and then drag straight into your AI provider (ChatGPT/Claude)</li>
                     </ol>
-                    <p style="margin: 15px 0 0 0; font-size: 14px; opacity: 0.9;">💡 <strong>Tip:</strong> Tick the checkboxes as you complete each document to track your progress!</p>
+                    <p style="margin: 15px 0 0 0; font-size: 14px; opacity: 0.9; display: flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2z"/></svg> <strong>Tip:</strong> Tick the checkboxes as you complete each document to track your progress!</p>
                 </div>
 
                 <!-- Progress Bar -->
                 <div class="progress-container" style="margin: 30px 0; padding: 20px; background: var(--bg-tertiary); border-radius: 12px; border: 2px solid var(--violet-light);">
                     <div class="progress-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <span style="font-weight: 600; color: var(--violet-deep);">📊 Document Collection Progress</span>
+                        <span style="font-weight: 600; color: var(--violet-deep); display: flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg> Document Collection Progress</span>
                         <span id="progressText" style="font-weight: 500; color: var(--text-secondary);">0 of 0 documents complete (0%)</span>
                     </div>
                     <div class="progress-bar-bg" style="width: 100%; height: 20px; background: var(--border); border-radius: 10px; overflow: hidden;">
@@ -637,17 +675,17 @@
 
                 <div id="documentsContainer"></div>
 
-                <button class="btn btn-primary" onclick="downloadDocumentFolder()" style="margin: 30px 0; background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); font-size: 16px; padding: 15px 30px; border: none; border-radius: 12px; color: white; cursor: pointer;">
-                    📁 Download My Document Folder
+                <button class="btn btn-primary" onclick="downloadDocumentFolder()" style="margin: 30px 0; background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); font-size: 16px; padding: 15px 30px; border: none; border-radius: 12px; color: white; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg> Download My Document Folder
                 </button>
                 <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Get templates + empty folders to organize your documents for AI upload</p>
-                
+
                 <button class="restart-btn" onclick="restartQuiz()">← Change Employment Type</button>
             </div>
         </div>
 
         <footer>
-            <p>✨ Created from an actual approved Thailand DTV visa application</p>
+            <p>Created from an actual approved Thailand DTV visa application</p>
             <p style="margin-top: 10px; opacity: 0.8;">Step 1 of 5: Gather Documents → Process with AI → Generate PDFs → Submit</p>
         </footer>
     </div>
@@ -672,7 +710,7 @@
                                 <li><strong>Copy of passport biodata page</strong></li>
                             </ul>
                             <em>Take a clear color photograph of the page showing your photo. All text must be readable. Save as PDF or JPG (max 3MB). Passport must have 6+ months validity remaining.</em>
-                            <div class="download-hint">💾 File name: Passport_Biodata.pdf</div>
+                            <div class="download-hint">File name: Passport_Biodata.pdf</div>
                         `
                     },
                     {
@@ -684,7 +722,7 @@
                                 <li><strong>Color passport photograph</strong></li>
                             </ul>
                             <em>35mm × 45mm (or 4×6 inches). Taken within last 6 months. Plain white or light background, cropped from shoulder level and above. Full face visible with neutral expression. No glasses, sunglasses, or hats. Take in natural daylight.</em>
-                            <div class="download-hint">💾 File name: Passport_Photo.jpg</div>
+                            <div class="download-hint">File name: Passport_Photo.jpg</div>
                         `
                     },
                     {
@@ -702,7 +740,7 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
-                            <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
+                            <div class="download-hint">File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
                     {
@@ -714,7 +752,7 @@
                                 <li><strong>DTV Work Restrictions Consent Letter</strong></li>
                             </ul>
                             <em>Use provided template or AI prompt. Must include your full name, passport number, National Insurance number. State you understand DTV restrictions, confirm you will NOT work for Thai employers, and confirm all work will be remote. Sign and date.</em>
-                            <div class="download-hint">💾 File name: Work_Restrictions_Letter.pdf</div>
+                            <div class="download-hint">File name: Work_Restrictions_Letter.pdf</div>
                         `
                     },
                     {
@@ -726,7 +764,7 @@
                                 <li><strong>Home Country Residence Consent Letter</strong></li>
                             </ul>
                             <em>Use provided template or AI prompt. Must include full name, passport number, National Insurance number. Confirm your current residence in home country, consent to all DTV conditions, and confirm understanding of visa restrictions. Sign and date.</em>
-                            <div class="download-hint">💾 File name: Residence_Consent_Letter.pdf</div>
+                            <div class="download-hint">File name: Residence_Consent_Letter.pdf</div>
                         `
                     }
                 ],
@@ -740,7 +778,7 @@
                                 <li><strong>3 months of statements from your personal bank account (the account your employer pays your salary into)</strong></li>
                             </ul>
                             <em>Download from online banking (e.g., January, February, March 2026) Must show: account holder name, account type, opening/closing balances, transactions Shows your financial history and salary deposits PDF format from your bank's online portal Do NOT need to be stamped by bank</em>
-                            <div class="download-hint">💾 File name: Bank_Statements_3Months_Jan_Feb_Mar_2026.pdf</div>
+                            <div class="download-hint">File name: Bank_Statements_3Months_Jan_Feb_Mar_2026.pdf</div>
                         `
                     },
                     {
@@ -752,7 +790,7 @@
                                 <li><strong>3-6 of your most recent payslips from your employer</strong></li>
                             </ul>
                             <em>Must show: your name, employer name, gross salary, deductions, net pay, tax withheld Recent payslips (last 3-6 months) Can be digital or printed/scanned</em>
-                            <div class="download-hint">💾 File name: Payslips_Jan_Feb_Mar_Apr_May_Jun_2026.pdf</div>
+                            <div class="download-hint">File name: Payslips_Jan_Feb_Mar_Apr_May_Jun_2026.pdf</div>
                         `
                     },
                     {
@@ -764,7 +802,7 @@
                                 <li><strong>Your original employment contract OR job offer letter</strong></li>
                             </ul>
                             <em>Must show: job title, employer name, salary, start date, employment type (full-time, permanent) On company letterhead preferred If you don't have original, ask your HR department for a certified copy</em>
-                            <div class="download-hint">💾 File name: Employment_Contract_2026.pdf</div>
+                            <div class="download-hint">File name: Employment_Contract_2026.pdf</div>
                         `
                     },
                     {
@@ -776,7 +814,7 @@
                                 <li><strong>Formal letter on company letterhead</strong></li>
                             </ul>
                             <em>Must confirm: your employment status and job title Dates of employment (start date and ongoing) Permission granted to work remotely/abroad on DTV visa Confirmation of salary/income during DTV period State that remote work from Thailand is approved Must be signed and dated by HR manager or company director Include company contact details and registration number Can be email from HR or formal letter</em>
-                            <div class="download-hint">💾 File name: Employer_Permission_Letter_DTV.pdf</div>
+                            <div class="download-hint">File name: Employer_Permission_Letter_DTV.pdf</div>
                         `
                     },
                     {
@@ -789,7 +827,7 @@
                                 <li><strong>P60 from your employer (end of tax year), OR</strong></li>
                             </ul>
                             <em>3 recent payslips showing your salary</em>
-                            <div class="download-hint">💾 File name: P60_2026.pdf OR Payslips_Recent.pdf</div>
+                            <div class="download-hint">File name: P60_2026.pdf OR Payslips_Recent.pdf</div>
                         `
                     },
                     {
@@ -802,7 +840,7 @@
                             </ul>
                             <em>LinkedIn profile URL or screenshot Professional website or portfolio link Company website or official company information Any professional certifications or qualifications</em>
                             <strong>Purpose:</strong> We will use these materials to create a professional portfolio document for you to submit with your visa application.
-                            <div class="download-hint">💾 File name: Professional_Portfolio_Materials.pdf</div>
+                            <div class="download-hint">File name: Professional_Portfolio_Materials.pdf</div>
                         `
                     },
                     {
@@ -814,7 +852,7 @@
                                 <li><strong>Please visit your local bank branch in person</strong></li>
                             </ul>
                             <em>Get the print out of your personal bank statements for the last 3 months Must have the official bank stamp clearly visible Must show minimum closing balance of £11,000 GBP Balance must be dated within last 15 days Balance should have been held for at least 10 days Get this statement in your final week before submitting</em>
-                            <div class="download-hint">💾 File name: Bank_Statement_Official_Stamped_May2026.pdf</div>
+                            <div class="download-hint">File name: Bank_Statement_Official_Stamped_May2026.pdf</div>
                         `
                     }
                 ]
@@ -832,7 +870,7 @@
                                 <li><strong>Copy of passport biodata page</strong></li>
                             </ul>
                             <em>Take a clear color photograph of the page showing your photo. All text must be readable. Save as PDF or JPG (max 3MB). Passport must have 6+ months validity remaining.</em>
-                            <div class="download-hint">💾 File name: Passport_Biodata.pdf</div>
+                            <div class="download-hint">File name: Passport_Biodata.pdf</div>
                         `
                     },
                     {
@@ -844,7 +882,7 @@
                                 <li><strong>Color passport photograph</strong></li>
                             </ul>
                             <em>35mm × 45mm (or 4×6 inches). Taken within last 6 months. Plain white or light background, cropped from shoulder level and above. Full face visible with neutral expression. No glasses, sunglasses, or hats. Take in natural daylight.</em>
-                            <div class="download-hint">💾 File name: Passport_Photo.jpg</div>
+                            <div class="download-hint">File name: Passport_Photo.jpg</div>
                         `
                     },
                     {
@@ -862,7 +900,7 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
-                            <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
+                            <div class="download-hint">File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
                     {
@@ -874,7 +912,7 @@
                                 <li><strong>DTV Work Restrictions Consent Letter</strong></li>
                             </ul>
                             <em>Use provided template or AI prompt. Must include your full name, passport number, National Insurance number. State you understand DTV restrictions, confirm you will NOT work for Thai employers, and confirm all work will be remote. Sign and date.</em>
-                            <div class="download-hint">💾 File name: Work_Restrictions_Letter.pdf</div>
+                            <div class="download-hint">File name: Work_Restrictions_Letter.pdf</div>
                         `
                     },
                     {
@@ -886,7 +924,7 @@
                                 <li><strong>Home Country Residence Consent Letter</strong></li>
                             </ul>
                             <em>Use provided template or AI prompt. Must include full name, passport number, National Insurance number. Confirm your current residence in home country, consent to all DTV conditions, and confirm understanding of visa restrictions. Sign and date.</em>
-                            <div class="download-hint">💾 File name: Residence_Consent_Letter.pdf</div>
+                            <div class="download-hint">File name: Residence_Consent_Letter.pdf</div>
                         `
                     }
                 ],
@@ -902,7 +940,7 @@
                                 <option value="invoices">3-6 recent business invoices paid by clients</option>
                                 <option value="statements">3 months business bank statements</option>
                             </select>
-                            <div class="download-hint">💾 File name: Business_Invoices_Examples.pdf OR Business_Bank_Statements_3Months.pdf</div>
+                            <div class="download-hint">File name: Business_Invoices_Examples.pdf OR Business_Bank_Statements_3Months.pdf</div>
                         `
                     },
                     {
@@ -915,7 +953,7 @@
                                 <li><strong>Any contracts or service agreements with clients</strong></li>
                             </ul>
                             <em>Retainer agreements or ongoing service contracts. Demonstrates your business has recurring income and established clients. Must show: client name, services provided, payment terms, your business details. Can be simple written agreements or formal contracts. Shows legitimacy and stability of your business operations.</em>
-                            <div class="download-hint">💾 File name: Business_Contracts_ServiceAgreements.pdf</div>
+                            <div class="download-hint">File name: Business_Contracts_ServiceAgreements.pdf</div>
                         `
                     },
                     {
@@ -927,7 +965,7 @@
                                 <li><strong>3 months of personal bank account statements from online banking</strong></li>
                             </ul>
                             <em>Shows your personal income and savings Shows your financial history and balance trajectory PDF from your bank's online portal</em>
-                            <div class="download-hint">💾 File name: Personal_Bank_Statements_3Months.pdf</div>
+                            <div class="download-hint">File name: Personal_Bank_Statements_3Months.pdf</div>
                         `
                     },
                     {
@@ -939,7 +977,7 @@
                                 <li><strong>Download from Companies House website (find.companieshouse.gov.uk)</strong></li>
                             </ul>
                             <em>Must be current and active company Shows: company number, director names (you), status must say "Active" Certified copy (download includes official seal) Must be dated within 3 months of application</em>
-                            <div class="download-hint">💾 File name: Company_House_Registration_Current.pdf</div>
+                            <div class="download-hint">File name: Company_House_Registration_Current.pdf</div>
                         `
                     },
                     {
@@ -956,7 +994,7 @@
                                 <option value="vat">VAT payment receipts (if registered)</option>
                                 <option value="other">Any other HMRC tax payment documentation</option>
                             </select>
-                            <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
+                            <div class="download-hint">File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
                     {
@@ -972,7 +1010,7 @@
                                 <li><strong>Receipt of tax paid for the latest financial year</strong></li>
                             </ul>
                             <em>Must specifically show tax has been paid on your income. Official letterhead preferred.</em>
-                            <div class="download-hint">💾 File name: Confirmation_of_Tax_Paid.pdf</div>
+                            <div class="download-hint">File name: Confirmation_of_Tax_Paid.pdf</div>
                         `
                     },
                     {
@@ -984,7 +1022,7 @@
                                 <li><strong>Please visit your personal bank branch in person</strong></li>
                             </ul>
                             <em>Get the print out of your personal bank statements for the last 3 months Must have the official bank stamp clearly visible Must show minimum closing balance of £11,000 GBP Balance must be dated within last 15 days Balance should have been held for at least 10 days Get this statement in your final week before submitting</em>
-                            <div class="download-hint">💾 File name: Personal_Bank_Statement_Official_Stamped.pdf</div>
+                            <div class="download-hint">File name: Personal_Bank_Statement_Official_Stamped.pdf</div>
                         `
                     }
                 ]
@@ -1002,7 +1040,7 @@
                                 <li><strong>Copy of passport biodata page</strong></li>
                             </ul>
                             <em>Take a clear color photograph of the page showing your photo. All text must be readable. Save as PDF or JPG (max 3MB). Passport must have 6+ months validity remaining.</em>
-                            <div class="download-hint">💾 File name: Passport_Biodata.pdf</div>
+                            <div class="download-hint">File name: Passport_Biodata.pdf</div>
                         `
                     },
                     {
@@ -1014,7 +1052,7 @@
                                 <li><strong>Color passport photograph</strong></li>
                             </ul>
                             <em>35mm × 45mm (or 4×6 inches). Taken within last 6 months. Plain white or light background, cropped from shoulder level and above. Full face visible with neutral expression. No glasses, sunglasses, or hats. Take in natural daylight.</em>
-                            <div class="download-hint">💾 File name: Passport_Photo.jpg</div>
+                            <div class="download-hint">File name: Passport_Photo.jpg</div>
                         `
                     },
                     {
@@ -1032,7 +1070,7 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
-                            <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
+                            <div class="download-hint">File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
                     {
@@ -1044,7 +1082,7 @@
                                 <li><strong>DTV Work Restrictions Consent Letter</strong></li>
                             </ul>
                             <em>Use provided template or AI prompt. Must include your full name, passport number, National Insurance number. State you understand DTV restrictions, confirm you will NOT work for Thai employers, and confirm all work will be remote. Sign and date.</em>
-                            <div class="download-hint">💾 File name: Work_Restrictions_Letter.pdf</div>
+                            <div class="download-hint">File name: Work_Restrictions_Letter.pdf</div>
                         `
                     },
                     {
@@ -1056,7 +1094,7 @@
                                 <li><strong>Home Country Residence Consent Letter</strong></li>
                             </ul>
                             <em>Use provided template or AI prompt. Must include full name, passport number, National Insurance number. Confirm your current residence in home country, consent to all DTV conditions, and confirm understanding of visa restrictions. Sign and date.</em>
-                            <div class="download-hint">💾 File name: Residence_Consent_Letter.pdf</div>
+                            <div class="download-hint">File name: Residence_Consent_Letter.pdf</div>
                         `
                     }
                 ],
@@ -1070,7 +1108,7 @@
                                 <li><strong>3 months of personal bank statements from online banking</strong></li>
                             </ul>
                             <em>Must show: account holder name, balance history Shows where your content creation income deposits Shows your financial history and balance trajectory PDF from your bank's online portal</em>
-                            <div class="download-hint">💾 File name: Bank_Statements_3Months_Jan_Feb_Mar_2026.pdf</div>
+                            <div class="download-hint">File name: Bank_Statements_3Months_Jan_Feb_Mar_2026.pdf</div>
                         `
                     },
                     {
@@ -1088,7 +1126,7 @@
                                 <li>Include: your name, earnings amount, date screenshot was taken</li>
                                 <li>Write date in corner or note when screenshot taken</li>
                             </ul>
-                            <div class="download-hint">💾 File name: Platform_Revenue_Screenshots_All.pdf</div>
+                            <div class="download-hint">File name: Platform_Revenue_Screenshots_All.pdf</div>
                         `
                     },
                     {
@@ -1096,13 +1134,13 @@
                         title: "Brand Deal Paid Invoices (3 Recent Examples) — OPTIONAL",
                         what: "Invoices you sent to brands (that have been paid) — Only if applicable",
                         details: `
-                            <p><strong style="color:var(--violet-main);">⚠️ ONLY IF APPLICABLE — Skip this if you don't have brand deals</strong></p>
+                            <p><strong style="color:var(--violet-main); display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg> ONLY IF APPLICABLE — Skip this if you don't have brand deals</strong></p>
                             <p>Provide this if you work with brands directly and have paid brand deal invoices:</p>
                             <ul>
                                 <li><strong>Invoice number and date</strong></li>
                             </ul>
                             <em>Brand name (company that paid you) Amount (fee for the campaign) Services provided (description of content you created: YouTube video, TikTok, Instagram post, etc.) Your details (name, address, contact) These are invoices YOU created and sent to brands Must be invoices that have been PAID (marked as paid or you have proof of payment) Should be from last 3-6 months</em>
-                            <div class="download-hint">💾 File name: Brand_Deal_Paid_Invoices.pdf</div>
+                            <div class="download-hint">File name: Brand_Deal_Paid_Invoices.pdf</div>
                         `
                     },
                     {
@@ -1123,7 +1161,7 @@
                                 <li><strong>3 examples</strong> matching your paid invoices</li>
                                 <li>Can be screenshots of incoming transfers</li>
                             </ul>
-                            <div class="download-hint">💾 File name: Bank_Statement_Brand_Deposits.pdf</div>
+                            <div class="download-hint">File name: Bank_Statement_Brand_Deposits.pdf</div>
                         `
                     },
                     {
@@ -1140,7 +1178,7 @@
                                 <option value="vat">VAT payment receipts (if registered)</option>
                                 <option value="other">Any other HMRC tax payment documentation</option>
                             </select>
-                            <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
+                            <div class="download-hint">File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
                     {
@@ -1162,7 +1200,7 @@
                                 <li>Official letterhead or HMRC branding</li>
                                 <li>Your name and tax year clearly stated</li>
                             </ul>
-                            <div class="download-hint">💾 File name: Confirmation_of_Tax_Paid.pdf</div>
+                            <div class="download-hint">File name: Confirmation_of_Tax_Paid.pdf</div>
                         `
                     },
                     {
@@ -1174,7 +1212,7 @@
                                 <li><strong>Please visit your local bank branch in person</strong></li>
                             </ul>
                             <em>Get the print out of your personal bank statements for the last 3 months Must have the official bank stamp clearly visible Must show minimum closing balance of £11,000 GBP Balance must be dated within last 15 days Balance should have been held for at least 10 days Get this statement in your final week before submitting</em>
-                            <div class="download-hint">💾 File name: Bank_Statement_Official_Stamped_May2026.pdf</div>
+                            <div class="download-hint">File name: Bank_Statement_Official_Stamped_May2026.pdf</div>
                         `
                     }
                 ]
@@ -1192,7 +1230,7 @@
                                 <li><strong>Copy of passport biodata page</strong></li>
                             </ul>
                             <em>Take a clear color photograph of the page showing your photo. All text must be readable. Save as PDF or JPG (max 3MB). Passport must have 6+ months validity remaining.</em>
-                            <div class="download-hint">💾 File name: Passport_Biodata.pdf</div>
+                            <div class="download-hint">File name: Passport_Biodata.pdf</div>
                         `
                     },
                     {
@@ -1204,7 +1242,7 @@
                                 <li><strong>Color passport photograph</strong></li>
                             </ul>
                             <em>35mm × 45mm (or 4×6 inches). Taken within last 6 months. Plain white or light background, cropped from shoulder level and above. Full face visible with neutral expression. No glasses, sunglasses, or hats. Take in natural daylight.</em>
-                            <div class="download-hint">💾 File name: Passport_Photo.jpg</div>
+                            <div class="download-hint">File name: Passport_Photo.jpg</div>
                         `
                     },
                     {
@@ -1222,7 +1260,7 @@
                                 <option value="hotel">Hotel booking confirmation in another country</option>
                                 <option value="airbnb">Airbnb or rental booking in another country</option>
                             </select>
-                            <div class="download-hint">💾 File name: Proof_Not_In_Thailand.pdf</div>
+                            <div class="download-hint">File name: Proof_Not_In_Thailand.pdf</div>
                         `
                     },
                     {
@@ -1234,7 +1272,7 @@
                                 <li><strong>DTV Work Restrictions Consent Letter</strong></li>
                             </ul>
                             <em>Use provided template or AI prompt. Must include your full name, passport number, National Insurance number. State you understand DTV restrictions, confirm you will NOT work for Thai employers, and confirm all work will be remote. Sign and date.</em>
-                            <div class="download-hint">💾 File name: Work_Restrictions_Letter.pdf</div>
+                            <div class="download-hint">File name: Work_Restrictions_Letter.pdf</div>
                         `
                     },
                     {
@@ -1246,7 +1284,7 @@
                                 <li><strong>Home Country Residence Consent Letter</strong></li>
                             </ul>
                             <em>Use provided template or AI prompt. Must include full name, passport number, National Insurance number. Confirm your current residence in home country, consent to all DTV conditions, and confirm understanding of visa restrictions. Sign and date.</em>
-                            <div class="download-hint">💾 File name: Residence_Consent_Letter.pdf</div>
+                            <div class="download-hint">File name: Residence_Consent_Letter.pdf</div>
                         `
                     }
                 ],
@@ -1264,7 +1302,7 @@
                                 <option value="statements">3 months company bank statements</option>
                                 <option value="contracts">Service agreements or client contracts</option>
                             </select>
-                            <div class="download-hint">💾 File name: Company_Evidence.pdf</div>
+                            <div class="download-hint">File name: Company_Evidence.pdf</div>
                         `
                     },
                     {
@@ -1276,7 +1314,7 @@
                                 <li><strong>3 months of personal bank statements from online banking</strong></li>
                             </ul>
                             <em>Shows your personal income from the company (dividends, salary) Shows your financial history and balance trajectory PDF from your bank is online portal</em>
-                            <div class="download-hint">💾 File name: Personal_Bank_Statements.pdf</div>
+                            <div class="download-hint">File name: Personal_Bank_Statements.pdf</div>
                         `
                     },
                     {
@@ -1293,7 +1331,7 @@
                                 <option value="snapshot">Option 2: Company snapshot (free PDF)</option>
                             </select>
                             <p style="margin-top:15px;"><strong>Get it here:</strong> <a href="https://find-and-update.company-information.service.gov.uk/company/YOUR_COMPANY_NUMBER/more" target="_blank">https://find-and-update.company-information.service.gov.uk/company/YOUR_COMPANY_NUMBER/more</a></p>
-                            <div class="download-hint">💾 File name: Certificate_of_Incorporation.pdf</div>
+                            <div class="download-hint">File name: Certificate_of_Incorporation.pdf</div>
                         `
                     },
                     {
@@ -1311,7 +1349,7 @@
                                 <option value="vat">VAT payment receipts (if registered)</option>
                                 <option value="other">Any other HMRC tax payment documentation</option>
                             </select>
-                            <div class="download-hint">💾 File name: Tax_Submission_Evidence.pdf</div>
+                            <div class="download-hint">File name: Tax_Submission_Evidence.pdf</div>
                         `
                     },
                     {
@@ -1333,7 +1371,7 @@
                                 <li>Official letterhead or HMRC branding</li>
                                 <li>Your name and tax year clearly stated</li>
                             </ul>
-                            <div class="download-hint">💾 File name: Confirmation_of_Tax_Paid.pdf</div>
+                            <div class="download-hint">File name: Confirmation_of_Tax_Paid.pdf</div>
                         `
                     },
                     {
@@ -1345,7 +1383,7 @@
                                 <li><strong>Please visit your personal bank branch in person</strong></li>
                             </ul>
                             <em>Get the print out of your personal bank statements for the last 3 months Must have the official bank stamp clearly visible Must show minimum closing balance of £11,000 GBP Balance must be dated within last 15 days Balance should have been held for at least 10 days Get this statement in your final week before submitting</em>
-                            <div class="download-hint">💾 File name: Personal_Bank_Statement_Official.pdf</div>
+                            <div class="download-hint">File name: Personal_Bank_Statement_Official.pdf</div>
                         `
                     }
                 ]

@@ -6,6 +6,7 @@
 
 const SHEET_ID = 'YOUR_SHEET_ID_HERE'; // Replace with your actual Sheet ID
 const SHEET_NAME = 'Quiz Submissions';
+const PAID_SHEET_NAME = 'Paid - Personalised Guide';
 
 // Main entry point
 function doPost(e) {
@@ -61,6 +62,127 @@ function doPost(e) {
     Logger.log('Error: ' + err.toString());
     return jsonResponse({ ok: false, error: 'server_error' });
   }
+}
+
+// Entry point for the Personalised Guide paywall checks
+function doGet(e) {
+  try {
+    const action = e.parameter.action;
+
+    if (action === 'verifySession') {
+      return jsonResponse(verifyStripeSession(e.parameter.session_id));
+    }
+
+    if (action === 'verifyEmail') {
+      return jsonResponse(verifyPaidEmail(e.parameter.email));
+    }
+
+    return jsonResponse({ ok: false, error: 'unknown_action' });
+  } catch (err) {
+    Logger.log('Error: ' + err.toString());
+    return jsonResponse({ ok: false, error: 'server_error' });
+  }
+}
+
+// Reads the Stripe secret key from Script Properties - never hardcode it here,
+// this file is committed to a public repo. Set it in the Apps Script editor:
+// Project Settings -> Script Properties -> STRIPE_SECRET_KEY
+function getStripeSecretKey() {
+  return PropertiesService.getScriptProperties().getProperty('STRIPE_SECRET_KEY');
+}
+
+// Confirms a Stripe Checkout Session actually completed payment, then records
+// the buyer's email so they can unlock again later from another device.
+function verifyStripeSession(sessionId) {
+  if (!sessionId) return { ok: false, error: 'missing_session_id' };
+
+  const secretKey = getStripeSecretKey();
+  if (!secretKey) {
+    Logger.log('STRIPE_SECRET_KEY script property is not set');
+    return { ok: false, error: 'not_configured' };
+  }
+
+  try {
+    const response = UrlFetchApp.fetch(
+      'https://api.stripe.com/v1/checkout/sessions/' + encodeURIComponent(sessionId),
+      {
+        method: 'get',
+        headers: { Authorization: 'Basic ' + Utilities.base64Encode(secretKey + ':') },
+        muteHttpExceptions: true
+      }
+    );
+
+    if (response.getResponseCode() !== 200) {
+      return { ok: false, error: 'session_not_found' };
+    }
+
+    const session = JSON.parse(response.getContentText());
+    if (session.payment_status !== 'paid') {
+      return { ok: false, error: 'not_paid' };
+    }
+
+    const email = session.customer_details && session.customer_details.email;
+    if (!email) {
+      return { ok: false, error: 'no_email_on_session' };
+    }
+
+    recordPaidAccess(email, sessionId);
+    return { ok: true, email: email };
+  } catch (err) {
+    Logger.log('Error verifying Stripe session: ' + err.toString());
+    return { ok: false, error: 'server_error' };
+  }
+}
+
+// Looks up whether an email has a recorded paid purchase
+function verifyPaidEmail(email) {
+  if (!email) return { ok: false, error: 'missing_email' };
+  return { ok: isEmailPaid(email) };
+}
+
+// Appends a paid record, skipping if this session was already recorded
+function recordPaidAccess(email, sessionId) {
+  try {
+    const sheet = getOrCreatePaidSheet();
+    const data = sheet.getDataRange().getValues();
+
+    for (let i = 1; i < data.length; i++) {
+      if (data[i][1] === sessionId) return; // already recorded
+    }
+
+    sheet.appendRow([email, sessionId, new Date()]);
+  } catch (err) {
+    Logger.log('Error recording paid access: ' + err.toString());
+  }
+}
+
+// Checks the paid sheet for a matching email
+function isEmailPaid(email) {
+  try {
+    const sheet = getOrCreatePaidSheet();
+    const data = sheet.getDataRange().getValues();
+    const normalized = email.trim().toLowerCase();
+
+    for (let i = 1; i < data.length; i++) {
+      if (String(data[i][0]).trim().toLowerCase() === normalized) {
+        return true;
+      }
+    }
+    return false;
+  } catch (err) {
+    Logger.log('Error checking paid email: ' + err.toString());
+    return false;
+  }
+}
+
+function getOrCreatePaidSheet() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName(PAID_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(PAID_SHEET_NAME);
+    sheet.appendRow(['Email', 'Stripe Session ID', 'Timestamp']);
+  }
+  return sheet;
 }
 
 // Calculate score from raw answers (single source of truth)
