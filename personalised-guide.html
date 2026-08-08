@@ -125,11 +125,21 @@ footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-siz
     <div style="text-align:center">
         <h2>Skip the guesswork. Get the exact letters you need.</h2>
         <div class="price-tag" id="priceTag">One-time purchase</div>
+        <p style="color:var(--text-secondary);max-width:520px;margin:0 auto 1.5rem;">Every applicant gets a full set of ready-to-fill letters, matched to how you qualify — employed, self-employed, content creator, or company director. Here's exactly what's inside:</p>
+
         <ul class="feature-list">
-            <li>Every consent, employment, and funds letter for your category — pre-written, just fill in your details</li>
-            <li>Covers employed, self-employed, content creator, and company director applicants</li>
-            <li>Built from actually-approved DTV applications</li>
-            <li>Instant access after purchase, download anytime</li>
+            <li><span><strong>Professional Portfolio</strong> — your career or business background, laid out the way embassies expect to see it</span></li>
+            <li><span><strong>Remote Work Statement</strong> — confirms your work is location-independent and compliant with DTV rules</span></li>
+            <li><span><strong>Proof of Funds</strong> — a clean cover letter to go with your bank statements</span></li>
+            <li><span><strong>Personal Declaration</strong> — a short cover letter introducing yourself and your key DTV undertakings</span></li>
+            <li><span><strong>Processing, Work Restrictions &amp; Residence Consent Letters</strong> — the three declarations every application needs, pre-written for you to sign</span></li>
+            <li><span><strong>Salary &amp; Tax Confirmation Letter</strong> — included automatically if you're employed</span></li>
+        </ul>
+        <ul class="feature-list" style="margin-top:0.5rem;">
+            <li>Real Word documents (.docx) — open and edit directly in Microsoft Word or Google Docs, no special software needed</li>
+            <li>A worked example alongside every template, so you can see exactly how a completed one should look</li>
+            <li>Built from actually-approved DTV applications, not generic legal boilerplate</li>
+            <li>Instant access after purchase — sign in anytime to re-download</li>
         </ul>
 
         <div class="unlock-row" style="border-top:none;padding-top:0;margin-top:0;">
@@ -295,696 +305,41 @@ let empType = '';
 
 const docSets = {
 'employed': [
-{num:'01', title:'Salary & Tax Confirmation Letter', what:'A letter from your employer confirming your salary, tax deductions, and employment status', content:`[COMPANY NAME / ISSUING ENTITY]
-[COMPANY ADDRESS LINE 1, LINE 2, POSTCODE, COUNTRY]
-[COMPANY REGISTRATION NUMBER] | Registered in [COUNTRY / JURISDICTION]
-[DATE OF LETTER]
-Ref: [REFERENCE NUMBER]
-
-To Whom It May Concern
-
-Re: Confirmation of Employment, Salary & Tax Contributions — [FULL LEGAL NAME]
-
-I, [NAME OF SIGNATORY], in my capacity as [ROLE OF SIGNATORY] of [COMPANY / FIRM NAME], hereby confirm the following details regarding the employment and remuneration of [FULL LEGAL NAME] for the [COUNTRY] tax year [TAX YEAR].
-
-[COMPANY NAME] is a [COUNTRY]-registered [COMPANY TYPE] ([COMPANY REGISTRATION NUMBER]), incorporated on [INCORPORATION DATE]. [FULL LEGAL NAME] has been employed since [EMPLOYMENT START DATE] in the role of [JOB TITLE], paid [PAYMENT FREQUENCY] through [PAYMENT METHOD]. Tax code: [TAX CODE]. [TAX/NATIONAL ID LABEL]: [TAX / NI NUMBER].
-
-Year-to-date gross pay: [GROSS YTD] | Total tax deducted: [TAX YTD] | Total NI / social-security contributions: [NI YTD]
-
-All salary payments are processed through [PAYROLL METHOD] and reported to [TAX AUTHORITY] accordingly.
-
-I confirm that all information provided above is true, accurate, and derived from official [SOURCE]. This letter is provided in support of [FULL LEGAL NAME]'s application for the Thailand Destination Thailand Visa (DTV).
-
-Yours faithfully,
-
-_______________________________
-[SIGNATORY FULL NAME] — printed name
-[SIGNATORY ROLE], [COMPANY / FIRM NAME]
-Date: [DATE]`},
-{num:'02', title:'Professional Portfolio', what:'A document showcasing your career history, skills, education, and key achievements', content:`Professional Portfolio
-Employed (Full-Time)
-
-About the Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Job title: [AS ON YOUR CONTRACT]
-Employer: [EMPLOYER NAME]
-Employer website: [COMPANY WEBSITE]
-Employed since: [START DATE]
-Years of experience: [NUMBER]
-Field: [2-4 WORDS]
-What you do day-to-day: [ONE SHORT CLAUSE]
-Work style: [FULLY REMOTE / HYBRID]
-LinkedIn: [URL]
-
-The applicant is a full-time employee of the employer shown above and performs this role remotely with the employer's written approval.
-
-Employment History
-Period: [YEAR]–PRESENT
-Job title: [JOB TITLE]
-Employer: [EMPLOYER]
-
-Education & Certifications
-Qualification: [DEGREE / CERTIFICATE]
-Institution: [INSTITUTION]
-Year: [YEAR]
-
-Key Achievements
-[ACHIEVEMENT 1 — one line]
-[ACHIEVEMENT 2 — one line (or delete line)]
-
-Declaration
-I, [FULL LEGAL NAME], certify that the information in this document is true and accurate to the best of my knowledge, and is provided in support of my application for the Destination Thailand Visa (DTV).
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'03', title:'Remote Working Statement', what:'Confirmation your employer has approved remote work from Thailand', content:`Remote Working Statement
-Employed (Full-Time)
-
-Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Passport no.: [PASSPORT NUMBER]
-
-Employment Status
-Employer: [EMPLOYER NAME]
-Employer country: [COUNTRY]
-Job title: [JOB TITLE]
-Contract type: [FULL-TIME / PART-TIME / CONTRACT]
-Start date: [START DATE]
-
-Remote Work Approval
-I, [FULL LEGAL NAME], confirm that my employer, [EMPLOYER NAME], has approved me to perform my role remotely from Thailand while holding a Destination Thailand Visa (DTV).
-
-This arrangement:
-• Is temporary and subject to ongoing review
-• Does not change my employment contract or obligations
-• Requires me to maintain suitable workspace and internet connectivity
-• Means all work is performed for and billed to [EMPLOYER NAME] outside Thailand
-
-I understand that:
-• I must remain tax-resident in [HOME COUNTRY]
-• My employer will continue to deduct [TAX/NATIONAL ID LABEL] contributions
-• I am responsible for complying with all Thai visa conditions
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'04', title:'Proof of Funds', what:'Bank statements showing you have at least THB 500,000', content:`Proof of Funds
-
-Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Date prepared: [DATE]
-
-Bank Details
-Bank name: [BANK NAME]
-Account holder: [FULL LEGAL NAME]
-Account number: [ACCOUNT NUMBER]
-Sort code: [SORT CODE] (UK) / IBAN: [IBAN] (EU/ROW)
-Currency: [CURRENCY]
-Current balance: [AMOUNT]
-Date of balance: [DATE]
-
-Evidence Attached
-• 3 months of bank statements ([MONTH 1], [MONTH 2], [MONTH 3])
-• Average monthly income: [AMOUNT]
-• Source of funds: [SALARY / SAVINGS / INVESTMENTS / OTHER]
-
-I confirm that the funds shown above are genuinely available to me and will be used to support my stay in Thailand under the Destination Thailand Visa (DTV).
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'05', title:'Processing Consent Letter', what:'Your undertaking to stay available during visa processing', content:`Consent Letter — Application Processing Undertaking
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], hereby give my consent to the processing of my personal data contained in my Destination Thailand Visa (DTV) application and the documents submitted in support thereof.
-
-I confirm that:
-1. All information provided is true, accurate, and complete to the best of my knowledge
-2. I understand that providing false information may result in refusal and future bans
-3. I will remain in [HOME COUNTRY] during the processing period
-4. I will respond promptly to any requests for additional information
-5. I will not travel to Thailand until my visa is approved and affixed to my passport
-
-I authorise the Royal Thai Embassy / Consulate to verify any of the information provided with third parties as necessary.
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'06', title:'Work Restrictions Consent Letter', what:'Confirmation you understand DTV visa work restrictions', content:`Work Restrictions Consent Letter
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], understand and agree to the following work restrictions under the Destination Thailand Visa (DTV):
-
-1. I will NOT seek or undertake employment with any Thai employer
-2. I will NOT work in a capacity that requires a Thai work permit
-3. I will NOT receive income sourced from within Thailand
-4. I will continue to work remotely for my [COUNTRY]-based employer(s)
-5. All work performed will be for entities outside Thailand and paid into non-Thai accounts
-6. I understand that breach of these conditions may result in visa cancellation and deportation
-
-I confirm that my presence in Thailand is solely for the purpose of remote working for overseas employers and that I have no intention to compete with the Thai labour market.
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'07', title:'Residence Consent Letter', what:'Declaration of your current home country residence', content:`Residence Consent Letter
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], declare the following:
-
-Current Residence
-Address: [FULL ADDRESS]
-City: [CITY]
-Postcode: [POSTCODE]
-Country: [COUNTRY]
-Resident since: [DATE]
-Proof of address attached: [UTILITY BILL / BANK STATEMENT / COUNCIL TAX / OTHER]
-
-Intentions in Thailand
-• Purpose of stay: [REMOTE WORK / DIGITAL NOMAD / RETIREMENT / OTHER]
-• Planned length of stay: [LENGTH] months
-• Accommodation in Thailand: [HOTEL / APARTMENT / FRIEND / OTHER]
-• Emergency contact in [HOME COUNTRY]: [NAME], [PHONE], [RELATIONSHIP]
-
-I confirm that:
-1. I am applying from my country of residence as required
-2. I will maintain my [HOME COUNTRY] address throughout the visa period
-3. I will inform the Thai authorities of any change of address
-4. I will leave Thailand before my visa expires or apply for extension in good time
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`}
+{num:'01', title:'Salary & Tax Confirmation Letter', what:'Proves your personal income and tax position to Thai immigration.', file:'document-templates/employed/01_Salary_Tax_Confirmation_Letter_TEMPLATE.docx', exampleFile:'document-templates/employed/01_Salary_Tax_Confirmation_Letter_EXAMPLE.docx'},
+{num:'02', title:'Professional Portfolio', what:'Shows Thai immigration you’re a real, verifiable employee of a real company, with an online presence that backs it up.', file:'document-templates/employed/02_Professional_Portfolio_Employed_TEMPLATE.docx', exampleFile:'document-templates/employed/02_Professional_Portfolio_Employed_EXAMPLE.docx'},
+{num:'03', title:'Remote Work Statement', what:'Confirms in your own words that your job is location-independent and your employer has approved you working from Thailand.', file:'document-templates/employed/03_Remote_Work_Statement_Employed_TEMPLATE.docx', exampleFile:'document-templates/employed/03_Remote_Work_Statement_Employed_EXAMPLE.docx'},
+{num:'04', title:'Proof of Funds', what:'Presents your savings and salary income in one organised document, proving you exceed the ≈ THB 500,000 requirement.', file:'document-templates/employed/04_Proof_of_Funds_Employed_TEMPLATE.docx', exampleFile:'document-templates/employed/04_Proof_of_Funds_Employed_EXAMPLE.docx'},
+{num:'05', title:'Personal Declaration', what:'A short cover letter introducing yourself and stating your key DTV undertakings in your own name.', file:'document-templates/shared/05_Personal_Declaration_TEMPLATE.docx', exampleFile:'document-templates/shared/05_Personal_Declaration_EXAMPLE.docx'},
+{num:'06', title:'Processing Consent Letter', what:'Your undertakings during the processing period: staying in your country of application and remaining available.', file:'document-templates/shared/06_Processing_Consent_Letter_TEMPLATE.docx', exampleFile:'document-templates/shared/06_Processing_Consent_Letter_EXAMPLE.docx'},
+{num:'07', title:'Work Restrictions Consent', what:'Your formal acknowledgment of the DTV’s work restrictions and your undertaking to comply with them.', file:'document-templates/shared/07_Work_Restrictions_Consent_TEMPLATE.docx', exampleFile:'document-templates/shared/07_Work_Restrictions_Consent_EXAMPLE.docx'},
+{num:'08', title:'Residence Consent', what:'Confirms where you legally reside, supporting your application through the embassy responsible for that country.', file:'document-templates/shared/08_Residence_Consent_TEMPLATE.docx', exampleFile:'document-templates/shared/08_Residence_Consent_EXAMPLE.docx'}
 ],
 'self-employed': [
-{num:'01', title:'Professional Portfolio', what:'Your professional background as a self-employed individual', content:`Professional Portfolio
-Self-Employed / Freelancer
-
-About the Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Profession: [YOUR PROFESSION]
-Business name: [BUSINESS NAME] (if applicable)
-Website: [WEBSITE URL]
-LinkedIn: [URL]
-Years of experience: [NUMBER]
-
-Services Offered
-[Service 1]: [Brief description]
-[Service 2]: [Brief description]
-[Service 3]: [Brief description]
-
-Client History
-Client: [CLIENT NAME]
-Project: [PROJECT DESCRIPTION]
-Period: [START] – [END]
-Location: [CLIENT LOCATION]
-
-Key Achievements
-[ACHIEVEMENT 1]
-[ACHIEVEMENT 2]
-
-Declaration
-I, [FULL LEGAL NAME], certify that the information in this document is true and accurate to the best of my knowledge, and is provided in support of my application for the Destination Thailand Visa (DTV).
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'02', title:'Remote Working Statement', what:'Confirmation your self-employed work is location-independent', content:`Remote Working Statement
-Self-Employed / Freelancer
-
-Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Passport no.: [PASSPORT NUMBER]
-
-Business Details
-Business name: [BUSINESS NAME]
-Profession: [YOUR PROFESSION]
-Services: [LIST KEY SERVICES]
-Clients located in: [COUNTRIES]
-All invoicing to: [COUNTRY / COUNTRIES]
-
-Remote Work Declaration
-I, [FULL LEGAL NAME], confirm that my self-employed work can be performed from any location with internet connectivity, including Thailand while holding a Destination Thailand Visa (DTV).
-
-I understand that:
-• My clients are based outside Thailand
-• I will not solicit work from Thai employers
-• All income will be invoiced to overseas clients
-• I remain tax-resident in [HOME COUNTRY]
-• I am responsible for my own tax reporting
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'03', title:'Proof of Funds', what:'Bank statements showing sufficient funds', content:`Proof of Funds
-
-Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Date prepared: [DATE]
-
-Bank Details
-Bank name: [BANK NAME]
-Account holder: [FULL LEGAL NAME]
-Account number: [ACCOUNT NUMBER]
-Sort code: [SORT CODE] (UK) / IBAN: [IBAN] (EU/ROW)
-Currency: [CURRENCY]
-Current balance: [AMOUNT]
-Date of balance: [DATE]
-
-Evidence Attached
-• 3 months of bank statements ([MONTH 1], [MONTH 2], [MONTH 3])
-• Average monthly income: [AMOUNT]
-• Source of funds: [CLIENT PAYMENTS / SAVINGS / INVESTMENTS / OTHER]
-
-I confirm that the funds shown above are genuinely available to me and will be used to support my stay in Thailand under the Destination Thailand Visa (DTV).
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'04', title:'Processing Consent Letter', what:'Your undertaking during visa processing', content:`Consent Letter — Application Processing Undertaking
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], hereby give my consent to the processing of my personal data contained in my Destination Thailand Visa (DTV) application and the documents submitted in support thereof.
-
-I confirm that:
-1. All information provided is true, accurate, and complete to the best of my knowledge
-2. I understand that providing false information may result in refusal and future bans
-3. I will remain in [HOME COUNTRY] during the processing period
-4. I will respond promptly to any requests for additional information
-5. I will not travel to Thailand until my visa is approved and affixed to my passport
-
-I authorise the Royal Thai Embassy / Consulate to verify any of the information provided with third parties as necessary.
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'05', title:'Work Restrictions Consent Letter', what:'Confirmation you understand DTV work restrictions', content:`Work Restrictions Consent Letter
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], understand and agree to the following work restrictions under the Destination Thailand Visa (DTV):
-
-1. I will NOT seek or undertake employment with any Thai employer
-2. I will NOT work in a capacity that requires a Thai work permit
-3. I will NOT receive income sourced from within Thailand
-4. I will continue to work remotely for my overseas clients
-5. All work performed will be for entities outside Thailand and paid into non-Thai accounts
-6. I understand that breach of these conditions may result in visa cancellation and deportation
-
-I confirm that my presence in Thailand is solely for the purpose of remote working for overseas clients and that I have no intention to compete with the Thai labour market.
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'06', title:'Residence Consent Letter', what:'Declaration of your home country residence', content:`Residence Consent Letter
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], declare the following:
-
-Current Residence
-Address: [FULL ADDRESS]
-City: [CITY]
-Postcode: [POSTCODE]
-Country: [COUNTRY]
-Resident since: [DATE]
-Proof of address attached: [UTILITY BILL / BANK STATEMENT / COUNCIL TAX / OTHER]
-
-Intentions in Thailand
-• Purpose of stay: [REMOTE WORK / DIGITAL NOMAD / RETIREMENT / OTHER]
-• Planned length of stay: [LENGTH] months
-• Accommodation in Thailand: [HOTEL / APARTMENT / FRIEND / OTHER]
-• Emergency contact in [HOME COUNTRY]: [NAME], [PHONE], [RELATIONSHIP]
-
-I confirm that:
-1. I am applying from my country of residence as required
-2. I will maintain my [HOME COUNTRY] address throughout the visa period
-3. I will inform the Thai authorities of any change of address
-4. I will leave Thailand before my visa expires or apply for extension in good time
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`}
+{num:'02', title:'Professional Portfolio', what:'Shows Thai immigration that your self-employment is real, registered, and earning — what you do, who your clients are, and where to verify it.', file:'document-templates/self-employed/02_Professional_Portfolio_SelfEmployed_TEMPLATE.docx', exampleFile:'document-templates/self-employed/02_Professional_Portfolio_SelfEmployed_EXAMPLE.docx'},
+{num:'03', title:'Remote Work Statement', what:'Confirms your self-employed work is location-independent and will continue unchanged, for non-Thai clients, while you’re in Thailand.', file:'document-templates/self-employed/03_Remote_Work_Statement_SelfEmployed_TEMPLATE.docx', exampleFile:'document-templates/self-employed/03_Remote_Work_Statement_SelfEmployed_EXAMPLE.docx'},
+{num:'04', title:'Proof of Funds', what:'Presents your personal savings and business income in one organised document, keeping personal and business money clearly separated.', file:'document-templates/self-employed/04_Proof_of_Funds_SelfEmployed_TEMPLATE.docx', exampleFile:'document-templates/self-employed/04_Proof_of_Funds_SelfEmployed_EXAMPLE.docx'},
+{num:'05', title:'Personal Declaration', what:'A short cover letter introducing yourself and stating your key DTV undertakings in your own name.', file:'document-templates/shared/05_Personal_Declaration_TEMPLATE.docx', exampleFile:'document-templates/shared/05_Personal_Declaration_EXAMPLE.docx'},
+{num:'06', title:'Processing Consent Letter', what:'Your undertakings during the processing period: staying in your country of application and remaining available.', file:'document-templates/shared/06_Processing_Consent_Letter_TEMPLATE.docx', exampleFile:'document-templates/shared/06_Processing_Consent_Letter_EXAMPLE.docx'},
+{num:'07', title:'Work Restrictions Consent', what:'Your formal acknowledgment of the DTV’s work restrictions and your undertaking to comply with them.', file:'document-templates/shared/07_Work_Restrictions_Consent_TEMPLATE.docx', exampleFile:'document-templates/shared/07_Work_Restrictions_Consent_EXAMPLE.docx'},
+{num:'08', title:'Residence Consent', what:'Confirms where you legally reside, supporting your application through the embassy responsible for that country.', file:'document-templates/shared/08_Residence_Consent_TEMPLATE.docx', exampleFile:'document-templates/shared/08_Residence_Consent_EXAMPLE.docx'}
 ],
 'content-creator': [
-{num:'01', title:'Professional Portfolio', what:'Your digital presence and audience reach', content:`Professional Portfolio
-Content Creator / Influencer
-
-About the Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Content niche: [YOUR NICHE]
-Primary platforms: [YOUTUBE / TIKTOK / INSTAGRAM / TWITCH / OTHER]
-Audience size: [NUMBER] followers/subscribers
-Website: [WEBSITE URL]
-LinkedIn: [URL]
-Years creating content: [NUMBER]
-
-Platform Details
-Platform: [PLATFORM NAME]
-Handle: [@HANDLE]
-Followers: [NUMBER]
-Content focus: [BRIEF DESCRIPTION]
-Monetisation: [ADSENSE / BRAND DEALS / AFFILIATES / PATREON / OTHER]
-
-Brand Partnerships
-Brand: [BRAND NAME]
-Campaign: [CAMPAIGN DESCRIPTION]
-Period: [START] – [END]
-
-Declaration
-I, [FULL LEGAL NAME], certify that the information in this document is true and accurate to the best of my knowledge, and is provided in support of my application for the Destination Thailand Visa (DTV).
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'02', title:'Remote Working Statement', what:'Confirmation your content creation is location-independent', content:`Remote Working Statement
-Content Creator / Influencer
-
-Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Passport no.: [PASSPORT NUMBER]
-
-Content Business Details
-Primary platforms: [PLATFORMS]
-Content niche: [NICHE]
-Monetisation methods: [ADSENSE / BRAND DEALS / AFFILIATES / PATREON / OTHER]
-Revenue sources located in: [COUNTRIES]
-All payments to: [COUNTRY]
-
-Remote Work Declaration
-I, [FULL LEGAL NAME], confirm that my content creation work can be performed from any location with internet connectivity, including Thailand while holding a Destination Thailand Visa (DTV).
-
-I understand that:
-• My audience and revenue sources are global, not Thai-specific
-• I will not create content for Thai employers
-• All income will be from overseas platforms and advertisers
-• I remain tax-resident in [HOME COUNTRY]
-• I am responsible for my own tax reporting
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'03', title:'Proof of Funds', what:'Bank statements showing sufficient funds', content:`Proof of Funds
-
-Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Date prepared: [DATE]
-
-Bank Details
-Bank name: [BANK NAME]
-Account holder: [FULL LEGAL NAME]
-Account number: [ACCOUNT NUMBER]
-Sort code: [SORT CODE] (UK) / IBAN: [IBAN] (EU/ROW)
-Currency: [CURRENCY]
-Current balance: [AMOUNT]
-Date of balance: [DATE]
-
-Evidence Attached
-• 3 months of bank statements ([MONTH 1], [MONTH 2], [MONTH 3])
-• Average monthly income: [AMOUNT]
-• Source of funds: [PLATFORM REVENUE / BRAND DEALS / AFFILIATES / OTHER]
-
-I confirm that the funds shown above are genuinely available to me and will be used to support my stay in Thailand under the Destination Thailand Visa (DTV).
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'04', title:'Processing Consent Letter', what:'Your undertaking during visa processing', content:`Consent Letter — Application Processing Undertaking
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], hereby give my consent to the processing of my personal data contained in my Destination Thailand Visa (DTV) application and the documents submitted in support thereof.
-
-I confirm that:
-1. All information provided is true, accurate, and complete to the best of my knowledge
-2. I understand that providing false information may result in refusal and future bans
-3. I will remain in [HOME COUNTRY] during the processing period
-4. I will respond promptly to any requests for additional information
-5. I will not travel to Thailand until my visa is approved and affixed to my passport
-
-I authorise the Royal Thai Embassy / Consulate to verify any of the information provided with third parties as necessary.
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'05', title:'Work Restrictions Consent Letter', what:'Confirmation you understand DTV work restrictions', content:`Work Restrictions Consent Letter
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], understand and agree to the following work restrictions under the Destination Thailand Visa (DTV):
-
-1. I will NOT seek or undertake employment with any Thai employer
-2. I will NOT work in a capacity that requires a Thai work permit
-3. I will NOT receive income sourced from within Thailand
-4. I will continue to create content for my global audience
-5. All income will be from overseas platforms and advertisers
-6. I understand that breach of these conditions may result in visa cancellation and deportation
-
-I confirm that my presence in Thailand is solely for the purpose of remote content creation for a global audience and that I have no intention to compete with the Thai labour market.
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'06', title:'Residence Consent Letter', what:'Declaration of your home country residence', content:`Residence Consent Letter
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], declare the following:
-
-Current Residence
-Address: [FULL ADDRESS]
-City: [CITY]
-Postcode: [POSTCODE]
-Country: [COUNTRY]
-Resident since: [DATE]
-Proof of address attached: [UTILITY BILL / BANK STATEMENT / COUNCIL TAX / OTHER]
-
-Intentions in Thailand
-• Purpose of stay: [REMOTE WORK / DIGITAL NOMAD / RETIREMENT / OTHER]
-• Planned length of stay: [LENGTH] months
-• Accommodation in Thailand: [HOTEL / APARTMENT / FRIEND / OTHER]
-• Emergency contact in [HOME COUNTRY]: [NAME], [PHONE], [RELATIONSHIP]
-
-I confirm that:
-1. I am applying from my country of residence as required
-2. I will maintain my [HOME COUNTRY] address throughout the visa period
-3. I will inform the Thai authorities of any change of address
-4. I will leave Thailand before my visa expires or apply for extension in good time
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`}
+{num:'02', title:'Professional Portfolio', what:'Shows Thai immigration that your content business is real and commercially active: platforms, audience, and verifiable brand income.', file:'document-templates/content-creator/02_Professional_Portfolio_ContentCreator_TEMPLATE.docx', exampleFile:'document-templates/content-creator/02_Professional_Portfolio_ContentCreator_EXAMPLE.docx'},
+{num:'03', title:'Remote Work Statement', what:'Confirms your content business runs from anywhere, and that your income comes from platforms and brands outside Thailand.', file:'document-templates/content-creator/03_Remote_Work_Statement_ContentCreator_TEMPLATE.docx', exampleFile:'document-templates/content-creator/03_Remote_Work_Statement_ContentCreator_EXAMPLE.docx'},
+{num:'04', title:'Proof of Funds', what:'Presents your savings plus your platform and brand income with an end-to-end paper trail: contract, invoice, bank deposit.', file:'document-templates/content-creator/04_Proof_of_Funds_ContentCreator_TEMPLATE.docx', exampleFile:'document-templates/content-creator/04_Proof_of_Funds_ContentCreator_EXAMPLE.docx'},
+{num:'05', title:'Personal Declaration', what:'A short cover letter introducing yourself and stating your key DTV undertakings in your own name.', file:'document-templates/shared/05_Personal_Declaration_TEMPLATE.docx', exampleFile:'document-templates/shared/05_Personal_Declaration_EXAMPLE.docx'},
+{num:'06', title:'Processing Consent Letter', what:'Your undertakings during the processing period: staying in your country of application and remaining available.', file:'document-templates/shared/06_Processing_Consent_Letter_TEMPLATE.docx', exampleFile:'document-templates/shared/06_Processing_Consent_Letter_EXAMPLE.docx'},
+{num:'07', title:'Work Restrictions Consent', what:'Your formal acknowledgment of the DTV’s work restrictions and your undertaking to comply with them.', file:'document-templates/shared/07_Work_Restrictions_Consent_TEMPLATE.docx', exampleFile:'document-templates/shared/07_Work_Restrictions_Consent_EXAMPLE.docx'},
+{num:'08', title:'Residence Consent', what:'Confirms where you legally reside, supporting your application through the embassy responsible for that country.', file:'document-templates/shared/08_Residence_Consent_TEMPLATE.docx', exampleFile:'document-templates/shared/08_Residence_Consent_EXAMPLE.docx'}
 ],
 'business-owner': [
-{num:'01', title:'Professional Portfolio', what:'Your company and director role information', content:`Professional Portfolio
-Company Director
-
-About the Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Role: [DIRECTOR / CEO / MANAGING DIRECTOR]
-Company: [COMPANY NAME]
-Company website: [WEBSITE URL]
-LinkedIn: [URL]
-Years in role: [NUMBER]
-
-Company Details
-Company name: [COMPANY NAME]
-Registration number: [COMPANY REGISTRATION NUMBER]
-Incorporated: [DATE]
-Jurisdiction: [COUNTRY]
-Business type: [LIMITED COMPANY / LLC / CORPORATION / OTHER]
-Employees: [NUMBER]
-Turnover: [AMOUNT]
-
-Business Activities
-[Activity 1]: [Description]
-[Activity 2]: [Description]
-[Activity 3]: [Description]
-
-Key Achievements
-[ACHIEVEMENT 1]
-[ACHIEVEMENT 2]
-
-Declaration
-I, [FULL LEGAL NAME], certify that the information in this document is true and accurate to the best of my knowledge, and is provided in support of my application for the Destination Thailand Visa (DTV).
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'02', title:'Remote Working Statement', what:'Confirmation your company is managed remotely', content:`Remote Working Statement
-Company Director
-
-Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Passport no.: [PASSPORT NUMBER]
-
-Company Details
-Company name: [COMPANY NAME]
-Registration number: [COMPANY REGISTRATION NUMBER]
-Jurisdiction: [COUNTRY]
-Business type: [LIMITED COMPANY / LLC / CORPORATION / OTHER]
-
-Remote Management Declaration
-I, [FULL LEGAL NAME], confirm that my duties as [ROLE] of [COMPANY NAME] can be performed remotely from Thailand while holding a Destination Thailand Visa (DTV).
-
-The company:
-• Is registered and operates in [COUNTRY]
-• Has clients based outside Thailand
-• Is managed through digital communication tools
-• Does not require my physical presence in [COUNTRY]
-
-I understand that:
-• I remain responsible for company compliance in [COUNTRY]
-• All company income is generated outside Thailand
-• I will not solicit Thai clients or employees
-• I remain tax-resident in [HOME COUNTRY]
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'03', title:'Proof of Funds', what:'Bank statements showing sufficient funds', content:`Proof of Funds
-
-Applicant
-Full name: [FULL LEGAL NAME]
-Nationality: [NATIONALITY]
-Date prepared: [DATE]
-
-Bank Details
-Bank name: [BANK NAME]
-Account holder: [FULL LEGAL NAME]
-Account number: [ACCOUNT NUMBER]
-Sort code: [SORT CODE] (UK) / IBAN: [IBAN] (EU/ROW)
-Currency: [CURRENCY]
-Current balance: [AMOUNT]
-Date of balance: [DATE]
-
-Evidence Attached
-• 3 months of bank statements ([MONTH 1], [MONTH 2], [MONTH 3])
-• Average monthly income: [AMOUNT]
-• Source of funds: [DIVIDENDS / DIRECTOR SALARY / COMPANY DISTRIBUTIONS / OTHER]
-
-I confirm that the funds shown above are genuinely available to me and will be used to support my stay in Thailand under the Destination Thailand Visa (DTV).
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'04', title:'Processing Consent Letter', what:'Your undertaking during visa processing', content:`Consent Letter — Application Processing Undertaking
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], hereby give my consent to the processing of my personal data contained in my Destination Thailand Visa (DTV) application and the documents submitted in support thereof.
-
-I confirm that:
-1. All information provided is true, accurate, and complete to the best of my knowledge
-2. I understand that providing false information may result in refusal and future bans
-3. I will remain in [HOME COUNTRY] during the processing period
-4. I will respond promptly to any requests for additional information
-5. I will not travel to Thailand until my visa is approved and affixed to my passport
-
-I authorise the Royal Thai Embassy / Consulate to verify any of the information provided with third parties as necessary.
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'05', title:'Work Restrictions Consent Letter', what:'Confirmation you understand DTV work restrictions', content:`Work Restrictions Consent Letter
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], understand and agree to the following work restrictions under the Destination Thailand Visa (DTV):
-
-1. I will NOT seek or undertake employment with any Thai employer
-2. I will NOT work in a capacity that requires a Thai work permit
-3. I will NOT receive income sourced from within Thailand
-4. I will continue to manage my overseas company remotely
-5. All company income will be generated outside Thailand
-6. I understand that breach of these conditions may result in visa cancellation and deportation
-
-I confirm that my presence in Thailand is solely for the purpose of remotely managing my [COUNTRY]-based company and that I have no intention to compete with the Thai labour market.
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`},
-{num:'06', title:'Residence Consent Letter', what:'Declaration of your home country residence', content:`Residence Consent Letter
-
-Date: [DATE]
-To: The Royal Thai Embassy / Royal Thai Consulate
-
-Re: [FULL LEGAL NAME] — Passport no.: [PASSPORT NUMBER]
-
-I, [FULL LEGAL NAME], declare the following:
-
-Current Residence
-Address: [FULL ADDRESS]
-City: [CITY]
-Postcode: [POSTCODE]
-Country: [COUNTRY]
-Resident since: [DATE]
-Proof of address attached: [UTILITY BILL / BANK STATEMENT / COUNCIL TAX / OTHER]
-
-Intentions in Thailand
-• Purpose of stay: [REMOTE WORK / DIGITAL NOMAD / RETIREMENT / OTHER]
-• Planned length of stay: [LENGTH] months
-• Accommodation in Thailand: [HOTEL / APARTMENT / FRIEND / OTHER]
-• Emergency contact in [HOME COUNTRY]: [NAME], [PHONE], [RELATIONSHIP]
-
-I confirm that:
-1. I am applying from my country of residence as required
-2. I will maintain my [HOME COUNTRY] address throughout the visa period
-3. I will inform the Thai authorities of any change of address
-4. I will leave Thailand before my visa expires or apply for extension in good time
-
-_______________________________
-[FULL LEGAL NAME] — printed name
-Date: [DATE]`}
+{num:'02', title:'Professional Portfolio', what:'Shows Thai immigration that your company (or companies) are real, active, and run by you remotely, with registry references an officer can verify.', file:'document-templates/business-owner/02_Professional_Portfolio_Director_TEMPLATE.docx', exampleFile:'document-templates/business-owner/02_Professional_Portfolio_Director_EXAMPLE.docx'},
+{num:'03', title:'Remote Work Statement', what:'Confirms you run your company (or companies) entirely remotely and that operations continue unchanged while you’re in Thailand.', file:'document-templates/business-owner/03_Remote_Work_Statement_Director_TEMPLATE.docx', exampleFile:'document-templates/business-owner/03_Remote_Work_Statement_Director_EXAMPLE.docx'},
+{num:'04', title:'Proof of Funds', what:'Presents personal funds, director income, and company financial strength, with personal and company money strictly separated.', file:'document-templates/business-owner/04_Proof_of_Funds_Director_TEMPLATE.docx', exampleFile:'document-templates/business-owner/04_Proof_of_Funds_Director_EXAMPLE.docx'},
+{num:'05', title:'Personal Declaration', what:'A short cover letter introducing yourself and stating your key DTV undertakings in your own name.', file:'document-templates/shared/05_Personal_Declaration_TEMPLATE.docx', exampleFile:'document-templates/shared/05_Personal_Declaration_EXAMPLE.docx'},
+{num:'06', title:'Processing Consent Letter', what:'Your undertakings during the processing period: staying in your country of application and remaining available.', file:'document-templates/shared/06_Processing_Consent_Letter_TEMPLATE.docx', exampleFile:'document-templates/shared/06_Processing_Consent_Letter_EXAMPLE.docx'},
+{num:'07', title:'Work Restrictions Consent', what:'Your formal acknowledgment of the DTV’s work restrictions and your undertaking to comply with them.', file:'document-templates/shared/07_Work_Restrictions_Consent_TEMPLATE.docx', exampleFile:'document-templates/shared/07_Work_Restrictions_Consent_EXAMPLE.docx'},
+{num:'08', title:'Residence Consent', what:'Confirms where you legally reside, supporting your application through the embassy responsible for that country.', file:'document-templates/shared/08_Residence_Consent_TEMPLATE.docx', exampleFile:'document-templates/shared/08_Residence_Consent_EXAMPLE.docx'}
 ]
 };
 
@@ -1013,8 +368,9 @@ function showResults() {
 <div class="document-title">${doc.title}</div>
 </div>
 <div class="document-what">${doc.what}</div>
-<div class="document-details">Replace all <strong>[PLACEHOLDER]</strong> text with your real details.</div>
-<div style="text-align:right;margin-top:15px">
+<div class="document-details">Word document (.docx) — opens directly in Microsoft Word or Google Docs. Every <strong>[FILL IN …]</strong> tag inside is ready for your details.</div>
+<div style="text-align:right;margin-top:15px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;">
+<button class="btn-secondary" onclick="downloadExample('${doc.num}')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;font-size:14px;">See Example</button>
 <button class="btn-download" onclick="downloadDoc('${doc.num}')" style="display:inline-flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg> Download Template ${doc.num}</button>
 </div>
 </div>
@@ -1032,23 +388,37 @@ function slugify(text) {
     return text.replace(/[^a-z0-9]+/gi, '_').replace(/^_+|_+$/g, '');
 }
 
-function downloadDoc(num) {
-    const doc = findDoc(num);
-    if (!doc) return;
-    const blob = new Blob([doc.content], { type: 'text/plain;charset=utf-8' });
-    saveAs(blob, `${doc.num}_${slugify(doc.title)}.txt`);
+async function fetchDocx(path) {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error('download_failed: ' + path);
+    return res.blob();
 }
 
-function downloadAll() {
+async function downloadDoc(num) {
+    const doc = findDoc(num);
+    if (!doc) return;
+    const blob = await fetchDocx(doc.file);
+    saveAs(blob, `${doc.num}_${slugify(doc.title)}_TEMPLATE.docx`);
+}
+
+async function downloadExample(num) {
+    const doc = findDoc(num);
+    if (!doc) return;
+    const blob = await fetchDocx(doc.exampleFile);
+    saveAs(blob, `${doc.num}_${slugify(doc.title)}_EXAMPLE.docx`);
+}
+
+async function downloadAll() {
     const data = docSets[empType];
     if (!data) return;
     const zip = new JSZip();
-    data.forEach(doc => {
-        zip.file(`${doc.num}_${slugify(doc.title)}.txt`, doc.content);
-    });
-    zip.generateAsync({ type: 'blob' }).then(blob => {
-        saveAs(blob, `DTV_Personalised_Guide_${empType}.zip`);
-    });
+    await Promise.all(data.map(async doc => {
+        const [template, example] = await Promise.all([fetchDocx(doc.file), fetchDocx(doc.exampleFile)]);
+        zip.file(`${doc.num}_${slugify(doc.title)}_TEMPLATE.docx`, template);
+        zip.file(`${doc.num}_${slugify(doc.title)}_EXAMPLE.docx`, example);
+    }));
+    const blob = await zip.generateAsync({ type: 'blob' });
+    saveAs(blob, `DTV_Personalised_Guide_${empType}.zip`);
 }
 
 function restart() {
