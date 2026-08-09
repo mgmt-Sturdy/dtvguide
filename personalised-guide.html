@@ -361,7 +361,7 @@ function showResults() {
 <div class="document-what">${doc.what}</div>
 <div class="document-details">Word document (.docx) — opens directly in Microsoft Word or Google Docs. Every <strong>[FILL IN …]</strong> tag inside is ready for your details.</div>
 <div style="text-align:right;margin-top:15px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;">
-<a href="${doc.examplePdf}" target="_blank" rel="noopener" class="btn-secondary" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;font-size:14px;text-decoration:none;">See Example</a>
+<a href="document-viewer.html?pdf=${encodeURIComponent(doc.examplePdf)}&title=${encodeURIComponent(doc.title)}" target="_blank" rel="noopener" class="btn-secondary" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;font-size:14px;text-decoration:none;">See Example</a>
 <button class="btn-download" onclick="downloadDoc('${doc.num}')" style="display:inline-flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg> Download Template ${doc.num}</button>
 </div>
 </div>
