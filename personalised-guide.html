@@ -92,6 +92,7 @@ button { padding: 12px 28px; border: none; border-radius: 8px; font-size: 16px; 
 .document-what { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; }
 .document-details { background: white; padding: 16px; border-radius: 6px; font-size: 14px; color: var(--text-secondary); }
 .document-details strong { color: var(--violet-main); }
+.document-requirement { background: #FFF7ED; border-left: 3px solid #F59E0B; padding: 10px 14px; border-radius: 6px; font-size: 13px; color: #92400E; margin-bottom: 12px; line-height: 1.5; }
 .btn-download { background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); color: white; padding: 10px 20px; font-size: 14px; margin-top: 15px; }
 .btn-download:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(124,58,237,0.3); }
 .btn-example { background: white; color: var(--violet-main); border: 2px solid var(--violet-main); padding: 10px 20px; font-size: 14px; }
@@ -423,6 +424,17 @@ ${(data.alt || []).map(a => `<div class="embassy-alt">${mission(a)}</div>`).join
 </div>`;
 }
 
+// Key requirements per document, quoted/paraphrased from the official Royal Thai
+// Ministry of Foreign Affairs DTV checklist ("Workcation: Digital nomad / remote
+// worker / foreign talent / freelancer" category) — not third-party guesses.
+// Source: image.mfa.go.th Checklist_DTV.pdf
+const KEY_REQUIREMENTS = {
+'01': "Official requirement: this must be <strong>hand-signed by an authorised HR contact or manager</strong> — the checklist explicitly states a job offer or acceptance letter is <strong>not sufficient</strong>. Attach salary slips covering the <strong>last 6 months</strong>, not just your latest one.",
+'02': "Official requirement: the checklist calls for \"a professional portfolio showcasing digital nomad, remote worker, foreign talent or freelancer status.\" Everything you state should be independently checkable — company registry, platform profile, client site — not just asserted.",
+'03': "Official requirement: your employment contract/certificate (or, if self-employed, your business registration/licence) must be <strong>authenticated by the embassy of the country where it's issued</strong> before you submit it — this is a legalisation step, not just a photocopy, and it can take weeks, so start early.",
+'04': "Official requirement: a bank statement covering the <strong>last 3 months</strong> with an ending balance of at least <strong>500,000 THB</strong> (or 65,000 MYR), plus proof of salary/income for the <strong>last 6 months</strong>. In practice, a balance that only appears in the final days of the statement is a common reason officers ask for more evidence — steady funds over the full period are stronger.",
+};
+
 const docSets = {
 'employed': [
 {num:'01', title:'Salary & Tax Confirmation Letter', what:'Proves your personal income and tax position to Thai immigration.', file:'document-templates/employed/01_Salary_Tax_Confirmation_Letter_TEMPLATE.docx', exampleFile:'document-templates/employed/01_Salary_Tax_Confirmation_Letter_EXAMPLE.docx', examplePdf:'document-templates/employed/01_Salary_Tax_Confirmation_Letter_EXAMPLE.pdf'},
@@ -491,6 +503,7 @@ function showResults() {
 <div class="document-title">${doc.title}</div>
 </div>
 <div class="document-what">${doc.what}</div>
+${KEY_REQUIREMENTS[doc.num] ? `<div class="document-requirement">⚠️ <strong>Key requirement:</strong> ${KEY_REQUIREMENTS[doc.num]}</div>` : ''}
 <div class="document-details">Word document (.docx) — opens directly in Microsoft Word or Google Docs. Every <strong>[FILL IN …]</strong> tag inside is ready for your details.</div>
 <div style="text-align:right;margin-top:15px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;">
 <a href="document-viewer.html?pdf=${encodeURIComponent(doc.examplePdf)}&title=${encodeURIComponent(doc.title)}" target="_blank" rel="noopener" class="btn-example" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;border-radius:8px;font-weight:600;transition:all 0.3s ease;">See Example</a>
