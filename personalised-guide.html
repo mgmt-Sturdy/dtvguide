@@ -110,6 +110,16 @@ button { padding: 12px 28px; border: none; border-radius: 8px; font-size: 16px; 
 .embassy-box .embassy-detail a { color: var(--violet-main); }
 .embassy-box .embassy-alt { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
 
+.submit-guide-box { background: white; border: 2px solid var(--border); border-radius: 12px; padding: 28px; margin-top: 30px; }
+.submit-guide-box h3 { font-size: 18px; margin-bottom: 6px; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+.submit-guide-box .submit-intro { font-size: 14px; color: var(--text-secondary); margin-bottom: 18px; }
+.submit-guide-steps { counter-reset: step; list-style: none; padding: 0; margin: 0; }
+.submit-guide-steps li { position: relative; padding: 0 0 18px 40px; font-size: 14px; color: var(--text-secondary); }
+.submit-guide-steps li:last-child { padding-bottom: 0; }
+.submit-guide-steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--violet-main); color: white; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+.submit-guide-steps strong { color: var(--text-primary); }
+.submit-guide-footnote { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
 footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-size: 13px; }
 </style>
 </head>
@@ -209,6 +219,8 @@ footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-siz
 <div id="embassyBox"></div>
 
 <div id="documentsContainer"></div>
+
+<div id="submitGuideBox"></div>
 
 <div style="margin-top:40px;text-align:center">
 <button class="btn-secondary" onclick="restart()">← Start Over (Change Answers)</button>
@@ -573,6 +585,38 @@ ${(data.alt || []).map(a => `<div class="embassy-alt">${mission(a)}</div>`).join
 </div>`;
 }
 
+// Confirmed visa fees, in the embassy's own stated currency, for the countries where
+// we found their own published DTV page (see EMBASSY_DATA / dtvNote above). Not stated
+// on the official site for every embassy, so most countries fall back to a general note.
+const EMBASSY_FEE = {
+    'United States': '$400 USD',
+    'United Kingdom': '£300', 'Ireland': '£300',
+    'Egypt': '18,000 EGP', 'Djibouti': '18,000 EGP', 'Sudan': '18,000 EGP', 'Eritrea': '18,000 EGP',
+};
+
+function submitGuideHtml() {
+    const country = document.getElementById('countrySelect') ? document.getElementById('countrySelect').value : '';
+    const fee = EMBASSY_FEE[country];
+    const feeLine = fee
+        ? `<strong>Pay the visa fee</strong> — your embassy's own stated fee is <strong>${fee}</strong>.`
+        : `<strong>Pay the visa fee</strong> — this varies by embassy; check your embassy's page (linked above) or the portal itself for the exact amount.`;
+
+    return `<div class="submit-guide-box">
+<h3>📤 How to Submit Your Application</h3>
+<p class="submit-intro">Once every document above is filled in and gathered, here's the actual application process — this isn't posted anywhere else on this site until now.</p>
+<ol class="submit-guide-steps">
+<li><strong>Apply online</strong> through the official Thai e-Visa portal — <a href="https://www.thaievisa.go.th/" target="_blank" rel="noopener" style="color:var(--violet-main);font-weight:600;">thaievisa.go.th</a>. Every DTV application goes through this single system, regardless of which embassy is responsible for you.</li>
+<li><strong>Create an account</strong> on the portal.</li>
+<li><strong>Fill in the application form</strong> with your personal details.</li>
+<li><strong>Upload your documents</strong> — everything you've downloaded and filled in above, as clear scans or photos. No photos of a screen, and no blurry or cropped files.</li>
+<li>${feeLine}</li>
+<li><strong>Wait for processing</strong> — timing varies by embassy and season.</li>
+<li><strong>Receive your e-Visa by email</strong> — a PDF confirmation. Print it; you don't get a physical stamp in your passport at this stage.</li>
+</ol>
+<div class="submit-guide-footnote">Once approved: the DTV is valid for <strong>5 years</strong> from issue, and each entry allows a stay of up to <strong>180 days</strong> — extendable once, for a further 180 days, through Thai Immigration once you're in the country.</div>
+</div>`;
+}
+
 // Approximate currency conversion for the 500,000 THB Proof of Funds threshold,
 // shown once a country is selected. Indicative only (not a live/authoritative
 // exchange rate) -- always verify the exact figure with your own embassy.
@@ -686,6 +730,7 @@ function showResults() {
 
     const country = document.getElementById('countrySelect').value;
     document.getElementById('embassyBox').innerHTML = embassyHtml(country);
+    document.getElementById('submitGuideBox').innerHTML = submitGuideHtml();
 
     const container = document.getElementById('documentsContainer');
     let html = '<div class="documents-section"><div class="section-title" style="display:flex;align-items:center;gap:10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6M9 15h6"/></svg> Your Document Templates</div></div>';
