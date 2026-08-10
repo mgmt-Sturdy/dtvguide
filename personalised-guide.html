@@ -92,8 +92,10 @@ button { padding: 12px 28px; border: none; border-radius: 8px; font-size: 16px; 
 .document-what { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; }
 .document-details { background: white; padding: 16px; border-radius: 6px; font-size: 14px; color: var(--text-secondary); }
 .document-details strong { color: var(--violet-main); }
-.btn-download { background: linear-gradient(135deg, #48bb78, #38a169); color: white; padding: 10px 20px; font-size: 14px; margin-top: 15px; }
-.btn-download:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(72,187,120,0.3); }
+.btn-download { background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); color: white; padding: 10px 20px; font-size: 14px; margin-top: 15px; }
+.btn-download:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(124,58,237,0.3); }
+.btn-example { background: white; color: var(--violet-main); border: 2px solid var(--violet-main); padding: 10px 20px; font-size: 14px; }
+.btn-example:hover { background: var(--violet-main); color: white; }
 .btn-zip { background: linear-gradient(135deg, #ed8936, #dd6b20); color: white; padding: 18px 36px; font-size: 20px; width: 100%; margin-bottom: 10px; }
 .btn-zip:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(237,137,54,0.3); }
 .info-box { background: var(--bg-tertiary); border-left: 4px solid var(--violet-main); padding: 20px; border-radius: 8px; margin-bottom: 30px; font-size: 14px; }
@@ -361,7 +363,7 @@ function showResults() {
 <div class="document-what">${doc.what}</div>
 <div class="document-details">Word document (.docx) — opens directly in Microsoft Word or Google Docs. Every <strong>[FILL IN …]</strong> tag inside is ready for your details.</div>
 <div style="text-align:right;margin-top:15px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;">
-<a href="document-viewer.html?pdf=${encodeURIComponent(doc.examplePdf)}&title=${encodeURIComponent(doc.title)}" target="_blank" rel="noopener" class="btn-secondary" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;font-size:14px;text-decoration:none;">See Example</a>
+<a href="document-viewer.html?pdf=${encodeURIComponent(doc.examplePdf)}&title=${encodeURIComponent(doc.title)}" target="_blank" rel="noopener" class="btn-example" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;border-radius:8px;font-weight:600;transition:all 0.3s ease;">See Example</a>
 <button class="btn-download" onclick="downloadDoc('${doc.num}')" style="display:inline-flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg> Download Template ${doc.num}</button>
 </div>
 </div>
