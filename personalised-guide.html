@@ -52,7 +52,10 @@ section.active { display: block; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* Locked state */
-.price-tag { display: inline-block; background: var(--bg-tertiary); color: var(--violet-deep); font-weight: 700; font-size: 1.5rem; padding: 0.5rem 1.5rem; border-radius: 100px; margin: 1rem 0 1.5rem; }
+.price-tag { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--violet-main), var(--accent-pink)); color: white; font-weight: 700; font-size: 1.5rem; padding: 0.75rem 1.75rem; border-radius: 100px; margin: 1rem 0 0.5rem; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
+.price-tag:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3); }
+.price-tag .price-native { font-size: 0.95rem; font-weight: 500; opacity: 0.85; }
+.price-fx-note { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem; }
 .feature-list { text-align: left; max-width: 480px; margin: 0 auto 2rem; }
 .feature-list li { list-style: none; padding: 0.6rem 0; color: var(--text-secondary); display: flex; gap: 0.6rem; align-items: flex-start; }
 .feature-list li::before { content: "✓"; color: var(--violet-main); font-weight: 700; }
@@ -149,7 +152,8 @@ footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-siz
 <section id="locked" class="active">
     <div style="text-align:center">
         <h2>Skip the guesswork. Get the exact letters you need.</h2>
-        <div class="price-tag" id="priceTag">£19.99 — one-time purchase</div>
+        <a class="price-tag" id="priceTag" href="#">£19.99 — one-time purchase →</a>
+        <p class="price-fx-note" id="priceFxNote" style="display:none;"></p>
         <p style="color:var(--text-secondary);max-width:520px;margin:0 auto 1.5rem;">7–8 ready-to-fill Word documents (.docx), matched to your situation — each with a worked example alongside it.</p>
 
         <ul class="feature-list">
@@ -633,6 +637,48 @@ function submitGuideHtml() {
 // exchange rate) -- always verify the exact figure with your own embassy.
 const COUNTRY_CURRENCY = { "Indonesia": "IDR", "Laos": "LAK", "Malaysia": "MYR", "Myanmar": "MMK", "Philippines": "PHP", "Timor-Leste": "USD", "Vietnam": "VND", "Brunei": "BND", "Singapore": "SGD", "China": "CNY", "Mongolia": "MNT", "Micronesia": "USD", "Japan": "JPY", "Marshall Islands": "USD", "South Korea": "KRW", "Taiwan": "TWD", "India": "INR", "Nepal": "NPR", "Pakistan": "PKR", "Sri Lanka": "LKR", "Maldives": "MVR", "Bangladesh": "BDT", "Bhutan": "BTN", "Jordan": "JOD", "Iraq": "IQD", "Palestine": "ILS", "Iran": "IRR", "Saudi Arabia": "SAR", "Lebanon": "LBP", "Oman": "OMR", "Bahrain": "BHD", "United Arab Emirates": "AED", "Kuwait": "KWD", "Qatar": "QAR", "Israel": "ILS", "Kazakhstan": "KZT", "Kyrgyzstan": "KGS", "Tajikistan": "TJS", "Russia": "RUB", "Armenia": "AMD", "Belarus": "BYN", "Moldova": "MDL", "Uzbekistan": "UZS", "Egypt": "EGP", "Djibouti": "DJF", "Sudan": "SDG", "Eritrea": "ERN", "Morocco": "MAD", "Mauritania": "MRU", "Tunisia": "TND", "Kenya": "KES", "Uganda": "UGX", "Tanzania": "TZS", "Seychelles": "SCR", "Comoros": "KMF", "DR Congo": "CDF", "Burundi": "BIF", "Rwanda": "RWF", "South Sudan": "SSP", "Ethiopia": "ETB", "Somalia": "SOS", "South Africa": "ZAR", "Mauritius": "MUR", "Zimbabwe": "USD", "Lesotho": "LSL", "Angola": "AOA", "Zambia": "ZMW", "Botswana": "BWP", "Namibia": "NAD", "Eswatini": "SZL", "Malawi": "MWK", "Madagascar": "MGA", "Senegal": "XOF", "Guinea": "GNF", "Guinea-Bissau": "XOF", "Mali": "XOF", "Gambia": "GMD", "Cote d'Ivoire": "XOF", "Sierra Leone": "SLE", "Togo": "XOF", "Burkina Faso": "XOF", "Gabon": "XAF", "Cabo Verde": "CVE", "Liberia": "LRD", "Niger": "XOF", "Nigeria": "NGN", "Benin": "XOF", "Cameroon": "XAF", "Ghana": "GHS", "Central African Republic": "XAF", "Congo": "XAF", "Equatorial Guinea": "XAF", "Sao Tome and Principe": "STN", "Chad": "XAF", "Mozambique": "MZN", "Hungary": "HUF", "Bosnia and Herzegovina": "BAM", "Montenegro": "EUR", "Kosovo": "EUR", "Croatia": "EUR", "Italy": "EUR", "Albania": "ALL", "Libya": "LYD", "Cyprus": "EUR", "San Marino": "EUR", "Turkey": "TRY", "Azerbaijan": "AZN", "Georgia": "GEL", "North Macedonia": "MKD", "Turkmenistan": "TMT", "Greece": "EUR", "Serbia": "RSD", "Malta": "EUR", "Belgium": "EUR", "Luxembourg": "EUR", "Germany": "EUR", "France": "EUR", "Monaco": "EUR", "United Kingdom": "GBP", "Ireland": "EUR", "Spain": "EUR", "Andorra": "EUR", "Austria": "EUR", "Slovenia": "EUR", "Slovakia": "EUR", "Denmark": "DKK", "Lithuania": "EUR", "Romania": "RON", "Bulgaria": "BGN", "Switzerland": "CHF", "Liechtenstein": "CHF", "Czech Republic": "CZK", "Portugal": "EUR", "Poland": "PLN", "Ukraine": "UAH", "Sweden": "SEK", "Latvia": "EUR", "Norway": "NOK", "Iceland": "ISK", "Netherlands": "EUR", "Finland": "EUR", "Estonia": "EUR", "Canada": "CAD", "Grenada": "XCD", "Dominican Republic": "DOP", "Jamaica": "JMD", "Antigua and Barbuda": "XCD", "Dominica": "XCD", "Saint Lucia": "XCD", "Saint Vincent and the Grenadines": "XCD", "Barbados": "BBD", "Bahamas": "BSD", "Trinidad and Tobago": "TTD", "Saint Kitts and Nevis": "XCD", "Mexico": "MXN", "Guatemala": "GTQ", "Honduras": "HNL", "Nicaragua": "NIO", "Cuba": "CUP", "Belize": "BZD", "Haiti": "HTG", "Peru": "PEN", "Venezuela": "VES", "Colombia": "COP", "Bolivia": "BOB", "Ecuador": "USD", "Chile": "CLP", "Costa Rica": "CRC", "Panama": "USD", "El Salvador": "USD", "Brazil": "BRL", "Guyana": "GYD", "Suriname": "SRD", "Argentina": "ARS", "Paraguay": "PYG", "Uruguay": "UYU", "United States": "USD", "Australia": "AUD", "Papua New Guinea": "PGK", "Vanuatu": "VUV", "Solomon Islands": "SBD", "Fiji": "FJD", "Kiribati": "AUD", "Tonga": "TOP", "Nauru": "AUD", "New Zealand": "NZD", "Samoa": "WST", "Cook Islands": "NZD", "Niue": "NZD", "Tuvalu": "AUD", "Hong Kong": "HKD", "Algeria": "DZD", "Palau": "USD" };
 const CURRENCY_THB_RATE = { "USD": 0.029, "EUR": 0.027, "GBP": 0.023, "MYR": 0.13, "JPY": 4.3, "CNY": 0.212, "INR": 2.42, "AUD": 0.045, "CAD": 0.04, "SGD": 0.039, "CHF": 0.025, "HKD": 0.227, "KRW": 39.5, "NZD": 0.049, "ZAR": 0.535, "BRL": 0.163, "MXN": 0.51, "SEK": 0.305, "NOK": 0.31, "DKK": 0.203, "PLN": 0.117, "RUB": 2.75, "AED": 0.107, "SAR": 0.109, "ILS": 0.106, "EGP": 1.42, "TRY": 0.99, "THB": 1.0, "IDR": 465.0, "PHP": 1.65, "VND": 730.0, "PKR": 8.1, "BDT": 3.4, "LKR": 8.7, "NPR": 3.87, "KZT": 15.0, "UZS": 370.0, "AMD": 11.3, "GEL": 0.079, "AZN": 0.049, "UAH": 1.21, "RON": 0.133, "BGN": 0.053, "HUF": 10.6, "CZK": 0.664, "ISK": 3.85, "ARS": 30.5, "CLP": 27.4, "COP": 116.0, "PEN": 0.109, "UYU": 1.16, "VES": 1.05, "GTQ": 0.226, "HNL": 0.72, "NIO": 1.06, "CUP": 0.7, "BZD": 0.058, "JMD": 4.55, "BSD": 0.029, "BBD": 0.058, "TTD": 0.196, "XCD": 0.078, "DOP": 1.71, "HTG": 3.8, "NGN": 46.5, "GHS": 0.42, "KES": 3.75, "TZS": 72.0, "UGX": 106.0, "ETB": 3.65, "ZMW": 0.71, "MZN": 1.85, "MAD": 0.283, "TND": 0.089, "DZD": 3.85, "XOF": 17.5, "XAF": 17.5, "MUR": 1.31, "MGA": 129.0, "MWK": 50.0, "BWP": 0.395, "NAD": 0.535, "LSL": 0.535, "SZL": 0.535, "RWF": 39.0, "BIF": 84.0, "DJF": 5.1, "SOS": 16.6, "JOD": 0.0205, "LBP": 2600.0, "IQD": 38.0, "IRR": 1220.0, "KWD": 0.0089, "BHD": 0.0109, "QAR": 0.105, "OMR": 0.0111, "PGK": 0.115, "FJD": 0.064, "WST": 0.079, "TOP": 0.067, "SBD": 0.243, "VUV": 3.45, "XPF": 3.2, "BND": 0.039, "MMK": 63.0, "TWD": 0.94, "LAK": 630.0, "BTN": 2.42, "MVR": 0.45, "KGS": 2.55, "TJS": 0.31, "TMT": 0.102, "MNT": 104.0, "RSD": 3.17, "MKD": 1.66, "ALL": 2.55, "BAM": 0.053, "MDL": 0.51, "BYN": 0.096, "CRC": 14.7, "BOB": 0.2, "PYG": 230.0, "GYD": 6.1, "SRD": 1.03, "LRD": 5.6, "GMD": 2.05, "GNF": 250.0, "CVE": 3.0, "SCR": 0.39, "KMF": 13.2, "CDF": 83.0, "SSP": 27.0, "SDG": 17.4, "ERN": 0.44, "STN": 0.66, "MRU": 1.15, "SLE": 0.66, "LYD": 0.14 };
+
+// Maps a browser-reported region code to a currency, so the price tag can show
+// an estimate in the visitor's own currency before they've told us their country
+// (that only happens later, in the quiz). Best-effort from navigator.language --
+// no geolocation permission, no IP lookup, nothing that needs consent.
+const REGION_CURRENCY = {
+    US: 'USD', GB: 'GBP', IE: 'EUR', CA: 'CAD', AU: 'AUD', NZ: 'NZD',
+    DE: 'EUR', FR: 'EUR', ES: 'EUR', IT: 'EUR', NL: 'EUR', BE: 'EUR', AT: 'EUR',
+    PT: 'EUR', GR: 'EUR', FI: 'EUR', SK: 'EUR', SI: 'EUR', LT: 'EUR', LV: 'EUR', EE: 'EUR',
+    CH: 'CHF', SE: 'SEK', NO: 'NOK', DK: 'DKK', PL: 'PLN', CZ: 'CZK', HU: 'HUF', RO: 'RON',
+    JP: 'JPY', KR: 'KRW', CN: 'CNY', HK: 'HKD', SG: 'SGD', MY: 'MYR', TH: 'THB', ID: 'IDR',
+    PH: 'PHP', VN: 'VND', IN: 'INR', PK: 'PKR', BD: 'BDT', LK: 'LKR',
+    AE: 'AED', SA: 'SAR', IL: 'ILS', TR: 'TRY', ZA: 'ZAR', EG: 'EGP', NG: 'NGN', KE: 'KES',
+    BR: 'BRL', MX: 'MXN', AR: 'ARS', CL: 'CLP', CO: 'COP', PE: 'PEN', RU: 'RUB', UA: 'UAH',
+};
+
+function setupPriceTag() {
+    const priceEl = document.getElementById('priceTag');
+    const fxNote = document.getElementById('priceFxNote');
+    priceEl.href = STRIPE_PAYMENT_LINK_URL;
+
+    let region = null;
+    try {
+        const lang = navigator.language || (navigator.languages && navigator.languages[0]) || '';
+        const parts = lang.split('-');
+        if (parts.length > 1) region = parts[1].toUpperCase();
+    } catch (e) { /* ignore, fall back to GBP display only */ }
+
+    const code = region ? REGION_CURRENCY[region] : null;
+    if (!code || code === 'GBP') return; // already showing GBP, nothing more to do
+
+    const rate = CURRENCY_THB_RATE[code];
+    const gbpRate = CURRENCY_THB_RATE['GBP'];
+    if (!rate || !gbpRate) return;
+
+    const localAmount = 19.99 / gbpRate * rate;
+    const formatted = localAmount >= 100 ? Math.round(localAmount).toLocaleString('en-US') : localAmount.toFixed(2);
+    priceEl.innerHTML = `<span class="price-native">≈ ${formatted} ${code}</span> £19.99 GBP →`;
+    fxNote.style.display = 'block';
+    fxNote.textContent = `Approximate — you're charged £19.99 GBP; your bank/card converts it to ${code} at checkout.`;
+}
+setupPriceTag();
 
 function formatLocalAmount(amount, code) {
     // Compact formatting: no decimals for large-unit currencies, otherwise up to 2dp.
