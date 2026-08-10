@@ -624,6 +624,30 @@ const docSets = {
 ]
 };
 
+// Countries with a confirmed, embassy-specific Proof of Funds variant (doc 04),
+// built from that embassy's own published requirements. Countries sharing a
+// mission with one of these get the same variant (e.g. Ireland -> London/UK).
+const COUNTRY_OVERRIDE_FOLDER = {
+    'United States': 'us',
+    'United Kingdom': 'uk', 'Ireland': 'uk',
+    'Japan': 'japan', 'Marshall Islands': 'japan',
+    'Egypt': 'egypt', 'Djibouti': 'egypt', 'Sudan': 'egypt', 'Eritrea': 'egypt',
+    'Norway': 'norway', 'Iceland': 'norway',
+};
+
+function resolveDoc(doc) {
+    const country = document.getElementById('countrySelect') ? document.getElementById('countrySelect').value : '';
+    const folder = COUNTRY_OVERRIDE_FOLDER[country];
+    if (doc.num !== '04' || !folder) return doc;
+    const base = `document-templates/by-country/${folder}/${empType}/${doc.file.split('/').pop().replace('_TEMPLATE.docx', '')}`;
+    return Object.assign({}, doc, {
+        file: `${base}_TEMPLATE.docx`,
+        exampleFile: `${base}_EXAMPLE.docx`,
+        examplePdf: `${base}_EXAMPLE.pdf`,
+        countryCustomized: country,
+    });
+}
+
 function selectOption(q, val) {
     document.querySelectorAll('#q' + q + ' .option').forEach(o => o.classList.remove('selected'));
     event.currentTarget.classList.add('selected');
@@ -644,13 +668,15 @@ function showResults() {
 
     const container = document.getElementById('documentsContainer');
     let html = '<div class="documents-section"><div class="section-title" style="display:flex;align-items:center;gap:10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6M9 15h6"/></svg> Your Document Templates</div></div>';
-    data.forEach(doc => {
+    data.forEach(rawDoc => {
+        const doc = resolveDoc(rawDoc);
         html += `
 <div class="document-item">
 <div class="document-header">
 <div class="document-number">${doc.num}</div>
 <div class="document-title">${doc.title}</div>
 </div>
+${doc.countryCustomized ? `<div style="display:inline-block;background:#EFF6FF;color:#1D4ED8;font-size:12px;font-weight:600;padding:4px 10px;border-radius:100px;margin-bottom:10px;">✓ Customized for ${doc.countryCustomized}'s embassy requirements</div>` : ''}
 <div class="document-what">${doc.what}</div>
 ${KEY_REQUIREMENTS[doc.num] ? `<div class="document-requirement">⚠️ <strong>Key requirement:</strong> ${KEY_REQUIREMENTS[doc.num]}</div>` : ''}
 <div class="document-details">Word document (.docx) — opens directly in Microsoft Word or Google Docs. Every <strong>[FILL IN …]</strong> tag inside is ready for your details.</div>
@@ -680,8 +706,9 @@ async function fetchDocx(path) {
 }
 
 async function downloadDoc(num) {
-    const doc = findDoc(num);
-    if (!doc) return;
+    const raw = findDoc(num);
+    if (!raw) return;
+    const doc = resolveDoc(raw);
     const blob = await fetchDocx(doc.file);
     saveAs(blob, `${doc.num}_${slugify(doc.title)}_TEMPLATE.docx`);
 }
@@ -690,7 +717,8 @@ async function downloadAll() {
     const data = docSets[empType];
     if (!data) return;
     const zip = new JSZip();
-    await Promise.all(data.map(async doc => {
+    await Promise.all(data.map(async rawDoc => {
+        const doc = resolveDoc(rawDoc);
         const [template, example] = await Promise.all([fetchDocx(doc.file), fetchDocx(doc.exampleFile)]);
         zip.file(`${doc.num}_${slugify(doc.title)}_TEMPLATE.docx`, template);
         zip.file(`${doc.num}_${slugify(doc.title)}_EXAMPLE.docx`, example);
