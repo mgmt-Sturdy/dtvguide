@@ -100,6 +100,15 @@ button { padding: 12px 28px; border: none; border-radius: 8px; font-size: 16px; 
 .btn-zip:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(237,137,54,0.3); }
 .info-box { background: var(--bg-tertiary); border-left: 4px solid var(--violet-main); padding: 20px; border-radius: 8px; margin-bottom: 30px; font-size: 14px; }
 
+.country-select { width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 10px; font-size: 16px; font-family: inherit; background: white; color: var(--text-primary); margin-bottom: 1.5rem; }
+.country-select:focus { outline: none; border-color: var(--violet-light); }
+.embassy-box { background: var(--bg-tertiary); border: 2px solid var(--violet-light); border-radius: 12px; padding: 24px; margin-bottom: 30px; }
+.embassy-box h3 { font-size: 17px; margin-bottom: 4px; color: var(--violet-deep); display: flex; align-items: center; gap: 8px; }
+.embassy-box .embassy-name { font-weight: 700; font-size: 15px; color: var(--text-primary); margin-top: 12px; }
+.embassy-box .embassy-detail { font-size: 14px; color: var(--text-secondary); margin-top: 3px; }
+.embassy-box .embassy-detail a { color: var(--violet-main); }
+.embassy-box .embassy-alt { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
+
 footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-size: 13px; }
 </style>
 </head>
@@ -162,10 +171,21 @@ footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-siz
 <div class="option" onclick="selectOption(1,'self-employed')"><div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg> Self-Employed / Freelancer</div><div class="option-desc">You work for yourself as a sole trader</div></div>
 <div class="option" onclick="selectOption(1,'content-creator')"><div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l4 4V6l-4 4H4a1 1 0 0 0-1 1z"/><path d="M15 8a3 3 0 0 1 0 8"/><path d="M18 6a6 6 0 0 1 0 12"/></svg> Content Creator / Influencer</div><div class="option-desc">Income from YouTube, TikTok, Instagram, etc.</div></div>
 <div class="option" onclick="selectOption(1,'business-owner')"><div class="option-text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg> Company Director</div><div class="option-desc">You run a limited company</div></div>
+<div class="button-group">
+<button class="btn-primary" id="nextBtn" onclick="goToStep2()" disabled>Next →</button>
+</div>
 </div>
 
+<div id="q2" class="quiz-step" style="display:none;">
+<h2>Which country do you currently live in?</h2>
+<p style="color:var(--text-secondary);font-size:14px;margin-bottom:1rem;">We'll use this to show you your nearest Thai embassy or consulate on the next page.</p>
+<select class="country-select" id="countrySelect" onchange="document.getElementById('nextBtn2').disabled = !this.value;">
+<option value="">Select your country…</option>
+</select>
 <div class="button-group">
-<button class="btn-primary" id="nextBtn" onclick="showResults()" disabled>See My Documents →</button>
+<button class="btn-secondary" onclick="backToStep1()">← Back</button>
+<button class="btn-primary" id="nextBtn2" onclick="showResults()" disabled>See My Documents →</button>
+</div>
 </div>
 </section>
 
@@ -184,6 +204,8 @@ footer { text-align: center; color: var(--text-muted); padding: 2rem 0; font-siz
 <div class="info-box">
 <strong>✓ What to do:</strong> Gather EVERY document listed below. These are the templates you need. Don't skip anything — you'll need all of them.
 </div>
+
+<div id="embassyBox"></div>
 
 <div id="documentsContainer"></div>
 
@@ -296,6 +318,111 @@ init();
 // ---- Quiz + document templates ----
 let empType = '';
 
+// Royal Thai Embassy / Consulate-General contact details, sourced from the
+// Thai Ministry of Foreign Affairs' overseas mission directory. Countries not
+// listed here fall back to the official MFA locator (see embassyHtml()).
+const EMBASSY_DATA = {
+'United States': { name: 'Royal Thai Embassy, Washington D.C.', address: '1024 Wisconsin Ave. N.W., Washington, DC 20007', phone: '+1 202 944 3600', website: 'https://thaiembdc.org', alt: [
+    { name: 'Royal Thai Consulate-General, New York', address: '351 East 52nd Street, New York, NY 10022', phone: '+1 212 754 1770' },
+    { name: 'Royal Thai Consulate-General, Los Angeles', address: '611 North Larchmont Blvd., 2nd Floor, Los Angeles, CA 90004', phone: '+1 323 962 9574' },
+] },
+'Canada': { name: 'Royal Thai Embassy, Ottawa', address: '180 Island Park Drive, Ottawa, Ontario K1Y 0A2', phone: '+1 613 722 4444', website: 'https://ottawa.thaiembassy.org', alt: [
+    { name: 'Royal Thai Consulate-General, Vancouver', address: '1040 Burrard Street, Vancouver, BC V6Z 2R9', phone: '+1 604 687 1143' },
+] },
+'Mexico': { name: 'Royal Thai Embassy, Mexico City', address: 'Palmas 1610, Lomas de Chapultepec, Mexico City 11000', website: 'https://www.facebook.com/thaiembmex' },
+'United Kingdom': { name: 'Royal Thai Embassy, London', address: "29-30 Queen's Gate, London, SW7 5JB", phone: '+44 20 7225 5500', website: 'https://london.thaiembassy.org' },
+'Ireland': { name: 'Royal Thai Embassy, London', note: 'Accredited to Ireland on a non-resident basis. There is also a Thai Honorary Consulate in Dublin for limited consular services, but visa applications are handled by the London embassy.', address: "29-30 Queen's Gate, London, SW7 5JB", phone: '+44 20 7225 5500', website: 'https://london.thaiembassy.org' },
+'Germany': { name: 'Royal Thai Embassy, Berlin', address: 'Lepsiusstrasse 64/66, 12163 Berlin', phone: '+49 30 794 810', website: 'https://german.thaiembassy.de', alt: [
+    { name: 'Royal Thai Consulate-General, Frankfurt', address: 'Kennedyallee 109, 60596 Frankfurt am Main', phone: '+49 69 698 680' },
+] },
+'France': { name: 'Royal Thai Embassy, Paris', address: '8, rue Greuze, 75116 Paris', phone: '+33 1 5626 5050', website: 'https://thaiembassy.fr' },
+'Netherlands': { name: 'Royal Thai Embassy, The Hague', address: 'Laan Copes van Cattenburch 123, 2585 EZ, The Hague', phone: '+31 70 345 0766', website: 'https://hague.thaiembassy.org' },
+'Belgium': { name: 'Royal Thai Embassy, Brussels', address: '876 Chaussée de Waterloo, 1000 Brussels', phone: '+32 2 640 6810', website: 'https://thaiembassy.be' },
+'Switzerland': { name: 'Royal Thai Embassy, Bern', address: 'Kirchstrasse 56, 3097 Liebefeld bei Bern', phone: '+41 31 970 3030', website: 'https://thaiembassy.ch' },
+'Austria': { name: 'Royal Thai Embassy, Vienna', address: 'Cottagegasse 48, A-1180 Vienna', phone: '+43 1 478 3335', website: 'https://thaiembassy.at' },
+'Spain': { name: 'Royal Thai Embassy, Madrid', address: 'Calle Joaquín Costa 29, 28002 Madrid', phone: '+34 91 563 2903', website: 'https://madrid.thaiembassy.org' },
+'Italy': { name: 'Royal Thai Embassy, Rome', address: 'Via Nomentana 132, 00162 Rome', phone: '+39 06 8622 051', website: 'https://thaiembassy.it' },
+'Portugal': { name: 'Royal Thai Embassy, Lisbon', address: 'Rua de Alcolena 12, Restelo, 1400-005 Lisbon', phone: '+351 21 301 4848', website: 'https://lisbon.thaiembassy.org' },
+'Sweden': { name: 'Royal Thai Embassy, Stockholm', address: 'Floragatan 3, 114 31 Stockholm', phone: '+46 8 588 04250', website: 'https://thaiembassy.se' },
+'Norway': { name: 'Royal Thai Embassy, Oslo', address: 'Eilert Sundts Gate 4, 0259 Oslo', phone: '+47 2212 8669', website: 'https://oslo.thaiembassy.org' },
+'Denmark': { name: 'Royal Thai Embassy, Copenhagen', address: 'Nørgesmindevej 18, 2900 Hellerup, Copenhagen', phone: '+45 3962 5010', website: 'https://copenhagen.thaiembassy.org' },
+'Finland': { name: 'Royal Thai Embassy, Helsinki', address: 'Lönnrotinkatu 7 B 12, 00120 Helsinki', phone: '+358 9 6122 6415', website: 'https://helsinki.thaiembassy.org' },
+'Poland': { name: 'Royal Thai Embassy, Warsaw', address: 'Ul. Willowa 7, 00-790 Warsaw', phone: '+48 22 849 26 55', website: 'https://warsaw.thaiembassy.org' },
+'Russia': { name: 'Royal Thai Embassy, Moscow', address: 'Serpov Lane 6, Moscow 119121', phone: '+7 495 109 3918', website: 'https://moscow.thaiembassy.org' },
+'United Arab Emirates': { name: 'Royal Thai Embassy, Abu Dhabi', address: "Villa No. 137, Al Ma'mourah Street, Al Nahyan Area, Abu Dhabi", phone: '+971 2 557 6551', website: 'https://abudhabi.thaiembassy.org', alt: [
+    { name: 'Royal Thai Consulate-General, Dubai', address: 'Villa 35, Al Jali Street, Community 366, Umm Suqeim 3, Dubai', phone: '+971 4 348 9550' },
+] },
+'Saudi Arabia': { name: 'Royal Thai Embassy, Riyadh', address: 'Diplomatic Quarter, P.O. Box 94359, Riyadh 11693', phone: '+966 11 488 1174', website: 'https://riyadh.thaiembassy.org', alt: [
+    { name: 'Royal Thai Consulate-General, Jeddah', address: 'Building No. 2920, Unit 1, Azsubair Ibn Al Awam, Jeddah 23218-8103', phone: '+966 12 665 5317' },
+] },
+'Israel': { name: 'Royal Thai Embassy, Tel Aviv', address: 'Ackerstein Tower A, 11th Fl., 11 Hemenofim Street, Herzliya Pituach 4672562', phone: '+972 9 954 8412', website: 'https://telaviv.thaiembassy.org' },
+'India': { name: 'Royal Thai Embassy, New Delhi', address: '56-N Nyaya Marg, Chanakyapuri, New Delhi 110021', phone: '+91 11 2419 7200', website: 'https://newdelhi.thaiembassy.org', alt: [
+    { name: 'Royal Thai Consulate-General, Mumbai', address: '12th Floor, Express Towers, Barrister Rajni Patel Marg, Mumbai 400021', phone: '+91 93 2438 1754' },
+] },
+'Singapore': { name: 'Royal Thai Embassy, Singapore', address: '370 Orchard Road, Singapore 238870', phone: '+65 6737 2475', website: 'https://thaiembassy.sg' },
+'Malaysia': { name: 'Royal Thai Embassy, Kuala Lumpur', address: '206 Jalan Ampang, 50450 Kuala Lumpur', phone: '+60 3 2148 8222', website: 'https://kualalumpur.thaiembassy.org' },
+'Japan': { name: 'Royal Thai Embassy, Tokyo', address: '3-14-6 Kami-Osaki, Shinagawa-ku, Tokyo 141-0021', phone: '+81 3 5789 2433', website: 'https://site.thaiembassy.jp' },
+'South Korea': { name: 'Royal Thai Embassy, Seoul', address: '42 Daesagwan-ro, Hannam-dong, Yongsan-gu, Seoul', phone: '+82 2 790 2955', website: 'https://seoul.thaiembassy.org' },
+'China': { name: 'Royal Thai Embassy, Beijing', address: '21 Guang Hua Road, Chaoyang District, Beijing 100600', phone: '+86 10 8531 8700', website: 'https://thaiembbeij.org' },
+'Hong Kong': { name: 'Royal Thai Consulate-General, Hong Kong', address: 'Fairmont House, 8th Floor, 8 Cotton Tree Drive, Central, Hong Kong', phone: '+852 2521 6481', website: 'https://hongkong.thaiembassy.org' },
+'South Africa': { name: 'Royal Thai Embassy, Pretoria', address: '248 Pretorius/Hill Street, Arcadia, Pretoria 0083', phone: '+27 12 342 5470', website: 'https://pretoria.thaiembassy.org' },
+'Brazil': { name: 'Royal Thai Embassy, Brasília', address: 'SEN – Av. das Nações, Lote 10, CEP 70.800-912, Brasília/DF', phone: '+55 61 3224 6943', website: 'https://thaiembassyinbrazil.com' },
+'Argentina': { name: 'Royal Thai Embassy, Buenos Aires', address: 'Vuelta de Obligado 1947, Piso 12, 1428 Buenos Aires', phone: '+54 11 4783 6412', website: 'https://thaiembassy-ar.com' },
+'Australia': { name: 'Royal Thai Embassy, Canberra', address: '111 Empire Circuit, Yarralumla ACT 2600', phone: '+61 2 6206 0100', website: 'https://canberra.thaiembassy.org', alt: [
+    { name: 'Royal Thai Consulate-General, Sydney', address: 'Level 8, 131 Macquarie Street, Sydney NSW 2000', phone: '+61 2 9241 2542' },
+] },
+'New Zealand': { name: 'Royal Thai Embassy, Wellington', address: '110 Molesworth Street, Thorndon, Wellington 6011', phone: '+64 4 496 2900', website: 'https://wellington.thaiembassy.org' },
+};
+
+function populateCountrySelect() {
+    const sel = document.getElementById('countrySelect');
+    Object.keys(EMBASSY_DATA).sort().forEach(country => {
+        const opt = document.createElement('option');
+        opt.value = country;
+        opt.textContent = country;
+        sel.appendChild(opt);
+    });
+    const other = document.createElement('option');
+    other.value = 'Other';
+    other.textContent = 'Other / not listed';
+    sel.appendChild(other);
+}
+populateCountrySelect();
+
+function goToStep2() {
+    document.getElementById('q1').style.display = 'none';
+    document.getElementById('q2').style.display = 'block';
+}
+
+function backToStep1() {
+    document.getElementById('q2').style.display = 'none';
+    document.getElementById('q1').style.display = 'block';
+}
+
+function embassyHtml(country) {
+    const data = EMBASSY_DATA[country];
+    const mission = m => `
+<div class="embassy-name">${m.name}</div>
+<div class="embassy-detail">${m.address}</div>
+${m.phone ? `<div class="embassy-detail">${m.phone}</div>` : ''}
+${m.website ? `<div class="embassy-detail"><a href="${m.website}" target="_blank" rel="noopener">${m.website.replace('https://', '')}</a></div>` : ''}`;
+
+    if (!data) {
+        return `<div class="embassy-box">
+<h3>🏛️ Your Nearest Thai Embassy</h3>
+<p style="font-size:14px;color:var(--text-secondary);margin-top:8px;">We don't have that country in our directory yet. Find your nearest Royal Thai Embassy or Consulate on the official Ministry of Foreign Affairs site:</p>
+<p style="margin-top:10px;"><a href="https://www.mfa.go.th" target="_blank" rel="noopener" style="color:var(--violet-main);font-weight:600;">mfa.go.th →</a></p>
+</div>`;
+    }
+
+    return `<div class="embassy-box">
+<h3>🏛️ Your Nearest Thai Embassy</h3>
+${data.note ? `<p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">${data.note}</p>` : ''}
+${mission(data)}
+${(data.alt || []).map(a => `<div class="embassy-alt">${mission(a)}</div>`).join('')}
+</div>`;
+}
+
 const docSets = {
 'employed': [
 {num:'01', title:'Salary & Tax Confirmation Letter', what:'Proves your personal income and tax position to Thai immigration.', file:'document-templates/employed/01_Salary_Tax_Confirmation_Letter_TEMPLATE.docx', exampleFile:'document-templates/employed/01_Salary_Tax_Confirmation_Letter_EXAMPLE.docx', examplePdf:'document-templates/employed/01_Salary_Tax_Confirmation_Letter_EXAMPLE.pdf'},
@@ -350,6 +477,9 @@ function showResults() {
     const data = docSets[empType];
     document.getElementById('resultTitle').textContent = 'Your Document Templates';
     document.getElementById('resultSummary').textContent = 'Based on your answers, here are the documents you need to gather.';
+
+    const country = document.getElementById('countrySelect').value;
+    document.getElementById('embassyBox').innerHTML = embassyHtml(country);
 
     const container = document.getElementById('documentsContainer');
     let html = '<div class="documents-section"><div class="section-title" style="display:flex;align-items:center;gap:10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6M9 15h6"/></svg> Your Document Templates</div></div>';
@@ -413,6 +543,9 @@ function restart() {
     document.getElementById('quiz').classList.add('active');
     document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
     document.getElementById('nextBtn').disabled = true;
+    document.getElementById('countrySelect').value = '';
+    document.getElementById('nextBtn2').disabled = true;
+    backToStep1();
 }
 </script>
 </body>
