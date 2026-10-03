@@ -939,6 +939,30 @@
                 <button class="btn-primary" onclick="submitFunds()" style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;">Continue</button>
             </div>
 
+            <!-- Question: Criminal Record (new rule, effective 31 Aug 2026) -->
+            <div class="quiz-question" data-question="crim">
+                <div class="question-number">Q6a</div>
+                <h3>Do you have a criminal record?</h3>
+                <p>Since 31 August 2026, every DTV applicant must submit a criminal record clearance certificate issued by the relevant authority in their home country.</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-value="no-clean" onclick="selectOption('crim', 'no-clean')">No — clean record</div>
+                    <div class="quiz-option" data-value="yes-minor" onclick="selectOption('crim', 'yes-minor')">Yes — minor or old conviction</div>
+                    <div class="quiz-option" data-value="yes-serious" onclick="selectOption('crim', 'yes-serious')">Yes — serious or recent conviction</div>
+                </div>
+            </div>
+
+            <!-- Question: Permanent Residence (new rule, effective 31 Aug 2026) -->
+            <div class="quiz-question" data-question="res">
+                <div class="question-number">Q6b</div>
+                <h3>Can you prove permanent residence in your home country?</h3>
+                <p>Since 31 August 2026 a general proof of current location, such as a hotel booking, is no longer enough. You need official documentation confirming your permanent residence.</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-value="yes-have" onclick="selectOption('res', 'yes-have')">Yes — I have official documents</div>
+                    <div class="quiz-option" data-value="yes-can-get" onclick="selectOption('res', 'yes-can-get')">Yes — I'd need to gather them</div>
+                    <div class="quiz-option" data-value="no" onclick="selectOption('res', 'no')">No — I don't have a permanent address</div>
+                </div>
+            </div>
+
             <!-- Question 7: Email Capture -->
             <div class="quiz-question" data-question="7">
                 <div class="question-number">Q7</div>
@@ -1664,6 +1688,10 @@
                     showQuestion(6);
                 } else if (questionId === 6) {
                     showQuestion(7);
+                } else if (questionId === 'crim') {
+                    showQuestion('res');
+                } else if (questionId === 'res') {
+                    showQuestion(7);
                 }
             }, 300);
         }
@@ -1710,6 +1738,9 @@
                 document.getElementById('country-search').value = '';
                 document.getElementById('country-continue').disabled = true;
                 showQuestion(2);
+            } else if (prevQuestion === '7') {
+                // '7' in the path is the funds answer, which lives on question 6
+                showQuestion(6);
             } else {
                 showQuestion(prevQuestion);
             }
@@ -1792,7 +1823,7 @@
             answers['7'] = { currency, amount, sufficient: isSufficient };
             questionPath.push('7');
             
-            showQuestion(7);
+            showQuestion('crim');
         }
 
         function saveEmailAndShowResults() {
@@ -1914,6 +1945,50 @@
                 totalWeeks += weeksNeeded;
             }
             
+            // Check criminal record clearance (required from 31 Aug 2026)
+            if (answers['crim'] === 'yes-minor') {
+                issues.push({
+                    icon: '⚖️',
+                    title: 'Criminal Record Clearance',
+                    description: 'A criminal record clearance certificate is now mandatory and it will show your record. Approval is at the embassy\'s discretion, so check with your Thai embassy before paying the fee.',
+                    time: 'Embassy decision',
+                    weeks: 0,
+                    guideHelp: 'The guide explains how the new clearance certificate requirement works.'
+                });
+            } else if (answers['crim'] === 'yes-serious') {
+                issues.push({
+                    icon: '⚖️',
+                    title: 'Criminal Record: High Risk',
+                    description: 'Thailand now requires a criminal record clearance certificate. A serious or recent conviction may lead to refusal, so speak to your Thai embassy before applying.',
+                    time: 'Embassy decision',
+                    weeks: 0,
+                    guideHelp: 'The guide explains how the new clearance certificate requirement works.'
+                });
+            }
+
+            // Check proof of permanent residence (required from 31 Aug 2026)
+            if (answers['res'] === 'yes-can-get') {
+                issues.push({
+                    icon: '🏠',
+                    title: 'Proof of Permanent Residence',
+                    description: 'Gather official documentation confirming your permanent residence. A hotel booking no longer counts.',
+                    time: '2 weeks',
+                    weeks: 2,
+                    guideHelp: 'The guide explains what counts as proof of permanent residence.'
+                });
+                totalWeeks += 2;
+            } else if (answers['res'] === 'no') {
+                issues.push({
+                    icon: '🏠',
+                    title: 'Permanent Residence Required',
+                    description: 'You need official documentation of permanent residence in your home country. A hotel booking or current-location proof is no longer accepted.',
+                    time: 'Varies',
+                    weeks: 4,
+                    guideHelp: 'The guide explains what counts as proof of permanent residence.'
+                });
+                totalWeeks += 4;
+            }
+
             // Build result HTML
             let statusMessage, statusColor;
             if (percentage >= 80) {
@@ -2048,6 +2123,8 @@
             const fundsAmount = fundsData.amount || '';
             const fundsCurrency = fundsData.currency || '';
             const fundsSufficient = fundsData.sufficient ? 'Yes' : 'No';
+            const criminalRecord = answers['crim'] || '';
+            const permanentResidence = answers['res'] || '';
             
             // Honeypot value (will be empty for legit submissions)
             const honeypot = document.querySelector('input[name="website"]')?.value || '';
@@ -2064,6 +2141,8 @@
                 fundsAmount: fundsAmount,
                 fundsCurrency: fundsCurrency,
                 fundsSufficient: fundsSufficient,
+                criminalRecord: criminalRecord,
+                permanentResidence: permanentResidence,
                 score: status || percentage + '%',
                 honeypot: honeypot
             };
